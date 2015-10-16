@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Bezier.cpp" />
+    <ClCompile Include="BlackHole.cpp" />
+    <ClCompile Include="Bloom.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CatmullRom.cpp" />
+    <ClCompile Include="Cfunctions.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Console.cpp" />
+    <ClCompile Include="Curb.cpp" />
+    <ClCompile Include="DataManager.cpp" />
+    <ClCompile Include="EntityTransformation.cpp" />
+    <ClCompile Include="EntityWithPv.cpp" />
+    <ClCompile Include="FloatingDamage.cpp" />
+    <ClCompile Include="Function.cpp" />
+    <ClCompile Include="FxText.cpp" />
+    <ClCompile Include="GenericList.cpp" />
+    <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="GraphCurb.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="LightningBolt.cpp" />
+    <ClCompile Include="LightningText.cpp" />
+    <ClCompile Include="Math.cpp" />
+    <ClCompile Include="Matrix22.cpp" />
+    <ClCompile Include="MatrixRotation22.cpp" />
+    <ClCompile Include="ObbCollider.cpp" />
+    <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="PhysicManager.cpp" />
+    <ClCompile Include="PointMass.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="SphereCollider.cpp" />
+    <ClCompile Include="Spring.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Joystick.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Parallaxe.cpp" />
+    <ClCompile Include="PostShader.cpp" />
+    <ClCompile Include="SF_GMK.cpp" />
+    <ClCompile Include="ShaderWave.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateDefault.cpp" />
+    <ClCompile Include="StateLoading.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TransformationBezier.cpp" />
+    <ClCompile Include="TransformationInterpolation.cpp" />
+    <ClCompile Include="TransformationRotation.cpp" />
+    <ClCompile Include="TransformationTranslation.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation.hpp" />
+    <ClInclude Include="Bezier.hpp" />
+    <ClInclude Include="BlackHole.hpp" />
+    <ClInclude Include="Bloom.hpp" />
+    <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="CatmullRom.hpp" />
+    <ClInclude Include="Cfunctions.hpp" />
+    <ClInclude Include="Collider.hpp" />
+    <ClInclude Include="Console.hpp" />
+    <ClInclude Include="Curb.hpp" />
+    <ClInclude Include="DataManager.hpp" />
+    <ClInclude Include="DynamicArray.hpp" />
+    <ClInclude Include="EntityTransformation.hpp" />
+    <ClInclude Include="EntityWithPv.hpp" />
+    <ClInclude Include="FloatingDamage.hpp" />
+    <ClInclude Include="Function.hpp" />
+    <ClInclude Include="FxText.hpp" />
+    <ClInclude Include="GenericList.hpp" />
+    <ClInclude Include="Graph.hpp" />
+    <ClInclude Include="GraphCurb.hpp" />
+    <ClInclude Include="Grid.hpp" />
+    <ClInclude Include="IncludesProjet.hpp" />
+    <ClInclude Include="LightningBolt.hpp" />
+    <ClInclude Include="LightningText.hpp" />
+    <ClInclude Include="Math.hpp" />
+    <ClInclude Include="Matrix22.hpp" />
+    <ClInclude Include="MatrixRotation22.hpp" />
+    <ClInclude Include="ObbCollider.hpp" />
+    <ClInclude Include="Parser.hpp" />
+    <ClInclude Include="PhysicManager.hpp" />
+    <ClInclude Include="PointMass.hpp" />
+    <ClInclude Include="SoundManager.hpp" />
+    <ClInclude Include="SphereCollider.hpp" />
+    <ClInclude Include="Spring.hpp" />
+    <ClInclude Include="Entity.hpp" />
+    <ClInclude Include="GameManager.hpp" />
+    <ClInclude Include="InputManager.hpp" />
+    <ClInclude Include="Joystick.hpp" />
+    <ClInclude Include="Keyboard.hpp" />
+    <ClInclude Include="Mouse.hpp" />
+    <ClInclude Include="Parallaxe.hpp" />
+    <ClInclude Include="PostShader.hpp" />
+    <ClInclude Include="SF_GMK.hpp" />
+    <ClInclude Include="ShaderWave.hpp" />
+    <ClInclude Include="SingletonTemplate.hpp" />
+    <ClInclude Include="Sprite.hpp" />
+    <ClInclude Include="State.hpp" />
+    <ClInclude Include="StateDefault.hpp" />
+    <ClInclude Include="StateLoading.hpp" />
+    <ClInclude Include="StateMachine.hpp" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="ThreadTemplate.hpp" />
+    <ClInclude Include="TransformationBezier.hpp" />
+    <ClInclude Include="TransformationInterpolation.hpp" />
+    <ClInclude Include="TransformationRotation.hpp" />
+    <ClInclude Include="TransformationTranslation.hpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{36F34954-F636-4BDE-8C17-72B149690B7A}</ProjectGuid>
+    <RootNamespace>SF_GMK</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <ForcedIncludeFiles>StdAfx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedUsingFiles>
+      </ForcedUsingFiles>
+      <AdditionalIncludeDirectories>..\Includes\;..\Includes\SFML-2.3.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <OpenMPSupport>false</OpenMPSupport>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\Includes\SFML-2.3.2\lib;..\Includes\fmodex\lib;..\Includes\zlib-1.2.3-lib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-s-d.lib;freetype.lib;jpeg.lib;opengl32.lib;sfml-system-s-d.lib;ws2_32.lib;sfml-window-s-d.lib;winmm.lib;%(AdditionalDependencies);zlib.lib;fmodex_vc.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <ForcedIncludeFiles>StdAfx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedUsingFiles>
+      </ForcedUsingFiles>
+      <AdditionalIncludeDirectories>..\Includes\;..\Includes\SFML-2.3.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <OpenMPSupport>false</OpenMPSupport>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>..\Includes\SFML-2.3.2\lib;..\Includes\fmodex\lib;..\Includes\zlib-1.2.3-lib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-s.lib;freetype.lib;jpeg.lib;opengl32.lib;sfml-system-s.lib;winmm.lib;sfml-window-s.lib;gdi32.lib;fmodex_vc.lib;%(AdditionalDependencies);zlib.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
