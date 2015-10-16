@@ -85,156 +85,150 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>sfgmk</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>sfgmk\GameManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>sfgmk\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>sfgmk\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Parallaxe.cpp">
-      <Filter>sfgmk\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>sfgmk\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
-      <Filter>sfgmk\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Mouse.cpp">
-      <Filter>sfgmk\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Joystick.cpp">
-      <Filter>sfgmk\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="PostShader.cpp">
-      <Filter>sfgmk\Shader\PostShader</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderWave.cpp">
-      <Filter>sfgmk\Shader\PostShader</Filter>
-    </ClCompile>
-    <ClCompile Include="StateMachine.cpp">
-      <Filter>sfgmk\StateMachine</Filter>
-    </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>sfgmk\StateMachine</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>sfgmk\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>sfgmk\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="Parser.cpp">
-      <Filter>sfgmk\Parser</Filter>
-    </ClCompile>
-    <ClCompile Include="Console.cpp">
-      <Filter>sfgmk\Console</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundManager.cpp">
-      <Filter>sfgmk\SoundManager</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityTransformation.cpp">
-      <Filter>sfgmk\Entity\Transformation</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix22.cpp">
-      <Filter>sfgmk\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Math.cpp">
-      <Filter>sfgmk\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="DataManager.cpp">
+    <ClCompile Include="Core\Manager\DataManager\DataManager.cpp">
       <Filter>sfgmk\DataManager</Filter>
     </ClCompile>
-    <ClCompile Include="StateLoading.cpp">
-      <Filter>sfgmk\StateMachine\State</Filter>
+    <ClCompile Include="Core\Manager\InputManager\InputManager.cpp">
+      <Filter>sfgmk\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Function.cpp">
+    <ClCompile Include="Core\Manager\InputManager\Joystick.cpp">
+      <Filter>sfgmk\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\InputManager\Keyboard.cpp">
+      <Filter>sfgmk\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\InputManager\Mouse.cpp">
+      <Filter>sfgmk\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\PhysicManager\Collider.cpp">
+      <Filter>sfgmk\Physic</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\PhysicManager\ObbCollider.cpp">
+      <Filter>sfgmk\Physic</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\PhysicManager\PhysicManager.cpp">
+      <Filter>sfgmk\Physic</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\PhysicManager\SphereCollider.cpp">
+      <Filter>sfgmk\Physic</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\StateMachineManager\State.cpp">
+      <Filter>sfgmk\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\StateMachineManager\StateMachine.cpp">
+      <Filter>sfgmk\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\GameManager.cpp">
+      <Filter>sfgmk\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\SF_GMK.cpp" />
+    <ClCompile Include="Core\Math\Math.cpp">
+      <Filter>sfgmk\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Math\Matrix\Matrix22.cpp">
+      <Filter>sfgmk\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Math\Matrix\MatrixRotation22.cpp">
+      <Filter>sfgmk\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Tool\Function.cpp">
       <Filter>sfgmk\Function</Filter>
     </ClCompile>
-    <ClCompile Include="FloatingDamage.cpp">
-      <Filter>sfgmk\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="Bezier.cpp">
-      <Filter>sfgmk\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="CatmullRom.cpp">
-      <Filter>sfgmk\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Curb.cpp">
-      <Filter>sfgmk\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="PointMass.cpp">
-      <Filter>sfgmk\Effect\Grid</Filter>
-    </ClCompile>
-    <ClCompile Include="Spring.cpp">
-      <Filter>sfgmk\Effect\Grid</Filter>
-    </ClCompile>
-    <ClCompile Include="Grid.cpp">
-      <Filter>sfgmk\Effect\Grid</Filter>
-    </ClCompile>
-    <ClCompile Include="BlackHole.cpp">
-      <Filter>sfgmk\Effect\Grid</Filter>
-    </ClCompile>
-    <ClCompile Include="Cfunctions.cpp">
-      <Filter>sfgmk\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="SF_GMK.cpp" />
-    <ClCompile Include="PhysicManager.cpp">
-      <Filter>sfgmk\Physic</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>sfgmk\Physic</Filter>
-    </ClCompile>
-    <ClCompile Include="SphereCollider.cpp">
-      <Filter>sfgmk\Physic</Filter>
-    </ClCompile>
-    <ClCompile Include="ObbCollider.cpp">
-      <Filter>sfgmk\Physic</Filter>
-    </ClCompile>
-    <ClCompile Include="GenericList.cpp">
+    <ClCompile Include="Core\Tool\GenericList.cpp">
       <Filter>sfgmk\DesignPattern</Filter>
     </ClCompile>
-    <ClCompile Include="EntityWithPv.cpp">
+    <ClCompile Include="ProjetSample\StateDefault.cpp">
+      <Filter>Projet</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\SoundManager\SoundManager.cpp">
+      <Filter>sfgmk\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\StateMachineManager\LoadingState\StateLoading.cpp">
+      <Filter>sfgmk\StateMachine\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\DebugManager\Console.cpp">
+      <Filter>sfgmk\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\EntityManager\Entity.cpp">
       <Filter>sfgmk\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="TransformationBezier.cpp">
+    <ClCompile Include="Core\Manager\EntityManager\EntityTransformation.cpp">
+      <Filter>sfgmk\Entity\Transformation</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\EntityManager\EntityWithPv.cpp">
+      <Filter>sfgmk\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\GraphicManager\Animation.cpp">
+      <Filter>sfgmk\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\GraphicManager\Camera.cpp">
+      <Filter>sfgmk\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\GraphicManager\Parallaxe.cpp">
+      <Filter>sfgmk\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\GraphicManager\Sprite.cpp">
+      <Filter>sfgmk\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\EntityManager\TransformationBezier.cpp">
       <Filter>sfgmk\Entity\Transformation\Curbs</Filter>
     </ClCompile>
-    <ClCompile Include="TransformationInterpolation.cpp">
+    <ClCompile Include="Core\Manager\EntityManager\TransformationInterpolation.cpp">
       <Filter>sfgmk\Entity\Transformation\Curbs</Filter>
     </ClCompile>
-    <ClCompile Include="TransformationRotation.cpp">
+    <ClCompile Include="Core\Manager\EntityManager\TransformationRotation.cpp">
       <Filter>sfgmk\Entity\Transformation\Basics Transformations</Filter>
     </ClCompile>
-    <ClCompile Include="TransformationTranslation.cpp">
+    <ClCompile Include="Core\Manager\EntityManager\TransformationTranslation.cpp">
       <Filter>sfgmk\Entity\Transformation\Basics Transformations</Filter>
     </ClCompile>
-    <ClCompile Include="MatrixRotation22.cpp">
+    <ClCompile Include="Core\Math\Curb\Bezier.cpp">
       <Filter>sfgmk\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Bloom.cpp">
-      <Filter>sfgmk\Effect\Grid</Filter>
+    <ClCompile Include="Core\Math\Curb\CatmullRom.cpp">
+      <Filter>sfgmk\Math</Filter>
     </ClCompile>
-    <ClCompile Include="LightningBolt.cpp">
+    <ClCompile Include="Core\Math\Curb\Curb.cpp">
+      <Filter>sfgmk\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Tool\Parser\Parser.cpp">
+      <Filter>sfgmk\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Math\Curb\CoordinateSystem\Graph.cpp">
+      <Filter>sfgmk\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Math\Curb\CoordinateSystem\GraphCurb.cpp">
+      <Filter>sfgmk\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\GraphicManager\FX\LightningBolt\LightningBolt.cpp">
       <Filter>sfgmk\Effect\Lightning bolt</Filter>
     </ClCompile>
-    <ClCompile Include="FxText.cpp">
+    <ClCompile Include="Core\Manager\GraphicManager\FX\Shader\Bloom.cpp">
+      <Filter>sfgmk\Effect\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\GraphicManager\FX\Shader\PostShader.cpp">
+      <Filter>sfgmk\Shader\PostShader</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\GraphicManager\FX\Shader\ShaderWave.cpp">
+      <Filter>sfgmk\Shader\PostShader</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\GraphicManager\FX\Text\FxText.cpp">
       <Filter>sfgmk\Effect\Text</Filter>
     </ClCompile>
-    <ClCompile Include="LightningText.cpp">
+    <ClCompile Include="Core\Manager\GraphicManager\FX\Text\LightningText.cpp">
       <Filter>sfgmk\Effect\Text</Filter>
     </ClCompile>
-    <ClCompile Include="Graph.cpp">
-      <Filter>sfgmk\Math</Filter>
+    <ClCompile Include="Core\Manager\GraphicManager\FX\Grid\BlackHole.cpp">
+      <Filter>sfgmk\Effect\Grid</Filter>
     </ClCompile>
-    <ClCompile Include="GraphCurb.cpp">
-      <Filter>sfgmk\Math</Filter>
+    <ClCompile Include="Core\Manager\GraphicManager\FX\Grid\Grid.cpp">
+      <Filter>sfgmk\Effect\Grid</Filter>
     </ClCompile>
-    <ClCompile Include="StateDefault.cpp">
-      <Filter>Projet</Filter>
+    <ClCompile Include="Core\Manager\GraphicManager\FX\Grid\PointMass.cpp">
+      <Filter>sfgmk\Effect\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\GraphicManager\FX\Grid\Spring.cpp">
+      <Filter>sfgmk\Effect\Grid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,166 +238,160 @@
     <ClInclude Include="targetver.h">
       <Filter>sfgmk</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.hpp">
-      <Filter>sfgmk\GameManager</Filter>
-    </ClInclude>
-    <ClInclude Include="SingletonTemplate.hpp">
-      <Filter>sfgmk\DesignPattern</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.hpp">
-      <Filter>sfgmk\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.hpp">
-      <Filter>sfgmk\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Parallaxe.hpp">
-      <Filter>sfgmk\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.hpp">
-      <Filter>sfgmk\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Keyboard.hpp">
-      <Filter>sfgmk\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Mouse.hpp">
-      <Filter>sfgmk\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Joystick.hpp">
-      <Filter>sfgmk\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="PostShader.hpp">
-      <Filter>sfgmk\Shader\PostShader</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderWave.hpp">
-      <Filter>sfgmk\Shader\PostShader</Filter>
-    </ClInclude>
-    <ClInclude Include="StateMachine.hpp">
-      <Filter>sfgmk\StateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="State.hpp">
-      <Filter>sfgmk\StateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.hpp">
-      <Filter>sfgmk\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.hpp">
-      <Filter>sfgmk\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="Parser.hpp">
-      <Filter>sfgmk\Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Console.hpp">
-      <Filter>sfgmk\Console</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundManager.hpp">
-      <Filter>sfgmk\SoundManager</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityTransformation.hpp">
-      <Filter>sfgmk\Entity\Transformation</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix22.hpp">
-      <Filter>sfgmk\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math.hpp">
-      <Filter>sfgmk\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="DataManager.hpp">
+    <ClInclude Include="Core\Manager\DataManager\DataManager.hpp">
       <Filter>sfgmk\DataManager</Filter>
     </ClInclude>
-    <ClInclude Include="StateLoading.hpp">
+    <ClInclude Include="Core\Manager\InputManager\InputManager.hpp">
+      <Filter>sfgmk\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\InputManager\Joystick.hpp">
+      <Filter>sfgmk\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\InputManager\Keyboard.hpp">
+      <Filter>sfgmk\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\InputManager\Mouse.hpp">
+      <Filter>sfgmk\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\PhysicManager\Collider.hpp">
+      <Filter>sfgmk\Physic</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\PhysicManager\ObbCollider.hpp">
+      <Filter>sfgmk\Physic</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\PhysicManager\PhysicManager.hpp">
+      <Filter>sfgmk\Physic</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\PhysicManager\SphereCollider.hpp">
+      <Filter>sfgmk\Physic</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\StateMachineManager\StateMachine.hpp">
+      <Filter>sfgmk\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\GameManager.hpp">
+      <Filter>sfgmk\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\SF_GMK.hpp" />
+    <ClInclude Include="Core\Math\Math.hpp">
+      <Filter>sfgmk\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Math\Matrix\Matrix22.hpp">
+      <Filter>sfgmk\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Math\Matrix\MatrixRotation22.hpp">
+      <Filter>sfgmk\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Tool\DynamicArray.hpp">
+      <Filter>sfgmk\DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Tool\Function.hpp">
+      <Filter>sfgmk\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Tool\GenericList.hpp">
+      <Filter>sfgmk\DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Tool\ThreadTemplate.hpp">
+      <Filter>sfgmk\DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Tool\DesignPattern\SingletonTemplate.hpp">
+      <Filter>sfgmk\DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjetSample\StateDefault.hpp">
+      <Filter>Projet</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjetSample\IncludesProjet.hpp" />
+    <ClInclude Include="Core\Manager\SoundManager\SoundManager.hpp">
+      <Filter>sfgmk\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\StateMachineManager\LoadingState\StateLoading.hpp">
       <Filter>sfgmk\StateMachine\State</Filter>
     </ClInclude>
-    <ClInclude Include="Function.hpp">
-      <Filter>sfgmk\Function</Filter>
+    <ClInclude Include="Core\Manager\StateMachineManager\State.hpp">
+      <Filter>sfgmk\StateMachine</Filter>
     </ClInclude>
-    <ClInclude Include="FloatingDamage.hpp">
-      <Filter>sfgmk\Effect</Filter>
+    <ClInclude Include="Core\Manager\DebugManager\Console.hpp">
+      <Filter>sfgmk\Console</Filter>
     </ClInclude>
-    <ClInclude Include="DynamicArray.hpp">
-      <Filter>sfgmk\DesignPattern</Filter>
-    </ClInclude>
-    <ClInclude Include="Bezier.hpp">
-      <Filter>sfgmk\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="CatmullRom.hpp">
-      <Filter>sfgmk\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Curb.hpp">
-      <Filter>sfgmk\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="PointMass.hpp">
-      <Filter>sfgmk\Effect\Grid</Filter>
-    </ClInclude>
-    <ClInclude Include="Spring.hpp">
-      <Filter>sfgmk\Effect\Grid</Filter>
-    </ClInclude>
-    <ClInclude Include="Grid.hpp">
-      <Filter>sfgmk\Effect\Grid</Filter>
-    </ClInclude>
-    <ClInclude Include="BlackHole.hpp">
-      <Filter>sfgmk\Effect\Grid</Filter>
-    </ClInclude>
-    <ClInclude Include="Cfunctions.hpp">
-      <Filter>sfgmk\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="SF_GMK.hpp" />
-    <ClInclude Include="PhysicManager.hpp">
-      <Filter>sfgmk\Physic</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider.hpp">
-      <Filter>sfgmk\Physic</Filter>
-    </ClInclude>
-    <ClInclude Include="SphereCollider.hpp">
-      <Filter>sfgmk\Physic</Filter>
-    </ClInclude>
-    <ClInclude Include="ObbCollider.hpp">
-      <Filter>sfgmk\Physic</Filter>
-    </ClInclude>
-    <ClInclude Include="GenericList.hpp">
-      <Filter>sfgmk\DesignPattern</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityWithPv.hpp">
+    <ClInclude Include="Core\Manager\EntityManager\Entity.hpp">
       <Filter>sfgmk\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="TransformationBezier.hpp">
+    <ClInclude Include="Core\Manager\EntityManager\EntityTransformation.hpp">
+      <Filter>sfgmk\Entity\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\EntityManager\EntityWithPv.hpp">
+      <Filter>sfgmk\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\GraphicManager\Animation.hpp">
+      <Filter>sfgmk\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\GraphicManager\Camera.hpp">
+      <Filter>sfgmk\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\GraphicManager\Parallaxe.hpp">
+      <Filter>sfgmk\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\GraphicManager\Sprite.hpp">
+      <Filter>sfgmk\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\EntityManager\TransformationBezier.hpp">
       <Filter>sfgmk\Entity\Transformation\Curbs</Filter>
     </ClInclude>
-    <ClInclude Include="TransformationInterpolation.hpp">
+    <ClInclude Include="Core\Manager\EntityManager\TransformationInterpolation.hpp">
       <Filter>sfgmk\Entity\Transformation\Curbs</Filter>
     </ClInclude>
-    <ClInclude Include="TransformationRotation.hpp">
+    <ClInclude Include="Core\Manager\EntityManager\TransformationRotation.hpp">
       <Filter>sfgmk\Entity\Transformation\Basics Transformations</Filter>
     </ClInclude>
-    <ClInclude Include="TransformationTranslation.hpp">
+    <ClInclude Include="Core\Manager\EntityManager\TransformationTranslation.hpp">
       <Filter>sfgmk\Entity\Transformation\Basics Transformations</Filter>
     </ClInclude>
-    <ClInclude Include="ThreadTemplate.hpp">
-      <Filter>sfgmk\DesignPattern</Filter>
-    </ClInclude>
-    <ClInclude Include="MatrixRotation22.hpp">
+    <ClInclude Include="Core\Math\Curb\Bezier.hpp">
       <Filter>sfgmk\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Bloom.hpp">
-      <Filter>sfgmk\Effect\Grid</Filter>
+    <ClInclude Include="Core\Math\Curb\CatmullRom.hpp">
+      <Filter>sfgmk\Math</Filter>
     </ClInclude>
-    <ClInclude Include="LightningBolt.hpp">
+    <ClInclude Include="Core\Math\Curb\Curb.hpp">
+      <Filter>sfgmk\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Tool\Parser\Parser.hpp">
+      <Filter>sfgmk\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Math\Curb\CoordinateSystem\Graph.hpp">
+      <Filter>sfgmk\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Math\Curb\CoordinateSystem\GraphCurb.hpp">
+      <Filter>sfgmk\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\GraphicManager\FX\LightningBolt\LightningBolt.hpp">
       <Filter>sfgmk\Effect\Lightning bolt</Filter>
     </ClInclude>
-    <ClInclude Include="FxText.hpp">
+    <ClInclude Include="Core\Manager\GraphicManager\FX\Shader\Bloom.hpp">
+      <Filter>sfgmk\Effect\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\GraphicManager\FX\Shader\PostShader.hpp">
+      <Filter>sfgmk\Shader\PostShader</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\GraphicManager\FX\Shader\ShaderWave.hpp">
+      <Filter>sfgmk\Shader\PostShader</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\GraphicManager\FX\Text\FxText.hpp">
       <Filter>sfgmk\Effect\Text</Filter>
     </ClInclude>
-    <ClInclude Include="LightningText.hpp">
+    <ClInclude Include="Core\Manager\GraphicManager\FX\Text\LightningText.hpp">
       <Filter>sfgmk\Effect\Text</Filter>
     </ClInclude>
-    <ClInclude Include="IncludesProjet.hpp" />
-    <ClInclude Include="Graph.hpp">
-      <Filter>sfgmk\Math</Filter>
+    <ClInclude Include="Core\Manager\GraphicManager\FX\Grid\BlackHole.hpp">
+      <Filter>sfgmk\Effect\Grid</Filter>
     </ClInclude>
-    <ClInclude Include="GraphCurb.hpp">
-      <Filter>sfgmk\Math</Filter>
+    <ClInclude Include="Core\Manager\GraphicManager\FX\Grid\Grid.hpp">
+      <Filter>sfgmk\Effect\Grid</Filter>
     </ClInclude>
-    <ClInclude Include="StateDefault.hpp">
-      <Filter>Projet</Filter>
+    <ClInclude Include="Core\Manager\GraphicManager\FX\Grid\PointMass.hpp">
+      <Filter>sfgmk\Effect\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\GraphicManager\FX\Grid\Spring.hpp">
+      <Filter>sfgmk\Effect\Grid</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
