@@ -11,7 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Manager\Core.cpp" />
+    <ClCompile Include="Core\Manager\EntityManager\EntityManager.cpp" />
     <ClCompile Include="Core\Manager\GraphicManager\Animation.cpp" />
+    <ClCompile Include="Core\Manager\GraphicManager\GraphicManager.cpp" />
     <ClCompile Include="Core\Math\Curb\Bezier.cpp" />
     <ClCompile Include="Core\Manager\GraphicManager\FX\Grid\BlackHole.cpp" />
     <ClCompile Include="Core\Manager\GraphicManager\FX\Shader\Bloom.cpp" />
@@ -21,7 +24,7 @@
     <ClCompile Include="Core\Manager\DebugManager\Console.cpp" />
     <ClCompile Include="Core\Math\Curb\Curb.cpp" />
     <ClCompile Include="Core\Manager\DataManager\DataManager.cpp" />
-    <ClCompile Include="Core\Manager\EntityManager\EntityTransformation.cpp" />
+    <ClCompile Include="Core\Manager\EntityManager\Transformation\EntityTransformation.cpp" />
     <ClCompile Include="Core\Manager\EntityManager\EntityWithPv.cpp" />
     <ClCompile Include="Core\Tool\Function.cpp" />
     <ClCompile Include="Core\Manager\GraphicManager\FX\Text\FxText.cpp" />
@@ -60,13 +63,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Core\Manager\EntityManager\TransformationBezier.cpp" />
-    <ClCompile Include="Core\Manager\EntityManager\TransformationInterpolation.cpp" />
-    <ClCompile Include="Core\Manager\EntityManager\TransformationRotation.cpp" />
-    <ClCompile Include="Core\Manager\EntityManager\TransformationTranslation.cpp" />
+    <ClCompile Include="Core\Manager\EntityManager\Transformation\TransformationBezier.cpp" />
+    <ClCompile Include="Core\Manager\EntityManager\Transformation\TransformationInterpolation.cpp" />
+    <ClCompile Include="Core\Manager\EntityManager\Transformation\TransformationRotation.cpp" />
+    <ClCompile Include="Core\Manager\EntityManager\Transformation\TransformationTranslation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Manager\Core.hpp" />
+    <ClInclude Include="Core\Manager\EntityManager\EntityManager.hpp" />
     <ClInclude Include="Core\Manager\GraphicManager\Animation.hpp" />
+    <ClInclude Include="Core\Manager\GraphicManager\GraphicManager.hpp" />
     <ClInclude Include="Core\Math\Curb\Bezier.hpp" />
     <ClInclude Include="Core\Manager\GraphicManager\FX\Grid\BlackHole.hpp" />
     <ClInclude Include="Core\Manager\GraphicManager\FX\Shader\Bloom.hpp" />
@@ -77,7 +83,7 @@
     <ClInclude Include="Core\Math\Curb\Curb.hpp" />
     <ClInclude Include="Core\Manager\DataManager\DataManager.hpp" />
     <ClInclude Include="Core\Tool\DynamicArray.hpp" />
-    <ClInclude Include="Core\Manager\EntityManager\EntityTransformation.hpp" />
+    <ClInclude Include="Core\Manager\EntityManager\Transformation\EntityTransformation.hpp" />
     <ClInclude Include="Core\Manager\EntityManager\EntityWithPv.hpp" />
     <ClInclude Include="Core\Tool\Function.hpp" />
     <ClInclude Include="Core\Manager\GraphicManager\FX\Text\FxText.hpp" />
@@ -117,10 +123,10 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Core\Tool\ThreadTemplate.hpp" />
-    <ClInclude Include="Core\Manager\EntityManager\TransformationBezier.hpp" />
-    <ClInclude Include="Core\Manager\EntityManager\TransformationInterpolation.hpp" />
-    <ClInclude Include="Core\Manager\EntityManager\TransformationRotation.hpp" />
-    <ClInclude Include="Core\Manager\EntityManager\TransformationTranslation.hpp" />
+    <ClInclude Include="Core\Manager\EntityManager\Transformation\TransformationBezier.hpp" />
+    <ClInclude Include="Core\Manager\EntityManager\Transformation\TransformationInterpolation.hpp" />
+    <ClInclude Include="Core\Manager\EntityManager\Transformation\TransformationRotation.hpp" />
+    <ClInclude Include="Core\Manager\EntityManager\Transformation\TransformationTranslation.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{36F34954-F636-4BDE-8C17-72B149690B7A}</ProjectGuid>
@@ -163,10 +169,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <ForcedIncludeFiles>StdAfx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <ForcedUsingFiles>
       </ForcedUsingFiles>
-      <AdditionalIncludeDirectories>..\Includes\;..\Includes\SFML-2.3.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Includes\;..\Includes\SFML-2.3.2\include;..\SF_GMK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <OpenMPSupport>false</OpenMPSupport>
     </ClCompile>
@@ -184,10 +190,10 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <ForcedIncludeFiles>StdAfx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <ForcedUsingFiles>
       </ForcedUsingFiles>
-      <AdditionalIncludeDirectories>..\Includes\;..\Includes\SFML-2.3.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Includes\;..\Includes\SFML-2.3.2\include;..\SF_GMK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <OpenMPSupport>false</OpenMPSupport>
     </ClCompile>

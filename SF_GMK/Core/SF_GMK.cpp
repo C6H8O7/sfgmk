@@ -1,6 +1,8 @@
 // SF_GMK.cpp : définit le point d'entrée pour l'application console.
 //
 
+#include "../ProjetSample/IncludesProjet.hpp"
+
 
 int _tmain(int argc, _TCHAR* argv[])
 {

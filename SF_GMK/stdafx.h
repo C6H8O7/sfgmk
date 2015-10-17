@@ -86,11 +86,11 @@
 	#include "Core\Manager\GraphicManager\Sprite.hpp"
 	#include "Core\Manager\EntityManager\Entity.hpp"
 	#include "Core\Manager\EntityManager\EntityWithPv.hpp"
-	#include "Core\Manager\EntityManager\EntityTransformation.hpp"
-	#include "Core\Manager\EntityManager\TransformationTranslation.hpp"
-	#include "Core\Manager\EntityManager\TransformationRotation.hpp"
-	#include "Core\Manager\EntityManager\TransformationBezier.hpp"
-	#include "Core\Manager\EntityManager\TransformationInterpolation.hpp"
+	#include "Core\Manager\EntityManager\Transformation\EntityTransformation.hpp"
+	#include "Core\Manager\EntityManager\Transformation\TransformationTranslation.hpp"
+	#include "Core\Manager\EntityManager\Transformation\TransformationRotation.hpp"
+	#include "Core\Manager\EntityManager\Transformation\TransformationBezier.hpp"
+	#include "Core\Manager\EntityManager\Transformation\TransformationInterpolation.hpp"
 
 	#include "Core\Manager\GraphicManager\FX\LightningBolt\LightningBolt.hpp"
 	#include "Core\Manager\GraphicManager\FX\Text\FxText.hpp"
@@ -118,5 +118,7 @@
 	#include "Core\Manager\GameManager.hpp"
 	#include "Core\Manager\InputManager\InputManager.hpp"
 
-	//Projet
-	#include "ProjetSample\IncludesProjet.hpp"
+
+#include "Core\Manager\EntityManager\EntityManager.hpp"
+#include "Core\Manager\GraphicManager\GraphicManager.hpp"
+#include "Core\Manager\Core.hpp"

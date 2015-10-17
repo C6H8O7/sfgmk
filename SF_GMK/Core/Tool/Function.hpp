@@ -47,16 +47,31 @@ namespace sfgmk
 
 	*/
 
-	#define SAFE_DELETE(a) if( a != NULL ) {delete a; a= NULL;}
+	#define SAFE_DELETE(a) if( a != NULL ) { delete a; a = NULL; }
 
 
 	//Supprime les éléments d'un conteneur, et le clear
-	template <class T> void ClearPtrCntr(T& cntr)
+	template<typename T> 
+	void ClearPtrCntr(T& _Cntr)
 	{
-		for( typename T::iterator it = cntr.begin(); it != cntr.end(); ++it )
+		for( auto it = _Cntr.begin(); it != _Cntr.end(); ++it )
 			delete *it;
 
-		cntr.clear();
+		_Cntr.clear();
+	}
+
+	//Supprime un élément d'un vector après l'avoir passé en queue
+	template<typename T>
+	void DeletePtrCntrElement(std::vector<T*>& _Cntr, const unsigned int& _ElementIndex)
+	{
+		unsigned int VectorEnd = _Cntr.size() - 1;
+
+		T* Temp = _Cntr[_ElementIndex];
+		_Cntr[_ElementIndex] = _Cntr[VectorEnd];
+		_Cntr[VectorEnd] = Temp;
+		delete Temp;
+
+		_Cntr.pop_back();
 	}
 
 	//Tri à bulle d'un tableau

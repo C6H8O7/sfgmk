@@ -67,7 +67,7 @@ namespace sfgmk
 
 		//Update inputs
 		sfgmk::InputManager::getSingleton()->update();
-
+		
 		//Boucle events
 		sf::Event event;
 		while( m_MainRenderWindow->pollEvent(event) )

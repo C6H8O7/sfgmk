@@ -28,18 +28,6 @@ namespace sfgmk
 	{
 		friend class SingletonTemplate<GameManager>;
 
-		enum eGAME_MANAGER_FUNCTIONS
-		{
-			eStateMachineUpdate = 0,	//Update état(s) courant(s)
-			eEntitiUpdate,				//Update des entités
-			ePhysicManagerUpdate,		//Physique
-			eEntitySort,				//Trie les entités du vector en fonction de leur Z
-			eParallaxeUpdate,			//Calcul des coordonnées virtuelles pour l'affichage
-			eParallaxeDraw,				//Draw parallaxe
-			eStateDraw,					//Draw état courant, joueur... (tout ce qui est à 0 de profondeur)
-			eGAME_MANAGER_FUNCTIONS_NUMBER
-		};
-
 		private:
 			sf::RenderWindow* m_MainRenderWindow;
 			sf::RenderTexture* m_MainRenderTexture;

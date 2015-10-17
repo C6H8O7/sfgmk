@@ -1,3 +1,6 @@
+#include "ProjetSample\IncludesProjet.hpp"
+
+
 StateDefault::StateDefault()
 {
 }

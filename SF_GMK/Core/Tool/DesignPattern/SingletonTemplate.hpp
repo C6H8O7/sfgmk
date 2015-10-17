@@ -37,11 +37,7 @@ namespace sfgmk
 
 			static void releaseSingleton()
 			{
-				if( m_Instance != NULL )
-				{
-					delete m_Instance;
-					m_Instance = NULL;
-				}
+				SAFE_DELETE(m_Instance);
 			}
 		};
 

@@ -152,9 +152,6 @@
     <ClCompile Include="Core\Manager\EntityManager\Entity.cpp">
       <Filter>sfgmk\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Manager\EntityManager\EntityTransformation.cpp">
-      <Filter>sfgmk\Entity\Transformation</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Manager\EntityManager\EntityWithPv.cpp">
       <Filter>sfgmk\Entity</Filter>
     </ClCompile>
@@ -169,18 +166,6 @@
     </ClCompile>
     <ClCompile Include="Core\Manager\GraphicManager\Sprite.cpp">
       <Filter>sfgmk\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Manager\EntityManager\TransformationBezier.cpp">
-      <Filter>sfgmk\Entity\Transformation\Curbs</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Manager\EntityManager\TransformationInterpolation.cpp">
-      <Filter>sfgmk\Entity\Transformation\Curbs</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Manager\EntityManager\TransformationRotation.cpp">
-      <Filter>sfgmk\Entity\Transformation\Basics Transformations</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Manager\EntityManager\TransformationTranslation.cpp">
-      <Filter>sfgmk\Entity\Transformation\Basics Transformations</Filter>
     </ClCompile>
     <ClCompile Include="Core\Math\Curb\Bezier.cpp">
       <Filter>sfgmk\Math</Filter>
@@ -229,6 +214,30 @@
     </ClCompile>
     <ClCompile Include="Core\Manager\GraphicManager\FX\Grid\Spring.cpp">
       <Filter>sfgmk\Effect\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\EntityManager\Transformation\EntityTransformation.cpp">
+      <Filter>sfgmk\Entity\Transformation</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\EntityManager\Transformation\TransformationBezier.cpp">
+      <Filter>sfgmk\Entity\Transformation\Curbs</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\EntityManager\Transformation\TransformationInterpolation.cpp">
+      <Filter>sfgmk\Entity\Transformation\Curbs</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\EntityManager\Transformation\TransformationRotation.cpp">
+      <Filter>sfgmk\Entity\Transformation\Basics Transformations</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\EntityManager\Transformation\TransformationTranslation.cpp">
+      <Filter>sfgmk\Entity\Transformation\Basics Transformations</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\EntityManager\EntityManager.cpp">
+      <Filter>sfgmk</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\Core.cpp">
+      <Filter>sfgmk</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Manager\GraphicManager\GraphicManager.cpp">
+      <Filter>sfgmk</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -315,9 +324,6 @@
     <ClInclude Include="Core\Manager\EntityManager\Entity.hpp">
       <Filter>sfgmk\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Manager\EntityManager\EntityTransformation.hpp">
-      <Filter>sfgmk\Entity\Transformation</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Manager\EntityManager\EntityWithPv.hpp">
       <Filter>sfgmk\Entity</Filter>
     </ClInclude>
@@ -332,18 +338,6 @@
     </ClInclude>
     <ClInclude Include="Core\Manager\GraphicManager\Sprite.hpp">
       <Filter>sfgmk\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Manager\EntityManager\TransformationBezier.hpp">
-      <Filter>sfgmk\Entity\Transformation\Curbs</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Manager\EntityManager\TransformationInterpolation.hpp">
-      <Filter>sfgmk\Entity\Transformation\Curbs</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Manager\EntityManager\TransformationRotation.hpp">
-      <Filter>sfgmk\Entity\Transformation\Basics Transformations</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Manager\EntityManager\TransformationTranslation.hpp">
-      <Filter>sfgmk\Entity\Transformation\Basics Transformations</Filter>
     </ClInclude>
     <ClInclude Include="Core\Math\Curb\Bezier.hpp">
       <Filter>sfgmk\Math</Filter>
@@ -393,5 +387,23 @@
     <ClInclude Include="Core\Manager\GraphicManager\FX\Grid\Spring.hpp">
       <Filter>sfgmk\Effect\Grid</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Manager\Core.hpp" />
+    <ClInclude Include="Core\Manager\EntityManager\Transformation\EntityTransformation.hpp">
+      <Filter>sfgmk\Entity\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\EntityManager\Transformation\TransformationBezier.hpp">
+      <Filter>sfgmk\Entity\Transformation\Curbs</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\EntityManager\Transformation\TransformationInterpolation.hpp">
+      <Filter>sfgmk\Entity\Transformation\Curbs</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\EntityManager\Transformation\TransformationRotation.hpp">
+      <Filter>sfgmk\Entity\Transformation\Basics Transformations</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\EntityManager\Transformation\TransformationTranslation.hpp">
+      <Filter>sfgmk\Entity\Transformation\Basics Transformations</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Manager\EntityManager\EntityManager.hpp" />
+    <ClInclude Include="Core\Manager\GraphicManager\GraphicManager.hpp" />
   </ItemGroup>
 </Project>

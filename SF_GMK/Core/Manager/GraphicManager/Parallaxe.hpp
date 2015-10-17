@@ -13,56 +13,57 @@
 
 namespace sfgmk
 {
-	#define PARALLAXE_MAX_Z 100
-	#define PARALLAXE_BEHIND_MEDIUM_PLAN_Z 1
-	#define PARALLAXE_MEDIUM_PLAN_Z 0
-	#define PARALLAXE_BEFORE_MEDIUM_PLAN_Z -1
-	#define PARALLAXE_MIN_Z -100
-	#define PARALLAXE_RATIO 100.0f
+		#define PARALLAXE_MAX_Z 100
+		#define PARALLAXE_BEHIND_MEDIUM_PLAN_Z 1
+		#define PARALLAXE_MEDIUM_PLAN_Z 0
+		#define PARALLAXE_BEFORE_MEDIUM_PLAN_Z -1
+		#define PARALLAXE_MIN_Z -100
+		#define PARALLAXE_RATIO 100.0f
 
-	struct sLAYER_ELEMENT
-	{
-		float fRealX, fRealY;
-		float fVirtualX, fVirtualY;
-		std::string sFilePath;
-		std::string sFileName;
-		sfgmk::Sprite* Sprite;
-		int iWidth;
-		int iHeight;
-	};
+		struct sLAYER_ELEMENT
+		{
+			float fRealX, fRealY;
+			float fVirtualX, fVirtualY;
+			std::string sFilePath;
+			std::string sFileName;
+			sfgmk::Sprite* Sprite;
+			int iWidth;
+			int iHeight;
+		};
 
-	class Parallaxe
-	{
-		friend class GameManager;
-		friend class StateLoading;
+		class Parallaxe
+		{
+			friend class GraphicManager;
+			friend class GameManager;
+			friend class StateLoading;
 
-		public:
-			void update();
-			void virtualCoordsComputation();
+			public:
+				void update();
+				void virtualCoordsComputation();
 
-			void drawLayers(int _MaxZ, int _MinZ);
+				void drawLayers(int _MaxZ, int _MinZ);
 
-			bool loadLevel(const std::string& _DirPath, StateLoading* _State = NULL);
-			bool unloadLevel(std::string _DirPath);
-			void unloadAll();
+				bool loadLevel(const std::string& _DirPath, StateLoading* _State = NULL);
+				bool unloadLevel(std::string _DirPath);
+				void unloadAll();
 
-			sLAYER_ELEMENT* getLayer(const std::string& _Name);
-			const int getLayerAccount() const;
-			const int getDrawAccount() const;
-			void addDrawToAccount(const int _DrawNumber);
-			
-		private:
-			Parallaxe();
-			~Parallaxe();
+				sLAYER_ELEMENT* getLayer(const std::string& _Name);
+				const int getLayerAccount() const;
+				const int getDrawAccount() const;
+				void addDrawToAccount(const int _DrawNumber);
 
-			void drawLayer(std::multimap<int, sLAYER_ELEMENT*>::reverse_iterator& _Iterator, sf::RenderTexture* _RenderTexture);
+			private:
+				Parallaxe();
+				~Parallaxe();
 
-			std::multimap<int, sLAYER_ELEMENT*> m_Layers;
-			std::multimap<int, sLAYER_ELEMENT*>::reverse_iterator m_LayerIterator;
-			int m_iEntityIndex;
+				void drawLayer(std::multimap<int, sLAYER_ELEMENT*>::reverse_iterator& _Iterator, sf::RenderTexture* _RenderTexture);
 
-			int m_iDrawAccount;
-	};
+				std::multimap<int, sLAYER_ELEMENT*> m_Layers;
+				std::multimap<int, sLAYER_ELEMENT*>::reverse_iterator m_LayerIterator;
+				int m_iEntityIndex;
+
+				int m_iDrawAccount;
+		};
 }
 
 
