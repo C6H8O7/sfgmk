@@ -22,7 +22,11 @@ Thumbs.db
 *.cache
 *.ilk
 *.log
+
 *.tlog
+*.idb
+*.ipch
+*.sdf
 
 # Pour la sfgmk on upload aussi les .lib et .dll pour faciliter les builds
 # *.dll
