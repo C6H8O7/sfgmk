@@ -15,6 +15,7 @@
     <ClCompile Include="Core\Manager\EntityManager\EntityManager.cpp" />
     <ClCompile Include="Core\Manager\GraphicManager\Animation.cpp" />
     <ClCompile Include="Core\Manager\GraphicManager\GraphicManager.cpp" />
+    <ClCompile Include="Core\Manager\StateMachineManager\StateMachineManager.cpp" />
     <ClCompile Include="Core\Math\Curb\Bezier.cpp" />
     <ClCompile Include="Core\Manager\GraphicManager\FX\Grid\BlackHole.cpp" />
     <ClCompile Include="Core\Manager\GraphicManager\FX\Shader\Bloom.cpp" />
@@ -73,6 +74,7 @@
     <ClInclude Include="Core\Manager\EntityManager\EntityManager.hpp" />
     <ClInclude Include="Core\Manager\GraphicManager\Animation.hpp" />
     <ClInclude Include="Core\Manager\GraphicManager\GraphicManager.hpp" />
+    <ClInclude Include="Core\Manager\StateMachineManager\StateMachineManager.hpp" />
     <ClInclude Include="Core\Math\Curb\Bezier.hpp" />
     <ClInclude Include="Core\Manager\GraphicManager\FX\Grid\BlackHole.hpp" />
     <ClInclude Include="Core\Manager\GraphicManager\FX\Shader\Bloom.hpp" />

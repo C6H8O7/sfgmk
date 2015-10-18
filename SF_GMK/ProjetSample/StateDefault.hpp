@@ -1,12 +1,14 @@
 #ifndef STATE_DEFAULT_HPP
 #define STATE_DEFAULT_HPP
 
-
 class StateDefault : public sfgmk::State
 {
 	private:
 
+		sfgmk::Sprite goomba;
+
 	public:
+
 		StateDefault();
 		~StateDefault();
 
@@ -16,7 +18,5 @@ class StateDefault : public sfgmk::State
 
 		void draw();
 };
-
-
 
 #endif

@@ -2,7 +2,7 @@ namespace sfgmk
 {
 	GameManager::GameManager() : m_MainRenderWindow(NULL), m_MainRenderTexture(NULL), m_CurrentCamera(NULL)
 	{
-		m_StateMachine = new StateMachine();
+		m_StateMachine = new engine::StateMachine();
 	}
 
 	GameManager::~GameManager()
@@ -63,7 +63,7 @@ namespace sfgmk
 
 		//Quelque chose de mal
 		if( !m_StateMachine )
-			m_StateMachine = new StateMachine();
+			m_StateMachine = new engine::StateMachine();
 
 		//Update inputs
 		sfgmk::InputManager::getSingleton()->update();
@@ -98,7 +98,7 @@ namespace sfgmk
 	void GameManager::loop()
 	{
 		//Update état(s) courant(s)
-		std::function<void()> StateMachineUpdate(std::bind(&StateMachine::update, m_StateMachine));
+		std::function<void()> StateMachineUpdate(std::bind(&engine::StateMachine::update, m_StateMachine));
 		m_EntityTimers.dStateUpdate = measureFunctionExecutionTime(StateMachineUpdate);
 
 		//Si state loading en cours, c'est une autre instance de parallaxe qui est utilisée
@@ -127,7 +127,7 @@ namespace sfgmk
 		m_EntityTimers.dParallaxeDisplay = measureFunctionExecutionTime(ParallaxeDrawB, PARALLAXE_MAX_Z, PARALLAXE_MEDIUM_PLAN_Z);
 
 		//Draw état courant, joueur... (tout ce qui est à 0 de profondeur)
-		std::function<void()> StateMachineDraw(std::bind(&StateMachine::draw, m_StateMachine));
+		std::function<void()> StateMachineDraw(std::bind(&engine::StateMachine::draw, m_StateMachine));
 		m_EntityTimers.dStateDraw = measureFunctionExecutionTime(StateMachineDraw);
 
 		//Draw foreground (profondeur de -1 jusqu'à -100)
@@ -173,7 +173,7 @@ namespace sfgmk
 	}
 
 
-	StateMachine* GameManager::getStateMachine()
+	engine::StateMachine* GameManager::getStateMachine()
 	{
 		return m_StateMachine;
 	}

@@ -2,7 +2,7 @@ namespace sfgmk
 {
 	Graph::Graph(sf::Vector2u _Units, sf::Vector2f _UnitValue) : m_UnitNumber(_Units), m_UnitValue(_UnitValue)
 	{
-		m_ScreenSize = (sf::Vector2f)GAME_MANAGER->getRenderTexture()->getSize();
+		m_ScreenSize = (sf::Vector2f)GRAPHIC_MANAGER->getRenderTexture()->getSize();
 
 		m_Repere[0] = sf::Vector2f(0.0f, m_ScreenSize.y * 0.5f);
 		m_Repere[1] = sf::Vector2f(m_ScreenSize.x, m_ScreenSize.y * 0.5f);
@@ -23,7 +23,7 @@ namespace sfgmk
 
 	void Graph::draw()
 	{
-		sf::RenderTexture* RenderTexture = GAME_MANAGER->getRenderTexture();
+		sf::RenderTexture* RenderTexture = GRAPHIC_MANAGER->getRenderTexture();
 
 		sf::Vertex Line[2];
 		char cBuffer[16];

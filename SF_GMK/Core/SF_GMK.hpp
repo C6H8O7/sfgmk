@@ -23,23 +23,28 @@ namespace sfgmk
 
 	#define SFGMK_DATA_PATH std::string("../Data/sfgmk/")
 
-	//States
-	#define STATE_BANK sfgmk::StateBank::getSingleton()
-	#define CHANGE_STATE(a) sfgmk::GameManager::getSingleton()->getStateMachine()->changeState(a);
-	#define STATE_MACHINE sfgmk::GameManager::getSingleton()->getStateMachine()
-	#define CURRENT_STATE sfgmk::GameManager::getSingleton()->getStateMachine()->Get_CurrentState()
+	//Core
+	#define SFGMK_CORE					sfgmk::engine::Core
 
 	//Managers
-	#define DATA_MANAGER sfgmk::DataManager::getSingleton()
-	#define GAME_MANAGER sfgmk::GameManager::getSingleton()
-	#define ADD_ENTITY(a) sfgmk::GameManager::getSingleton()->addEntity(a)
-	#define FREE_ENTITY_VECTOR sfgmk::GameManager::getSingleton()->freeEntityVector()
-	#define CAMERA sfgmk::GameManager::getSingleton()->getCurrentCamera()
-	#define CONSOLE sfgmk::ConsoleDev::getSingleton();
-	#define PARALLAXE sfgmk::GameManager::getSingleton()->getParallaxe()
-	#define TIME_DELTA sfgmk::GameManager::getSingleton()->getTimeDelta()
+	#define STATEMACHINE_MANAGER		SFGMK_CORE::getStateMachineManager()
+	#define GRAPHIC_MANAGER				SFGMK_CORE::getGraphicManager()
+	#define DATA_MANAGER				SFGMK_CORE::getDataManager()
+	#define GAME_MANAGER				sfgmk::GameManager::getSingleton()
+	#define SOUND_MANAGER				sfgmk::SoundManager::getSingleton()
 
-	#define SOUND_MANAGER sfgmk::SoundManager::getSingleton()
+	#define ADD_ENTITY(a)				sfgmk::GameManager::getSingleton()->addEntity(a)
+	#define FREE_ENTITY_VECTOR			sfgmk::GameManager::getSingleton()->freeEntityVector()
+	#define CAMERA						sfgmk::GameManager::getSingleton()->getCurrentCamera()
+	#define CONSOLE						sfgmk::ConsoleDev::getSingleton();
+	#define PARALLAXE					sfgmk::GameManager::getSingleton()->getParallaxe()
+	#define TIME_DELTA					SFGMK_CORE::getSingleton()->getTimeDelta()
+
+	//States
+	#define STATE_BANK					STATEMACHINE_MANAGER
+	#define CHANGE_STATE(a)				STATEMACHINE_MANAGER->getStateMachine()->changeState(a);
+	#define STATE_MACHINE				STATEMACHINE_MANAGER->getStateMachine()
+	#define CURRENT_STATE				STATEMACHINE_MANAGER->getStateMachine()->Get_CurrentState()
 
 	//Inputs
 	#define INPUT_MANAGER sfgmk::InputManager::getSingleton()

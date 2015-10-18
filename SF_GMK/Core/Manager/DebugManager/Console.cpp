@@ -117,7 +117,7 @@ namespace sfgmk
 		if( !m_bIsActive )
 			return false;
 
-		float fScale = 1.0f / GAME_MANAGER->getCurrentCamera()->getZoomFactor(); //Pour que la console garde sa taille quand on a zoomé/dézoomé la vue
+		float fScale = 1.0f / GRAPHIC_MANAGER->getCurrentCamera()->getZoomFactor(); //Pour que la console garde sa taille quand on a zoomé/dézoomé la vue
 
 		//Draw
 			//Console
@@ -129,7 +129,7 @@ namespace sfgmk
 			m_ConsoleRender.draw(m_FpsCurbSprite);
 
 			//Caméra (si le free move est activée)
-			Camera* CurrentCam = GAME_MANAGER->getCurrentCamera();
+			Camera* CurrentCam = GRAPHIC_MANAGER->getCurrentCamera();
 			if( CurrentCam->getFreeMove() )
 			{
 				sf::Vector2i CameraPosition = (sf::Vector2i)CurrentCam->getCenter();
@@ -284,7 +284,7 @@ namespace sfgmk
 		//Caméra libre
 		if( m_sSeizureBuffer == "/freecam" )
 		{
-			bool bIsFreeMove = sfgmk::GameManager::getSingleton()->getCurrentCamera()->setFreeMove();
+			bool bIsFreeMove = GRAPHIC_MANAGER->getCurrentCamera()->setFreeMove();
 			bIsFreeMove ? m_sConsoleString += "Camera libre activee\n" : m_sConsoleString += "Camera libre desactivee\n";
 		}
 		//Draw colliders

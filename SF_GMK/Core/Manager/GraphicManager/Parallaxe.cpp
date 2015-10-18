@@ -20,7 +20,7 @@ namespace sfgmk
 
 	void Parallaxe::virtualCoordsComputation()
 	{
-		sf::Vector2f CameraOrigin = GAME_MANAGER->getCurrentCamera()->getRelativOriginWithZoomCompensation();
+		sf::Vector2f CameraOrigin = GRAPHIC_MANAGER->getCurrentCamera()->getRelativOriginWithZoomCompensation();
 		std::vector<Entity*> EntityVector = GAME_MANAGER->getEntityVector();
 		sf::Transformable* VirtualTransform = NULL;
 		float fZ(0.0f);
@@ -70,10 +70,10 @@ namespace sfgmk
 
 	void Parallaxe::drawLayers(int _MaxZ, int _MinZ)
 	{
-		sf::Vector2f CameraCenter = GAME_MANAGER->getCurrentCamera()->getCenter();
-		sf::Vector2f CameraSize = GAME_MANAGER->getCurrentCamera()->getSize();
-		sf::Vector2f CameraOrigin = GAME_MANAGER->getCurrentCamera()->getCenter() - GAME_MANAGER->getCurrentCamera()->getSize() / 2.0f;
-		sf::RenderTexture* Rendertexture = GAME_MANAGER->getRenderTexture();
+		sf::Vector2f CameraCenter = GRAPHIC_MANAGER->getCurrentCamera()->getCenter();
+		sf::Vector2f CameraSize = GRAPHIC_MANAGER->getCurrentCamera()->getSize();
+		sf::Vector2f CameraOrigin = GRAPHIC_MANAGER->getCurrentCamera()->getCenter() - GRAPHIC_MANAGER->getCurrentCamera()->getSize() / 2.0f;
+		sf::RenderTexture* Rendertexture = GRAPHIC_MANAGER->getRenderTexture();
 		std::vector<Entity*> EntityVector = GAME_MANAGER->getEntityVector();
 		sLAYER_ELEMENT* TempLayer = NULL;
 		Entity* TempEntity = NULL;
@@ -128,7 +128,7 @@ namespace sfgmk
 
 	bool Parallaxe::loadLevel(const std::string& _DirPath, StateLoading* _State)
 	{
-		sfgmk::DataManager* DataManager = sfgmk::DataManager::getSingleton();
+		sfgmk::engine::DataManager* DataManager = DATA_MANAGER;
 		DIR* LevelRepertory = NULL;
 		struct dirent* ReadFile = NULL;
 
@@ -214,7 +214,7 @@ namespace sfgmk
 
 	bool Parallaxe::unloadLevel(std::string _DirPath)
 	{
-		sfgmk::DataManager* DataManager = sfgmk::DataManager::getSingleton();
+		sfgmk::engine::DataManager* DataManager = DATA_MANAGER;
 		DIR* LevelRepertory = NULL;
 		struct dirent* ReadFile = NULL;
 		std::vector<std::string> FileNameVector;
@@ -270,7 +270,7 @@ namespace sfgmk
 
 	void Parallaxe::unloadAll()
 	{
-		sfgmk::DataManager* DataManager = sfgmk::DataManager::getSingleton();
+		sfgmk::engine::DataManager* DataManager = DATA_MANAGER;
 
 		for( auto it = m_Layers.begin(); it != m_Layers.end(); it = m_Layers.erase(it) )
 		{

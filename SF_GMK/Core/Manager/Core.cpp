@@ -4,12 +4,13 @@ namespace sfgmk
 	{
 		Core::Core()
 		{
+
 		}
 
 		Core::~Core()
 		{
-		}
 
+		}
 
 		void Core::update()
 		{
@@ -48,8 +49,7 @@ namespace sfgmk
 		void Core::loop()
 		{
 			//Update état(s) courant(s)
-			//std::function<void()> StateMachineUpdate(std::bind(&StateMachine::update, m_StateMachine));
-			//m_EntityTimers.dStateUpdate = measureFunctionExecutionTime(StateMachineUpdate);
+			StateMachineManager::getSingleton()->update();
 
 			//Si state loading en cours, c'est une autre instance de parallaxe qui est utilisée
 			//Parallaxe* CurrentParallaxe = &m_Parallaxe;
@@ -65,7 +65,10 @@ namespace sfgmk
 
 			//Trie les entités du vector en fonction de leur Z
 			EntityManager::getSingleton()->sortEntityVector();
-			
+
+			//Draw état(s) courant(s)
+			StateMachineManager::getSingleton()->draw();
+
 			//GraphicManager::getSingleton()->compute();
 			//GraphicManager::getSingleton()->draw();
 		}

@@ -38,7 +38,7 @@ namespace sfgmk
 			float m_fTimeDelta;
 			stGameManagerTimers m_EntityTimers;
 
-			StateMachine *m_StateMachine;
+			engine::StateMachine *m_StateMachine;
 
 			std::map<std::string, Camera*> m_Cameras;
 			Camera* m_CurrentCamera;
@@ -66,7 +66,7 @@ namespace sfgmk
 
 			float getTimeDelta();
 
-			StateMachine* getStateMachine();
+			engine::StateMachine* getStateMachine();
 
 			void registerCamera(std::string _CameraName, Camera* _Camera);
 			Camera* getCamera(std::string _CameraName);

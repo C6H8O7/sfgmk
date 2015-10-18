@@ -4,6 +4,7 @@ namespace sfgmk
 	{
 		GraphicManager::GraphicManager() : m_RenderWindow(NULL), m_RenderTexture(NULL), m_CurrentCamera(NULL)
 		{
+
 		}
 
 		GraphicManager::~GraphicManager()
@@ -15,7 +16,6 @@ namespace sfgmk
 
 			ClearPtrCntr(m_PostShaders);
 		}
-
 
 		void GraphicManager::init(sf::VideoMode& _Mode, const std::string& _WindowName, int _Style)
 		{
@@ -29,7 +29,6 @@ namespace sfgmk
 			m_RenderTexture = new sf::RenderTexture();
 			m_RenderTexture->create(_Mode.width, _Mode.height);
 		}
-
 
 		void GraphicManager::set()
 		{
@@ -78,7 +77,6 @@ namespace sfgmk
 			m_RenderWindow->display();
 		}
 
-
 		sf::RenderWindow* GraphicManager::getRenderWindow()
 		{
 			return m_RenderWindow;
@@ -93,7 +91,6 @@ namespace sfgmk
 		{
 			return m_Parallaxe;
 		}*/
-
 
 		void GraphicManager::registerCamera(std::string _CameraName, Camera* _Camera)
 		{
@@ -144,7 +141,6 @@ namespace sfgmk
 
 			return false;
 		}
-
 
 		void GraphicManager::addPostShader(PostShader* _PostShader)
 		{

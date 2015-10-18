@@ -35,10 +35,10 @@ namespace sfgmk
 		m_FixedPoints = new PointMass[m_iPointNumber];
 
 		m_Size = sf::Vector2f((unsigned int)(m_iLineNumber.x - 1) * m_fSpacing.x, (unsigned int)(m_iLineNumber.y - 1) * m_fSpacing.y);
-		m_ScreenSize = sf::Vector2f(GAME_MANAGER->getRenderWindow()->getSize());
+		m_ScreenSize = sf::Vector2f(GRAPHIC_MANAGER->getRenderWindow()->getSize());
 
 		m_RenderTexture = new sf::RenderTexture();
-		m_RenderTexture->create(MAX((unsigned int)GAME_MANAGER->getCurrentCamera()->getSize().x, (unsigned int)m_Size.x + 4U), MAX((unsigned int)GAME_MANAGER->getCurrentCamera()->getSize().y, (unsigned int)m_Size.y + 4U));
+		m_RenderTexture->create(MAX((unsigned int)GRAPHIC_MANAGER->getCurrentCamera()->getSize().x, (unsigned int)m_Size.x + 4U), MAX((unsigned int)GRAPHIC_MANAGER->getCurrentCamera()->getSize().y, (unsigned int)m_Size.y + 4U));
 
 		int iColumn(0), iRow(0);
 		sf::Vector2f Position = getPosition();
@@ -142,7 +142,7 @@ namespace sfgmk
 
 	void Grid::draw(sf::RenderTexture* _Render)
 	{
-		m_CameraView = GAME_MANAGER->getCurrentCamera()->getRect();
+		m_CameraView = GRAPHIC_MANAGER->getCurrentCamera()->getRect(); // get rekt lel
 		
 		sf::Vector2f VecLeft, VecUp, VecP, VecUpLeft, Mid;
 		int iClamped, x, y;

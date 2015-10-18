@@ -3,7 +3,6 @@
 
 #include "../ProjetSample/IncludesProjet.hpp"
 
-
 int _tmain(int argc, _TCHAR* argv[])
 {
 	//Cache la console / souris
@@ -12,42 +11,29 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	//Init random
 	srand((unsigned int)time(NULL));
-	
-	//Init fenêtre
-	GAME_MANAGER->init(sf::VideoMode::getDesktopMode(), "SF_GMK", sf::Style::Default);
-	//GAME_MANAGER->getRenderWindow()->setVerticalSyncEnabled(true);
-	//GAME_MANAGER->getRenderWindow()->setFramerateLimit(120); //Ne PAS utiliser vSync et frameRateLimit simultanément
 
-	//Camera
+	//Init fenêtre V2
+	SFGMK_CORE::getGraphicManager()->init(sf::VideoMode(1280, 720), "SF_GMK", sf::Style::Default);
+
+	//Camera V2
 	sfgmk::Camera* MyCamera = new sfgmk::Camera();
-	MyCamera->setSize(sf::Vector2f(GAME_MANAGER->getRenderWindow()->getSize()));
+	MyCamera->setSize(sf::Vector2f(sfgmk::engine::Core::getGraphicManager()->getRenderWindow()->getSize()));
 	MyCamera->setCenter(MyCamera->getSize() * 0.5f);
-	GAME_MANAGER->registerCamera("MainCamera", MyCamera);
-	GAME_MANAGER->setCurrentCamera("MainCamera");
+	SFGMK_CORE::getGraphicManager()->registerCamera("MainCamera", MyCamera);
+	SFGMK_CORE::getGraphicManager()->setCurrentCamera("MainCamera");
 
-	//Enregistrement des états du jeu
-	STATE_BANK->RegisterState<sfgmk::StateLoading>(sfgmk::eSFGMK_STATES::eLoadingState, "data/sfgmk/stateLoading");
+	//Init states V2
+	SFGMK_CORE::getStateMachineManager()->RegisterState<StateDefault>(sfgmk::eSFGMK_STATES::eStateDefault, "data/sfgmk/StateDefault");
+	SFGMK_CORE::getStateMachineManager()->getStateMachine()->init(sfgmk::eSFGMK_STATES::eStateDefault);
 
-	STATE_BANK->RegisterState<StateDefault>(sfgmk::eSFGMK_STATES::eStateDefault, "data/sfgmk/StateDefault");
-
-	//Etat de départ
-	GAME_MANAGER->getStateMachine()->init(sfgmk::eSFGMK_STATES::eStateDefault);
-	
-	//Loop
-	while( GAME_MANAGER->getRenderWindow()->isOpen() )
+	while (sfgmk::engine::Core::getGraphicManager()->getRenderWindow()->isOpen())
 	{
-		GAME_MANAGER->preLoop();
-		GAME_MANAGER->loop();
-		GAME_MANAGER->postLoop();
+		SFGMK_CORE::getSingleton()->preLoop();
+		SFGMK_CORE::getSingleton()->loop();
+		SFGMK_CORE::getSingleton()->postLoop();
 	}
 
-	sfgmk::StateBank::releaseSingleton();
-	sfgmk::DataManager::releaseSingleton();
-	sfgmk::PhysicManager::releaseSingleton();
-	sfgmk::GameManager::releaseSingleton();
-	sfgmk::ConsoleDev::releaseSingleton();
-	sfgmk::SoundManager::releaseSingleton();
-	sfgmk::InputManager::releaseSingleton();
+	// TODO : release des singletons
 
 	return 0;
 }

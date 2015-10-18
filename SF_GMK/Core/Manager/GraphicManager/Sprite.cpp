@@ -8,13 +8,13 @@ namespace sfgmk
 
 	Sprite::Sprite(std::string _resName, bool _isAnim)
 	{
-		sfgmk::DataManager *dataman = sfgmk::DataManager::getSingleton();
+		sfgmk::engine::DataManager *dataman = DATA_MANAGER;
 
 		m_isAnim = _isAnim;
 		m_Animation = 0;
 
 		if( m_isAnim )
-			setAnimation(sfgmk::DataManager::getSingleton()->getAnimation(_resName));
+			setAnimation(DATA_MANAGER->getAnimation(_resName));
 		else
 			sf::Sprite::setTexture(dataman->getTexture(_resName));
 	}

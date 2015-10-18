@@ -38,7 +38,7 @@ namespace sfgmk
 		
 		//Init les fonctions
 		m_ThreadFunctions[eLevel] = std::function<bool(const std::string&, StateLoading*)>(std::bind(&Parallaxe::loadLevel, &PARALLAXE, std::placeholders::_1, std::placeholders::_2));
-		m_ThreadFunctions[eAsset] = std::function<bool(const std::string&, StateLoading*)>(std::bind(&DataManager::loadLevel, DATA_MANAGER, std::placeholders::_1, std::placeholders::_2));
+		m_ThreadFunctions[eAsset] = std::function<bool(const std::string&, StateLoading*)>(std::bind(&sfgmk::engine::DataManager::loadLevel, DATA_MANAGER, std::placeholders::_1, std::placeholders::_2));
 		m_ThreadFunctions[eSound] = std::function<bool(const std::string&, StateLoading*)>(std::bind(&SoundManager::loadLevel, SOUND_MANAGER, std::placeholders::_1, std::placeholders::_2));
 	}
 
@@ -85,7 +85,7 @@ namespace sfgmk
 		//Affiche les touches à presser pour passer à l'état suivant
 		if( m_bThreadOver )
 		{
-			sf::RenderTexture* MainRenderTexture(GAME_MANAGER->getRenderTexture());
+			sf::RenderTexture* MainRenderTexture(GRAPHIC_MANAGER->getRenderTexture());
 			sf::Vector2u MainRenderTextureSize = MainRenderTexture->getSize();
 			sfgmk::Sprite Sprite;
 			unsigned int uiTextSize = 32U;
@@ -127,7 +127,7 @@ namespace sfgmk
 			Sprite.setScale(WindowSizeRatio.x, WindowSizeRatio.y);
 			Sprite.setColor(sf::Color(255, 255, 255, uiAlpha));
 			Sprite.setPosition((MainRenderTextureSize.x * 0.5f - TextRectSize.x * 0.5f * WindowSizeRatio.x), (MainRenderTextureSize.y - 2.5f * TextRectSize.y * WindowSizeRatio.y));
-			GAME_MANAGER->getRenderTexture()->draw(Sprite);
+			GRAPHIC_MANAGER->getRenderTexture()->draw(Sprite);
 		}
 	}
 

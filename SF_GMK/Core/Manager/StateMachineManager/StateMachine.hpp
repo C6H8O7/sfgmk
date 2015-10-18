@@ -12,69 +12,44 @@
 
 namespace sfgmk
 {
-	typedef State* StatePtr;
-	typedef StatePtr(*tStateCreationFunc)();
-
-	class StateMachine
+	namespace engine
 	{
-		public:
-			union StateCreationConv
-			{
-				void* _voidptr;
-				tStateCreationFunc _statefunc;
-			};
+		typedef State* StatePtr;
+		typedef StatePtr(*tStateCreationFunc)();
 
-			StateMachine();
-			~StateMachine();
+		class StateMachine
+		{
+			public:
+				union StateCreationConv
+				{
+					void* _voidptr;
+					tStateCreationFunc _statefunc;
+				};
 
-			State *CreateState(int _id);
+				StateMachine();
+				~StateMachine();
 
-			void init(int _id);
-			void update();
-			bool changeState(int _id, int _StateToLoadId = 0);
+				State *CreateState(int _id);
 
-			void draw();
+				void init(int _id);
+				void update();
+				bool changeState(int _id, int _StateToLoadId = 0);
 
-			State* Get_CurrentState();
+				void draw();
 
-			const int& getStateCreatedId();
-			const int& getStateToLoadId();
+				State* Get_CurrentState();
 
-		private:
-			State *m_CurrentState;
+				const int& getStateCreatedId();
+				const int& getStateToLoadId();
 
-			int m_iStateCreated;
-			int m_iStateToLoad;
-	};
+			private:
+				State *m_CurrentState;
 
-	class StateBank : public SingletonTemplate<StateBank>
-	{
-		friend class SingletonTemplate<StateBank>;
-
-		public:
-			std::map<int, std::pair<void*, std::string>> m_States;
-	
-			template <class T>
-			void RegisterState(const int& _id, const std::string& _StateDataPath)
-			{
-				StateMachine::StateCreationConv conv;
-				conv._statefunc = &sfgmk::GetStateCreationFunc<T>;
-
-				m_States[_id] = std::pair<void*, std::string>(conv._voidptr, _StateDataPath);
-			}
-
-			template <class T>
-			friend State *GetStateCreationFunc()
-			{
-				return new T();
-			}	
-
-			const std::string& getStateRessourcePath(const int& _StateId)
-			{
-				return m_States[_StateId].second;
-			}
-	};
-};
+				int m_iStateCreated;
+				int m_iStateToLoad;
+		};
+	}
+}
 
 
 #endif

@@ -239,6 +239,9 @@
     <ClCompile Include="Core\Manager\GraphicManager\GraphicManager.cpp">
       <Filter>sfgmk</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Manager\StateMachineManager\StateMachineManager.cpp">
+      <Filter>sfgmk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -405,5 +408,6 @@
     </ClInclude>
     <ClInclude Include="Core\Manager\EntityManager\EntityManager.hpp" />
     <ClInclude Include="Core\Manager\GraphicManager\GraphicManager.hpp" />
+    <ClInclude Include="Core\Manager\StateMachineManager\StateMachineManager.hpp" />
   </ItemGroup>
 </Project>

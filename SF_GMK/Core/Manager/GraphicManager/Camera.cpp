@@ -4,7 +4,7 @@ namespace sfgmk
 		m_Speed(sf::Vector2f(FREE_CAMERA_DEFAULT_SPEED, FREE_CAMERA_DEFAULT_SPEED)), 
 		m_bVibrate(false), m_VibrationRange(0.0f, 0.0f), m_VibrationAttenuation(0.0f, 0.0f), m_fVibrationTimer(0.0f), m_RelativOrigin(sf::Vector2f(0.0f, 0.0f))
 	{
-		sf::Vector2u CurrentResolution = sfgmk::GameManager::getSingleton()->getRenderWindow()->getSize();
+		sf::Vector2u CurrentResolution = GRAPHIC_MANAGER->getRenderWindow()->getSize();
 
 		this->setCenter(sf::Vector2f(CurrentResolution.x * 0.5f, CurrentResolution.y * 0.5f));
 		this->setSize(sf::Vector2f(CurrentResolution));

@@ -112,9 +112,12 @@
 	#include "Core\Manager\PhysicManager\PhysicManager.hpp"
 	#include "Core\Manager\SoundManager\SoundManager.hpp"
 	#include "Core\Manager\DebugManager\Console.hpp"
+
 	#include "Core\Manager\StateMachineManager\State.hpp"
 	#include "Core\Manager\StateMachineManager\LoadingState\StateLoading.hpp"
 	#include "Core\Manager\StateMachineManager\StateMachine.hpp"
+	#include "Core\Manager\StateMachineManager\StateMachineManager.hpp"
+
 	#include "Core\Manager\GameManager.hpp"
 	#include "Core\Manager\InputManager\InputManager.hpp"
 
