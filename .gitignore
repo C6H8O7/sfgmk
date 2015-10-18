@@ -34,3 +34,5 @@ Thumbs.db
 
 *.sbr
 *.opensdf
+*.iobj
+*.ipdb
