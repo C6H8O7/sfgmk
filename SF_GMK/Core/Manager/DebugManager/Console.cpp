@@ -305,26 +305,26 @@ namespace sfgmk
 
 	void ConsoleDev::updateCounters()
 	{
-		sfgmk::GameManager* GameMan = sfgmk::GameManager::getSingleton();
-		sfgmk::Parallaxe* GameParallaxe = &sfgmk::GameManager::getSingleton()->getParallaxe();
-		stGameManagerTimers* Timers = &GameMan->getTimers();
+		//sfgmk::GameManager* GameMan = sfgmk::GameManager::getSingleton();
+		sfgmk::engine::Parallaxe* GameParallaxe = &sfgmk::engine::GraphicManager::getSingleton()->getParallaxe();
+		//stGameManagerTimers* Timers = &GameMan->getTimers();
 		
 		//Current state
-		std::string sStateUpdate = std::to_string(Timers->dStateUpdate);
+		/*std::string sStateUpdate = std::to_string(Timers->dStateUpdate);
 		sStateUpdate = sStateUpdate.substr(0, sStateUpdate.find('.') + 3);
 		std::string sStateDisplay = std::to_string(Timers->dStateDraw);
 		sStateDisplay = sStateDisplay.substr(0, sStateDisplay.find('.') + 3);
 	
-		m_TextArray[eCONSOLE_DEV_TEXT::eState].setString("State:\tUpdate:  " + sStateUpdate + " ms\t" + "Draw:  " + sStateDisplay + " ms");
+		m_TextArray[eCONSOLE_DEV_TEXT::eState].setString("State:\tUpdate:  " + sStateUpdate + " ms\t" + "Draw:  " + sStateDisplay + " ms");*/
 
 		//Parallaxe
-		std::string sEntity("Entity: " + std::to_string(GameMan->getEntityNumber()) + "  ");
+		/*std::string sEntity("Entity: " + std::to_string(GameMan->getEntityNumber()) + "  ");
 		std::string sLayer("Layer: " + std::to_string(GameParallaxe->getLayerAccount()) + "  ");
 		std::string sDraw("Draw: " + std::to_string(GameParallaxe->getDrawAccount()) + "  ");
-		m_TextArray[eCONSOLE_DEV_TEXT::eParallaxe].setString("Parallaxe:\t" + sEntity + sLayer + sDraw);
+		m_TextArray[eCONSOLE_DEV_TEXT::eParallaxe].setString("Parallaxe:\t" + sEntity + sLayer + sDraw);*/
 
 		//Entity
-		std::string sUpdate = std::to_string(Timers->dEntityUpdate);
+		/*std::string sUpdate = std::to_string(Timers->dEntityUpdate);
 		sUpdate = sUpdate.substr(0, sUpdate.find('.') + 3);
 		std::string sSort = std::to_string(Timers->dEntitySort);
 		sSort = sSort.substr(0, sSort.find('.') + 3);
@@ -339,7 +339,7 @@ namespace sfgmk
 																			 + "\nSort: " + sSort + " ms"
 																			 + "\nParallaxe: " + sParallaxe + " ms"
 																			 + "\nPhysic: " + sPhysic + " ms"
-																			 + "\nDisplay: " + sDisplay + " ms");
+																			 + "\nDisplay: " + sDisplay + " ms");*/
 	}
 
 

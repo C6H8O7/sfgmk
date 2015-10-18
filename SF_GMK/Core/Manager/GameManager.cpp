@@ -1,4 +1,4 @@
-namespace sfgmk
+/*namespace sfgmk
 {
 	GameManager::GameManager() : m_MainRenderWindow(NULL), m_MainRenderTexture(NULL), m_CurrentCamera(NULL)
 	{
@@ -345,4 +345,4 @@ namespace sfgmk
 	{
 		return(_Entity1->getZ() < _Entity2->getZ());
 	}
-}
+}*/

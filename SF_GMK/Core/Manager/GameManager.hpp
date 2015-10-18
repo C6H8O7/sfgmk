@@ -24,7 +24,7 @@ struct stGameManagerTimers
 
 namespace sfgmk
 {
-	class GameManager : public SingletonTemplate<GameManager>
+	/*class GameManager : public SingletonTemplate<GameManager>
 	{
 		friend class SingletonTemplate<GameManager>;
 
@@ -93,7 +93,7 @@ namespace sfgmk
 	};
 
 	//Fonction qui permet de trier les entités par leur Z virtuel
-	inline bool sortEntityByZ(Entity* _Entity1, Entity* _Entity2);
+	inline bool sortEntityByZ(Entity* _Entity1, Entity* _Entity2);*/
 }
 
 

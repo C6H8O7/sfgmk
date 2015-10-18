@@ -21,7 +21,7 @@ namespace sfgmk
 
 	#define EMPTY_COLOR sf::Color(0, 0, 0, 0)
 
-	#define SFGMK_DATA_PATH std::string("../Data/sfgmk/")
+	#define SFGMK_DATA_PATH std::string("../data/sfgmk/")
 
 	//Core
 	#define SFGMK_CORE					sfgmk::engine::Core
@@ -32,12 +32,13 @@ namespace sfgmk
 	#define DATA_MANAGER				SFGMK_CORE::getDataManager()
 	#define GAME_MANAGER				sfgmk::GameManager::getSingleton()
 	#define SOUND_MANAGER				sfgmk::SoundManager::getSingleton()
+	#define ENTITY_MANAGER				sfgmk::EntityManager::getSingleton()
 
 	#define ADD_ENTITY(a)				sfgmk::GameManager::getSingleton()->addEntity(a)
 	#define FREE_ENTITY_VECTOR			sfgmk::GameManager::getSingleton()->freeEntityVector()
 	#define CAMERA						sfgmk::GameManager::getSingleton()->getCurrentCamera()
 	#define CONSOLE						sfgmk::ConsoleDev::getSingleton();
-	#define PARALLAXE					sfgmk::GameManager::getSingleton()->getParallaxe()
+	#define PARALLAXE					sfgmk::engine::GraphicManager::getSingleton()->getParallaxe()
 	#define TIME_DELTA					SFGMK_CORE::getSingleton()->getTimeDelta()
 
 	//States

@@ -28,34 +28,38 @@ namespace sfgmk
 			m_RenderWindow->create(_Mode, _WindowName, _Style);
 			m_RenderTexture = new sf::RenderTexture();
 			m_RenderTexture->create(_Mode.width, _Mode.height);
+
+			initDefaultCamera();
+		}
+
+		void GraphicManager::initDefaultCamera()
+		{
+			sfgmk::Camera* MyCamera = new sfgmk::Camera();
+			MyCamera->setSize(sf::Vector2f(m_RenderWindow->getSize()));
+			MyCamera->setCenter(MyCamera->getSize() * 0.5f);
+			registerCamera(DEFAULT_CAMERA_NAME, MyCamera);
+			setCurrentCamera(DEFAULT_CAMERA_NAME);
 		}
 
 		void GraphicManager::set()
 		{
-			//Caméra définie
-			if( m_CurrentCamera )
-			{
-				m_CurrentCamera->update(TIME_DELTA);
-				m_RenderTexture->setView(*m_CurrentCamera);
-			}
-			//Pas de caméra définie
-			else
-				m_RenderTexture->setView(m_RenderTexture->getDefaultView());
-
+			m_CurrentCamera->update(TIME_DELTA);
+			m_RenderTexture->setView(*m_CurrentCamera);
+	
 			//Clear render texture
 			m_RenderTexture->clear(sf::Color::Black);
 		}
 
-		/*void GraphicManager::compute()
+		void GraphicManager::compute()
 		{
 			m_Parallaxe.update();
-		}*/
+		}
 
-		/*void GraphicManager::draw()
+		void GraphicManager::draw()
 		{
 			m_Parallaxe.drawLayers(PARALLAXE_MAX_Z, PARALLAXE_MEDIUM_PLAN_Z);
 			m_Parallaxe.drawLayers(PARALLAXE_BEFORE_MEDIUM_PLAN_Z, PARALLAXE_MIN_Z);
-		}*/
+		}
 
 		void GraphicManager::display()
 		{
@@ -87,10 +91,10 @@ namespace sfgmk
 			return m_RenderTexture;
 		}
 
-		/*Parallaxe& GraphicManager::getParallaxe()
+		Parallaxe& GraphicManager::getParallaxe()
 		{
 			return m_Parallaxe;
-		}*/
+		}
 
 		void GraphicManager::registerCamera(std::string _CameraName, Camera* _Camera)
 		{
@@ -110,8 +114,7 @@ namespace sfgmk
 
 		void GraphicManager::setDefaultCamera()
 		{
-			m_CurrentCamera = NULL;
-			m_RenderTexture->setView(m_RenderTexture->getDefaultView());
+			setCurrentCamera(DEFAULT_CAMERA_NAME);
 		}
 
 		bool GraphicManager::setCurrentCamera(std::string _CameraName)

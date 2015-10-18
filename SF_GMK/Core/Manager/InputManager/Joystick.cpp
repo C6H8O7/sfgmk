@@ -33,7 +33,7 @@ namespace sfgmk
 
 		//Update vibrations controller
 		if( m_fVibrationTimer > 0 )
-			m_fVibrationTimer -= GameManager::getSingleton()->getTimeDelta();
+			m_fVibrationTimer -= SFGMK_CORE::getSingleton()->getTimeDelta();
 		else if( m_fVibrationTimer <= 0 )
 		{
 			m_fVibrationTimer = 0;

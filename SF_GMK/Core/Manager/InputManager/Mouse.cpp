@@ -57,10 +57,12 @@ namespace sfgmk
 
 	sf::Vector2f Mouse::getWorldPosition()
 	{
-		sf::Vector2f ViewPosition(GRAPHIC_MANAGER->getCurrentCamera()->getCenter());
-		sf::Vector2f ViewSize(GRAPHIC_MANAGER->getCurrentCamera()->getSize());
+		Camera* CurrentCamera = GRAPHIC_MANAGER->getCurrentCamera();
 
-		return sf::Vector2f(getWindowPosition()) * GRAPHIC_MANAGER->getCurrentCamera()->getZoomFactor() + ViewPosition - (ViewSize * 0.5f);
+		sf::Vector2f ViewPosition(CurrentCamera->getCenter());
+		sf::Vector2f ViewSize(CurrentCamera->getSize());
+
+		return sf::Vector2f(getWindowPosition()) * CurrentCamera->getZoomFactor() + ViewPosition - (ViewSize * 0.5f);
 	}
 
 

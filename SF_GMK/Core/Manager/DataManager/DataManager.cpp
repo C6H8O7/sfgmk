@@ -301,8 +301,8 @@ namespace sfgmk
 			}
 
 			//Si on est en stateLoading, on compte les fichiers chargés
-			if (_State)
-				_State->AddToCounter(eAsset);
+			//if (_State)
+				//_State->AddToCounter(eAsset);
 
 			return true;
 		}

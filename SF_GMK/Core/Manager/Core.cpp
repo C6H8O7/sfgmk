@@ -66,11 +66,11 @@ namespace sfgmk
 			//Trie les entités du vector en fonction de leur Z
 			EntityManager::getSingleton()->sortEntityVector();
 
+			GraphicManager::getSingleton()->compute();
+			GraphicManager::getSingleton()->draw();
+
 			//Draw état(s) courant(s)
 			StateMachineManager::getSingleton()->draw();
-
-			//GraphicManager::getSingleton()->compute();
-			//GraphicManager::getSingleton()->draw();
 		}
 
 		void Core::postLoop()

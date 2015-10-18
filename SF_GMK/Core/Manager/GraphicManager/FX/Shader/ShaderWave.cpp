@@ -26,8 +26,9 @@ namespace sfgmk
 		if( innerRadius < 0.0f )
 			innerRadius = 0.0f;
 
-		sf::Vector2f pos = GameManager::getSingleton()->getCurrentCamera()->getCenter();
-		sf::Vector2f size = GameManager::getSingleton()->getCurrentCamera()->getSize();
+		Camera* CurrentCamera = sfgmk::engine::GraphicManager::getSingleton()->getCurrentCamera();
+		sf::Vector2f pos = CurrentCamera->getCenter();
+		sf::Vector2f size = CurrentCamera->getSize();
 
 		pos.x -= size.x / 2.0f;
 		pos.y -= size.y / 2.0f;

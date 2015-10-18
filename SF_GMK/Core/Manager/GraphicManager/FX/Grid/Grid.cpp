@@ -215,7 +215,7 @@ namespace sfgmk
 		//Rendu final
 		m_Sprite.setTexture(m_RenderTexture->getTexture());
 		_Render->draw(m_Sprite);
-		GAME_MANAGER->getParallaxe().addDrawToAccount(m_iDrawNumber - 1); //-1 car un draw est compté dans parallaxe
+		//GAME_MANAGER->getParallaxe().addDrawToAccount(m_iDrawNumber - 1); //-1 car un draw est compté dans parallaxe
 	}
 
 	void Grid::drawLine(sf::Vector2f& _Point1, const sf::Vector2f& _Point2, const sf::Color& _Color)

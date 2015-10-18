@@ -13,6 +13,8 @@
 
 namespace sfgmk
 {
+	namespace engine
+	{
 		#define PARALLAXE_MAX_Z 100
 		#define PARALLAXE_BEHIND_MEDIUM_PLAN_Z 1
 		#define PARALLAXE_MEDIUM_PLAN_Z 0
@@ -34,7 +36,6 @@ namespace sfgmk
 		class Parallaxe
 		{
 			friend class GraphicManager;
-			friend class GameManager;
 			friend class StateLoading;
 
 			public:
@@ -64,6 +65,7 @@ namespace sfgmk
 
 				int m_iDrawAccount;
 		};
+	}
 }
 
 

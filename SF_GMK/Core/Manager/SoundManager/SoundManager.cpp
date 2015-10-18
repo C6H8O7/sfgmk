@@ -156,7 +156,7 @@ namespace sfgmk
 		}
 	}
 
-	bool SoundManager::loadLevel(const std::string& _Dir, StateLoading* _State)
+	bool SoundManager::loadLevel(const std::string& _Dir, engine::StateLoading* _State)
 	{
 		DIR* LevelRepertory = NULL;
 		struct dirent* ReadFile = NULL;
@@ -189,8 +189,8 @@ namespace sfgmk
 					m_MusicMap.insert(std::pair<std::string, FMOD::Sound*>(Name, NewSound));
 
 				//Si on est en stateLoading, on compte les fichiers chargés
-				if( _State )
-					_State->AddToCounter(eSound);
+				//if( _State )
+					//_State->AddToCounter(eSound);
 			}
 			closedir(LevelRepertory);
 		}
@@ -220,8 +220,8 @@ namespace sfgmk
 					m_SoundMap.insert(std::pair<std::string, FMOD::Sound*>(Name, NewSound));
 
 				//Si on est en stateLoading, on compte les fichiers chargés
-				if( _State )
-					_State->AddToCounter(eSound);
+				//if( _State )
+					//_State->AddToCounter(eSound);
 			}
 			closedir(LevelRepertory);
 		}
@@ -499,9 +499,9 @@ namespace sfgmk
 
 	void SoundManager::drawSpectrum()
 	{
-		sf::RenderTexture* RenderTexture = sfgmk::GameManager::getSingleton()->getRenderTexture();
+		sf::RenderTexture* RenderTexture = sfgmk::engine::GraphicManager::getSingleton()->getRenderTexture();
 		float fScale(0.0f);
-		float fVerticalPosition = (float)sfgmk::GameManager::getSingleton()->getRenderWindow()->getSize().y + 1;
+		float fVerticalPosition = (float)sfgmk::engine::GraphicManager::getSingleton()->getRenderWindow()->getSize().y + 1;
 
 		for( int i(0); i < FREQUENCY_SAMPLE; ++i )
 		{

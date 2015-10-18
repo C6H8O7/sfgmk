@@ -14,6 +14,8 @@ namespace sfgmk
 {
 	namespace engine
 	{
+		#define DEFAULT_CAMERA_NAME "DefaultCamera"
+
 		class GraphicManager : public SingletonTemplate<GraphicManager>
 		{
 			friend class SingletonTemplate<GraphicManager>;
@@ -25,7 +27,7 @@ namespace sfgmk
 				sf::RenderWindow* m_RenderWindow;
 				sf::RenderTexture* m_RenderTexture;
 				sf::Sprite m_RenderSprite;
-				//Parallaxe m_Parallaxe;
+				Parallaxe m_Parallaxe;
 
 				std::map<std::string, Camera*> m_Cameras;
 				Camera* m_CurrentCamera;
@@ -34,6 +36,7 @@ namespace sfgmk
 
 			public:
 				void init(sf::VideoMode& _Mode, const std::string& _WindowName, int _Style);
+				void initDefaultCamera();
 
 				void set();
 				void compute();

@@ -35,7 +35,7 @@ namespace sfgmk
 			bool unloadMusic(char* _MusicName);
 			bool loadSound(char* _FilePath, char* _SoundName = NULL, int _FmodMode = FMOD_3D);
 			bool unloadSound(char* _SoundName);
-			bool loadLevel(const std::string& _Dir, StateLoading* _State = NULL);
+			bool loadLevel(const std::string& _Dir, engine::StateLoading* _State = NULL);
 			bool unloadLevel(std::string _Dir);
 			void unloadAll();
 

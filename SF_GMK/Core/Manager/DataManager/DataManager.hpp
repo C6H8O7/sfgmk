@@ -25,7 +25,7 @@ namespace sfgmk
 				std::map<std::string, sf::Texture*> m_TextureMap;
 				sf::Texture m_TextureError;
 
-				std::map<std::string, sfgmk::Animation*> m_AnimationMap;
+				std::map<std::string, Animation*> m_AnimationMap;
 
 				std::map<std::string, sf::Font*> m_FontMap;
 
@@ -56,10 +56,10 @@ namespace sfgmk
 				bool unloadTexture(const std::string& _resName);
 				sf::Texture& getTexture(const std::string& _resName);
 
-				bool addAnimation(std::string _resName, sfgmk::Animation *_animation);
+				bool addAnimation(std::string _resName, Animation *_animation);
 				bool loadAnimation(const std::string& _resName, const std::string& _filePath);
 				bool unloadAnimation(const std::string& _resName);
-				sfgmk::Animation& getAnimation(const std::string& _resName);
+				Animation& getAnimation(const std::string& _resName);
 
 				bool loadFont(const std::string& _resName, const std::string& _filePath);
 				bool loadFontFromMemory(std::string _resName, const void *_memoryLocation, size_t size);
