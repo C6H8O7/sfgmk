@@ -3,19 +3,19 @@
 
 StateDefault::StateDefault()
 {
-	DATA_MANAGER->loadLevel(m_sRessourcesPath);
-	sfgmk::engine::GraphicManager::getSingleton()->getParallaxe().loadLevel(m_sRessourcesPath);
+	sfgmk::DATA_MANAGER->loadLevel(m_sRessourcesPath);
+	sfgmk::PARALLAXE.loadLevel(m_sRessourcesPath);
 }
 
 StateDefault::~StateDefault()
 {
-	DATA_MANAGER->unloadLevel(m_sRessourcesPath);
-	sfgmk::engine::GraphicManager::getSingleton()->getParallaxe().unloadLevel(m_sRessourcesPath);
+	sfgmk::DATA_MANAGER->unloadLevel(m_sRessourcesPath);
+	sfgmk::PARALLAXE.unloadLevel(m_sRessourcesPath);
 }
 
 void StateDefault::init()
 {
-	goomba.setTexture(DATA_MANAGER->getTexture("goomba1"));
+	goomba.setTexture(sfgmk::DATA_MANAGER->getTexture("goomba1"));
 }
 
 void StateDefault::update()
