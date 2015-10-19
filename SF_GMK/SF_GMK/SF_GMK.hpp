@@ -14,17 +14,17 @@ namespace sfgmk
 { 
 	enum eSTATES
 	{
-		eLoadingState = 0,
 		eStateDefault = 1,
 		eSTATES_NUMBER
 	};
 
 	#define EMPTY_COLOR sf::Color(0, 0, 0, 0)
 
-	#define DATA_PATH std::string("../data/sfgmk/")
+	#define DATA_PATH std::string("../data/sfgmk")
 
 	//Core
 	#define CORE						engine::Core::getSingleton()
+	#define TIME_DELTA					CORE->getTimeDelta()
 
 	//Managers
 	#define DATA_MANAGER				engine::DataManager::getSingleton()
@@ -41,15 +41,12 @@ namespace sfgmk
 	#define CAMERA						sfgmk::engine::GraphicManager::getSingleton()->getCurrentCamera()
 	#define CONSOLE						sfgmk::engine::ConsoleDev::getSingleton();
 	#define PARALLAXE					GRAPHIC_MANAGER->getParallaxe()
-	#define TIME_DELTA					CORE->getTimeDelta()
 
 	//States
 	#define CHANGE_STATE(a)				STATE_MACHINE_MANAGER->getStateMachine()->changeState(a);
 	#define STATE_MACHINE				STATE_MACHINE_MANAGER->getStateMachine()
 	#define CURRENT_STATE				STATE_MACHINE_MANAGER->getStateMachine()->Get_CurrentState()
 
-	//Inputs
-	
 	//Keyboard
 	#define KEYBOARD					INPUT_MANAGER->getKeyboard()
 	#define KEYBOARD_KEY(a)				KEYBOARD.getKeyState(a)

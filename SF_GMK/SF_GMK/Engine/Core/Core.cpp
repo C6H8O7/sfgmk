@@ -4,12 +4,10 @@ namespace sfgmk
 	{
 		Core::Core()
 		{
-
 		}
 
 		Core::~Core()
 		{
-
 		}
 
 		void Core::update()
@@ -50,11 +48,6 @@ namespace sfgmk
 		{
 			//Update état(s) courant(s)
 			StateMachineManager::getSingleton()->update();
-
-			//Si state loading en cours, c'est une autre instance de parallaxe qui est utilisée
-			//Parallaxe* CurrentParallaxe = &m_Parallaxe;
-			//if( CURRENT_STATE->getID() == eLoadingState )
-			//	CurrentParallaxe = ((sfgmk::StateLoading*)(CURRENT_STATE))->Get_Parallaxe();
 
 			//Update des entités
 			EntityManager::getSingleton()->update();

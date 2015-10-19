@@ -101,47 +101,44 @@ namespace sfgmk
 			//Clavier / Souris
 				//Déplacements
 					//Gauche
-			if( KEYBOARD_KEY(sf::Keyboard::Left) == KeyStates::KEY_DOWN )
-				this->move(-m_Speed.x * _TimeDelta, 0);
+					if( KEYBOARD_KEY(sf::Keyboard::Left) == KeyStates::KEY_DOWN )
+						this->move(-m_Speed.x * _TimeDelta, 0);
 
-			//Droite
-			else if( KEYBOARD_KEY(sf::Keyboard::Right) == KeyStates::KEY_DOWN )
-				this->move(m_Speed.x * _TimeDelta, 0);
+					//Droite
+					else if( KEYBOARD_KEY(sf::Keyboard::Right) == KeyStates::KEY_DOWN )
+						this->move(m_Speed.x * _TimeDelta, 0);
 
-			//Haut
-			if( KEYBOARD_KEY(sf::Keyboard::Up) == KeyStates::KEY_DOWN )
-				this->move(0, -m_Speed.y * _TimeDelta);
+					//Haut
+					if( KEYBOARD_KEY(sf::Keyboard::Up) == KeyStates::KEY_DOWN )
+						this->move(0, -m_Speed.y * _TimeDelta);
 
-			//Bas
-			else if( KEYBOARD_KEY(sf::Keyboard::Down) == KeyStates::KEY_DOWN )
-				this->move(0, m_Speed.y * _TimeDelta);
+					//Bas
+					else if( KEYBOARD_KEY(sf::Keyboard::Down) == KeyStates::KEY_DOWN )
+						this->move(0, m_Speed.y * _TimeDelta);
 
-			//Zoom
-				//Arriere
-			if( MOUSE.getWheelState() == -1 )
-				this->zoom(2.0f);
+					//Zoom
+						//Arriere
+						if( MOUSE.getWheelState() == -1 )
+							this->zoom(2.0f);
 
-			//Avant
-			else if( MOUSE.getWheelState() == 1 )
-				this->zoom(0.5f);
+						//Avant
+						else if( MOUSE.getWheelState() == 1 )
+							this->zoom(0.5f);
 
 			//Manette (si un joystick connecté)
 				//Déplacements
-			if( sf::Joystick::isConnected(0) )
-			{
-				sf::Vector2f JoystickPow(ABS(JOYSTICK_GET_AXIS(0, JOYSTICK_LEFT_HORIZONTAL)), ABS(JOYSTICK_GET_AXIS(0, JOYSTICK_LEFT_VERTICAL)));
-
-				if( JoystickPow.x > JOYSTICK_TOLERANCE || JoystickPow.y > JOYSTICK_TOLERANCE )
+				if( sf::Joystick::isConnected(0) )
 				{
-					float fJoystickAngle = INPUT_MANAGER->getJoystickAngle(0, JOYSTICK_LEFT_VERTICAL, JOYSTICK_LEFT_HORIZONTAL);
-					sf::Vector2f Result = math::Matrix22(cos(fJoystickAngle), -sin(fJoystickAngle), sin(fJoystickAngle), cos(fJoystickAngle)) * sf::Vector2f(1.0f, 0.0f);
+					sf::Vector2f JoystickPow(ABS(JOYSTICK_GET_AXIS(0, JOYSTICK_LEFT_HORIZONTAL)), ABS(JOYSTICK_GET_AXIS(0, JOYSTICK_LEFT_VERTICAL)));
 
-					this->move(Result.x * m_Speed.x * _TimeDelta, Result.y * m_Speed.y * _TimeDelta);
+					if( JoystickPow.x > JOYSTICK_TOLERANCE || JoystickPow.y > JOYSTICK_TOLERANCE )
+					{
+						float fJoystickAngle = INPUT_MANAGER->getJoystickAngle(0, JOYSTICK_LEFT_VERTICAL, JOYSTICK_LEFT_HORIZONTAL);
+						sf::Vector2f Result = math::Matrix22(cos(fJoystickAngle), -sin(fJoystickAngle), sin(fJoystickAngle), cos(fJoystickAngle)) * sf::Vector2f(1.0f, 0.0f);
+
+						this->move(Result.x * m_Speed.x * _TimeDelta, Result.y * m_Speed.y * _TimeDelta);
+					}
 				}
-			}
-
-			//Zoom
-				//TODO
 		}
 
 

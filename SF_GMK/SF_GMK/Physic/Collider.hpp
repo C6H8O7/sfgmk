@@ -24,25 +24,25 @@ namespace sfgmk
 		class Collider
 		{
 			protected:
-			eCOLLIDER_TYPE m_Type;
-			bool m_bActive;
-			bool m_bCollide;
+				eCOLLIDER_TYPE m_Type;
+				bool m_bActive;
+				bool m_bCollide;
 
-			Entity* m_Entity;
+				Entity* m_Entity;
 
 			public:
-			Collider(Entity* _Entity);
-			~Collider();
+				Collider(Entity* _Entity);
+				~Collider();
 
-			const eCOLLIDER_TYPE& getType();
-			const bool& isActive();
-			void setActive(bool _Boolean);
-			const bool& Collide();
-			void setCollide(bool _Boolean);
+				const eCOLLIDER_TYPE& getType();
+				const bool& isActive();
+				void setActive(bool _Boolean);
+				const bool& Collide();
+				void setCollide(bool _Boolean);
 
-			sf::Vector2f getWorldCenter();
+				sf::Vector2f getWorldCenter();
 
-			Entity* getEntity();
+				Entity* getEntity();
 		};
 }
 

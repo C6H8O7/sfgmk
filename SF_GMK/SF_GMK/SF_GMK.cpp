@@ -16,10 +16,10 @@ int _tmain(int argc, char* argv[])
 	sfgmk::GRAPHIC_MANAGER->init(sf::VideoMode(1280, 720), "SF_GMK", sf::Style::Default);
 
 	//Init states V2
-	sfgmk::STATE_MACHINE_MANAGER->RegisterState<StateDefault>(sfgmk::eSTATES::eStateDefault, DATA_PATH + "stateDefault");
-	sfgmk::STATE_MACHINE_MANAGER->getStateMachine()->init(sfgmk::eSTATES::eStateDefault);
+	sfgmk::STATE_MACHINE_MANAGER->RegisterState<StateDefault>(sfgmk::eSTATES::eStateDefault, "../data/states/stateDefault");
+	sfgmk::STATE_MACHINE->init(sfgmk::eSTATES::eStateDefault);
 
-	while (sfgmk::GRAPHIC_MANAGER->getRenderWindow()->isOpen())
+	while( sfgmk::GRAPHIC_MANAGER->getRenderWindow()->isOpen() )
 	{
 		sfgmk::CORE->preLoop();
 		sfgmk::CORE->loop();

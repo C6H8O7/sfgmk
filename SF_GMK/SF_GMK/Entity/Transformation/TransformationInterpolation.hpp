@@ -12,19 +12,19 @@
 
 namespace sfgmk
 {
-		class TransformationInterpolation : public EntityTransformation
-		{
-			private:
+	class TransformationInterpolation : public EntityTransformation
+	{
+		private:
 			math::CatmullRom* m_InterpolationCurb;
 
-			public:
+		public:
 			TransformationInterpolation(math::CatmullRom* _Curb, const float& _Duration, const bool& _DieOnTheEnd = false);
 			~TransformationInterpolation();
 
 			void update(const float& _TimeDelta, Entity* _Entity);
 
 			math::CatmullRom* getCurb();
-		};
+	};
 }
 
 

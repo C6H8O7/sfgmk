@@ -11,9 +11,9 @@
 
 namespace sfgmk
 {
-		class FxText
-		{
-			protected:
+	class FxText
+	{
+		protected:
 			sf::Vector2u m_Size;
 			sfgmk::DynamicArray<sf::Vector2f> m_PixelArray;
 
@@ -22,13 +22,13 @@ namespace sfgmk
 			sf::Sprite m_Sprite;
 			sf::Color m_Color;
 
-			public:
+		public:
 			FxText(std::string _String, sf::Font _Font, unsigned int _Size, sf::Color _Color = sf::Color::White);
 			virtual ~FxText();
 
 			virtual void update(const float& _TimeDelta) = 0;
 			virtual void draw(sf::RenderTexture* _Render) = 0;
-		};
+	};
 }
 
 

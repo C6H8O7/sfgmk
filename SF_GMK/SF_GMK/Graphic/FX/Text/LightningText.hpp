@@ -11,26 +11,26 @@
 
 namespace sfgmk
 {
-		class LightningText : public FxText
-		{
-			private:
+	class LightningText : public FxText
+	{
+		private:
 			sf::RenderTexture m_PreviousFrameRender;
 			sfgmk::DynamicArray<LightningBolt*> m_Bolts;
 			unsigned int m_uiArraySize;
 			std::mt19937 m_MersenneTwister19937Generator;
 
-			sf::Shader m_Shader;
+			sf::Shader* m_Shader;
 
 			unsigned int m_uiPrecision;
 			unsigned int m_uiBoltChance;
 
-			public:
+		public:
 			LightningText(std::string _String, sf::Font _Font, unsigned int _Size, unsigned int _Precision, unsigned int _BoltChance, sf::Color _Color = sf::Color::White);
 			~LightningText();
 
 			void update(const float& _TimeDelta);
 			void draw(sf::RenderTexture* _Render);
-		};
+	};
 }
 
 

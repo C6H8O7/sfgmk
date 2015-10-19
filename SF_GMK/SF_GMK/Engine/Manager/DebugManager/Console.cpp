@@ -10,12 +10,12 @@ namespace sfgmk
 
 			for( int i(0); i < 60; i++ )
 				m_iFpsArray[i] = 0;
-
+			
 			//Rendu
-			m_FpsCurbImageOriginal.loadFromFile(DATA_PATH + "console/fpsTab.png");
-			m_Font[0].loadFromFile(DATA_PATH + "console/fontSquare.ttf");
-			m_Font[1].loadFromFile(DATA_PATH + "console/fontCOMUNICA_TYPE.ttf");
-			m_Texture[0].loadFromFile(DATA_PATH + "console/background.png");
+			m_FpsCurbImageOriginal = DATA_MANAGER->getTexture("sfgmk_fpsTab").copyToImage();
+			m_Font[0] = DATA_MANAGER->getFont("sfgmk_fontSquare");
+			m_Font[1] = DATA_MANAGER->getFont("sfgmk_fontCOMUNICA_TYPE");
+			m_Texture[0] = DATA_MANAGER->getTexture("sfgmk_background");
 			m_ConsoleSprite.setTexture(m_Texture[0], true);
 			m_ConsoleSprite.setPosition(0.0f, 0.0f);
 
@@ -52,7 +52,7 @@ namespace sfgmk
 			m_FpsCurbSprite.setPosition(95.0f, m_TextArray[eCONSOLE_DEV_TEXT::eFps].getPosition().y - 18);
 
 			//Camera
-			m_Texture[1].loadFromFile(DATA_PATH + "console/camera.png");
+			m_Texture[1] = DATA_MANAGER->getTexture("sfgmk_camera");
 			m_CameraSprite.setTexture(m_Texture[1], true);
 			m_CameraSprite.setPosition(500.0f, 0.0f);
 			m_CameraText.setFont(m_Font[0]);

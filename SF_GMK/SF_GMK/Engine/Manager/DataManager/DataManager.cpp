@@ -5,13 +5,27 @@ namespace sfgmk
 		DataManager::DataManager()
 		{
 			sf::Image image;
-			image.create(64, 64, sf::Color(255, 0, 255, 255));
+			image.create(64U, 64U, sf::Color(255, 0, 255, 255));
 
 			m_TextureError.loadFromImage(image);
+
+			loadSfgmkRessources();
 		}
 
 		DataManager::~DataManager()
 		{
+			unloadAll();
+		}
+
+
+		void DataManager::loadSfgmkRessources()
+		{
+			loadLevel(DATA_PATH);
+		}
+
+		void DataManager::unloadSfgmkRessources()
+		{
+			unloadLevel(DATA_PATH);
 		}
 
 
@@ -300,10 +314,6 @@ namespace sfgmk
 				break;
 			}
 
-			//Si on est en stateLoading, on compte les fichiers chargés
-			//if (_State)
-				//_State->AddToCounter(eAsset);
-
 			return true;
 		}
 
@@ -549,19 +559,19 @@ namespace sfgmk
 		void DataManager::unloadAll()
 		{
 			//Textures
-			for (auto it(m_TextureMap.begin()); it != m_TextureMap.end(); it = m_TextureMap.erase(it))
+			for( auto it(m_TextureMap.begin()); it != m_TextureMap.end(); it = m_TextureMap.erase(it) )
 				delete it->second;
 
 			//Animations
-			for (auto it(m_AnimationMap.begin()); it != m_AnimationMap.end(); it = m_AnimationMap.erase(it))
+			for( auto it(m_AnimationMap.begin()); it != m_AnimationMap.end(); it = m_AnimationMap.erase(it) )
 				delete it->second;
 
 			//Fonts
-			for (auto it(m_FontMap.begin()); it != m_FontMap.end(); it = m_FontMap.erase(it))
+			for( auto it(m_FontMap.begin()); it != m_FontMap.end(); it = m_FontMap.erase(it) )
 				delete it->second;
 
 			//Shader
-			for (auto it(m_ShaderMap.begin()); it != m_ShaderMap.end(); it = m_ShaderMap.erase(it))
+			for( auto it(m_ShaderMap.begin()); it != m_ShaderMap.end(); it = m_ShaderMap.erase(it) )
 				delete it->second;
 		}
 	}

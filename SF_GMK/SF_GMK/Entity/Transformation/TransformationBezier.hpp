@@ -12,19 +12,19 @@
 
 namespace sfgmk
 {
-		class TransformationBezier : public EntityTransformation
-		{
-			private:
+	class TransformationBezier : public EntityTransformation
+	{
+		private:
 			math::Bezier* m_BezierCurb;
 
-			public:
+		public:
 			TransformationBezier(math::Bezier* _Curb, const float& _Duration, const bool& _DieOnTheEnd = false);
 			~TransformationBezier();
 
 			void update(const float& _TimeDelta, Entity* _Entity);
 
 			math::Bezier* getCurb();
-		};
+	};
 }
 
 

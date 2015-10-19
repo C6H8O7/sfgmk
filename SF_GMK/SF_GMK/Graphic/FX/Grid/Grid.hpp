@@ -12,9 +12,9 @@
 
 namespace sfgmk
 {
-		class Grid : public Entity
-		{
-			private:
+	class Grid : public Entity
+	{
+		private:
 			Bloom* m_BloomEffect;
 
 			std::vector<Spring> m_Springs;
@@ -35,9 +35,8 @@ namespace sfgmk
 			bool m_bApplyBloom;
 
 			sf::Rect<float> m_CameraView;
-			int m_iDrawNumber;
 
-			public:
+		public:
 			Grid();
 			Grid(const sf::Vector2i& _Lines, const sf::Vector2f& _Spacing, const sf::Vector3f& _Position = sf::Vector3f(0.0f, 0.0f, 0.0f));
 			~Grid();
@@ -70,7 +69,7 @@ namespace sfgmk
 
 			void setDrawMidLines(bool _Boolean);
 			void setApplyBloom(bool _Boolean, float _EffectTextureDownScale = 1.0f, float _EffectLevel = 2.0f, float _SaturateLevel = 0.3f, sf::Vector2f _BlurOffset = sf::Vector2f(0.0005f, 0.0005f));
-		};
+	};
 }
 
 

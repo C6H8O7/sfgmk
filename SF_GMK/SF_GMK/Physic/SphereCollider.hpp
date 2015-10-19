@@ -12,20 +12,19 @@
 
 namespace sfgmk
 {
-		class SphereCollider : public Collider
-		{
-			private:
+	class SphereCollider : public Collider
+	{
+		private:
 			float m_fRadius;
 
-			public:
+		public:
 			SphereCollider(Entity* _Entity, float _Radius);
 			~SphereCollider();
-
 
 			const float& getRadius();
 			float getWorldRadius();
 			void setRadius(const float& _Radius);
-		};
+	};
 }
 
 

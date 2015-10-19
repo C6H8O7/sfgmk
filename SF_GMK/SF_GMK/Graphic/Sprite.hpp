@@ -12,10 +12,9 @@
 
 namespace sfgmk
 {
-		class Sprite : public sf::Sprite
-		{
-			public:
-
+	class Sprite : public sf::Sprite
+	{
+		public:
 			Sprite();
 			Sprite(std::string _resName, bool _isAnim);
 			~Sprite();
@@ -31,13 +30,12 @@ namespace sfgmk
 			void SetLoop(bool _loop);
 			bool GetLoop();
 
-			protected:
-
+		protected:
 			void FinalizeSprite(float _timeDelta);
 
 			bool m_isAnim;
 			Animation *m_Animation;
-		};
+	};
 }
 
 

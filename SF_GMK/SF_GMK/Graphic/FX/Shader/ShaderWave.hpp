@@ -12,20 +12,20 @@
 
 namespace sfgmk
 {
-		class ShaderWave : public PostShader
-		{
-			public:
+	class ShaderWave : public PostShader
+	{
+		public:
 			ShaderWave(float _x, float _y, float _duration, float _maxRadius);
 			~ShaderWave();
 
 			virtual bool update(float _timeDelta);
 			virtual bool isAlive();
 
-			protected:
+		protected:
 			float m_fX, m_fY;
 			float m_fDuration;
 			float m_fMaxRadius;
-		};
+	};
 }
 
 

@@ -12,21 +12,21 @@
 
 namespace sfgmk
 {
-		class EntityTransformation
-		{
-			protected:
+	class EntityTransformation
+	{
+		protected:
 			float m_fTimer;
 			float m_fDuration;
 			bool m_bStopOnTheEnd;
 			bool m_bDieOnTheEnd;
 
-			public:
+		public:
 			EntityTransformation(const float& _Duration, const bool& _StopOntheEnd = false, const bool& _DieOnTheEnd = false);
 			virtual ~EntityTransformation();
 
 			virtual void update(const float& _TimeDelta, Entity* _Entity) = 0;
 			bool checkTimer(const float& _TimeDelta, Entity* _Entity);
-		};
+	};
 }
 
 

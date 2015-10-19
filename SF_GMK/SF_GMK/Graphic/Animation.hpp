@@ -12,18 +12,17 @@
 
 namespace sfgmk
 {
-		class Sprite;
+	class Sprite;
 
-		struct AnimationFrame
-		{
-			sf::Texture *texture;
+	struct AnimationFrame
+	{
+		sf::Texture *texture;
+		float duration;
+	};
 
-			float duration;
-		};
-
-		class Animation
-		{
-			public:
+	class Animation
+	{
+		public:
 			Animation();
 			Animation(Animation& _copy);
 			~Animation();
@@ -39,7 +38,7 @@ namespace sfgmk
 
 			void LoadFromFile(std::string _file);
 
-			private:
+		private:
 			bool m_isLoop;
 
 			float m_fTimer;
@@ -47,7 +46,7 @@ namespace sfgmk
 			int m_iCurrentFrame;
 
 			std::vector<AnimationFrame*> m_Frames;
-		};
+	};
 }
 
 

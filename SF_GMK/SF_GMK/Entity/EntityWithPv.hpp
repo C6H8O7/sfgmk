@@ -12,15 +12,15 @@
 
 namespace sfgmk
 {
-#define ENTITY_DEFAULT_PV 1
+	#define ENTITY_DEFAULT_PV 1
 
-		class EntityWithPv : public Entity
-		{
-			protected:
+	class EntityWithPv : public Entity
+	{
+		protected:
 			int m_iPv;
 			bool m_bDieWhenPvNull;
 
-			public:
+		public:
 			EntityWithPv(const bool& _DieWhenPvNull = true);
 			EntityWithPv(const int& _Id, const bool& _DieWhenPvNull = true);
 			virtual ~EntityWithPv();
@@ -33,7 +33,7 @@ namespace sfgmk
 
 			const bool& getDieWhenPvNull();
 			void setDieWhenPvNull(const bool& _Boolean);
-		};
+	};
 }
 
 

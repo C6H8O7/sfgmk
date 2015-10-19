@@ -12,43 +12,12 @@
 
 namespace sfgmk
 {
+	#define SAFE_DELETE(a) if( a != NULL ) { delete a; a = NULL; }
+
 	//Opérations sur les bits
 	#define SET_BIT(flag, bit) ((flag) |= (1 << (bit))) 
 	#define CLEAR_BIT(flag, bit) ((flag) &= ~(1 << (bit))) 
 	#define GET_BIT(flag, bit) ((flag) & (1 << (bit)))
-
-	/*
-	enum {
-	OPTION1 = 1 << 0,
-	OPTION2 = 1 << 1
-	};
-
-	void foo(int);
-
-	int main(void)
-	{
-	foo(OPTION1 | OPTION2);
-	return 0;
-	}
-
-	void foo(int options)
-	{
-	if (options & OPTION1)
-	printf("OPTION1 trouve\n");
-	if (options & OPTION2)
-	printf("OPTION2 trouve\n");
-	}
-
-
-
-	foo(OPTION1 | OPTION2)
-
-	options & OPTION1
-
-	*/
-
-	#define SAFE_DELETE(a) if( a != NULL ) { delete a; a = NULL; }
-
 
 	//Supprime les éléments d'un conteneur, et le clear
 	template<typename T> 

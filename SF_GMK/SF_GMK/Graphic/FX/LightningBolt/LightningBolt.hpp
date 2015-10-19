@@ -13,13 +13,13 @@
 
 namespace sfgmk
 {
-#define LIGHTNING_BOLT_ALPHA_INCREASE_SPEED 2040
-#define LIGHTNING_BOLT_ALPHA_DECREASE_SPEED 510
-#define LIGHTNING_BOLT_BRANCH_CHANCE 1
+	#define LIGHTNING_BOLT_ALPHA_INCREASE_SPEED 2040
+	#define LIGHTNING_BOLT_ALPHA_DECREASE_SPEED 510
+	#define LIGHTNING_BOLT_BRANCH_CHANCE 1
 
-		class LightningBolt : public Entity
-		{
-			private:
+	class LightningBolt : public Entity
+	{
+		private:
 			sf::Vector2f* m_PointArray;
 			int m_iPointNumber;
 			float m_fThickness;
@@ -33,7 +33,7 @@ namespace sfgmk
 
 			int m_iDrawNumber;
 
-			public:
+		public:
 			LightningBolt(const sf::Vector3f& _Position, const sf::Vector2f& _Destination, const bool& _Branch, const sf::Color& _Color = sf::Color::White, const float& _Thickness = 1.0f);
 			~LightningBolt();
 
@@ -41,7 +41,7 @@ namespace sfgmk
 			void draw(sf::RenderTexture* _Render);
 
 			void setMax();
-		};
+	};
 }
 
 

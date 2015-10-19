@@ -12,19 +12,19 @@
 
 namespace sfgmk
 {
-		class TransformationRotation : public EntityTransformation
-		{
-			private:
+	class TransformationRotation : public EntityTransformation
+	{
+		private:
 			float m_fDegreePerSecond;
 
-			public:
+		public:
 			TransformationRotation(const float& _DegreePerSecond, const float& _Duration, const bool& _DieOnTheEnd = false);
 			~TransformationRotation();
 
 			void update(const float& _TimeDelta, Entity* _Entity);
 
 			float& getRefDegreePerSecond();
-		};
+	};
 }
 
 

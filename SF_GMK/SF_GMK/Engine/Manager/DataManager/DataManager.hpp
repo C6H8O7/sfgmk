@@ -9,14 +9,13 @@
 #ifndef DATAMANAGER_HPP
 #define DATAMANAGER_HPP
 
-
-#define ENCRYPT_KEY				"l0lz~H4x0r~2000~Ilum1n4t1~Zl4t4n"
-#define ENCRYPT_KEY_LENGTH		strlen(ENCRYPT_KEY)
-
 namespace sfgmk
 {
 	namespace engine
 	{
+		#define ENCRYPT_KEY				"l0lz~H4x0r~2000~Ilum1n4t1~Zl4t4n"
+		#define ENCRYPT_KEY_LENGTH		strlen(ENCRYPT_KEY)
+
 		class DataManager : public SingletonTemplate<DataManager>
 		{
 			friend class SingletonTemplate<DataManager>;
@@ -50,6 +49,9 @@ namespace sfgmk
 					char resourceName[20];
 					char resourceType;
 				};
+
+				void loadSfgmkRessources();
+				void unloadSfgmkRessources();
 
 				bool loadTexture(const std::string& _resName, const std::string& _filePath);
 				bool loadTextureFromMemory(std::string _resName, const void *_memoryLocation, size_t size);

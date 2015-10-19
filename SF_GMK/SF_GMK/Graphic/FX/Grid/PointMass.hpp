@@ -14,18 +14,17 @@ namespace sfgmk
 {
 #define POINT_MASS_DEFAULT_DAMPING 0.98f
 
-		class PointMass
-		{
-			protected:
+	class PointMass
+	{
+		protected:
 			sf::Vector3f m_Acceleration;
 			float m_fDamping;
 
-			public:
+		public:
 			sf::Vector3f m_Position;
 			sf::Vector3f m_Velocity;
 			float m_fInverseMass;
 
-			public:
 			PointMass();
 			PointMass(const sf::Vector3f& _Position, float _InvMass);
 
@@ -33,7 +32,7 @@ namespace sfgmk
 			void increaseDamping(float _Factor);
 
 			void update();
-		};
+	};
 }
 
 

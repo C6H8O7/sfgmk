@@ -3,9 +3,8 @@ namespace sfgmk
 		LightningBolt::LightningBolt(const sf::Vector3f& _Position, const sf::Vector2f& _Destination, const bool& _Branch, const sf::Color& _Color, const float& _Thickness)
 			: Entity(_Position), m_fThickness(_Thickness), m_Color(_Color), m_fAlpha(0.0f), m_bIsDecreasing(false), m_bBranch(_Branch), m_iDrawNumber(0)
 		{
-			//m_LightningBoltTexture.loadFromFile("data/sfgmk/texture/lightningCorpse.png");
 			m_Sprite = new Sprite();
-			m_Sprite->setTexture(DATA_MANAGER->getTexture("lightningCorpse"));
+			m_Sprite->setTexture(DATA_MANAGER->getTexture("sfgmk_lightningCorpse"));
 			m_Sprite->setRelativeOrigin(0.0f, 0.5f);
 
 			//Init
@@ -49,7 +48,7 @@ namespace sfgmk
 
 			delete[] fRatioArray;
 
-			//Branches
+			//TODO Branches
 			/*if( m_bBranch )
 			{
 				sfgmk::LightningBolt* Branch = NULL;

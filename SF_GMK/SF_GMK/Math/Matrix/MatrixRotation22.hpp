@@ -17,8 +17,8 @@ namespace sfgmk
 		class MatrixRotation22 : public Matrix22
 		{
 			public:
-			MatrixRotation22(float _Rotation);
-			~MatrixRotation22();
+				MatrixRotation22(float _Rotation);
+				~MatrixRotation22();
 		};
 	}
 }

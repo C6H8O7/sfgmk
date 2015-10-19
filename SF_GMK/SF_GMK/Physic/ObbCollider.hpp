@@ -14,14 +14,14 @@ namespace sfgmk
 {
 #define OBB_COLLIDER_POINT_NUMBER 4
 
-		class ObbCollider : public Collider
-		{
-			private:
+	class ObbCollider : public Collider
+	{
+		private:
 			sf::Vector2f m_Size;
 			sf::Vector2f m_Min;
 			sf::Vector2f m_Max;
 
-			public:
+		public:
 			ObbCollider(Entity* _Entity, sf::Vector2f _Size);
 			~ObbCollider();
 
@@ -34,7 +34,7 @@ namespace sfgmk
 
 			sf::Vector2f getRight();
 			sf::Vector2f getUp();
-		};
+	};
 }
 
 

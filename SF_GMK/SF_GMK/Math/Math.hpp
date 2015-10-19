@@ -17,31 +17,31 @@ namespace sfgmk
 	namespace math
 	{
 		//Constantes
-#define G -9.81f
-#define EPSILON 0.00001f
-#define PI 3.14159265358979323846f
-#define PI_2 1.57079632679489661923f
-#define PI_4 0.785398163397448309616f
-#define PI_X_2 6.28318530718f
+		#define G -9.81f
+		#define EPSILON 0.00001f
+		#define PI 3.14159265358979323846f
+		#define PI_2 1.57079632679489661923f
+		#define PI_4 0.785398163397448309616f
+		#define PI_X_2 6.28318530718f
 
-#define X_UNIT_VECTOR_2D sf::Vector2f(1.0f, 0.0f)
-#define Y_UNIT_VECTOR_2D sf::Vector2f(0.0f, -1.0f)
+		#define X_UNIT_VECTOR_2D sf::Vector2f(1.0f, 0.0f)
+		#define Y_UNIT_VECTOR_2D sf::Vector2f(0.0f, -1.0f)
 
-#define X_UNIT_VECTOR_3D sf::Vector3f(1.0f, 0.0f, 0.0f)
-#define Y_UNIT_VECTOR_3D sf::Vector2f(0.0f, -1.0f, 0.0f)
-#define Z_UNIT_VECTOR_3D sf::Vector2f(0.0f, 0.0f, 1.0f)
+		#define X_UNIT_VECTOR_3D sf::Vector3f(1.0f, 0.0f, 0.0f)
+		#define Y_UNIT_VECTOR_3D sf::Vector2f(0.0f, -1.0f, 0.0f)
+		#define Z_UNIT_VECTOR_3D sf::Vector2f(0.0f, 0.0f, 1.0f)
 
-//Macros
-#define ABS(A) ((A)>=(0)?(A):((-1)*(A)))
-#define RAND(MIN,MAX) ((MIN)+((rand())%((ABS(((MAX)-(MIN))))+(1))))
-#define SQUARE(a) (a)*(a)
-#define CUBE(a) a*a*a
-#define MAX(a,b) (((a) > (b)) ? (a) : (b))
-#define MIN(a,b) (((a) < (b)) ? (a) : (b))
-#define RAD_TO_DEG(a) ((a) * 57.2957795131f)
-#define DEG_TO_RAD(a) ((a) * 0.01745329251f)
+		//Macros
+		#define ABS(A) ((A)>=(0)?(A):((-1)*(A)))
+		#define RAND(MIN,MAX) ((MIN)+((rand())%((ABS(((MAX)-(MIN))))+(1)))) //Limite 32767
+		#define SQUARE(a) (a)*(a)
+		#define CUBE(a) a*a*a
+		#define MAX(a,b) (((a) > (b)) ? (a) : (b))
+		#define MIN(a,b) (((a) < (b)) ? (a) : (b))
+		#define RAD_TO_DEG(a) ((a) * 57.2957795131f)
+		#define DEG_TO_RAD(a) ((a) * 0.01745329251f)
 
-//Magic Square Root
+		//Magic Square Root
 		float Msqrt(float _Number);	//Une iteration
 		float Msqrt(float _Number, int _Iteration);	//Plusieurs itérations (plus précis), un indice 3 donne généralement un résultat convenable
 

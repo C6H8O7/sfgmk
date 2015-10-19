@@ -203,10 +203,6 @@ namespace sfgmk
 
 					//Insertion dans la multimap
 					m_Layers.insert(std::pair<int, sLAYER_ELEMENT*>(iPositionZ, NewLayer));
-
-					//Si on est en stateLoading, on compte les fichiers chargés
-					//if( _State )
-						//_State->AddToCounter(eLevel);
 				}
 				closedir(LevelRepertory);
 				return true;

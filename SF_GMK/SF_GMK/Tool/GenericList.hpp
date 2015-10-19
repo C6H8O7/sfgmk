@@ -23,7 +23,7 @@ namespace sfgmk
 		private:
 			sGenericList m_FirstElement;
 			sGenericList* m_LastElement;
-			unsigned int m_iElementNumber;
+			unsigned int m_uiElementNumber;
 
 			void addElementAtPosition(void* _ElementToAdd, const size_t _ElementSize, const unsigned int _Position);
 			bool removeElementAtPosition(const unsigned int _Position);

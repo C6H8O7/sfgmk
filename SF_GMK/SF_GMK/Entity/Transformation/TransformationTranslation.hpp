@@ -12,19 +12,19 @@
 
 namespace sfgmk
 {
-		class TransformationTranslation : public EntityTransformation
-		{
-			private:
+	class TransformationTranslation : public EntityTransformation
+	{
+		private:
 			sf::Vector3f m_Direction;
 			float m_fSpeed;
 
-			public:
+		public:
 			TransformationTranslation(const sf::Vector2f& _Direction, const float& _Speed, const float& _Duration, const bool& _DieOnTheEnd = false);
 			TransformationTranslation(const sf::Vector3f& _Direction, const float& _Speed, const float& _Duration, const bool& _DieOnTheEnd = false);
 			~TransformationTranslation();
 
 			void update(const float& _TimeDelta, Entity* _Entity);
-		};
+	};
 }
 
 

@@ -4,7 +4,7 @@ namespace sfgmk
 	{
 		DIR* LevelRepertory = NULL;
 		struct dirent* ReadFile = NULL;
-		int iNumberOfFile(0);
+		unsigned int uiNumberOfFile(0U);
 
 		LevelRepertory = opendir(_DirPath);
 
@@ -19,10 +19,10 @@ namespace sfgmk
 		else
 		{
 			while( (ReadFile = readdir(LevelRepertory)) != NULL ) //On récupére tous les fichiers contenus
-				++iNumberOfFile;
+				++uiNumberOfFile;
 
 			closedir(LevelRepertory);
-			return (iNumberOfFile - 2);
+			return( uiNumberOfFile - 2U );
 		}
 	}
 

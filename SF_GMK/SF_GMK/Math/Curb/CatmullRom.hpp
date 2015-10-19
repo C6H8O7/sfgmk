@@ -18,16 +18,16 @@ namespace sfgmk
 		class CatmullRom : public Curb
 		{
 			public:
-			CatmullRom(int _PointNumber, float _Time = 1.0f);
-			~CatmullRom();
+				CatmullRom(int _PointNumber, float _Time = 1.0f);
+				~CatmullRom();
 
-			void update(float _TimeDelta);
+				void update(float _TimeDelta);
 
-			void computeCoords();
+				void computeCoords();
 
 			private:
-			int m_iPointNumber;
-			int m_iCurrentPoint;
+				int m_iPointNumber;
+				int m_iCurrentPoint;
 		};
 	}
 }

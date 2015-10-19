@@ -22,9 +22,9 @@
 
 namespace sfgmk
 {
-		class Spring
-		{
-			public:
+	class Spring
+	{
+		public:
 			PointMass* m_End1;
 			PointMass* m_End2;
 			float m_fTargetLength;
@@ -33,11 +33,11 @@ namespace sfgmk
 
 			bool m_bBehind;
 
-			public:
+		public:
 			Spring(PointMass* _End1, PointMass* _End2, float _Stiffness, float _Damping);
 
 			void update();
-		};
+	};
 }
 
 

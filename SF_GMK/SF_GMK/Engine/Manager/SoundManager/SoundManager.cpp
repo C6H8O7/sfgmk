@@ -220,10 +220,6 @@ namespace sfgmk
 					Name = Name.substr(0, Name.find('.'));
 					if( m_SoundSystem->createStream((DataDir + '/' + ReadFile->d_name).c_str(), FMOD_3D, 0, &NewSound) == FMOD_OK )
 						m_SoundMap.insert(std::pair<std::string, FMOD::Sound*>(Name, NewSound));
-
-					//Si on est en stateLoading, on compte les fichiers chargés
-					//if( _State )
-						//_State->AddToCounter(eSound);
 				}
 				closedir(LevelRepertory);
 			}

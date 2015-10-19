@@ -40,7 +40,7 @@ namespace sfgmk
 
 			void DynamicArray::print()
 			{
-				for( int i(0); i < m_iElementNumber; i++ )
+				for( int i(0); i < m_uiElementNumber; i++ )
 					std::cout << m_Array[i] << std::endl;
 
 				std::cout << std::endl;
@@ -81,7 +81,7 @@ namespace sfgmk
 
 			T* DynamicArray::findElement(const T& _Element)
 			{
-				for( int i(0); i < m_iElementNumber; i++ )
+				for( unsigned int i(0U); i < m_uiElementNumber; i++ )
 				{
 					if( m_Array[i] == _Element )
 						return &m_Array[i];
@@ -155,7 +155,7 @@ namespace sfgmk
 				{
 					bSort = false;
 
-					for( int i(0); i < m_iElementNumber - 1; i++ )
+					for( unsigned int i(0); i < m_uiElementNumber - 1; i++ )
 					{
 						if( m_Array[i] > m_Array[i + 1] )
 						{
@@ -163,21 +163,8 @@ namespace sfgmk
 							T temp = m_Array[i];
 							m_Array[i] = m_Array[i + 1];
 							m_Array[i + 1] = temp;
-							//swapIndex(m_Array[i], m_Array[i + 1]);
 						}
 					}
-
-					/*if( !bSort )
-						return;
-
-					for( int i(m_iElementNumber - 1); i > 0; i-- )
-					{
-						if( m_Array[i] < m_Array[i - 1] )
-						{
-							bSort = true;
-							swapElement(m_Array[i], m_Array[i - 1]);
-						}
-					}*/
 				}
 			}
 
@@ -206,10 +193,10 @@ namespace sfgmk
 			void DynamicArray::pushFront(const T& _Element)
 			{
 				m_iElementNumber++;
-				if( (m_iElementNumber * sizeof(T)) > m_iSize )
+				if( (m_uiElementNumber * sizeof(T)) > m_iSize )
 					doubleSize();
 
-				for( int i(m_iElementNumber - 1); i > 0; i-- )
+				for( int i(m_uiElementNumber - 1); i > 0; i-- )
 					m_Array[i] = m_Array[i - 1];
 
 				m_Array[0] = _Element;

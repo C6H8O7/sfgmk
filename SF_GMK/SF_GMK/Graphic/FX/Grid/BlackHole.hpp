@@ -12,20 +12,20 @@
 
 namespace sfgmk
 {
-		class BlackHole : public Entity
-		{
-			private:
+	class BlackHole : public Entity
+	{
+		private:
 			Grid* m_Grid;
 			float m_fSprayAngle;
 
-			public:
+		public:
 			BlackHole();
 			~BlackHole();
 
 			void update(const float& _TimeDelta);
 
 			void setGrid(Grid* _Grid);
-		};
+	};
 }
 
 

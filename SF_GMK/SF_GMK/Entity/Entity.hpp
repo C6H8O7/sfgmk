@@ -12,11 +12,11 @@
 
 namespace sfgmk
 {
-		class EntityTransformation;
+	class EntityTransformation;
 
-		class Entity : public sf::Transformable
-		{
-			protected:
+	class Entity : public sf::Transformable
+	{
+		protected:
 			int m_iId;
 			bool m_bIsAlive;
 
@@ -31,12 +31,7 @@ namespace sfgmk
 
 			Collider* m_Collider;
 
-			private:
-			static int iEntityAccount;
-
-			public:
-			static int getEntityAccount();
-
+		public:
 			Entity(const int& _Id = 0);
 			Entity(const sf::Vector3f& _Position, const int& _Id = 0);
 			virtual ~Entity();
@@ -77,7 +72,7 @@ namespace sfgmk
 			void addObbCollider(const sf::Vector2f& _Size);
 
 			virtual void physicCallBack(const int& _ColliderId);
-		};
+	};
 }
 
 

@@ -12,9 +12,9 @@
 
 namespace sfgmk
 {
-		class PostShader
-		{
-			public:
+	class PostShader
+	{
+		public:
 			PostShader();
 			PostShader(const std::string& _file, sf::Shader::Type _type);
 			PostShader(const std::string& _vertexFile, const std::string& _fragmentFile);
@@ -32,7 +32,7 @@ namespace sfgmk
 			sf::Shader *m_Shader;
 
 			float m_fTimer;
-		};
+	};
 }
 
 

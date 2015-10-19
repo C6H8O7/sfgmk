@@ -19,7 +19,6 @@ namespace sfgmk
 			friend class SingletonTemplate<Core>;
 
 			private:
-
 				Core();
 				~Core();
 
@@ -27,7 +26,6 @@ namespace sfgmk
 				float m_fTimeDelta;
 				
 			public:
-
 				void update();
 				void preLoop();
 				void loop();
