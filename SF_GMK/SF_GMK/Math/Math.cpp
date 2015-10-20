@@ -83,24 +83,7 @@ namespace sfgmk
 
 
 		//Distance
-		float Calc_Distance(float _X1, float _Y1, float _X2, float _Y2)
-		{
-			float x = _X1 - _X2;
-			float y = _Y1 - _Y2;
-
-			return Msqrt(x*x + y*y);
-		}
-
-		float Calc_Distance(float _X1, float _Y1, float _Z1, float _X2, float _Y2, float _Z2)
-		{
-			float x = _X1 - _X2;
-			float y = _Y1 - _Y2;
-			float z = _Z1 - _Z2;
-
-			return Msqrt(x*x + y*y + z*z);
-		}
-
-		float Calc_Distance(sf::Vector2f _Element1, sf::Vector2f _Element2)
+		float Calc_Distance(const sf::Vector2f& _Element1, const sf::Vector2f& _Element2)
 		{
 			float x = _Element1.x - _Element2.x;
 			float y = _Element1.y - _Element2.y;
@@ -108,14 +91,14 @@ namespace sfgmk
 			return Msqrt(x*x + y*y);
 		}
 
-		float Calc_Distance(sf::Vector2f _Element1, sf::Vector3f _Element2)
+		float Calc_Distance(const sf::Vector2f& _Element1, const sf::Vector3f& _Element2)
 		{
 			sf::Vector2f Conversion(_Element2.x, _Element2.y);
 
 			return Calc_Distance(_Element1, Conversion);
 		}
 
-		float Calc_Distance(sf::Vector3f _Element1, sf::Vector3f _Element2)
+		float Calc_Distance(const sf::Vector3f& _Element1, const sf::Vector3f& _Element2)
 		{
 			float x = _Element1.x - _Element2.x;
 			float y = _Element1.y - _Element2.y;
@@ -124,7 +107,7 @@ namespace sfgmk
 			return Msqrt(x*x + y*y + z*z);
 		}
 
-		float Calc_DistanceSquared(sf::Vector2f _Element1, sf::Vector2f _Element2)
+		float Calc_DistanceSquared(const sf::Vector2f& _Element1, const sf::Vector2f& _Element2)
 		{
 			float x = _Element1.x - _Element2.x;
 			float y = _Element1.y - _Element2.y;
@@ -132,7 +115,7 @@ namespace sfgmk
 			return x*x + y*y;
 		}
 
-		float Calc_DistanceSquared(sf::Vector3f _Element1, sf::Vector3f _Element2)
+		float Calc_DistanceSquared(const sf::Vector3f& _Element1, const sf::Vector3f& _Element2)
 		{
 			float x = _Element1.x - _Element2.x;
 			float y = _Element1.y - _Element2.y;
@@ -143,7 +126,7 @@ namespace sfgmk
 
 
 		//Angle
-		float Calc_Angle(sf::Vector2f _VectorOne, sf::Vector2f _VectorTwo)
+		float Calc_Angle(const sf::Vector2f& _VectorOne, const sf::Vector2f& _VectorTwo)
 		{
 			float fScalarProduct = _VectorOne.x * _VectorTwo.x + _VectorOne.y * _VectorTwo.y;
 			float fVectorOneNorm = Msqrt((_VectorOne.x * _VectorOne.x) + (_VectorOne.y * _VectorOne.y));
@@ -164,12 +147,12 @@ namespace sfgmk
 			return sf::Vector3f(_FinalPoint.x - _OriginePoint.x, _FinalPoint.y - _OriginePoint.y, _FinalPoint.z - _OriginePoint.z);
 		}
 
-		sf::Vector3f Convert2dTo3d(const sf::Vector2f _Vector2d, const float _Z)
+		sf::Vector3f Convert2dTo3d(const sf::Vector2f& _Vector2d, const float& _Z)
 		{
 			return sf::Vector3f(_Vector2d.x, _Vector2d.y, _Z);
 		}
 
-		sf::Vector2f Convert3dTo2d(const sf::Vector3f _Vector3d)
+		sf::Vector2f Convert3dTo2d(const sf::Vector3f& _Vector3d)
 		{
 			return sf::Vector2f(_Vector3d.x, _Vector3d.y);
 		}

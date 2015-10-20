@@ -77,9 +77,6 @@
     <Filter Include="sfgmk\Effect\Text">
       <UniqueIdentifier>{1c93b079-28be-4107-b546-51a9af47b319}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Projet">
-      <UniqueIdentifier>{0b3a3440-c796-4218-ae3a-fa440436c1cd}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

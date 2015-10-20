@@ -51,22 +51,58 @@ namespace sfgmk
 		int SFGMK_API Factorial(int _Number);
 
 		//Distance
-		float SFGMK_API Calc_Distance(float _X1, float _Y1, float _X2, float _Y2);
-		float SFGMK_API Calc_Distance(float _X1, float _Y1, float _Z1, float _X2, float _Y2, float _Z2);
-		float SFGMK_API Calc_Distance(sf::Vector2f _Element1, sf::Vector2f _Element2);
-		float SFGMK_API Calc_Distance(sf::Vector2f _Element1, sf::Vector3f _Element2);
-		float SFGMK_API Calc_Distance(sf::Vector3f _Element1, sf::Vector3f _Element2);
-		float SFGMK_API Calc_DistanceSquared(sf::Vector2f _Element1, sf::Vector2f _Element2);
-		float SFGMK_API Calc_DistanceSquared(sf::Vector3f _Element1, sf::Vector3f _Element2);
+		template<typename T>
+		float Calc_Distance(const T& _X1, const T& _Y1, const T& _X2, const T& _Y2)
+		{
+			T X = _X1 - _X2;
+			T Y = _Y1 - _Y2;
+
+			return Msqrt(X*X + Y*Y);
+		}
+
+		template<typename T>
+		T Calc_DistanceSquared(const T& _X1, const T& _Y1, const T& _X2, const T& _Y2)
+		{
+			T X = _X1 - _X2;
+			T Y = _Y1 - _Y2;
+
+			return (X*X + Y*Y);
+		}
+
+		template<typename T>
+		float Calc_Distance(const T& _X1, const T& _Y1, const T& _Z1, const T& _X2, const T& _Y2, const T& _Z2)
+		{
+			T X = _X1 - _X2;
+			T Y = _Y1 - _Y2;
+			T Z = _Z1 - _Z2;
+
+			return Msqrt(X*X + Y*Y + Z*Z);
+		}
+
+		template<typename T>
+		T Calc_DistanceSquared(const T& _X1, const T& _Y1, const T& _Z1, const T& _X2, const T& _Y2, const T& _Z2)
+		{
+			T X = _X1 - _X2;
+			T Y = _Y1 - _Y2;
+			T Z = _Z1 - _Z2;
+
+			return (X*X + Y*Y + Z*Z);
+		}
+
+		float SFGMK_API Calc_Distance(const sf::Vector2f& _Element1, const sf::Vector2f& _Element2);
+		float SFGMK_API Calc_Distance(const sf::Vector2f& _Element1, const sf::Vector3f& _Element2);
+		float SFGMK_API Calc_Distance(const sf::Vector3f& _Element1, const sf::Vector3f& _Element2);
+		float SFGMK_API Calc_DistanceSquared(const sf::Vector2f& _Element1, const sf::Vector2f& _Element2);
+		float SFGMK_API Calc_DistanceSquared(const sf::Vector3f& _Element1, const sf::Vector3f& _Element2);
 
 		//Angle
-		float SFGMK_API Calc_Angle(sf::Vector2f _VectorOne, sf::Vector2f _VectorTwo);
+		float SFGMK_API Calc_Angle(const sf::Vector2f& _VectorOne, const sf::Vector2f& _VectorTwo);
 
 		//Vector
 		sf::Vector2f SFGMK_API Calc_Vector(sf::Vector2f _OriginePoint, sf::Vector2f _FinalPoint);
 		sf::Vector3f SFGMK_API Calc_Vector(sf::Vector3f _OriginePoint, sf::Vector3f _FinalPoint);
-		sf::Vector3f SFGMK_API Convert2dTo3d(const sf::Vector2f _Vector2d, const float _Z = 0.0f);
-		sf::Vector2f SFGMK_API Convert3dTo2d(const sf::Vector3f _Vector3d);
+		sf::Vector3f SFGMK_API Convert2dTo3d(const sf::Vector2f& _Vector2d, const float& _Z = 0.0f);
+		sf::Vector2f SFGMK_API Convert3dTo2d(const sf::Vector3f& _Vector3d);
 
 		float SFGMK_API DotProduct(const sf::Vector2f& _Vector1, const sf::Vector2f& _Vector2);
 		float SFGMK_API DotProduct(const sf::Vector3f& _Vector1, const sf::Vector3f& _Vector2);
