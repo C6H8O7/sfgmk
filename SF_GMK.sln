@@ -13,6 +13,8 @@ Global
 		Debug_DLL|x64 = Debug_DLL|x64
 		Debug|Win32 = Debug|Win32
 		Debug|x64 = Debug|x64
+		Release_DLL|Win32 = Release_DLL|Win32
+		Release_DLL|x64 = Release_DLL|x64
 		Release|Win32 = Release|Win32
 		Release|x64 = Release|x64
 	EndGlobalSection
@@ -23,6 +25,9 @@ Global
 		{36F34954-F636-4BDE-8C17-72B149690B7A}.Debug|Win32.ActiveCfg = Debug|Win32
 		{36F34954-F636-4BDE-8C17-72B149690B7A}.Debug|Win32.Build.0 = Debug|Win32
 		{36F34954-F636-4BDE-8C17-72B149690B7A}.Debug|x64.ActiveCfg = Debug|Win32
+		{36F34954-F636-4BDE-8C17-72B149690B7A}.Release_DLL|Win32.ActiveCfg = Release_DLL|Win32
+		{36F34954-F636-4BDE-8C17-72B149690B7A}.Release_DLL|Win32.Build.0 = Release_DLL|Win32
+		{36F34954-F636-4BDE-8C17-72B149690B7A}.Release_DLL|x64.ActiveCfg = Release_DLL|Win32
 		{36F34954-F636-4BDE-8C17-72B149690B7A}.Release|Win32.ActiveCfg = Release|Win32
 		{36F34954-F636-4BDE-8C17-72B149690B7A}.Release|Win32.Build.0 = Release|Win32
 		{36F34954-F636-4BDE-8C17-72B149690B7A}.Release|x64.ActiveCfg = Release|Win32
@@ -34,6 +39,10 @@ Global
 		{7AF9D4BD-1295-49FF-945E-59149864D227}.Debug|Win32.Build.0 = Debug|Win32
 		{7AF9D4BD-1295-49FF-945E-59149864D227}.Debug|x64.ActiveCfg = Debug|x64
 		{7AF9D4BD-1295-49FF-945E-59149864D227}.Debug|x64.Build.0 = Debug|x64
+		{7AF9D4BD-1295-49FF-945E-59149864D227}.Release_DLL|Win32.ActiveCfg = Release_DLL|Win32
+		{7AF9D4BD-1295-49FF-945E-59149864D227}.Release_DLL|Win32.Build.0 = Release_DLL|Win32
+		{7AF9D4BD-1295-49FF-945E-59149864D227}.Release_DLL|x64.ActiveCfg = Release_DLL|x64
+		{7AF9D4BD-1295-49FF-945E-59149864D227}.Release_DLL|x64.Build.0 = Release_DLL|x64
 		{7AF9D4BD-1295-49FF-945E-59149864D227}.Release|Win32.ActiveCfg = Release|Win32
 		{7AF9D4BD-1295-49FF-945E-59149864D227}.Release|Win32.Build.0 = Release|Win32
 		{7AF9D4BD-1295-49FF-945E-59149864D227}.Release|x64.ActiveCfg = Release|x64
