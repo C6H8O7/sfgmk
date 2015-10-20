@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class ShaderWave : public PostShader
+	class SFGMK_API ShaderWave : public PostShader
 	{
 		public:
 			ShaderWave(float _x, float _y, float _duration, float _maxRadius);

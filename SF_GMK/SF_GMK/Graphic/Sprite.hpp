@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class Sprite : public sf::Sprite
+	class SFGMK_API Sprite : public sf::Sprite
 	{
 		public:
 			Sprite();

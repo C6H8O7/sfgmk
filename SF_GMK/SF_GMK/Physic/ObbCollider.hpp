@@ -14,7 +14,7 @@ namespace sfgmk
 {
 #define OBB_COLLIDER_POINT_NUMBER 4
 
-	class ObbCollider : public Collider
+	class SFGMK_API ObbCollider : public Collider
 	{
 		private:
 			sf::Vector2f m_Size;

@@ -22,7 +22,7 @@
 
 namespace sfgmk
 {
-	class Spring
+	class SFGMK_API Spring
 	{
 		public:
 			PointMass* m_End1;

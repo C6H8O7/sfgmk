@@ -85,9 +85,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>sfgmk</Filter>
     </ClCompile>
-    <ClCompile Include="ProjetSample\StateDefault.cpp">
-      <Filter>Projet</Filter>
-    </ClCompile>
     <ClCompile Include="SF_GMK\Engine\Core\Core.cpp">
       <Filter>sfgmk</Filter>
     </ClCompile>
@@ -232,7 +229,6 @@
     <ClCompile Include="SF_GMK\Tool\GenericList.cpp">
       <Filter>sfgmk\DesignPattern</Filter>
     </ClCompile>
-    <ClCompile Include="SF_GMK\SF_GMK.cpp" />
     <ClCompile Include="SF_GMK\Physic\Collider.cpp">
       <Filter>sfgmk\Physic</Filter>
     </ClCompile>
@@ -247,13 +243,6 @@
     <ClInclude Include="stdafx.h">
       <Filter>sfgmk</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>sfgmk</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjetSample\StateDefault.hpp">
-      <Filter>Projet</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjetSample\IncludesProjet.hpp" />
     <ClInclude Include="SF_GMK\Engine\Core\Core.hpp" />
     <ClInclude Include="SF_GMK\Engine\Core\GameManager.hpp">
       <Filter>sfgmk\GameManager</Filter>

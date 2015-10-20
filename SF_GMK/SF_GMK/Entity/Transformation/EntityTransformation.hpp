@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class EntityTransformation
+	class SFGMK_API EntityTransformation
 	{
 		protected:
 			float m_fTimer;

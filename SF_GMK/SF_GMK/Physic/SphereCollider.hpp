@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class SphereCollider : public Collider
+	class SFGMK_API SphereCollider : public Collider
 	{
 		private:
 			float m_fRadius;

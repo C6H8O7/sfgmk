@@ -13,7 +13,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		class StateMachineManager : public SingletonTemplate< StateMachineManager >
+		class SFGMK_API StateMachineManager : public SingletonTemplate< StateMachineManager >
 		{
 			friend class SingletonTemplate< StateMachineManager >;
 

@@ -14,7 +14,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		class Mouse
+		class SFGMK_API Mouse
 		{
 			friend class InputManager;
 

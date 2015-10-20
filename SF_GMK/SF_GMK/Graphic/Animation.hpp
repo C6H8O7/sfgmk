@@ -20,7 +20,7 @@ namespace sfgmk
 		float duration;
 	};
 
-	class Animation
+	class SFGMK_API Animation
 	{
 		public:
 			Animation();

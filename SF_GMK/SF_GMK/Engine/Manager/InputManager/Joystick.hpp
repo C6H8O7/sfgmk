@@ -19,7 +19,7 @@ namespace sfgmk
 #define TRIGGER_TOLERANCE 1 //Valeur qui semble correcte pour le contrôleur XBOX-360
 #define JOYSTICK_MAX_VALUE 100
 
-		class Joystick
+		class SFGMK_API Joystick
 		{
 			friend class InputManager;
 

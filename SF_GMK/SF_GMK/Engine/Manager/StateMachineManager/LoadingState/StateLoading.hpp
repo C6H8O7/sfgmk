@@ -28,7 +28,7 @@ namespace sfgmk
 			unsigned int iRessourceLoaded;
 		};
 
-		class StateLoading : public State
+		class SFGMK_API StateLoading : public State
 		{
 			protected:
 				std::thread m_Threads[eSTATE_LOADING_DATA_TYPE_NUMBER];

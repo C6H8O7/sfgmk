@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class TransformationRotation : public EntityTransformation
+	class SFGMK_API TransformationRotation : public EntityTransformation
 	{
 		private:
 			float m_fDegreePerSecond;

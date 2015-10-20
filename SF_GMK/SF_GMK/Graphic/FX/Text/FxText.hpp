@@ -11,7 +11,7 @@
 
 namespace sfgmk
 {
-	class FxText
+	class SFGMK_API FxText
 	{
 		protected:
 			sf::Vector2u m_Size;

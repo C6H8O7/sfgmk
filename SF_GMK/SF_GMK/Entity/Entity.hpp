@@ -14,7 +14,7 @@ namespace sfgmk
 {
 	class EntityTransformation;
 
-	class Entity : public sf::Transformable
+	class SFGMK_API Entity : public sf::Transformable
 	{
 		protected:
 			int m_iId;

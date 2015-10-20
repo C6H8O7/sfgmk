@@ -16,7 +16,7 @@ namespace sfgmk
 	{
 		#define DEFAULT_CAMERA_NAME "DefaultCamera"
 
-		class GraphicManager : public SingletonTemplate<GraphicManager>
+		class SFGMK_API GraphicManager : public SingletonTemplate<GraphicManager>
 		{
 			friend class SingletonTemplate<GraphicManager>;
 

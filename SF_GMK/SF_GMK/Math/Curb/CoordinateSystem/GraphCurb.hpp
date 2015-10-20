@@ -6,7 +6,7 @@ namespace sfgmk
 {
 	namespace math
 	{
-		class GraphCurb
+		class SFGMK_API GraphCurb
 		{
 			private:
 				sfgmk::DynamicArray<sf::Vector2f> m_Values;

@@ -16,7 +16,7 @@ namespace sfgmk
 	{
 #define FREE_CAMERA_DEFAULT_SPEED 250.0f
 
-		class Camera : public sf::View
+		class SFGMK_API Camera : public sf::View
 		{
 			private:
 			void freeMove(float _TimeDelta);

@@ -14,7 +14,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		class PhysicManager : public SingletonTemplate<PhysicManager>
+		class SFGMK_API PhysicManager : public SingletonTemplate<PhysicManager>
 		{
 			friend class SingletonTemplate<PhysicManager>;
 

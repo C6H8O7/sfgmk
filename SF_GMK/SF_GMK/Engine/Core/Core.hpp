@@ -14,7 +14,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		class Core : public SingletonTemplate<Core>
+		class SFGMK_API Core : public SingletonTemplate<Core>
 		{
 			friend class SingletonTemplate<Core>;
 

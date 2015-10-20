@@ -14,7 +14,7 @@ namespace sfgmk
 {
 	namespace math
 	{
-		class Matrix22
+		class SFGMK_API Matrix22
 		{
 			private:
 				float m_fArray[4];

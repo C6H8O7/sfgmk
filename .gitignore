@@ -36,3 +36,5 @@ Thumbs.db
 *.opensdf
 *.iobj
 *.ipdb
+
+*.exp

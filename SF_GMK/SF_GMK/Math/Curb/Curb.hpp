@@ -15,7 +15,7 @@ namespace sfgmk
 {
 	namespace math
 	{
-		class Curb
+		class SFGMK_API Curb
 		{
 			protected:
 				sf::Vector3f* m_Points;

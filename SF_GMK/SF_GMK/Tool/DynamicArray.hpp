@@ -7,7 +7,7 @@ namespace sfgmk
 	#define DYNAMIC_ARRAY_INITIAL_SIZE 32U
 
 	template <typename T>
-	class DynamicArray
+	class SFGMK_API DynamicArray
 	{
 		private:
 			T* m_Array;

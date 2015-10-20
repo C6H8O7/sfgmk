@@ -15,7 +15,7 @@ namespace sfgmk
 {
 	namespace math
 	{
-		class Bezier : public Curb
+		class SFGMK_API Bezier : public Curb
 		{
 			public:
 				Bezier(sf::Vector3f _Origin = sf::Vector3f(0.0f, 0.0f, 0.0f), sf::Vector3f Arrival = sf::Vector3f(0.0f, 0.0f, 0.0f), sf::Vector3f _ControlPoint1 = sf::Vector3f(0.0f, 0.0f, 0.0f), sf::Vector3f _ControlPoint2 = sf::Vector3f(0.0f, 0.0f, 0.0f), float _Time = 1.0f);

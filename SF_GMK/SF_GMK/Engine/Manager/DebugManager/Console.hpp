@@ -46,7 +46,7 @@ namespace sfgmk
 			ULONG  CurrentIdleState;
 		} PROCESSOR_POWER_INFORMATION, *PPROCESSOR_POWER_INFORMATION;
 
-		class ConsoleDev : public SingletonTemplate<ConsoleDev>
+		class SFGMK_API ConsoleDev : public SingletonTemplate<ConsoleDev>
 		{
 			friend class SingletonTemplate<ConsoleDev>;
 

@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class ParserContent
+	class SFGMK_API ParserContent
 	{
 		public:
 			ParserContent(std::string _content);
@@ -34,7 +34,7 @@ namespace sfgmk
 			std::string m_Content;
 	};
 
-	class Parser
+	class SFGMK_API Parser
 	{
 		public:
 			Parser(std::string _file);

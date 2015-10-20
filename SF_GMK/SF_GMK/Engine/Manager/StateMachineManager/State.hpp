@@ -22,7 +22,7 @@ namespace sfgmk
 			bool isContinuing;
 		};
 
-		class State
+		class SFGMK_API State
 		{
 			protected:
 			State *m_Parent;

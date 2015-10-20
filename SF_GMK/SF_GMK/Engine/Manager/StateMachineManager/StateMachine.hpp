@@ -17,7 +17,7 @@ namespace sfgmk
 		typedef State* StatePtr;
 		typedef StatePtr(*tStateCreationFunc)();
 
-		class StateMachine
+		class SFGMK_API StateMachine
 		{
 			public:
 				union StateCreationConv

@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class PostShader
+	class SFGMK_API PostShader
 	{
 		public:
 			PostShader();

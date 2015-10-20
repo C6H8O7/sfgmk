@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class TransformationTranslation : public EntityTransformation
+	class SFGMK_API TransformationTranslation : public EntityTransformation
 	{
 		private:
 			sf::Vector3f m_Direction;

@@ -14,7 +14,7 @@ namespace sfgmk
 {
 	namespace math
 	{
-		class MatrixRotation22 : public Matrix22
+		class SFGMK_API MatrixRotation22 : public Matrix22
 		{
 			public:
 				MatrixRotation22(float _Rotation);

@@ -11,7 +11,7 @@
 
 namespace sfgmk
 {
-	class LightningText : public FxText
+	class SFGMK_API LightningText : public FxText
 	{
 		private:
 			sf::RenderTexture m_PreviousFrameRender;

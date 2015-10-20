@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_DLL|Win32">
+      <Configuration>Debug_DLL</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -53,15 +57,14 @@
     <ClCompile Include="SF_GMK\Engine\Manager\InputManager\Mouse.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\GraphicManager\Parallaxe.cpp" />
     <ClCompile Include="SF_GMK\Graphic\FX\Shader\PostShader.cpp" />
-    <ClCompile Include="SF_GMK\SF_GMK.cpp" />
     <ClCompile Include="SF_GMK\Graphic\FX\Shader\ShaderWave.cpp" />
     <ClCompile Include="SF_GMK\Graphic\Sprite.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\StateMachineManager\State.cpp" />
-    <ClCompile Include="ProjetSample\StateDefault.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\StateMachineManager\LoadingState\StateLoading.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\StateMachineManager\StateMachine.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SF_GMK\Entity\Transformation\TransformationBezier.cpp" />
@@ -93,7 +96,6 @@
     <ClInclude Include="SF_GMK\Math\Curb\CoordinateSystem\Graph.hpp" />
     <ClInclude Include="SF_GMK\Math\Curb\CoordinateSystem\GraphCurb.hpp" />
     <ClInclude Include="SF_GMK\Graphic\FX\Grid\Grid.hpp" />
-    <ClInclude Include="ProjetSample\IncludesProjet.hpp" />
     <ClInclude Include="SF_GMK\Graphic\FX\LightningBolt\LightningBolt.hpp" />
     <ClInclude Include="SF_GMK\Graphic\FX\Text\LightningText.hpp" />
     <ClInclude Include="SF_GMK\Math\Math.hpp" />
@@ -119,11 +121,9 @@
     <ClInclude Include="SF_GMK\Tool\DesignPattern\SingletonTemplate.hpp" />
     <ClInclude Include="SF_GMK\Graphic\Sprite.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\StateMachineManager\State.hpp" />
-    <ClInclude Include="ProjetSample\StateDefault.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\StateMachineManager\LoadingState\StateLoading.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\StateMachineManager\StateMachine.hpp" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
     <ClInclude Include="SF_GMK\Tool\ThreadTemplate.hpp" />
     <ClInclude Include="SF_GMK\Entity\Transformation\TransformationBezier.hpp" />
     <ClInclude Include="SF_GMK\Entity\Transformation\TransformationInterpolation.hpp" />
@@ -133,10 +133,17 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{36F34954-F636-4BDE-8C17-72B149690B7A}</ProjectGuid>
     <RootNamespace>SF_GMK</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -154,11 +161,18 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
@@ -175,7 +189,26 @@
       <ForcedUsingFiles>
       </ForcedUsingFiles>
       <AdditionalIncludeDirectories>..\Includes\;..\Includes\SFML-2.3.2\include;..\SF_GMK;..\SF_GMK\SF_GMK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SFGMK_EXPORT;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <OpenMPSupport>false</OpenMPSupport>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\Includes\SFML-2.3.2\lib;..\Includes\fmodex\lib;..\Includes\zlib-1.2.3-lib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-s-d.lib;freetype.lib;jpeg.lib;opengl32.lib;sfml-system-s-d.lib;ws2_32.lib;sfml-window-s-d.lib;winmm.lib;%(AdditionalDependencies);zlib.lib;fmodex_vc.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <ForcedIncludeFiles>stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedUsingFiles>
+      </ForcedUsingFiles>
+      <AdditionalIncludeDirectories>..\Includes\;..\Includes\SFML-2.3.2\include;..\SF_GMK;..\SF_GMK\SF_GMK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFGMK_API_DLL;SFGMK_EXPORT;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <OpenMPSupport>false</OpenMPSupport>
     </ClCompile>
     <Link>

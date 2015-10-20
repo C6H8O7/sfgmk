@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class Bloom
+	class SFGMK_API Bloom
 	{
 		private:
 			sf::Shader* m_BrightnessShader;

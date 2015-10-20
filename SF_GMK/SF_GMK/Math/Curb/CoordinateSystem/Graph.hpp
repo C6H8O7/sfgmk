@@ -6,7 +6,7 @@ namespace sfgmk
 {
 	namespace math
 	{
-		class Graph
+		class SFGMK_API Graph
 		{
 			private:
 				sfgmk::DynamicArray<GraphCurb*> m_Curbs;

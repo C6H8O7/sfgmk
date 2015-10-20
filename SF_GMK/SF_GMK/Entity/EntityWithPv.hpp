@@ -14,7 +14,7 @@ namespace sfgmk
 {
 	#define ENTITY_DEFAULT_PV 1
 
-	class EntityWithPv : public Entity
+	class SFGMK_API EntityWithPv : public Entity
 	{
 		protected:
 			int m_iPv;

@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class Grid : public Entity
+	class SFGMK_API Grid : public Entity
 	{
 		private:
 			Bloom* m_BloomEffect;

@@ -14,7 +14,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		class Keyboard
+		class SFGMK_API Keyboard
 		{
 			friend class InputManager;
 

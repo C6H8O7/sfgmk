@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class TransformationBezier : public EntityTransformation
+	class SFGMK_API TransformationBezier : public EntityTransformation
 	{
 		private:
 			math::Bezier* m_BezierCurb;

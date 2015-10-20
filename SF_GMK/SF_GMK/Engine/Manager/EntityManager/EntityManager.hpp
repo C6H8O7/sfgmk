@@ -14,7 +14,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		class EntityManager : public SingletonTemplate<EntityManager>
+		class SFGMK_API EntityManager : public SingletonTemplate<EntityManager>
 		{
 			friend class SingletonTemplate<EntityManager>;
 

@@ -18,7 +18,7 @@ namespace sfgmk
 		void* pData;
 	};
 
-	class GenericList
+	class SFGMK_API GenericList
 	{
 		private:
 			sGenericList m_FirstElement;

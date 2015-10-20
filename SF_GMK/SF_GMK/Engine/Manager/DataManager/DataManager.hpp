@@ -16,7 +16,7 @@ namespace sfgmk
 		#define ENCRYPT_KEY				"l0lz~H4x0r~2000~Ilum1n4t1~Zl4t4n"
 		#define ENCRYPT_KEY_LENGTH		strlen(ENCRYPT_KEY)
 
-		class DataManager : public SingletonTemplate<DataManager>
+		class SFGMK_API DataManager : public SingletonTemplate<DataManager>
 		{
 			friend class SingletonTemplate<DataManager>;
 

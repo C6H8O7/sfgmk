@@ -14,7 +14,7 @@ namespace sfgmk
 {
 #define POINT_MASS_DEFAULT_DAMPING 0.98f
 
-	class PointMass
+	class SFGMK_API PointMass
 	{
 		protected:
 			sf::Vector3f m_Acceleration;

@@ -87,11 +87,11 @@ namespace sfgmk
 	}
 
 	//Renvoi le nombre de fichiers dans le dossier spécifié
-	int getNumberOfFileInDir(const char* _DirPath);
-	int getNumberOfFileInDir(const std::string& _DirPath);
+	int SFGMK_API getNumberOfFileInDir(const char* _DirPath);
+	int SFGMK_API getNumberOfFileInDir(const std::string& _DirPath);
 
 	//Déplace le curseur de lecture d'un fichier jusqu'au caractère passé en argument
-	bool goToChar(FILE* _File, const int& _Char);
+	bool SFGMK_API goToChar(FILE* _File, const int& _Char);
 }
 
 

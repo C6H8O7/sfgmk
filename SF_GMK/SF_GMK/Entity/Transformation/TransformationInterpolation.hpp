@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class TransformationInterpolation : public EntityTransformation
+	class SFGMK_API TransformationInterpolation : public EntityTransformation
 	{
 		private:
 			math::CatmullRom* m_InterpolationCurb;

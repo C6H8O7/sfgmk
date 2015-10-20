@@ -20,7 +20,7 @@ namespace sfgmk
 #define FREQUENCY_SAMPLE 128 //[64, 8192]
 #define REC_SHAPE_SIZE 25.0f
 
-		class SoundManager : public SingletonTemplate<SoundManager>
+		class SFGMK_API SoundManager : public SingletonTemplate<SoundManager>
 		{
 			friend class SingletonTemplate<SoundManager>;
 

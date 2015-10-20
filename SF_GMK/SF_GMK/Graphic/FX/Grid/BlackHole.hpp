@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class BlackHole : public Entity
+	class SFGMK_API BlackHole : public Entity
 	{
 		private:
 			Grid* m_Grid;

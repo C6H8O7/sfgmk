@@ -15,7 +15,7 @@ namespace sfgmk
 {
 	namespace math
 	{
-		class CatmullRom : public Curb
+		class SFGMK_API CatmullRom : public Curb
 		{
 			public:
 				CatmullRom(int _PointNumber, float _Time = 1.0f);

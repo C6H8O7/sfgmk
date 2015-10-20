@@ -13,7 +13,7 @@
 namespace sfgmk
 {
 	template<typename T, typename... Args>
-	class ThreadTemplate
+	class SFGMK_API ThreadTemplate
 	{
 		private:
 			std::thread m_Thread;

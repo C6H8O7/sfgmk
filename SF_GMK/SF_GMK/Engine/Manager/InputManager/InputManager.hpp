@@ -29,7 +29,7 @@ namespace sfgmk
 			WHEEL_TOP = 1
 		};
 
-		class InputManager : public SingletonTemplate<InputManager>
+		class SFGMK_API InputManager : public SingletonTemplate<InputManager>
 		{
 			friend class SingletonTemplate<InputManager>;
 

@@ -33,7 +33,7 @@ namespace sfgmk
 			int iHeight;
 		};
 
-		class Parallaxe
+		class SFGMK_API Parallaxe
 		{
 			friend class GraphicManager;
 			friend class StateLoading;

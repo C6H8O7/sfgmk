@@ -17,7 +17,7 @@ namespace sfgmk
 	#define LIGHTNING_BOLT_ALPHA_DECREASE_SPEED 510
 	#define LIGHTNING_BOLT_BRANCH_CHANCE 1
 
-	class LightningBolt : public Entity
+	class SFGMK_API LightningBolt : public Entity
 	{
 		private:
 			sf::Vector2f* m_PointArray;
