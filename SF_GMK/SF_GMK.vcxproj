@@ -226,7 +226,7 @@
       <ForcedUsingFiles>
       </ForcedUsingFiles>
       <AdditionalIncludeDirectories>..\Includes\;..\Includes\SFML-2.3.2\include;..\SF_GMK;..\SF_GMK\SF_GMK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>SFGMK_API_DLL;SFGMK_EXPORT;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SFML_STATIC;SFGMK_API_DLL;SFGMK_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <OpenMPSupport>false</OpenMPSupport>
     </ClCompile>
     <Link>
