@@ -300,7 +300,7 @@ namespace sfgmk
 			{
 				bool isValid = false;
 
-				for (int i = 0; i < m_Commands.getElementNumber(); i++)
+				for (unsigned int i = 0; i < m_Commands.getElementNumber(); i++)
 				{
 					sCONSOLE_COMMAND& command = m_Commands[i];
 

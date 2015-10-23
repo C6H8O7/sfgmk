@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SF_GMK", "SF_GMK\SF_GMK.vcxproj", "{36F34954-F636-4BDE-8C17-72B149690B7A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SF_GMK_Project", "SF_GMK_Project\SF_GMK_Project.vcxproj", "{7AF9D4BD-1295-49FF-945E-59149864D227}"
+	ProjectSection(ProjectDependencies) = postProject
+		{36F34954-F636-4BDE-8C17-72B149690B7A} = {36F34954-F636-4BDE-8C17-72B149690B7A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

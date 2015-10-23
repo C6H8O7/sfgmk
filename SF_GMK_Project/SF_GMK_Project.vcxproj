@@ -126,10 +126,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -139,9 +141,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_DLL|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -161,7 +165,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>sfml-graphics-s-d.lib;freetype.lib;jpeg.lib;opengl32.lib;sfml-system-s-d.lib;ws2_32.lib;sfml-window-s-d.lib;winmm.lib;%(AdditionalDependencies);zlib.lib;fmodex_vc.lib;SF_GMK.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\Includes\SFML-2.3.2\lib;..\Includes\fmodex\lib;..\Includes\zlib-1.2.3-lib\lib;..\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Includes\SFML-2.3.2\lib;..\Includes\fmodex\lib;..\Includes\zlib-1.2.3-lib\lib;..\bin\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">
@@ -176,7 +180,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>sfml-graphics-d.lib;freetype.lib;jpeg.lib;opengl32.lib;sfml-system-d.lib;ws2_32.lib;sfml-window-d.lib;winmm.lib;%(AdditionalDependencies);zlib.lib;fmodex_vc.lib;SF_GMK.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\Includes\SFML-2.3.2\lib;..\Includes\fmodex\lib;..\Includes\zlib-1.2.3-lib\lib;..\Debug_DLL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Includes\SFML-2.3.2\lib;..\Includes\fmodex\lib;..\Includes\zlib-1.2.3-lib\lib;..\bin\Debug_DLL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -218,7 +222,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\Includes\SFML-2.3.2\lib;..\Includes\fmodex\lib;..\Includes\zlib-1.2.3-lib\lib;..\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Includes\SFML-2.3.2\lib;..\Includes\fmodex\lib;..\Includes\zlib-1.2.3-lib\lib;..\bin\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-s.lib;freetype.lib;jpeg.lib;opengl32.lib;sfml-system-s.lib;winmm.lib;sfml-window-s.lib;gdi32.lib;fmodex_vc.lib;%(AdditionalDependencies);zlib.lib;SF_GMK.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -238,7 +242,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\Includes\SFML-2.3.2\lib;..\Includes\fmodex\lib;..\Includes\zlib-1.2.3-lib\lib;..\Release_DLL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Includes\SFML-2.3.2\lib;..\Includes\fmodex\lib;..\Includes\zlib-1.2.3-lib\lib;..\bin\Release_DLL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics.lib;freetype.lib;jpeg.lib;opengl32.lib;sfml-system.lib;winmm.lib;sfml-window.lib;gdi32.lib;fmodex_vc.lib;%(AdditionalDependencies);zlib.lib;SF_GMK.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
