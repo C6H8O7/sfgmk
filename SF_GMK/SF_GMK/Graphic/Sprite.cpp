@@ -54,7 +54,7 @@ namespace sfgmk
 
 	sf::Vector2f Sprite::getSize()
 	{
-		return sf::Vector2f(getTextureRect().width, getTextureRect().height);
+		return sf::Vector2f((float)getTextureRect().width, (float)getTextureRect().height);
 	}
 
 	void Sprite::FinalizeSprite(float _timeDelta)

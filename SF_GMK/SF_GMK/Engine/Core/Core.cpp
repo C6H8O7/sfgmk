@@ -47,35 +47,32 @@ namespace sfgmk
 		void Core::loop()
 		{
 			//Update état(s) courant(s)
-			STATE_MACHINE_MANAGER->update();
+			void(StateMachineManager::*ptr6)(void) = &StateMachineManager::update;
+			m_ExecutionTimes.dStateUpdate = measureFunctionExecutionTime(ptr6, STATE_MACHINE_MANAGER);
 
 			//Update des entités
-			ENTITY_MANAGER->update();
+			void(EntityManager::*ptr4)(void) = &EntityManager::update;
+			m_ExecutionTimes.dEntityUpdate = measureFunctionExecutionTime(ptr4, ENTITY_MANAGER);
 
 			//Physique
-			PHYSIC_MANAGER->update();
-			//std::function<void()> PhysicUpdate(std::bind(&PhysicManager::update, sfgmk::PhysicManager::getSingleton()));
-			// = measureFunctionExecutionTime(PhysicUpdate);
+			void(PhysicManager::*ptr5)(void) = &PhysicManager::update;
+			m_ExecutionTimes.dPhysic = measureFunctionExecutionTime(ptr5, PHYSIC_MANAGER);
 
 			//Trie les entités du vector en fonction de leur Z
-			ENTITY_MANAGER->sortEntityVector();
+			void(EntityManager::*ptr)(void) = &EntityManager::sortEntityVector;
+			m_ExecutionTimes.dEntitySort = measureFunctionExecutionTime(ptr, ENTITY_MANAGER);
 
-			//void(EntityManager::*ptr)(void) = &EntityManager::sortEntityVector;
-			//(EntityManager::getSingleton()->*ptr)();
+			//Parallaxe
+			void(GraphicManager::*ptr2)(void) = &GraphicManager::compute;
+			m_ExecutionTimes.dParallaxeComputation = measureFunctionExecutionTime(ptr2, GRAPHIC_MANAGER);
 
-
-			//m_ExecutionTimes.dEntitySort = measureFunctionExecutionTime(ptr, EntityManager::getSingleton());
-
-			/*int (A::*ptr)(int) = &A::fonction;
-			int (A::*ptr)(int) = &A::fonction;  //On déclare un pointeur sur la fonction membre
-			A instance;  //On crée une instance de la classe A
-			int resultat = (instance.*ptr)(2);*/
-
-			GRAPHIC_MANAGER->compute();
-			GRAPHIC_MANAGER->draw();
+			//Draw parallaxe
+			void(GraphicManager::*ptr3)(void) = &GraphicManager::draw;
+			m_ExecutionTimes.dParallaxeDisplay = measureFunctionExecutionTime(ptr3, GRAPHIC_MANAGER);
 
 			//Draw état(s) courant(s)
-			STATE_MACHINE_MANAGER->draw();
+			void(StateMachineManager::*ptr7)(void) = &StateMachineManager::draw;
+			m_ExecutionTimes.dStateDraw = measureFunctionExecutionTime(ptr7, STATE_MACHINE_MANAGER);
 		}
 
 		void Core::postLoop()

@@ -333,16 +333,17 @@ namespace sfgmk
 
 		void ConsoleDev::updateCounters()
 		{
+			sSfgmkExecutionTimes Timers = CORE->getExecutionTimes();
+
 			Parallaxe* GameParallaxe = &GraphicManager::getSingleton()->getParallaxe();
-			//stGameManagerTimers* Timers = &GameMan->getTimers();
 
 			//Current state
-			/*std::string sStateUpdate = std::to_string(Timers->dStateUpdate);
+			std::string sStateUpdate = std::to_string(Timers.dStateUpdate);
 			sStateUpdate = sStateUpdate.substr(0, sStateUpdate.find('.') + 3);
-			std::string sStateDisplay = std::to_string(Timers->dStateDraw);
+			std::string sStateDisplay = std::to_string(Timers.dStateDraw);
 			sStateDisplay = sStateDisplay.substr(0, sStateDisplay.find('.') + 3);
 
-			m_TextArray[eCONSOLE_DEV_TEXT::eState].setString("State:\tUpdate:  " + sStateUpdate + " ms\t" + "Draw:  " + sStateDisplay + " ms");*/
+			m_TextArray[eCONSOLE_DEV_TEXT::eState].setString("State:\tUpdate:  " + sStateUpdate + " ms\t" + "Draw:  " + sStateDisplay + " ms");
 
 			//Parallaxe
 			std::string sEntity("Entity: " + std::to_string(ENTITY_MANAGER->getEntityNumber()) + "  ");
@@ -351,22 +352,22 @@ namespace sfgmk
 			m_TextArray[eCONSOLE_DEV_TEXT::eParallaxe].setString("Parallaxe:\t" + sEntity + sLayer + sDraw);
 
 			//Entity
-			/*std::string sUpdate = std::to_string(Timers->dEntityUpdate);
+			std::string sUpdate = std::to_string(Timers.dEntityUpdate);
 			sUpdate = sUpdate.substr(0, sUpdate.find('.') + 3);
-			std::string sSort = std::to_string(Timers->dEntitySort);
+			std::string sSort = std::to_string(Timers.dEntitySort);
 			sSort = sSort.substr(0, sSort.find('.') + 3);
-			std::string sParallaxe = std::to_string(Timers->dParallaxeComputation);
+			std::string sParallaxe = std::to_string(Timers.dParallaxeComputation);
 			sParallaxe = sParallaxe.substr(0, sParallaxe.find('.') + 3);
-			std::string sDisplay = std::to_string(Timers->dParallaxeDisplay);
+			std::string sDisplay = std::to_string(Timers.dParallaxeDisplay);
 			sDisplay = sDisplay.substr(0, sDisplay.find('.') + 3);
-			std::string sPhysic = std::to_string(Timers->dPhysic);
+			std::string sPhysic = std::to_string(Timers.dPhysic);
 			sPhysic = sPhysic.substr(0, sPhysic.find('.') + 3);
 
 			m_TextArray[eCONSOLE_DEV_TEXT::eEntity].setString("\tEntity system:\nUpdate: " + sUpdate + " ms"
 																				 + "\nSort: " + sSort + " ms"
 																				 + "\nParallaxe: " + sParallaxe + " ms"
 																				 + "\nPhysic: " + sPhysic + " ms"
-																				 + "\nDisplay: " + sDisplay + " ms");*/
+																				 + "\nDraw: " + sDisplay + " ms");
 		}
 
 
@@ -376,11 +377,11 @@ namespace sfgmk
 
 			PROCESS_MEMORY_COUNTERS pmc;
 			GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-
-			size_t fTotalRam2(pmc.PeakWorkingSetSize / 1024.0f / 1024.0f);
+			
+			unsigned long fTotalRam2(pmc.PeakWorkingSetSize / 1024 / 1024);
 			std::string sTotalRam2(std::to_string(fTotalRam2));
 			sTotalRam2 = sTotalRam2.substr(0, 3);
-			size_t fUsedRam2(pmc.WorkingSetSize / 1024.0f / 1024.0f);
+			unsigned long fUsedRam2(pmc.WorkingSetSize / 1024 / 1024);
 			std::string sUsedRam2(std::to_string(fUsedRam2));
 			sUsedRam2 = sUsedRam2.substr(0, 3);
 

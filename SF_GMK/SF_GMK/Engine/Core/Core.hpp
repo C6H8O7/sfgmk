@@ -14,6 +14,17 @@ namespace sfgmk
 {
 	namespace engine
 	{
+		struct sSfgmkExecutionTimes
+		{
+			double dEntityUpdate;
+			double dEntitySort;
+			double dParallaxeComputation;
+			double dPhysic;
+			double dParallaxeDisplay;
+			double dStateUpdate;
+			double dStateDraw;
+		};
+
 		class SFGMK_API Core : public SingletonTemplate<Core>
 		{
 			friend class SingletonTemplate<Core>;
@@ -25,13 +36,7 @@ namespace sfgmk
 				sf::Clock m_ClockTimeDelta;
 				float m_fTimeDelta;
 
-				struct sSfgmkExecutionTimes 
-				{
-					double dEntityUpdate;
-					double dEntitySort;
-					double dParallaxeComputation;
-					double dParallaxeDisplay;
-				}m_ExecutionTimes;
+				sSfgmkExecutionTimes m_ExecutionTimes;
 				
 			public:
 				void update();
