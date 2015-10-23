@@ -36,6 +36,14 @@ namespace sfgmk
 			eCONSOLE_DEV_TEXT_NUMBER
 		};
 
+		typedef std::string(*CONSOLE_CALLBACK) (std::string&);
+
+		struct sCONSOLE_COMMAND
+		{
+			std::string command;
+			CONSOLE_CALLBACK function;
+		};
+
 		typedef struct _PROCESSOR_POWER_INFORMATION
 		{
 			ULONG  Number;
@@ -62,6 +70,7 @@ namespace sfgmk
 				float updateFmodCharge();
 				void updateSeizure();
 				void command();
+				void registerCommand(std::string _commandName, CONSOLE_CALLBACK _commandFunction);
 				void updateCounters();
 
 				void memoryUsage();
@@ -103,6 +112,8 @@ namespace sfgmk
 				sf::Text m_TextArray[eCONSOLE_DEV_TEXT::eCONSOLE_DEV_TEXT_NUMBER];
 				sf::Sprite m_CameraSprite;
 				sf::Text m_CameraText;
+
+				DynamicArray<sCONSOLE_COMMAND> m_Commands; // Commandes consoles
 		};
 	}
 }

@@ -16,6 +16,10 @@ int main()
 	//Init random
 	srand((unsigned int)time(NULL));
 
+	/*DeleteFileA("../Data/sfgmk/texture/Thumbs.db");
+	DeleteFileA("../Data/states/stateDefault/texture/Thumbs.db");
+	DeleteFileA("../Data/states/stateDefault/layer/Thumbs.db");*/
+
 	//Init fenêtre V2
 	sfgmk::GRAPHIC_MANAGER->init(sf::VideoMode(1280, 720), "SF_GMK", sf::Style::Default);
 

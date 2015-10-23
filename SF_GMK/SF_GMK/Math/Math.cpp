@@ -3,7 +3,7 @@ namespace sfgmk
 	namespace math
 	{
 		//Magic Square Root
-		float Msqrt(float _Number)	//Une iteration
+		inline float Msqrt(float _Number)	//Une iteration
 		{
 			long i;
 			float x2, y;
@@ -19,7 +19,7 @@ namespace sfgmk
 			return _Number * y;
 		}
 
-		float Msqrt(float _Number, int _Iteration)	//Plusieurs itérations (plus précis)
+		inline float Msqrt(float _Number, int _Iteration)	//Plusieurs itérations (plus précis)
 		{
 			long i;
 			float x2, y;

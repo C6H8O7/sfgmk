@@ -297,12 +297,38 @@ namespace sfgmk
 				bIsPhysicDraw ? m_sConsoleString += "Affichage physique desactivee\n" : m_sConsoleString += "Affichage physique activee\n";
 			}
 			else
-				m_sConsoleString += m_sSeizureBuffer + '\n';
+			{
+				bool isValid = false;
+
+				for (int i = 0; i < m_Commands.getElementNumber(); i++)
+				{
+					sCONSOLE_COMMAND& command = m_Commands[i];
+
+					if (m_sSeizureBuffer.find(command.command) != std::string::npos)
+					{
+						isValid = true;
+						m_sConsoleString += command.function(m_sSeizureBuffer);
+					}
+				}
+
+				if(!isValid)
+					m_sConsoleString += m_sSeizureBuffer + '\n';
+			}
 
 			m_iConsoleStringLine++;
 
 			if( m_iConsoleStringLine > CONSOLE_STRING_MAX_LINE )
 				m_sConsoleString = m_sConsoleString.substr(m_sConsoleString.find('\n') + 1);
+		}
+
+		void ConsoleDev::registerCommand(std::string _commandName, CONSOLE_CALLBACK _commandFunction)
+		{
+			sCONSOLE_COMMAND command;
+
+			command.command = _commandName;
+			command.function = _commandFunction;
+
+			m_Commands.pushBack(command);
 		}
 
 		void ConsoleDev::updateCounters()
