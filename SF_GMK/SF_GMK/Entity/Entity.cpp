@@ -44,6 +44,9 @@ namespace sfgmk
 				m_Transformation.pop_back();
 			}
 		}
+
+		if (m_Sprite)
+			m_Sprite->finalize(_TimeDelta);
 	}
 
 	void Entity::draw(sf::RenderTexture* _Render)
@@ -228,8 +231,8 @@ namespace sfgmk
 		m_Collider = new ObbCollider(this, _Size);
 	}
 
-
 	void Entity::physicCallBack(const int& _ColliderId)
 	{
+
 	}
 }

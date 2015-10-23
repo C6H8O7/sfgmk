@@ -160,7 +160,7 @@ namespace sfgmk
 	#define ADD_ENTITY(a)				sfgmk::engine::EntityManager::getSingleton()->addEntity(a)
 	#define FREE_ENTITY_VECTOR			sfgmk::engine::EntityManager::getSingleton()->freeEntityVector()
 	#define CAMERA						sfgmk::engine::GraphicManager::getSingleton()->getCurrentCamera()
-	#define CONSOLE						sfgmk::engine::ConsoleDev::getSingleton();
+	#define CONSOLE						sfgmk::engine::ConsoleDev::getSingleton()
 	#define PARALLAXE					GRAPHIC_MANAGER->getParallaxe()
 
 	//States
