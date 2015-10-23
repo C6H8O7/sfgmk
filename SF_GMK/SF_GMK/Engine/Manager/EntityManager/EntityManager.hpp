@@ -19,20 +19,22 @@ namespace sfgmk
 			friend class SingletonTemplate<EntityManager>;
 
 			private:
-			EntityManager();
-			~EntityManager();
+				EntityManager();
+				~EntityManager();
 
-			std::vector<Entity*> m_EntityVector;
+				std::vector<Entity*> m_EntityVector;
+				unsigned int m_uiEntityAccount;
 
 			public:
-			void update();
+				void update();
 
-			const std::vector<Entity*>& getEntityVector();
-			const int getEntityNumber();
-			void addEntity(Entity* _Entity);
-			void freeEntityVector();
+				const std::vector<Entity*>& getEntityVector();
+				const unsigned int& getEntityNumber();
+				void addEntity(Entity* _Entity);
+				void removeEntity(const unsigned int& _Index);
+				void freeEntityVector();
 
-			void sortEntityVector();
+				void sortEntityVector();
 		};
 
 		//Fonction qui permet de trier les entités par leur Z virtuel

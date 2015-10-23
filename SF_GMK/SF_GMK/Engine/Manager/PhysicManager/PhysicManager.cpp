@@ -271,7 +271,7 @@ namespace sfgmk
 			const float* MatrixOBBInverse = _BoxCollider->getEntity()->getInverseTransform().getMatrix();
 
 			//Transform sphere center from world coordinates to OBB coordinates
-			NewSphereCenter = _BoxCollider->getEntity()->getInverseTransform().transformPoint(_SphereCollider->getEntity()->getPosition());
+			NewSphereCenter = _BoxCollider->getEntity()->getInverseTransform().transformPoint(_SphereCollider->getWorldCenter());
 
 			//X
 			if( NewSphereCenter.x < MinVector.x )

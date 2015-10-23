@@ -21,55 +21,66 @@ namespace sfgmk
 			this->update();
 
 			//Update inputs
-			InputManager::getSingleton()->update();
+			INPUT_MANAGER->update();
 
 			//Boucle events
 			sf::Event event;
-			while( GraphicManager::getSingleton()->getRenderWindow()->pollEvent(event) )
+			while( GRAPHIC_MANAGER->getRenderWindow()->pollEvent(event) )
 			{
 				if( event.type == sf::Event::Closed )
-					GraphicManager::getSingleton()->getRenderWindow()->close();
+					GRAPHIC_MANAGER->getRenderWindow()->close();
 
-				sfgmk::engine::InputManager::getSingleton()->handleEvent(event);
+				INPUT_MANAGER->handleEvent(event);
 			}
-			GraphicManager::getSingleton()->set();
+			GRAPHIC_MANAGER->set();
 
 			//Console
 			sfgmk::engine::ConsoleDev::getSingleton()->update(m_fTimeDelta);
-
-			if( sfgmk::engine::InputManager::getSingleton()->getKeyboard().getKeyState(sf::Keyboard::Quote) == sfgmk::engine::KeyStates::KEY_PRESSED )
+			
+			if( INPUT_MANAGER->getKeyboard().getKeyState(sf::Keyboard::Quote) == sfgmk::engine::KeyStates::KEY_PRESSED )
 				sfgmk::engine::ConsoleDev::getSingleton()->setActive();
 
 			//Son
-			SoundManager::getSingleton()->update();
+			SOUND_MANAGER->update();
 		}
 
 		void Core::loop()
 		{
 			//Update état(s) courant(s)
-			StateMachineManager::getSingleton()->update();
+			STATE_MACHINE_MANAGER->update();
 
 			//Update des entités
-			EntityManager::getSingleton()->update();
+			ENTITY_MANAGER->update();
 
 			//Physique
-			PhysicManager::getSingleton()->update();
+			PHYSIC_MANAGER->update();
 			//std::function<void()> PhysicUpdate(std::bind(&PhysicManager::update, sfgmk::PhysicManager::getSingleton()));
-			//m_EntityTimers.dPhysic = measureFunctionExecutionTime(PhysicUpdate);
+			// = measureFunctionExecutionTime(PhysicUpdate);
 
 			//Trie les entités du vector en fonction de leur Z
-			EntityManager::getSingleton()->sortEntityVector();
+			ENTITY_MANAGER->sortEntityVector();
 
-			GraphicManager::getSingleton()->compute();
-			GraphicManager::getSingleton()->draw();
+			//void(EntityManager::*ptr)(void) = &EntityManager::sortEntityVector;
+			//(EntityManager::getSingleton()->*ptr)();
+
+
+			//m_ExecutionTimes.dEntitySort = measureFunctionExecutionTime(ptr, EntityManager::getSingleton());
+
+			/*int (A::*ptr)(int) = &A::fonction;
+			int (A::*ptr)(int) = &A::fonction;  //On déclare un pointeur sur la fonction membre
+			A instance;  //On crée une instance de la classe A
+			int resultat = (instance.*ptr)(2);*/
+
+			GRAPHIC_MANAGER->compute();
+			GRAPHIC_MANAGER->draw();
 
 			//Draw état(s) courant(s)
-			StateMachineManager::getSingleton()->draw();
+			STATE_MACHINE_MANAGER->draw();
 		}
 
 		void Core::postLoop()
 		{
-			GraphicManager::getSingleton()->display();
+			GRAPHIC_MANAGER->display();
 		}
 	}
 }

@@ -4,7 +4,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		EntityManager::EntityManager()
+		EntityManager::EntityManager() : m_uiEntityAccount(0U)
 		{
 		}
 
@@ -15,13 +15,14 @@ namespace sfgmk
 
 
 		void EntityManager::update()
-		{	for( int i(m_EntityVector.size() - 1); i >= 0; i-- )
+		{	
+			for( int i(m_EntityVector.size() - 1); i >= 0; i-- )
 			{
 				m_EntityVector[i]->update(TIME_DELTA);
 
 				//Suppression entités en fin de vie
 				if( !m_EntityVector[i]->getIsAlive() )
-					DeletePtrCntrElement(m_EntityVector, i);
+					removeEntity(i);
 			}
 		}
 
@@ -31,15 +32,23 @@ namespace sfgmk
 			return m_EntityVector;
 		}
 
-		const int EntityManager::getEntityNumber()
+		const unsigned int& EntityManager::getEntityNumber()
 		{
-			return m_EntityVector.size();
+			return m_uiEntityAccount;
 		}
 
 		void EntityManager::addEntity(Entity* _Entity)
 		{
 			m_EntityVector.push_back(_Entity);
+			m_uiEntityAccount++;
 		}
+
+		void EntityManager::removeEntity(const unsigned int& _Index)
+		{
+			DeletePtrCntrElement(m_EntityVector, _Index);
+			m_uiEntityAccount--;
+		}
+
 
 		void EntityManager::freeEntityVector()
 		{

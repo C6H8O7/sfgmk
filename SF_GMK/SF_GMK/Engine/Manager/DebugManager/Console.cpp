@@ -333,8 +333,7 @@ namespace sfgmk
 
 		void ConsoleDev::updateCounters()
 		{
-			//sfgmk::GameManager* GameMan = sfgmk::GameManager::getSingleton();
-			Parallaxe* GameParallaxe = &sfgmk::engine::GraphicManager::getSingleton()->getParallaxe();
+			Parallaxe* GameParallaxe = &GraphicManager::getSingleton()->getParallaxe();
 			//stGameManagerTimers* Timers = &GameMan->getTimers();
 
 			//Current state
@@ -346,10 +345,10 @@ namespace sfgmk
 			m_TextArray[eCONSOLE_DEV_TEXT::eState].setString("State:\tUpdate:  " + sStateUpdate + " ms\t" + "Draw:  " + sStateDisplay + " ms");*/
 
 			//Parallaxe
-			/*std::string sEntity("Entity: " + std::to_string(GameMan->getEntityNumber()) + "  ");
+			std::string sEntity("Entity: " + std::to_string(ENTITY_MANAGER->getEntityNumber()) + "  ");
 			std::string sLayer("Layer: " + std::to_string(GameParallaxe->getLayerAccount()) + "  ");
 			std::string sDraw("Draw: " + std::to_string(GameParallaxe->getDrawAccount()) + "  ");
-			m_TextArray[eCONSOLE_DEV_TEXT::eParallaxe].setString("Parallaxe:\t" + sEntity + sLayer + sDraw);*/
+			m_TextArray[eCONSOLE_DEV_TEXT::eParallaxe].setString("Parallaxe:\t" + sEntity + sLayer + sDraw);
 
 			//Entity
 			/*std::string sUpdate = std::to_string(Timers->dEntityUpdate);
@@ -375,29 +374,17 @@ namespace sfgmk
 		{
 			char cMemory[64] = { 0 };
 
-			MEMORYSTATUS stat;
-			GlobalMemoryStatus(&stat);
-
 			PROCESS_MEMORY_COUNTERS pmc;
 			GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
 
-			float fTotalRam(stat.dwTotalPhys / 1024.0f / 1024.0f / 1024.0f);
-			float fFreeRam(stat.dwAvailPhys / 1024.0f / 1024.0f / 1024.0f);
-			float fUsedRam(fTotalRam - fFreeRam);
-			std::string sUsedRam(std::to_string(fUsedRam));
-			sUsedRam = sUsedRam.substr(0, 4);
-			std::string sTotalRam(std::to_string(fTotalRam));
-			sTotalRam = sTotalRam.substr(0, 4);
-
-			float fTotalRam2(pmc.PeakWorkingSetSize / 1024.0f / 1024.0f);
+			size_t fTotalRam2(pmc.PeakWorkingSetSize / 1024.0f / 1024.0f);
 			std::string sTotalRam2(std::to_string(fTotalRam2));
 			sTotalRam2 = sTotalRam2.substr(0, 3);
-			sUsedRam = sUsedRam.substr(0, 3);
-			float fUsedRam2(pmc.WorkingSetSize / 1024.0f / 1024.0f);
+			size_t fUsedRam2(pmc.WorkingSetSize / 1024.0f / 1024.0f);
 			std::string sUsedRam2(std::to_string(fUsedRam2));
 			sUsedRam2 = sUsedRam2.substr(0, 3);
 
-			std::string PhysicRam("RAM:  " + sUsedRam2 + " Mo / " + sTotalRam2 + " Mo\t\t" + sUsedRam + " Go / " + sTotalRam + " Go");
+			std::string PhysicRam("RAM:    Current: " + sUsedRam2 + " Mo / Max: " + sTotalRam2 + " Mo");
 			m_TextArray[eCONSOLE_DEV_TEXT::eRam].setString(PhysicRam);
 		}
 

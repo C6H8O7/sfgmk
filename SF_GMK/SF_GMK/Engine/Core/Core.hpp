@@ -24,6 +24,14 @@ namespace sfgmk
 
 				sf::Clock m_ClockTimeDelta;
 				float m_fTimeDelta;
+
+				struct sSfgmkExecutionTimes 
+				{
+					double dEntityUpdate;
+					double dEntitySort;
+					double dParallaxeComputation;
+					double dParallaxeDisplay;
+				}m_ExecutionTimes;
 				
 			public:
 				void update();
@@ -32,6 +40,8 @@ namespace sfgmk
 				void postLoop();
 
 				inline const float& getTimeDelta() { return m_fTimeDelta; }
+
+				const sSfgmkExecutionTimes& getExecutionTimes() { return m_ExecutionTimes; }
 		};
 	}
 }
