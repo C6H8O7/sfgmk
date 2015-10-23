@@ -38,3 +38,8 @@ Thumbs.db
 *.ipdb
 
 *.exp
+
+bin/Debug/*
+bin/Debug_DLL/*
+bin/Release/*
+bin/Release_DLL/*
