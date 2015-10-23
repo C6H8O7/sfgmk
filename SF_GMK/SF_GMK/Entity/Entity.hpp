@@ -57,6 +57,7 @@ namespace sfgmk
 			std::vector<EntityTransformation*>& getTransformation();
 
 			const float& getZ();
+			sf::Vector2f getCenter();
 			sf::Vector3f getPosition3D();
 			void setPosition(const sf::Vector2f& position);
 			void setPosition(const sf::Vector3f& _Position);

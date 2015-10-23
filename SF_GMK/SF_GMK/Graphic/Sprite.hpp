@@ -24,6 +24,7 @@ namespace sfgmk
 			void setRelativeOrigin(float _rox, float _roy);
 
 			sf::Vector2f getCenter();
+			sf::Vector2f getSize();
 
 			virtual Sprite& finalize(float _timeDelta);
 

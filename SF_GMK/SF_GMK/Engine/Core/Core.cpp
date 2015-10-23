@@ -53,6 +53,7 @@ namespace sfgmk
 			EntityManager::getSingleton()->update();
 
 			//Physique
+			PhysicManager::getSingleton()->update();
 			//std::function<void()> PhysicUpdate(std::bind(&PhysicManager::update, sfgmk::PhysicManager::getSingleton()));
 			//m_EntityTimers.dPhysic = measureFunctionExecutionTime(PhysicUpdate);
 

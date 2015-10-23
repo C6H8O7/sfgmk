@@ -48,7 +48,6 @@ namespace sfgmk
 			}
 		}
 
-
 		void PhysicManager::draw(sf::RenderTexture* _RenderTexture)
 		{
 			for( unsigned int i(0U); i < m_PhysicObjects.getElementNumber(); i++ )
@@ -57,11 +56,13 @@ namespace sfgmk
 
 		void PhysicManager::drawCollider(Collider* _Collider, sf::RenderTexture* _RenderTexture)
 		{
-			Entity* Entity = _Collider->getEntity();
+			sfgmk::Entity* Entity = _Collider->getEntity();
 			bool bIsColliding = _Collider->Collide();
 			sf::CircleShape CircleShape;
 			sf::RectangleShape RectShape;
 			const sf::Transform* Transform = NULL;
+			sf::Vector2f ShapeOrigin(sf::Vector2f(0.0f, 0.0));
+			float fSphereRadius;
 			Entity->getIsComputatedByParralax() ? Transform = &Entity->getVirtualTransform().getTransform() : Transform = &Entity->getTransform();
 
 			if( _Collider->isActive() )
@@ -69,8 +70,12 @@ namespace sfgmk
 				switch( _Collider->getType() )
 				{
 					case eCOLLIDER_TYPE::eSphere:
-						CircleShape.setRadius(((SphereCollider*)_Collider)->getRadius());
+						fSphereRadius = ((SphereCollider*)_Collider)->getRadius();
+						CircleShape.setRadius(fSphereRadius);
 						CircleShape.setOutlineThickness(1);
+
+						ShapeOrigin = sf::Vector2f(fSphereRadius * Entity->getOrigin().x * 2.0f, fSphereRadius * Entity->getOrigin().y * 2.0f);
+						CircleShape.setOrigin(ShapeOrigin.x, ShapeOrigin.y);
 
 						if( bIsColliding )
 						{
@@ -89,6 +94,9 @@ namespace sfgmk
 					case eCOLLIDER_TYPE::eOBB:
 						RectShape.setSize(((ObbCollider*)_Collider)->getSize());
 						RectShape.setOutlineThickness(1);
+
+						ShapeOrigin = sf::Vector2f(RectShape.getSize().x * Entity->getOrigin().x, RectShape.getSize().y * Entity->getOrigin().y);
+						RectShape.setOrigin(ShapeOrigin.x, ShapeOrigin.y);
 
 						if( bIsColliding )
 						{
@@ -126,7 +134,7 @@ namespace sfgmk
 		{
 			bool bCollision(false);
 			eCOLLIDER_TYPE Type1 = _Collider1->getType(), Type2 = _Collider2->getType();
-			Entity *Entity1 = _Collider1->getEntity(), *Entity2 = _Collider2->getEntity();
+			sfgmk::Entity *Entity1 = _Collider1->getEntity(), *Entity2 = _Collider2->getEntity();
 			float fCollider1Z = Entity1->getZ(), fCollider2Z = Entity2->getZ();
 
 			//Test profondeur
@@ -222,7 +230,7 @@ namespace sfgmk
 		}
 
 
-		bool PhysicManager::collisionSphereSphere(SphereCollider* _Collider1, SphereCollider* _Collider2, Entity* _Entity1, Entity* _Entity2)
+		bool PhysicManager::collisionSphereSphere(SphereCollider* _Collider1, SphereCollider* _Collider2, sfgmk::Entity* _Entity1, sfgmk::Entity* _Entity2)
 		{
 			float fDistanceSquared = math::Calc_DistanceSquared(_Collider1->getWorldCenter(), _Collider2->getWorldCenter());
 			float fRadiusSquared = _Collider1->getWorldRadius() + _Collider2->getWorldRadius();
@@ -231,7 +239,7 @@ namespace sfgmk
 			return fDistanceSquared < fRadiusSquared;
 		}
 
-		bool PhysicManager::collisionObbObb(ObbCollider* _Collider1, ObbCollider* _Collider2, Entity* _Entity1, Entity* _Entity2)
+		bool PhysicManager::collisionObbObb(ObbCollider* _Collider1, ObbCollider* _Collider2, sfgmk::Entity* _Entity1, sfgmk::Entity* _Entity2)
 		{
 			//Données boite 1
 			sf::Vector2f Box1Center = _Collider1->getWorldCenter();
@@ -254,7 +262,7 @@ namespace sfgmk
 		}
 
 
-		bool PhysicManager::collisionSphereObb(SphereCollider* _SphereCollider, ObbCollider* _BoxCollider, Entity* _Entity1, Entity* _Entity2)
+		bool PhysicManager::collisionSphereObb(SphereCollider* _SphereCollider, ObbCollider* _BoxCollider, sfgmk::Entity* _Entity1, sfgmk::Entity* _Entity2)
 		{
 			float fSphereRadius(_SphereCollider->getWorldRadius()), fDifference(0.0f), fDistance(0.0);
 			sf::Vector2f Scale = _BoxCollider->getEntity()->getScale();
@@ -263,7 +271,7 @@ namespace sfgmk
 			const float* MatrixOBBInverse = _BoxCollider->getEntity()->getInverseTransform().getMatrix();
 
 			//Transform sphere center from world coordinates to OBB coordinates
-			NewSphereCenter = _BoxCollider->getEntity()->getInverseTransform().transformPoint(_SphereCollider->getWorldCenter());
+			NewSphereCenter = _BoxCollider->getEntity()->getInverseTransform().transformPoint(_SphereCollider->getEntity()->getPosition());
 
 			//X
 			if( NewSphereCenter.x < MinVector.x )

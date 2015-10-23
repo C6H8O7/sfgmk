@@ -52,6 +52,11 @@ namespace sfgmk
 		return sf::Vector2f(getTextureRect().width * 0.5f, getTextureRect().height * 0.5f);
 	}
 
+	sf::Vector2f Sprite::getSize()
+	{
+		return sf::Vector2f(getTextureRect().width, getTextureRect().height);
+	}
+
 	void Sprite::FinalizeSprite(float _timeDelta)
 	{
 		if( m_isAnim && m_Animation )

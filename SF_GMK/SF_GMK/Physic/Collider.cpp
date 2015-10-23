@@ -39,7 +39,7 @@ namespace sfgmk
 
 	sf::Vector2f Collider::getWorldCenter()
 	{
-		return m_Entity->getPosition();
+		return m_Entity->getCenter();
 	}
 
 

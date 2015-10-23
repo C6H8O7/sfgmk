@@ -1,3 +1,5 @@
+#include <omp.h>
+
 namespace sfgmk
 {
 	namespace engine
@@ -13,8 +15,7 @@ namespace sfgmk
 
 
 		void EntityManager::update()
-		{
-			for( int i(m_EntityVector.size() - 1); i >= 0; i-- )
+		{	for( int i(m_EntityVector.size() - 1); i >= 0; i-- )
 			{
 				m_EntityVector[i]->update(TIME_DELTA);
 

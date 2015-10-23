@@ -35,7 +35,7 @@ namespace sfgmk
 		{
 			m_Transformation[i]->update(_TimeDelta, this);
 
-			if( !m_Transformation[i]->checkTimer(_TimeDelta, this) )
+			if( m_Transformation[i]->checkTimer(_TimeDelta, this) == false )
 			{
 				EntityTransformation* Temp = m_Transformation[i];
 				m_Transformation[i] = m_Transformation[m_Transformation.size() - 1];
@@ -48,7 +48,7 @@ namespace sfgmk
 
 	void Entity::draw(sf::RenderTexture* _Render)
 	{
-		m_Sprite->setRelativeOrigin(0.5f, 0.5f);
+		m_Sprite->setRelativeOrigin(m_VirtualTransform.getOrigin().x, m_VirtualTransform.getOrigin().y);
 		m_Sprite->setScale(m_VirtualTransform.getScale());
 		m_Sprite->setRotation(m_VirtualTransform.getRotation());
 		m_Sprite->setPosition(m_VirtualTransform.getPosition());
@@ -150,6 +150,15 @@ namespace sfgmk
 	const float& Entity::getZ()
 	{
 		return m_fPositionZ;
+	}
+
+	sf::Vector2f Entity::getCenter()
+	{
+		sf::Vector2f Size = m_Sprite->getSize();
+		sf::Vector2f Origin = getOrigin();
+		sf::Vector2f Position = getPosition();
+
+		return sf::Vector2f(Position.x + ((0.5f - Origin.x) * Size.x), Position.y + ((0.5f - Origin.y) * Size.y));
 	}
 
 	sf::Vector3f Entity::getPosition3D()
