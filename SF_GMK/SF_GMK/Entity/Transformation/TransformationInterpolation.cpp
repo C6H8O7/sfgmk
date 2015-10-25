@@ -1,6 +1,6 @@
 namespace sfgmk
 {
-	TransformationInterpolation::TransformationInterpolation(math::CatmullRom* _Curb, const float& _Duration, const bool& _DieOnTheEnd) : EntityTransformation(_DieOnTheEnd)
+	TransformationInterpolation::TransformationInterpolation(math::CatmullRom* _Curb, const float& _Duration, const bool& _StopOntheEnd, const bool& _DieOnTheEnd) : EntityTransformation(_Duration, _StopOntheEnd, _DieOnTheEnd)
 	{
 		m_InterpolationCurb = _Curb;
 		m_fDuration = _Duration;

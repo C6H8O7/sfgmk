@@ -57,7 +57,7 @@ namespace sfgmk
 				if( _Array[i] > _Array[i + 1] )
 				{
 					bChange = true;
-					float fTemp = _Array[i + 1];
+					T fTemp = _Array[i + 1];
 					_Array[i + 1] = _Array[i];
 					_Array[i] = fTemp;
 				}
@@ -67,23 +67,23 @@ namespace sfgmk
 
 	//Execute une fonction, et renvoie la durée d'exécution de celle-ci
 	template<typename T, typename... Args>
-	double measureFunctionExecutionTime(std::function<T(Args... _Args)> _Function, Args... _Args)
+	signed long long measureFunctionExecutionTime(std::function<T(Args... _Args)>& _Function, Args... _Args)
 	{
 		sf::Clock Timer;
 
 		_Function(_Args...);
 
-		return (Timer.getElapsedTime().asMicroseconds() * 0.001f);
+		return (Timer.getElapsedTime().asMicroseconds());
 	}
 
 	template<typename T, typename T2, typename... Args>
-	double measureFunctionExecutionTime(T2(T::*ptr)(Args... _Args), T* _Instance)
+	signed long long measureFunctionExecutionTime(T2(T::*ptr)(Args... _Args), T* _Instance)
 	{
 		sf::Clock Timer;
 
 		(_Instance->*ptr)(_Args...);
 
-		return (Timer.getElapsedTime().asMicroseconds() * 0.001f);
+		return (Timer.getElapsedTime().asMicroseconds());
 	}
 
 	//Met tous les éléments d'un tableau à la valeur donnée

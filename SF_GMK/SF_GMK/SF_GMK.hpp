@@ -169,7 +169,7 @@ namespace sfgmk
 	#define CURRENT_STATE				STATE_MACHINE_MANAGER->getStateMachine()->Get_CurrentState()
 
 	//Keyboard
-	#define KEYBOARD					INPUT_MANAGER->getKeyboard()
+	#define KEYBOARD					getKeyboard()
 	#define KEYBOARD_KEY(a)				KEYBOARD.getKeyState(a)
 
 	//Mouse

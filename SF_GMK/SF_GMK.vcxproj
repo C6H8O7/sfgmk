@@ -95,6 +95,7 @@
     <ClInclude Include="SF_GMK\Tool\DynamicArray.hpp" />
     <ClInclude Include="SF_GMK\Entity\Transformation\EntityTransformation.hpp" />
     <ClInclude Include="SF_GMK\Entity\EntityWithPv.hpp" />
+    <ClInclude Include="SF_GMK\Tool\FoncterTemplate.hpp" />
     <ClInclude Include="SF_GMK\Tool\Function.hpp" />
     <ClInclude Include="SF_GMK\Graphic\FX\Text\FxText.hpp" />
     <ClInclude Include="SF_GMK\Tool\GenericList.hpp" />

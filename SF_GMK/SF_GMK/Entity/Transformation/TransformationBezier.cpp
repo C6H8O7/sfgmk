@@ -1,6 +1,6 @@
 namespace sfgmk
 {
-	TransformationBezier::TransformationBezier(math::Bezier* _Curb, const float& _Duration, const bool& _DieOnTheEnd) : EntityTransformation(_DieOnTheEnd)
+	TransformationBezier::TransformationBezier(math::Bezier* _Curb, const float& _Duration, const bool& _StopOntheEnd, const bool& _DieOnTheEnd) : EntityTransformation(_Duration, _StopOntheEnd, _DieOnTheEnd)
 	{
 		m_BezierCurb = _Curb;
 		m_fDuration = _Duration;

@@ -1,7 +1,7 @@
 namespace sfgmk
 {
-	TransformationRotation::TransformationRotation(const float& _DegreePerSecond, const float& _Duration, const bool& _DieOnTheEnd)
-		: EntityTransformation(_Duration, _DieOnTheEnd), m_fDegreePerSecond(_DegreePerSecond)
+	TransformationRotation::TransformationRotation(const float& _DegreePerSecond, const float& _Duration, const bool& _StopOntheEnd, const bool& _DieOnTheEnd)
+		: EntityTransformation(_Duration, _StopOntheEnd, _DieOnTheEnd), m_fDegreePerSecond(_DegreePerSecond)
 	{
 	}
 

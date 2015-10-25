@@ -16,13 +16,13 @@ namespace sfgmk
 	{
 		struct sSfgmkExecutionTimes
 		{
-			double dEntityUpdate;
-			double dEntitySort;
-			double dParallaxeComputation;
-			double dPhysic;
-			double dParallaxeDisplay;
-			double dStateUpdate;
-			double dStateDraw;
+			signed long long dEntityUpdate;
+			signed long long dEntitySort;
+			signed long long dParallaxeComputation;
+			signed long long dPhysic;
+			signed long long dParallaxeDisplay;
+			signed long long dStateUpdate;
+			signed long long dStateDraw;
 		};
 
 		class SFGMK_API Core : public SingletonTemplate<Core>

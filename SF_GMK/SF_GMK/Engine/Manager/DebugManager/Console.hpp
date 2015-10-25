@@ -38,10 +38,12 @@ namespace sfgmk
 
 		typedef std::string(*CONSOLE_CALLBACK) (std::string&);
 
-		struct sCONSOLE_COMMAND
+		struct stCONSOLE_COMMAND
 		{
-			std::string command;
 			CONSOLE_CALLBACK function;
+			bool bBeenCalled;
+			std::string sOnCallOutput;
+			std::string sOnRecallOutput;
 		};
 
 		typedef struct _PROCESSOR_POWER_INFORMATION
@@ -69,13 +71,14 @@ namespace sfgmk
 				void updateFpsCurb();
 				float updateFmodCharge();
 				void updateSeizure();
-				void command();
-				void registerCommand(std::string _commandName, CONSOLE_CALLBACK _commandFunction);
 				void updateCounters();
 
 				void memoryUsage();
 				void initCpuUsage();
 				float cpuUsage();
+
+				void command();
+				void registerCommand(const std::string& _commandName, CONSOLE_CALLBACK _commandFunction, const std::string& _CallOutput, const std::string& _RecallOutput);
 
 			private:
 				ConsoleDev();
@@ -96,6 +99,7 @@ namespace sfgmk
 				sf::Font m_Font[2];
 				sf::Texture m_Texture[2];
 
+				int m_iMinFps, m_iMaxFps;
 				MEMORYSTATUSEX m_MemInfo;
 				ULARGE_INTEGER m_LastCPU;
 				ULARGE_INTEGER m_LastSysCPU;
@@ -113,7 +117,9 @@ namespace sfgmk
 				sf::Sprite m_CameraSprite;
 				sf::Text m_CameraText;
 
-				DynamicArray<sCONSOLE_COMMAND> m_Commands; // Commandes consoles
+				std::map<std::string, stCONSOLE_COMMAND> m_Commands;
+				std::vector<std::string> m_EnteredCommands;
+				int m_iEnteredCommandsIndex;
 		};
 	}
 }

@@ -30,13 +30,18 @@ void StateDefault::init()
 		Entity* entity = new Entity(sf::Vector3f(RAND(100, 1180), RAND(100, 620), 0.0f));
 		entity->getSprite()->setAnimation(DATA_MANAGER->getAnimation("goomba"));
 
-		if( RAND(0, 1) == 0 )
+		/*if( RAND(0, 1) == 0 )
 			entity->addObbCollider();
 		else
-			entity->addSphereCollider();
+			entity->addSphereCollider();*/
 
 		ADD_ENTITY(entity);
 	}
+
+	/*sfgmk::Entity* NewEntity = new sfgmk::Entity();
+	sfgmk::math::Bezier* Curb = new sfgmk::math::Bezier(sf::Vector3f(0.0f, 0.0f, 0.0f), sf::Vector3f(0.0f, 0.0f, 0.0f), sf::Vector3f(0.0f, 0.0f, 0.0f), sf::Vector3f(0.0f, 0.0f, 0.0f));
+	NewEntity->addTransformation(new sfgmk::TransformationBezier(Curb, 5.0f, true));
+	ADD_ENTITY(NewEntity);*/
 }
 
 void StateDefault::update()

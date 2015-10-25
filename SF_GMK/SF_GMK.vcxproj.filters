@@ -395,5 +395,6 @@
     <ClInclude Include="SF_GMK\Physic\SphereCollider.hpp">
       <Filter>sfgmk\Physic</Filter>
     </ClInclude>
+    <ClInclude Include="SF_GMK\Tool\FoncterTemplate.hpp" />
   </ItemGroup>
 </Project>

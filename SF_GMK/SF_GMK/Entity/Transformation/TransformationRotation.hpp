@@ -18,7 +18,7 @@ namespace sfgmk
 			float m_fDegreePerSecond;
 
 		public:
-			TransformationRotation(const float& _DegreePerSecond, const float& _Duration, const bool& _DieOnTheEnd = false);
+			TransformationRotation(const float& _DegreePerSecond, const float& _Duration, const bool& _StopOntheEnd = false, const bool& _DieOnTheEnd = false);
 			~TransformationRotation();
 
 			void update(const float& _TimeDelta, Entity* _Entity);

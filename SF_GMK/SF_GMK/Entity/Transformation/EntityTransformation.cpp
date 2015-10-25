@@ -17,8 +17,8 @@ namespace sfgmk
 		{
 			if( m_bDieOnTheEnd )
 				_Entity->setIsAlive(false);
-
-			//if( m_bStopOnTheEnd )
+		
+			if( m_bStopOnTheEnd )
 				return false;
 		}
 

@@ -101,19 +101,19 @@ namespace sfgmk
 			//Clavier / Souris
 				//Déplacements
 					//Gauche
-					if( KEYBOARD_KEY(sf::Keyboard::Left) == KeyStates::KEY_DOWN )
+					if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Left) == KeyStates::KEY_DOWN )
 						this->move(-m_Speed.x * _TimeDelta, 0);
 
 					//Droite
-					else if( KEYBOARD_KEY(sf::Keyboard::Right) == KeyStates::KEY_DOWN )
+					else if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Right) == KeyStates::KEY_DOWN )
 						this->move(m_Speed.x * _TimeDelta, 0);
 
 					//Haut
-					if( KEYBOARD_KEY(sf::Keyboard::Up) == KeyStates::KEY_DOWN )
+					if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Up) == KeyStates::KEY_DOWN )
 						this->move(0, -m_Speed.y * _TimeDelta);
 
 					//Bas
-					else if( KEYBOARD_KEY(sf::Keyboard::Down) == KeyStates::KEY_DOWN )
+					else if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Down) == KeyStates::KEY_DOWN )
 						this->move(0, m_Speed.y * _TimeDelta);
 
 					//Zoom
