@@ -116,11 +116,12 @@ namespace sfgmk
 						EntityPosition = TempEntity->getVirtualTransform().getPosition();
 						SpriteSize = TempSprite->getTextureRect();
 
-						//if( sfgmk::RectsIntersects(CameraOrigin.x, CameraOrigin.y, CameraSize.x, CameraSize.y, EntityPosition.x, EntityPosition.y, (float)SpriteSize.width, (float)SpriteSize.height) ) //Test d'affichage
-						//{
-						TempEntity->draw(Rendertexture);
-						m_iDrawAccount++;
-						//}
+						//Test d'affichage
+						if( sfgmk::math::RectsIntersects(CameraOrigin.x, CameraOrigin.y, CameraSize.x, CameraSize.y, EntityPosition.x, EntityPosition.y, (float)SpriteSize.width, (float)SpriteSize.height) )
+						{
+							TempEntity->draw(Rendertexture);
+							m_iDrawAccount++;
+						}
 					}
 					m_iEntityIndex--;
 				}

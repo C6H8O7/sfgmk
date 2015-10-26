@@ -215,7 +215,7 @@ namespace sfgmk
 		}
 
 		//Physique
-		bool ProjectionsIntersects(float _l1, float _r1, float _l2, float _r2)
+		bool ProjectionsIntersects(const float& _l1, const float& _r1, const float& _l2, const float& _r2)
 		{
 			if( ((_l1 <= _l2 && _r1 >= _r2) || (_l1 >= _l2 && _r1 <= _r2))
 			   || ((_l1 >= _l2 && _l1 <= _r2) || (_r1 >= _l2 && _r1 <= _r2)) )
@@ -224,7 +224,7 @@ namespace sfgmk
 			return false;
 		}
 
-		bool RectsIntersects(float _x1, float _y1, float _w1, float _h1, float _x2, float _y2, float _w2, float _h2)
+		bool RectsIntersects(const float& _x1, const float& _y1, const float& _w1, const float& _h1, const float& _x2, const float& _y2, const float& _w2, const float& _h2)
 		{
 			float t1 = _y1, t2 = _y2;
 			float l1 = _x1, l2 = _x2;

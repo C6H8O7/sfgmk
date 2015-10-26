@@ -102,19 +102,31 @@ namespace sfgmk
 				//Déplacements
 					//Gauche
 					if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Left) == KeyStates::KEY_DOWN )
+					{
 						this->move(-m_Speed.x * _TimeDelta, 0);
+						ConsoleDev::getSingleton()->setDisplayTimer(CONSOLE_DISPLAY_TIMING);
+					}
 
 					//Droite
 					else if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Right) == KeyStates::KEY_DOWN )
+					{
 						this->move(m_Speed.x * _TimeDelta, 0);
+						ConsoleDev::getSingleton()->setDisplayTimer(CONSOLE_DISPLAY_TIMING);
+					}
 
 					//Haut
 					if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Up) == KeyStates::KEY_DOWN )
+					{
 						this->move(0, -m_Speed.y * _TimeDelta);
+						ConsoleDev::getSingleton()->setDisplayTimer(CONSOLE_DISPLAY_TIMING);
+					}
 
 					//Bas
 					else if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Down) == KeyStates::KEY_DOWN )
+					{
 						this->move(0, m_Speed.y * _TimeDelta);
+						ConsoleDev::getSingleton()->setDisplayTimer(CONSOLE_DISPLAY_TIMING);
+					}
 
 					//Zoom
 						//Arriere
@@ -143,6 +155,7 @@ namespace sfgmk
 						sf::Vector2f Result = math::Matrix22(cos(fJoystickAngle), -sin(fJoystickAngle), sin(fJoystickAngle), cos(fJoystickAngle)) * sf::Vector2f(1.0f, 0.0f);
 
 						this->move(Result.x * m_Speed.x * _TimeDelta, Result.y * m_Speed.y * _TimeDelta);
+						ConsoleDev::getSingleton()->setDisplayTimer(CONSOLE_DISPLAY_TIMING);
 					}
 				}
 		}

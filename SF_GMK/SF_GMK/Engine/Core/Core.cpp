@@ -37,7 +37,7 @@ namespace sfgmk
 			//Console
 			sfgmk::engine::ConsoleDev::getSingleton()->update(m_fTimeDelta);
 			
-			if( INPUT_MANAGER->getKeyboard().getKeyState(sf::Keyboard::Quote) == sfgmk::engine::KeyStates::KEY_PRESSED )
+			if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Quote) == sfgmk::engine::KeyStates::KEY_PRESSED )
 				sfgmk::engine::ConsoleDev::getSingleton()->setActive();
 
 			//Son
@@ -77,7 +77,8 @@ namespace sfgmk
 
 		void Core::postLoop()
 		{
-			GRAPHIC_MANAGER->display();
+			void(GraphicManager::*ptr)(void) = &GraphicManager::display;
+			m_ExecutionTimes.dParallaxeDisplay += measureFunctionExecutionTime(ptr, GRAPHIC_MANAGER);
 		}
 	}
 }
