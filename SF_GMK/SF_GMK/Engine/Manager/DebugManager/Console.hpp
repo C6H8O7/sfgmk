@@ -20,6 +20,7 @@ namespace sfgmk
 		#define CONSOLE_SIZE_X 564
 		#define CONSOLE_SIZE_Y 500
 		#define CONSOLE_UPDATE_TIMING 1.0f
+		#define CONSOLE_DISPLAY_TIMING 0.1f
 		#define CONSOLE_STRING_MAX_LINE 9
 
 		enum eCONSOLE_DEV_TEXT
@@ -64,7 +65,8 @@ namespace sfgmk
 				bool setActive(bool _Boolean);
 				bool setActive();
 				void update(float _TimeDelta);
-				bool display(sf::RenderTexture* _Render, sf::Vector2f _CameraOrigin);
+				void display();
+				void draw(sf::RenderTexture* _Render);
 
 				int updateFps(float _TimeDelta);
 				void updateFpsDraw();
@@ -79,6 +81,7 @@ namespace sfgmk
 
 				void command();
 				void registerCommand(const std::string& _commandName, CONSOLE_CALLBACK _commandFunction, const std::string& _CallOutput, const std::string& _RecallOutput);
+				void incrementConsoleStringsIndex();
 
 			private:
 				ConsoleDev();
@@ -87,11 +90,12 @@ namespace sfgmk
 				bool m_bOpacity;
 
 				float m_fTimer;
+				float m_fDisplayTimer;
 				bool m_bIsActive;
 				bool m_bIsSeizureActive;
 				std::string m_sSeizureBuffer;
-				std::string m_sConsoleString;
-				int m_iConsoleStringLine;
+				std::string m_sConsoleStrings[CONSOLE_STRING_MAX_LINE];
+				int m_iConsoleStringsIndex;
 
 				sf::Sprite m_RenderSprite;
 				sf::RenderTexture m_ConsoleRender;

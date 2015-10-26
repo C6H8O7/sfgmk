@@ -2,7 +2,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		ConsoleDev::ConsoleDev() : m_bOpacity(false), m_fTimer(0.0f), m_bIsActive(false), m_bIsSeizureActive(false), m_sSeizureBuffer(""), m_sConsoleString(""), m_iConsoleStringLine(0), m_iMinFps(0), m_iMaxFps(0), m_fCpuUsagePercent(0.0f), m_iEnteredCommandsIndex(-1)
+		ConsoleDev::ConsoleDev() : m_bOpacity(false), m_fTimer(0.0f), m_fDisplayTimer(0.0f), m_bIsActive(false), m_bIsSeizureActive(false), m_sSeizureBuffer(""), m_iConsoleStringsIndex(0), m_iMinFps(0), m_iMaxFps(0), m_fCpuUsagePercent(0.0f), m_iEnteredCommandsIndex(-1)
 		{
 			//Init
 			m_ConsoleRender.create(CONSOLE_SIZE_X, CONSOLE_SIZE_Y);
@@ -44,9 +44,9 @@ namespace sfgmk
 			m_TextArray[eCONSOLE_DEV_TEXT::eState].setPosition(25.0f, 90.0f);
 			m_TextArray[eCONSOLE_DEV_TEXT::eParallaxe].setPosition(25.0f, 110.0f);
 			m_TextArray[eCONSOLE_DEV_TEXT::eEntity].setPosition(360.0f, 130.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eFps].setPosition(30.0f, 140.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eFps].setPosition(27.0f, 140.0f);
 			m_TextArray[eCONSOLE_DEV_TEXT::eSeizure].setPosition(25.0f, 450.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setPosition(30.0f, 225.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setPosition(25.0f, 225.0f);
 
 			m_FpsCurbSprite.setPosition(95.0f, m_TextArray[eCONSOLE_DEV_TEXT::eFps].getPosition().y - 4);
 
@@ -60,8 +60,8 @@ namespace sfgmk
 			m_CameraText.setPosition(505.0f, 68.0f);
 
 			//Commandes
-			//registerCommand("/freecam", TODO, "Camera libre activee\n", "Camera libre desactivee\n");
-			//registerCommand("/physic", TODO, "Affichage physique active\n", "Affichage physique desactive\n");
+			//registerCommand("/freecam", TODO GRAPHIC_MANAGER->getCurrentCamera()->setFreeMove(), "Camera libre activee\n", "Camera libre desactivee\n");
+			//registerCommand("/physic", TODO PHYSIC_MANAGER->setDraw(), "Affichage physique active\n", "Affichage physique desactive\n");
 		}
 
 		ConsoleDev::~ConsoleDev()
@@ -89,8 +89,10 @@ namespace sfgmk
 
 		void ConsoleDev::update(float _TimeDelta)
 		{
-			//Update des valeurs de "performance"
 			m_fTimer += _TimeDelta;
+			m_fDisplayTimer += _TimeDelta;
+
+			//Update des valeurs de "performance"
 			if( m_fTimer >= CONSOLE_UPDATE_TIMING )
 			{
 				m_fTimer = 0.0f;
@@ -105,6 +107,7 @@ namespace sfgmk
 					memoryUsage();
 					cpuUsage();
 					updateCounters();
+					
 				}
 			}
 
@@ -116,14 +119,18 @@ namespace sfgmk
 
 				//Update saisie
 				updateSeizure();
+
+				//Display
+				if( m_fDisplayTimer >= CONSOLE_DISPLAY_TIMING )
+				{
+					display();
+					m_fDisplayTimer = 0.0f;
+				}
 			}
 		}
 
-		bool ConsoleDev::display(sf::RenderTexture* _Render, sf::Vector2f _CameraOrigin)
+		void ConsoleDev::display()
 		{
-			if( !m_bIsActive )
-				return false;
-
 			float fScale = 1.0f / GRAPHIC_MANAGER->getCurrentCamera()->getZoomFactor(); //Pour que la console garde sa taille quand on a zoomé/dézoomé la vue
 
 			//Draw
@@ -131,8 +138,17 @@ namespace sfgmk
 				m_bOpacity ? m_ConsoleRender.clear(sf::Color(0, 0, 0, 255)) : m_ConsoleRender.clear(sf::Color(0, 0, 0, 0));
 
 				m_ConsoleRender.draw(m_ConsoleSprite, sf::RenderStates::Default);
-				for( int i(0); i < eCONSOLE_DEV_TEXT::eCONSOLE_DEV_TEXT_NUMBER; ++i )
+				for( int i(0); i < eCONSOLE_DEV_TEXT::eCONSOLE_DEV_TEXT_NUMBER - 1; ++i )
 					m_ConsoleRender.draw(m_TextArray[i]);
+
+				//Commandes entrées
+				for( int i(0); i < CONSOLE_STRING_MAX_LINE; ++i )
+				{
+					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setString(m_sConsoleStrings[i]);
+					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setPosition(sf::Vector2f(25.0f, 225.0f) + sf::Vector2f(0.0f, i * 20.0f));
+					m_ConsoleRender.draw(m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText]);
+				}
+
 				m_ConsoleRender.draw(m_FpsCurbSprite);
 
 				//Caméra (si le free move est activée)
@@ -152,11 +168,13 @@ namespace sfgmk
 
 				m_ConsoleRender.display();
 				m_RenderSprite.setTexture(m_ConsoleRender.getTexture(), true);
-				m_RenderSprite.setPosition(_CameraOrigin);
+				m_RenderSprite.setPosition(GRAPHIC_MANAGER->getCurrentCamera()->getRelativOrigin());
 				m_RenderSprite.setScale(fScale, fScale);
-				_Render->draw(m_RenderSprite);
+		}
 
-			return true;
+		void ConsoleDev::draw(sf::RenderTexture* _Render)
+		{
+			_Render->draw(m_RenderSprite);
 		}
 
 
@@ -314,9 +332,6 @@ namespace sfgmk
 					m_TextArray[eCONSOLE_DEV_TEXT::eSeizure].setString("_");
 				else
 					m_TextArray[eCONSOLE_DEV_TEXT::eSeizure].setString(m_sSeizureBuffer);
-
-				//Update affichage
-				m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setString(m_sConsoleString);
 			}
 		}
 
@@ -460,38 +475,17 @@ namespace sfgmk
 			if( m_sSeizureBuffer == "/freecam" )
 			{
 				bool bIsFreeMove = GRAPHIC_MANAGER->getCurrentCamera()->setFreeMove();
-				bIsFreeMove ? m_sConsoleString += "Camera libre activee\n" : m_sConsoleString += "Camera libre desactivee\n";
+				bIsFreeMove ? m_sConsoleStrings[m_iConsoleStringsIndex] = "Camera libre activee" : m_sConsoleStrings[m_iConsoleStringsIndex] = "Camera libre desactivee";
+				incrementConsoleStringsIndex();
 			}
 			//Draw colliders
 			else if( m_sSeizureBuffer == "/physic" )
 			{
 				bool bIsPhysicDraw = PHYSIC_MANAGER->getDraw();
 				PHYSIC_MANAGER->setDraw(!bIsPhysicDraw);
-				bIsPhysicDraw ? m_sConsoleString += "Affichage physique desactivee\n" : m_sConsoleString += "Affichage physique activee\n";
+				bIsPhysicDraw ? m_sConsoleStrings[m_iConsoleStringsIndex] = "Affichage physique desactivee" : m_sConsoleStrings[m_iConsoleStringsIndex] = "Affichage physique activee";
+				incrementConsoleStringsIndex();
 			}
-			else
-			{
-				bool isValid = false;
-
-				/*for (unsigned int i = 0; i < m_Commands.getElementNumber(); i++)
-				{
-				sCONSOLE_COMMAND& command = m_Commands[i];
-
-				if (m_sSeizureBuffer.find(command.command) != std::string::npos)
-				{
-				isValid = true;
-				m_sConsoleString += command.function(m_sSeizureBuffer);
-				}
-				}*/
-
-				if( !isValid )
-					m_sConsoleString += m_sSeizureBuffer + '\n';
-			}
-
-			m_iConsoleStringLine++;
-
-			if( m_iConsoleStringLine > CONSOLE_STRING_MAX_LINE )
-				m_sConsoleString = m_sConsoleString.substr(m_sConsoleString.find('\n') + 1);
 		}
 
 		void ConsoleDev::registerCommand(const std::string& _commandName, CONSOLE_CALLBACK _commandFunction, const std::string& _CallOutput, const std::string& _RecallOutput)
@@ -502,6 +496,13 @@ namespace sfgmk
 											 _RecallOutput };
 
 			m_Commands.insert(std::pair<std::string, stCONSOLE_COMMAND>(_commandName, NewCommand));
+		}
+
+		void ConsoleDev::incrementConsoleStringsIndex()
+		{
+			m_iConsoleStringsIndex++;
+			if( m_iConsoleStringsIndex >= CONSOLE_STRING_MAX_LINE )
+				m_iConsoleStringsIndex = 0;
 		}
 	}
 }

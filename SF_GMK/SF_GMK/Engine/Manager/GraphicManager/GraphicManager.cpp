@@ -70,7 +70,7 @@ namespace sfgmk
 				PHYSIC_MANAGER->draw(m_RenderTexture);
 
 			//Rendu console
-			sfgmk::engine::ConsoleDev::getSingleton()->display(m_RenderTexture, m_CurrentCamera->getRelativOrigin());
+			sfgmk::engine::ConsoleDev::getSingleton()->draw(m_RenderTexture);
 
 			//Rendu final
 			m_RenderTexture->display();
