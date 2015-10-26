@@ -23,17 +23,17 @@ StateDefault::~StateDefault()
 void StateDefault::init()
 {
 	GRAPHIC_MANAGER->getCurrentCamera()->setFreeMove();
-	//PHYSIC_MANAGER->setDraw(true);
+	PHYSIC_MANAGER->setDraw(true);
 
 	for( int i(0); i < 100; i++ )
 	{
 		Entity* entity = new Entity(sf::Vector3f(RAND(100, 1180), RAND(100, 620), 0.0f));
 		entity->getSprite()->setAnimation(DATA_MANAGER->getAnimation("goomba"));
 
-		/*if( RAND(0, 1) == 0 )
+		if( RAND(0, 1) == 0 )
 			entity->addObbCollider();
 		else
-			entity->addSphereCollider();*/
+			entity->addSphereCollider();
 
 		ADD_ENTITY(entity);
 	}

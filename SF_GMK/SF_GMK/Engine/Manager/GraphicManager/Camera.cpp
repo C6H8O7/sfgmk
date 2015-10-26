@@ -119,11 +119,17 @@ namespace sfgmk
 					//Zoom
 						//Arriere
 						if( MOUSE.getWheelState() == -1 )
+						{
 							this->zoom(2.0f);
+							ConsoleDev::getSingleton()->setDisplayTimer(CONSOLE_DISPLAY_TIMING);
+						}
 
 						//Avant
 						else if( MOUSE.getWheelState() == 1 )
+						{
 							this->zoom(0.5f);
+							ConsoleDev::getSingleton()->setDisplayTimer(CONSOLE_DISPLAY_TIMING);
+						}
 
 			//Manette (si un joystick connecté)
 				//Déplacements

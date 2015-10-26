@@ -75,6 +75,7 @@ namespace sfgmk
 		{
 			m_bIsActive = _Boolean;
 			m_fTimer = 0.0f;
+			m_ConsoleRender.clear(EMPTY_COLOR);
 
 			return m_bIsActive;
 		}
@@ -83,6 +84,7 @@ namespace sfgmk
 		{
 			m_bIsActive = !m_bIsActive;
 			m_fTimer = 0.0f;
+			m_ConsoleRender.clear(EMPTY_COLOR);
 
 			return m_bIsActive;
 		}
@@ -107,7 +109,6 @@ namespace sfgmk
 					memoryUsage();
 					cpuUsage();
 					updateCounters();
-					
 				}
 			}
 
@@ -175,6 +176,11 @@ namespace sfgmk
 		void ConsoleDev::draw(sf::RenderTexture* _Render)
 		{
 			_Render->draw(m_RenderSprite);
+		}
+
+		void ConsoleDev::setDisplayTimer(const float& _Value)
+		{
+			m_fDisplayTimer = _Value;
 		}
 
 

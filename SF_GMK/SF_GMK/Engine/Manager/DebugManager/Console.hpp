@@ -67,6 +67,7 @@ namespace sfgmk
 				void update(float _TimeDelta);
 				void display();
 				void draw(sf::RenderTexture* _Render);
+				void setDisplayTimer(const float& _Value = 0.0f);
 
 				int updateFps(float _TimeDelta);
 				void updateFpsDraw();
