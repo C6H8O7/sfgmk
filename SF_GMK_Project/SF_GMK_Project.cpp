@@ -27,14 +27,24 @@ int main()
 	sfgmk::STATE_MACHINE_MANAGER->RegisterState<StateDefault>(sfgmk::eSTATES::eStateDefault, "../data/states/stateDefault");
 	sfgmk::STATE_MACHINE->init(sfgmk::eSTATES::eStateDefault);
 
-	while (sfgmk::GRAPHIC_MANAGER->getRenderWindow()->isOpen())
+	while( sfgmk::GRAPHIC_MANAGER->getRenderWindow()->isOpen() )
 	{
 		sfgmk::CORE->preLoop();
 		sfgmk::CORE->loop();
 		sfgmk::CORE->postLoop();
 	}
 
-	// TODO : release des singletons
+	//Release des singletons
+	sfgmk::DATA_MANAGER->releaseSingleton();
+	sfgmk::DEBUG_MANAGER->releaseSingleton();
+	sfgmk::ENTITY_MANAGER->releaseSingleton();
+	sfgmk::GRAPHIC_MANAGER->releaseSingleton();
+	sfgmk::INPUT_MANAGER->releaseSingleton();
+	sfgmk::PHYSIC_MANAGER->releaseSingleton();
+	sfgmk::SOUND_MANAGER->releaseSingleton();
+	sfgmk::STATE_MACHINE_MANAGER->releaseSingleton();
 
+	sfgmk::CORE->releaseSingleton();
+	
 	return 0;
 }

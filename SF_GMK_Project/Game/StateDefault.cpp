@@ -27,8 +27,10 @@ void StateDefault::init()
 
 	for( int i(0); i < 100; i++ )
 	{
-		Entity* entity = new Entity(sf::Vector3f(RAND(100, 1180), RAND(100, 620), 0.0f));
+		int iInitialPv = RAND(1, 100);
+		EntityWithPv* entity = new EntityWithPv(sf::Vector3f((float)RAND(100, 1180), (float)RAND(100, 620), 0.0f), iInitialPv, RAND(1, iInitialPv));
 		entity->getSprite()->setAnimation(DATA_MANAGER->getAnimation("goomba"));
+		entity->addLifeBar();
 
 		if( RAND(0, 1) == 0 )
 			entity->addObbCollider();

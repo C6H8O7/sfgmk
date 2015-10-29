@@ -45,19 +45,20 @@ namespace sfgmk
 			}
 		}
 
-		if (m_Sprite)
+		if( m_Sprite )
+		{
 			m_Sprite->finalize(_TimeDelta);
+
+			m_Sprite->setRelativeOrigin(m_VirtualTransform.getOrigin().x, m_VirtualTransform.getOrigin().y);
+			m_Sprite->setScale(m_VirtualTransform.getScale());
+			m_Sprite->setRotation(m_VirtualTransform.getRotation());
+			m_Sprite->setPosition(m_VirtualTransform.getPosition());
+		}
 	}
 
 	void Entity::draw(sf::RenderTexture* _Render)
 	{
-		m_Sprite->setRelativeOrigin(m_VirtualTransform.getOrigin().x, m_VirtualTransform.getOrigin().y);
-		m_Sprite->setScale(m_VirtualTransform.getScale());
-		m_Sprite->setRotation(m_VirtualTransform.getRotation());
-		m_Sprite->setPosition(m_VirtualTransform.getPosition());
 		_Render->draw(*m_Sprite);
-
-		//m_bIsComputatedByParallax ? _Render->draw(*m_Sprite, m_VirtualTransform.getTransform()) : _Render->draw(*m_Sprite, getTransform());
 	}
 
 
@@ -105,8 +106,8 @@ namespace sfgmk
 
 	Sprite* Entity::getSprite()
 	{
-		if( m_Sprite == NULL )
-			m_Sprite = new Sprite;
+		if( !m_Sprite )
+			m_Sprite = new Sprite();
 
 		return m_Sprite;
 	}
@@ -195,6 +196,14 @@ namespace sfgmk
 	sf::Transformable& Entity::getVirtualTransform()
 	{
 		return m_VirtualTransform;
+	}
+
+	void Entity::setVirtualTransformWithTransform()
+	{
+		m_VirtualTransform.setOrigin(getOrigin());
+		m_VirtualTransform.setScale(getScale());
+		m_VirtualTransform.setRotation(getRotation());
+		m_VirtualTransform.setPosition(getPosition());
 	}
 
 

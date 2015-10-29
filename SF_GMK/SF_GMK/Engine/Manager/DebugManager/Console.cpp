@@ -13,8 +13,8 @@ namespace sfgmk
 			
 			//Rendu
 			m_FpsCurbImageOriginal = DATA_MANAGER->getTexture("sfgmk_fpsTab").copyToImage();
-			m_Font[0] = DATA_MANAGER->getFont("sfgmk_fontSquare");
-			m_Font[1] = DATA_MANAGER->getFont("sfgmk_fontCOMUNICA_TYPE");
+			m_Font[0] = DATA_MANAGER->getFont("sfgmk_ConsoleFont1");
+			m_Font[1] = DATA_MANAGER->getFont("sfgmk_ConsoleFont2");
 			m_Texture[0] = DATA_MANAGER->getTexture("sfgmk_background");
 			m_ConsoleSprite.setTexture(m_Texture[0], true);
 			m_ConsoleSprite.setPosition(0.0f, 0.0f);
@@ -25,7 +25,7 @@ namespace sfgmk
 				if( i < eCONSOLE_DEV_TEXT::eSeizure )
 				{
 					m_TextArray[i].setFont(m_Font[0]);
-					m_TextArray[i].setCharacterSize(16);
+					m_TextArray[i].setCharacterSize(20);
 					m_TextArray[i].setColor(sf::Color(100, 200, 100, 255));
 				}
 				else
@@ -36,26 +36,26 @@ namespace sfgmk
 				}
 			}
 
-			m_TextArray[eCONSOLE_DEV_TEXT::eEntity].setCharacterSize(11);
+			m_TextArray[eCONSOLE_DEV_TEXT::eEntity].setCharacterSize(14);
 
-			m_TextArray[eCONSOLE_DEV_TEXT::eCpu].setPosition(25.0f, 20.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eFmod].setPosition(25.0f, 40.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eRam].setPosition(25.0f, 60.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eState].setPosition(25.0f, 90.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eParallaxe].setPosition(25.0f, 110.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eEntity].setPosition(360.0f, 130.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eFps].setPosition(27.0f, 140.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eSeizure].setPosition(25.0f, 450.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setPosition(25.0f, 225.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eCpu].setPosition(26.0f, 25.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eFmod].setPosition(26.0f, 65.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eRam].setPosition(26.0f, 45.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eState].setPosition(26.0f, 88.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eParallaxe].setPosition(26.0f, 110.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eEntity].setPosition(340.0f, 135.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eFps].setPosition(28.0f, 140.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eSeizure].setPosition(26.0f, 450.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setPosition(26.0f, 225.0f);
 
-			m_FpsCurbSprite.setPosition(95.0f, m_TextArray[eCONSOLE_DEV_TEXT::eFps].getPosition().y - 4);
+			m_FpsCurbSprite.setPosition(95.0f, m_TextArray[eCONSOLE_DEV_TEXT::eFps].getPosition().y);
 
 			//Camera
 			m_Texture[1] = DATA_MANAGER->getTexture("sfgmk_camera");
 			m_CameraSprite.setTexture(m_Texture[1], true);
 			m_CameraSprite.setPosition(500.0f, 0.0f);
 			m_CameraText.setFont(m_Font[0]);
-			m_CameraText.setCharacterSize(12);
+			m_CameraText.setCharacterSize(18);
 			m_CameraText.setColor(sf::Color(100, 200, 100, 255));
 			m_CameraText.setPosition(505.0f, 68.0f);
 
@@ -161,7 +161,7 @@ namespace sfgmk
 					std::string sY = std::to_string(CameraPosition.y);
 					std::string sZoom = std::to_string(CurrentCam->getZoomFactor());
 					sZoom = sZoom.substr(0, sZoom.find('.') + 3);
-					m_CameraText.setString("X:\t" + sX + "\nY:\t" + sY + "\n\n\t" + sZoom + " X");
+					m_CameraText.setString("X: " + sX + "\nY: " + sY + "\n " + sZoom + " X");
 
 					m_ConsoleRender.draw(m_CameraSprite);
 					m_ConsoleRender.draw(m_CameraText);
@@ -308,10 +308,18 @@ namespace sfgmk
 					m_iEnteredCommandsIndex++;
 					m_sSeizureBuffer = m_EnteredCommands[m_EnteredCommands.size() - m_iEnteredCommandsIndex - 1];
 				}
-				else if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Down) == KEY_PRESSED && m_iEnteredCommandsIndex > 0 )
+				else if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Down) == KEY_PRESSED )
 				{
-					m_iEnteredCommandsIndex--;
-					m_sSeizureBuffer = m_EnteredCommands[m_EnteredCommands.size() - m_iEnteredCommandsIndex - 1];
+					if( m_iEnteredCommandsIndex > 0 )
+					{
+						m_iEnteredCommandsIndex--;
+						m_sSeizureBuffer = m_EnteredCommands[m_EnteredCommands.size() - m_iEnteredCommandsIndex - 1];
+					}
+					else
+					{
+						m_iEnteredCommandsIndex = -1;
+						m_sSeizureBuffer = "";
+					}
 				}
 
 				//Envoyer commande
@@ -353,13 +361,13 @@ namespace sfgmk
 			std::string sStateDisplay = std::to_string((double)(Timers.dStateDraw * 0.001f));
 			sStateDisplay = sStateDisplay.substr(0, sStateDisplay.find('.') + 3);
 
-			m_TextArray[eCONSOLE_DEV_TEXT::eState].setString("State:\tUpdate:  " + sStateUpdate + " ms\t" + "Draw:  " + sStateDisplay + " ms");
+			m_TextArray[eCONSOLE_DEV_TEXT::eState].setString("Update:  " + sStateUpdate + " ms\t" + "Draw:  " + sStateDisplay + " ms");
 
 			//Parallaxe
 			std::string sEntity("Entity: " + std::to_string(ENTITY_MANAGER->getEntityNumber()) + "  ");
 			std::string sLayer("Layer: " + std::to_string(GameParallaxe->getLayerAccount()) + "  ");
 			std::string sDraw("Draw: " + std::to_string(GameParallaxe->getDrawAccount()) + "  ");
-			m_TextArray[eCONSOLE_DEV_TEXT::eParallaxe].setString("Parallaxe:\t" + sEntity + sLayer + sDraw);
+			m_TextArray[eCONSOLE_DEV_TEXT::eParallaxe].setString("Parallaxe: " + sEntity + sLayer + sDraw);
 
 			//Entity
 			std::string sUpdate = std::to_string((double)(Timers.dEntityUpdate * 0.001f));
@@ -373,11 +381,11 @@ namespace sfgmk
 			std::string sPhysic = std::to_string((double)(Timers.dPhysic * 0.001f));
 			sPhysic = sPhysic.substr(0, sPhysic.find('.') + 3);
 
-			m_TextArray[eCONSOLE_DEV_TEXT::eEntity].setString("\tEntity system:\nUpdate: " + sUpdate + " ms"
-																				 + "\nSort: " + sSort + " ms"
-																				 + "\nParallaxe: " + sParallaxe + " ms"
-																				 + "\nPhysic: " + sPhysic + " ms"
-																				 + "\nDraw: " + sDisplay + " ms");
+			m_TextArray[eCONSOLE_DEV_TEXT::eEntity].setString("\tUpdate: " + sUpdate + " ms"
+																				 + "\n\tSort: " + sSort + " ms"
+																				 + "\n\tParallaxe: " + sParallaxe + " ms"
+																				 + "\n\tPhysic: " + sPhysic + " ms"
+																				 + "\n\tDraw: " + sDisplay + " ms");
 		}
 
 
@@ -395,7 +403,7 @@ namespace sfgmk
 			std::string sUsedRam2(std::to_string(fUsedRam2));
 			sUsedRam2 = sUsedRam2.substr(0, 3);
 
-			std::string PhysicRam("RAM:    Current: " + sUsedRam2 + " Mo / Max: " + sTotalRam2 + " Mo");
+			std::string PhysicRam("RAM:  Current: " + sUsedRam2 + " Mo / Max: " + sTotalRam2 + " Mo");
 			m_TextArray[eCONSOLE_DEV_TEXT::eRam].setString(PhysicRam);
 		}
 

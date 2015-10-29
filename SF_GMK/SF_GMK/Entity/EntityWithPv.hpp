@@ -18,11 +18,12 @@ namespace sfgmk
 	{
 		protected:
 			int m_iPv;
+			int m_iInitialPv;
 			bool m_bDieWhenPvNull;
-
+			LifeBar* m_Lifebar;
+		
 		public:
-			EntityWithPv(const bool& _DieWhenPvNull = true);
-			EntityWithPv(const int& _Id, const bool& _DieWhenPvNull = true);
+			EntityWithPv(const sf::Vector3f& _Position, const int& _InitialPv = ENTITY_DEFAULT_PV, const int& _CurrentPv = ENTITY_DEFAULT_PV, const bool& _DieWhenPvNull = true);
 			virtual ~EntityWithPv();
 
 			void update(const float& _TimeDelta);
@@ -31,8 +32,14 @@ namespace sfgmk
 			void setPv(const int& _Pv);
 			const int& removePv(const int& _PvToRemove);
 
+			const int& getInitialPv();
+			void setInitialPv(const int& _Pv);
+
 			const bool& getDieWhenPvNull();
 			void setDieWhenPvNull(const bool& _Boolean);
+
+			bool addLifeBar();
+			bool removeLifeBar();
 	};
 }
 

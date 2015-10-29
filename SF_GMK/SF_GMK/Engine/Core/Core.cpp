@@ -34,11 +34,8 @@ namespace sfgmk
 			}
 			GRAPHIC_MANAGER->set();
 
-			//Console
-			sfgmk::engine::ConsoleDev::getSingleton()->update(m_fTimeDelta);
-			
-			if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Quote) == sfgmk::engine::KeyStates::KEY_PRESSED )
-				sfgmk::engine::ConsoleDev::getSingleton()->setActive();
+			//Debug
+			DEBUG_MANAGER->update(m_fTimeDelta);
 
 			//Son
 			SOUND_MANAGER->update();

@@ -65,6 +65,7 @@ namespace sfgmk
 			void move(const sf::Vector3f& _Vector);
 
 			sf::Transformable& getVirtualTransform();
+			void setVirtualTransformWithTransform();
 
 			Collider* getCollider();
 			void addSphereCollider();

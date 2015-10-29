@@ -21,6 +21,9 @@ namespace sfgmk
 			friend class SingletonTemplate<DataManager>;
 
 			private:
+				DataManager();
+				~DataManager();
+
 				std::map<std::string, sf::Texture*> m_TextureMap;
 				sf::Texture m_TextureError;
 
@@ -81,10 +84,6 @@ namespace sfgmk
 				bool loadLevel(const std::string& _DirPath, StateLoading* _State = NULL);
 				bool unloadLevel(const std::string& _DirPath);
 				void unloadAll();
-
-			private:
-				DataManager();
-				~DataManager();
 		};
 	}
 }

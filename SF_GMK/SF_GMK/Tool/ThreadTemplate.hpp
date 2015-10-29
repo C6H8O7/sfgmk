@@ -21,7 +21,7 @@ namespace sfgmk
 			bool m_bLaunched;
 		
 		public:
-			ThreadTemplate(std::function<T(Args... _Args)> _Function, Args... _Args, bool _LaunchThreadNow = false) : m_Function(_Function), m_bLaunched(false)
+			ThreadTemplate(std::function<T(Args... _Args)> _Function, Args... _Args, bool _LaunchThreadNow = false) : m_Function(_Function), m_bLaunched(_LaunchThreadNow)
 			{
 				if( _LaunchThreadNow )
 					Launch(_Args);

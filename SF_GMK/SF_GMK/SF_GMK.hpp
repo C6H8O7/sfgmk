@@ -91,6 +91,7 @@
 
 	#include "Graphic\Animation.hpp"
 	#include "Graphic\Sprite.hpp"
+	#include "Graphic\FX\LifeBar\LifeBar.hpp"
 	#include "Entity\Entity.hpp"
 	#include "Entity\EntityWithPv.hpp"
 	#include "Entity\Transformation\EntityTransformation.hpp"
@@ -129,6 +130,7 @@
 
 	#include "Engine\Manager\EntityManager\EntityManager.hpp"
 	#include "Engine\Manager\GraphicManager\GraphicManager.hpp"
+	#include "Engine\Manager\DebugManager\DebugManager.hpp"
 	#include "Engine\Core\Core.hpp"
  
 namespace sfgmk
@@ -149,7 +151,7 @@ namespace sfgmk
 
 	//Managers
 	#define DATA_MANAGER				engine::DataManager::getSingleton()
-	//debugmanager
+	#define DEBUG_MANAGER				engine::DebugManager::getSingleton()
 	#define ENTITY_MANAGER				engine::EntityManager::getSingleton()
 	#define GRAPHIC_MANAGER				engine::GraphicManager::getSingleton()
 	#define INPUT_MANAGER				engine::InputManager::getSingleton()
@@ -160,7 +162,7 @@ namespace sfgmk
 	#define ADD_ENTITY(a)				sfgmk::engine::EntityManager::getSingleton()->addEntity(a)
 	#define FREE_ENTITY_VECTOR			sfgmk::engine::EntityManager::getSingleton()->freeEntityVector()
 	#define CAMERA						sfgmk::engine::GraphicManager::getSingleton()->getCurrentCamera()
-	#define CONSOLE						sfgmk::engine::ConsoleDev::getSingleton()
+	#define CONSOLE						DEBUG_MANAGER->getConsole()
 	#define PARALLAXE					GRAPHIC_MANAGER->getParallaxe()
 
 	//States

@@ -57,32 +57,11 @@ namespace sfgmk
 			ULONG  CurrentIdleState;
 		} PROCESSOR_POWER_INFORMATION, *PPROCESSOR_POWER_INFORMATION;
 
-		class SFGMK_API ConsoleDev : public SingletonTemplate<ConsoleDev>
+		class DebugManager;
+
+		class SFGMK_API ConsoleDev
 		{
-			friend class SingletonTemplate<ConsoleDev>;
-
-			public:
-				bool setActive(bool _Boolean);
-				bool setActive();
-				void update(float _TimeDelta);
-				void display();
-				void draw(sf::RenderTexture* _Render);
-				void setDisplayTimer(const float& _Value = 0.0f);
-
-				int updateFps(float _TimeDelta);
-				void updateFpsDraw();
-				void updateFpsCurb();
-				float updateFmodCharge();
-				void updateSeizure();
-				void updateCounters();
-
-				void memoryUsage();
-				void initCpuUsage();
-				float cpuUsage();
-
-				void command();
-				void registerCommand(const std::string& _commandName, CONSOLE_CALLBACK _commandFunction, const std::string& _CallOutput, const std::string& _RecallOutput);
-				void incrementConsoleStringsIndex();
+			friend class DebugManager;
 
 			private:
 				ConsoleDev();
@@ -125,6 +104,29 @@ namespace sfgmk
 				std::map<std::string, stCONSOLE_COMMAND> m_Commands;
 				std::vector<std::string> m_EnteredCommands;
 				int m_iEnteredCommandsIndex;
+
+			public:
+				bool setActive(bool _Boolean);
+				bool setActive();
+				void update(float _TimeDelta);
+				void display();
+				void draw(sf::RenderTexture* _Render);
+				void setDisplayTimer(const float& _Value = 0.0f);
+
+				int updateFps(float _TimeDelta);
+				void updateFpsDraw();
+				void updateFpsCurb();
+				float updateFmodCharge();
+				void updateSeizure();
+				void updateCounters();
+
+				void memoryUsage();
+				void initCpuUsage();
+				float cpuUsage();
+
+				void command();
+				void registerCommand(const std::string& _commandName, CONSOLE_CALLBACK _commandFunction, const std::string& _CallOutput, const std::string& _RecallOutput);
+				void incrementConsoleStringsIndex();
 		};
 	}
 }

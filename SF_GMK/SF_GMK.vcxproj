@@ -20,10 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SF_GMK\Engine\Core\Core.cpp" />
+    <ClCompile Include="SF_GMK\Engine\Manager\DebugManager\DebugManager.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\EntityManager\EntityManager.cpp" />
     <ClCompile Include="SF_GMK\Graphic\Animation.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\GraphicManager\GraphicManager.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\StateMachineManager\StateMachineManager.cpp" />
+    <ClCompile Include="SF_GMK\Graphic\FX\LifeBar\LifeBar.cpp" />
     <ClCompile Include="SF_GMK\Math\Curb\Bezier.cpp" />
     <ClCompile Include="SF_GMK\Graphic\FX\Grid\BlackHole.cpp" />
     <ClCompile Include="SF_GMK\Graphic\FX\Shader\Bloom.cpp" />
@@ -54,7 +56,6 @@
     <ClCompile Include="SF_GMK\Physic\SphereCollider.cpp" />
     <ClCompile Include="SF_GMK\Graphic\FX\Grid\Spring.cpp" />
     <ClCompile Include="SF_GMK\Entity\Entity.cpp" />
-    <ClCompile Include="SF_GMK\Engine\Core\GameManager.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\InputManager\InputManager.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\InputManager\Joystick.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\InputManager\Keyboard.cpp" />
@@ -79,10 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SF_GMK\Engine\Core\Core.hpp" />
+    <ClInclude Include="SF_GMK\Engine\Manager\DebugManager\DebugManager.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\EntityManager\EntityManager.hpp" />
     <ClInclude Include="SF_GMK\Graphic\Animation.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\GraphicManager\GraphicManager.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\StateMachineManager\StateMachineManager.hpp" />
+    <ClInclude Include="SF_GMK\Graphic\FX\LifeBar\LifeBar.hpp" />
     <ClInclude Include="SF_GMK\Math\Curb\Bezier.hpp" />
     <ClInclude Include="SF_GMK\Graphic\FX\Grid\BlackHole.hpp" />
     <ClInclude Include="SF_GMK\Graphic\FX\Shader\Bloom.hpp" />
@@ -115,7 +118,6 @@
     <ClInclude Include="SF_GMK\Physic\SphereCollider.hpp" />
     <ClInclude Include="SF_GMK\Graphic\FX\Grid\Spring.hpp" />
     <ClInclude Include="SF_GMK\Entity\Entity.hpp" />
-    <ClInclude Include="SF_GMK\Engine\Core\GameManager.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\InputManager\InputManager.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\InputManager\Joystick.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\InputManager\Keyboard.hpp" />

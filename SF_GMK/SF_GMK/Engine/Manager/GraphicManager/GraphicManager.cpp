@@ -4,7 +4,6 @@ namespace sfgmk
 	{
 		GraphicManager::GraphicManager() : m_RenderWindow(NULL), m_RenderTexture(NULL), m_CurrentCamera(NULL)
 		{
-
 		}
 
 		GraphicManager::~GraphicManager()
@@ -12,7 +11,10 @@ namespace sfgmk
 			SAFE_DELETE(m_RenderWindow);
 			SAFE_DELETE(m_RenderTexture);
 
-			//ClearPtrCntr(m_Cameras); // pas possib
+			//Destruction std::map caméras
+			for( auto rit(m_Cameras.rbegin()); rit != m_Cameras.rend(); ++rit )
+				delete(rit->second);
+			m_Cameras.clear();
 
 			ClearPtrCntr(m_PostShaders);
 		}
@@ -70,7 +72,7 @@ namespace sfgmk
 				PHYSIC_MANAGER->draw(m_RenderTexture);
 
 			//Rendu console
-			sfgmk::engine::ConsoleDev::getSingleton()->draw(m_RenderTexture);
+			CONSOLE.draw(m_RenderTexture);
 
 			//Rendu final
 			m_RenderTexture->display();
@@ -171,5 +173,25 @@ namespace sfgmk
 		{
 			ClearPtrCntr(m_PostShaders);
 		}
+
+
+		/*void GraphicManager::screenshot()
+		{
+			m_ScreenshotImage = m_MainRenderWindow->capture();
+
+			time_t ttSecondes = 0;
+			struct tm TimeSave;
+			FILE* fSave = NULL;
+			char cNomFichier[sizeof("%d-%d-%d_%dh%dm%ds.png")] = { '\0' };
+			std::string sFileName = SFGMK_DATA_PATH + "screenshot/";
+
+			//Recuperation date
+			time(&ttSecondes);
+			localtime_s(&TimeSave, &ttSecondes);;
+			sprintf_s(cNomFichier, "%d-%d-%d_%dh%dm%ds.png", TimeSave.tm_year + 1900, TimeSave.tm_mon + 1, TimeSave.tm_mday, TimeSave.tm_hour, TimeSave.tm_min, TimeSave.tm_sec);
+			sFileName += cNomFichier;
+
+			m_ScreenshotImage.saveToFile(sFileName);
+		}*/
 	}
 }

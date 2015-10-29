@@ -41,23 +41,34 @@ namespace sfgmk
 			//Entités
 			for( Entity*& entity : EntityVector )
 			{
-				fZ = entity->getZ();
-				fZ != PARALLAXE_BEFORE_MEDIUM_PLAN_Z && fZ != PARALLAXE_BEHIND_MEDIUM_PLAN_Z ? fCoef = fZ / PARALLAXE_RATIO : fCoef = 0.0f;
-				VirtualTransform = &entity->getVirtualTransform();
+				if( entity->getIsComputatedByParralax() )
+				{
+					VirtualTransform = &entity->getVirtualTransform();
+					fZ = entity->getZ();
+					fZ != PARALLAXE_BEFORE_MEDIUM_PLAN_Z && fZ != PARALLAXE_BEHIND_MEDIUM_PLAN_Z ? fCoef = fZ / PARALLAXE_RATIO : fCoef = 0.0f;
 
-				//Origine égale
-				VirtualTransform->setOrigin(entity->getOrigin());
+					//Origine égale
+					VirtualTransform->setOrigin(entity->getOrigin());
 
-				//Scale virtuel
-				sf::Vector2f entityScale(entity->getScale());
-				VirtualTransform->setScale(entityScale.x * (1.0f - fCoef), entityScale.y * (1.0f - fCoef));
+					//Scale virtuel
+					if( entity->getIsScaledByParralax() )
+					{
+						sf::Vector2f entityScale(entity->getScale());
+						VirtualTransform->setScale(entityScale.x * (1.0f - fCoef), entityScale.y * (1.0f - fCoef));
+					}
+					else
+						VirtualTransform->setScale(entity->getScale());
 
-				//Rotation égale
-				VirtualTransform->setRotation(entity->getRotation());
+					//Rotation égale
+					VirtualTransform->setRotation(entity->getRotation());
 
-				//Position virtuelle
-				sf::Vector2f entityPosition(entity->getPosition().x, entity->getPosition().y);
-				VirtualTransform->setPosition(entityPosition.x + fCoef * CameraOrigin.x, entityPosition.y + fCoef * CameraOrigin.y);
+					//Position virtuelle
+					sf::Vector2f entityPosition(entity->getPosition());
+					VirtualTransform->setPosition(entityPosition.x + fCoef * CameraOrigin.x, entityPosition.y + fCoef * CameraOrigin.y);
+				}
+				else
+					//Le transform de l'entité est copié dans le transform virtuel
+					entity->setVirtualTransformWithTransform();
 			}
 		}
 

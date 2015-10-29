@@ -85,9 +85,6 @@
     <ClCompile Include="SF_GMK\Engine\Core\Core.cpp">
       <Filter>sfgmk</Filter>
     </ClCompile>
-    <ClCompile Include="SF_GMK\Engine\Core\GameManager.cpp">
-      <Filter>sfgmk\GameManager</Filter>
-    </ClCompile>
     <ClCompile Include="SF_GMK\Engine\Manager\DataManager\DataManager.cpp">
       <Filter>sfgmk\DataManager</Filter>
     </ClCompile>
@@ -235,15 +232,18 @@
     <ClCompile Include="SF_GMK\Physic\SphereCollider.cpp">
       <Filter>sfgmk\Physic</Filter>
     </ClCompile>
+    <ClCompile Include="SF_GMK\Engine\Manager\DebugManager\DebugManager.cpp">
+      <Filter>sfgmk</Filter>
+    </ClCompile>
+    <ClCompile Include="SF_GMK\Graphic\FX\LifeBar\LifeBar.cpp">
+      <Filter>sfgmk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>sfgmk</Filter>
     </ClInclude>
     <ClInclude Include="SF_GMK\Engine\Core\Core.hpp" />
-    <ClInclude Include="SF_GMK\Engine\Core\GameManager.hpp">
-      <Filter>sfgmk\GameManager</Filter>
-    </ClInclude>
     <ClInclude Include="SF_GMK\Engine\Manager\DataManager\DataManager.hpp">
       <Filter>sfgmk\DataManager</Filter>
     </ClInclude>
@@ -396,5 +396,7 @@
       <Filter>sfgmk\Physic</Filter>
     </ClInclude>
     <ClInclude Include="SF_GMK\Tool\FoncterTemplate.hpp" />
+    <ClInclude Include="SF_GMK\Engine\Manager\DebugManager\DebugManager.hpp" />
+    <ClInclude Include="SF_GMK\Graphic\FX\LifeBar\LifeBar.hpp" />
   </ItemGroup>
 </Project>

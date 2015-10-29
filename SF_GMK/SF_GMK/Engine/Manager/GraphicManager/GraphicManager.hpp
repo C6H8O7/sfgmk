@@ -57,6 +57,8 @@ namespace sfgmk
 				void addPostShader(PostShader* _PostShader);
 				void applyPostShaders();
 				void freePostShaderVector();
+
+				void screenshot();
 		};
 	}
 }
