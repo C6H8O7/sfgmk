@@ -1,5 +1,7 @@
 namespace sfgmk
 {
+	bool EntityWithPv::bEntityWithPvLifeBarDraw = false;
+
 	EntityWithPv::EntityWithPv(const sf::Vector3f& _Position, const int& _InitialPv, const int& _CurrentPv, const bool& _DieWhenPvNull)
 		: Entity(_Position), m_iPv(_CurrentPv), m_iInitialPv(_InitialPv), m_bDieWhenPvNull(_DieWhenPvNull), m_Lifebar(NULL)
 	{
@@ -16,10 +18,18 @@ namespace sfgmk
 		Entity::update(_TimeDelta);
 
 		if( m_Lifebar )
-			m_Lifebar->update(m_iPv);
-
+			m_Lifebar->update(m_iPv, m_iInitialPv, m_VirtualTransform.getOrigin(), m_VirtualTransform.getScale(), m_VirtualTransform.getRotation(), m_VirtualTransform.getPosition());
+	
 		if( m_iPv <= 0 && m_bDieWhenPvNull )
 			m_bIsAlive = false;
+	}
+
+	void EntityWithPv::draw(sf::RenderTexture* _Render)
+	{
+		if( bEntityWithPvLifeBarDraw && m_Lifebar )
+			m_Lifebar->draw();
+
+		_Render->draw(*m_Sprite);
 	}
 
 
@@ -62,11 +72,11 @@ namespace sfgmk
 	}
 
 
-	bool EntityWithPv::addLifeBar()
+	bool EntityWithPv::addLifeBar(const bool& _DrawText)
 	{
 		if( !m_Lifebar )
 		{
-			m_Lifebar = new LifeBar(m_iInitialPv, m_iPv);
+			m_Lifebar = new LifeBar(m_Sprite->getTextureRect(), _DrawText);
 			return true;
 		}
 		else
@@ -82,5 +92,10 @@ namespace sfgmk
 		}
 		else
 			return false;
+	}
+
+	LifeBar* EntityWithPv::getLifeBar()
+	{
+		return m_Lifebar;
 	}
 }

@@ -62,6 +62,7 @@ namespace sfgmk
 			//Commandes
 			//registerCommand("/freecam", TODO GRAPHIC_MANAGER->getCurrentCamera()->setFreeMove(), "Camera libre activee\n", "Camera libre desactivee\n");
 			//registerCommand("/physic", TODO PHYSIC_MANAGER->setDraw(), "Affichage physique active\n", "Affichage physique desactive\n");
+			// /life
 		}
 
 		ConsoleDev::~ConsoleDev()
@@ -498,6 +499,14 @@ namespace sfgmk
 				bool bIsPhysicDraw = PHYSIC_MANAGER->getDraw();
 				PHYSIC_MANAGER->setDraw(!bIsPhysicDraw);
 				bIsPhysicDraw ? m_sConsoleStrings[m_iConsoleStringsIndex] = "Affichage physique desactivee" : m_sConsoleStrings[m_iConsoleStringsIndex] = "Affichage physique activee";
+				incrementConsoleStringsIndex();
+			}
+			//Draw lifebars
+			else if( m_sSeizureBuffer == "/life" )
+			{
+				bool bIsLifeBarDraw = EntityWithPv::getLifeBarDraw();
+				EntityWithPv::setLifeBarDraw(!bIsLifeBarDraw);
+				bIsLifeBarDraw ? m_sConsoleStrings[m_iConsoleStringsIndex] = "Affichage vie desactivee" : m_sConsoleStrings[m_iConsoleStringsIndex] = "Affichage vie activee";
 				incrementConsoleStringsIndex();
 			}
 		}

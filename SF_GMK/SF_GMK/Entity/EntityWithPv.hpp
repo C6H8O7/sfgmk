@@ -16,6 +16,9 @@ namespace sfgmk
 
 	class SFGMK_API EntityWithPv : public Entity
 	{
+		public:
+			static bool bEntityWithPvLifeBarDraw;
+
 		protected:
 			int m_iPv;
 			int m_iInitialPv;
@@ -27,6 +30,7 @@ namespace sfgmk
 			virtual ~EntityWithPv();
 
 			void update(const float& _TimeDelta);
+			void draw(sf::RenderTexture* _Render);
 
 			const int& getPv();
 			void setPv(const int& _Pv);
@@ -38,8 +42,23 @@ namespace sfgmk
 			const bool& getDieWhenPvNull();
 			void setDieWhenPvNull(const bool& _Boolean);
 
-			bool addLifeBar();
+			bool addLifeBar(const bool& _DrawText);
 			bool removeLifeBar();
+			LifeBar* getLifeBar();
+
+			static bool getLifeBarDraw()
+			{
+				return bEntityWithPvLifeBarDraw;
+			}
+			static void setLifeBarDraw(const bool& _Boolean)
+			{ 
+				bEntityWithPvLifeBarDraw = _Boolean; 
+			}
+			static bool setLifeBarDraw() 
+			{
+				bEntityWithPvLifeBarDraw = !bEntityWithPvLifeBarDraw; 
+				return bEntityWithPvLifeBarDraw; 
+			}
 	};
 }
 

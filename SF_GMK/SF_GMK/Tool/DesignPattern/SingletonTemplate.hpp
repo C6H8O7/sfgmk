@@ -39,7 +39,7 @@ namespace sfgmk
 			{
 				SAFE_DELETE(m_Instance);
 			}
-		};
+	};
 
 	template <typename T>
 	T *SingletonTemplate<T>::m_Instance = NULL;

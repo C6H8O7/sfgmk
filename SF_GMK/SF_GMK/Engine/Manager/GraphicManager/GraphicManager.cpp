@@ -19,6 +19,7 @@ namespace sfgmk
 			ClearPtrCntr(m_PostShaders);
 		}
 
+
 		void GraphicManager::init(sf::VideoMode& _Mode, const std::string& _WindowName, int _Style)
 		{
 			//Destruction précédent rendu si existant
@@ -42,6 +43,7 @@ namespace sfgmk
 			registerCamera(DEFAULT_CAMERA_NAME, MyCamera);
 			setCurrentCamera(DEFAULT_CAMERA_NAME);
 		}
+
 
 		void GraphicManager::set()
 		{
@@ -83,6 +85,7 @@ namespace sfgmk
 			m_RenderWindow->display();
 		}
 
+
 		sf::RenderWindow* GraphicManager::getRenderWindow()
 		{
 			return m_RenderWindow;
@@ -97,6 +100,7 @@ namespace sfgmk
 		{
 			return m_Parallaxe;
 		}
+
 
 		void GraphicManager::registerCamera(std::string _CameraName, Camera* _Camera)
 		{
@@ -146,6 +150,7 @@ namespace sfgmk
 
 			return false;
 		}
+
 
 		void GraphicManager::addPostShader(PostShader* _PostShader)
 		{
