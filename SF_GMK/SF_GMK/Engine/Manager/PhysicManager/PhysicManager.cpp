@@ -52,12 +52,10 @@ namespace sfgmk
 							}
 						}
 					}
+
+					i_entity->onPhysicExit();
 				}
 			}
-
-			for (unsigned int i(0U); i < m_PhysicObjects.getElementNumber(); i++)
-				if (m_PhysicObjects[i]->isActive())
-					m_PhysicObjects[i]->getEntity()->onPhysicExit();
 		}
 
 		void PhysicManager::draw(sf::RenderTexture* _RenderTexture)
