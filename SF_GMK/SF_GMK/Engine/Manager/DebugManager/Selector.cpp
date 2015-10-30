@@ -5,12 +5,12 @@ namespace sfgmk
 		Selector::Selector()
 		{
 			getSprite()->setTexture(DATA_MANAGER->getTexture("sfgmk_pix"));
-			getSprite()->setColor(sf::Color(255, 0, 0, 128));
+			getSprite()->setColor(sf::Color(0, 255, 255, 64));
 			setRelativOrigin(0.5f, 0.5f);
 
-			m_State = SELECTOR_STATE::STANDBY;
+			m_fPositionZ = -1;
 
-			ADD_ENTITY(this);
+			m_State = SELECTOR_STATE::STANDBY;
 		}
 
 		Selector::~Selector()
@@ -64,7 +64,10 @@ namespace sfgmk
 			setPosition(pos);
 			setScale(scale);
 
-			addObbCollider();
+			if (m_Start != m_End)
+				addObbCollider();
+			else
+				SAFE_DELETE(m_Collider);
 
 			// Basic Entity::update ==============
 

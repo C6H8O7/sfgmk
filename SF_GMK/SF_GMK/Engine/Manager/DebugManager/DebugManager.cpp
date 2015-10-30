@@ -4,13 +4,13 @@ namespace sfgmk
 	{
 		DebugManager::DebugManager()
 		{
-			Selector *selector = new Selector();
+			ADD_ENTITY(&m_Selector);
 		}
 
 		DebugManager::~DebugManager()
 		{
+			
 		}
-
 
 		void DebugManager::update(const float& _TimeDelta)
 		{

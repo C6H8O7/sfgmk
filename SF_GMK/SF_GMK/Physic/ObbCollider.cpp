@@ -9,8 +9,8 @@ namespace sfgmk
 
 		ObbCollider::~ObbCollider()
 		{
-		}
 
+		}
 
 		void ObbCollider::computeRect()
 		{
@@ -19,7 +19,6 @@ namespace sfgmk
 			m_Min = sf::Vector2f(0.0f, 0.0f);
 			m_Max = sf::Vector2f(Rect.width, Rect.height);
 		}
-
 
 		const sf::Vector2f& ObbCollider::getSize()
 		{
@@ -42,7 +41,6 @@ namespace sfgmk
 			return m_Max;
 		}
 
-
 		sf::Vector2f ObbCollider::getRight()
 		{
 			float fAngle = DEG_TO_RAD(m_Entity->getRotation());
@@ -53,5 +51,11 @@ namespace sfgmk
 		{
 			float fAngle = DEG_TO_RAD(m_Entity->getRotation());
 			return math::MatrixRotation22(fAngle) * Y_UNIT_VECTOR_2D;
+		}
+
+		float ObbCollider::getSquaredWorldRadius()
+		{
+			sf::Vector2f dim = getWorldSize();
+			return (dim.x * dim.x + dim.y * dim.y);
 		}
 }

@@ -34,6 +34,8 @@ namespace sfgmk
 
 			sf::Vector2f getRight();
 			sf::Vector2f getUp();
+
+			float getSquaredWorldRadius();
 	};
 }
 

@@ -22,7 +22,10 @@ namespace sfgmk
 			~SphereCollider();
 
 			const float& getRadius();
+
 			float getWorldRadius();
+			float getSquaredWorldRadius();
+
 			void setRadius(const float& _Radius);
 	};
 }

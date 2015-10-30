@@ -4,6 +4,7 @@ namespace sfgmk
 	{
 		PhysicManager::PhysicManager() : m_bDrawCollider(false)
 		{
+
 		}
 
 		PhysicManager::~PhysicManager()
@@ -21,7 +22,6 @@ namespace sfgmk
 		{
 			m_bDrawCollider = _Boolean;
 		}
-
 
 		void PhysicManager::update()
 		{
@@ -100,7 +100,7 @@ namespace sfgmk
 
 					case eCOLLIDER_TYPE::eOBB:
 						RectShape.setSize(((ObbCollider*)_Collider)->getSize());
-						RectShape.setOutlineThickness(1 / Entity->getScale().x);
+						RectShape.setOutlineThickness(1.0f / Entity->getScale().x);
 
 						if( bIsColliding )
 						{
@@ -122,7 +122,6 @@ namespace sfgmk
 			}
 		}
 
-
 		void PhysicManager::addCollider(Collider* _NewCollider)
 		{
 			m_PhysicObjects.pushBack(_NewCollider);
@@ -132,7 +131,6 @@ namespace sfgmk
 		{
 			m_PhysicObjects.removeElement(_ColliderToRemove);
 		}
-
 
 		bool PhysicManager::testCollision(Collider* _Collider1, Collider* _Collider2)
 		{
@@ -166,12 +164,11 @@ namespace sfgmk
 
 				if( (Type1 + Type2) == eSphere + eOBB )
 					bInverse ? bCollision = collisionSphereObb((SphereCollider*)_Collider2, (ObbCollider*)_Collider1, Entity1, Entity2)
-					: bCollision = collisionSphereObb((SphereCollider*)_Collider1, (ObbCollider*)_Collider2, Entity1, Entity2);
+							 : bCollision = collisionSphereObb((SphereCollider*)_Collider1, (ObbCollider*)_Collider2, Entity1, Entity2);
 			}
 
 			return bCollision;
 		}
-
 
 		bool PhysicManager::OverlapBoxes(sf::Vector2f _Box1Center, sf::Vector2f _Box1HalfSize, sf::Vector2f _Box1Ortho[3], sf::Vector2f _Box2Center, sf::Vector2f _Box2HalfSize, sf::Vector2f _Box2Ortho[3])
 		{
@@ -233,7 +230,6 @@ namespace sfgmk
 			return true;
 		}
 
-
 		bool PhysicManager::collisionSphereSphere(SphereCollider* _Collider1, SphereCollider* _Collider2, sfgmk::Entity* _Entity1, sfgmk::Entity* _Entity2)
 		{
 			float fDistanceSquared = math::Calc_DistanceSquared(_Collider1->getWorldCenter(), _Collider2->getWorldCenter());
@@ -245,6 +241,9 @@ namespace sfgmk
 
 		bool PhysicManager::collisionObbObb(ObbCollider* _Collider1, ObbCollider* _Collider2, sfgmk::Entity* _Entity1, sfgmk::Entity* _Entity2)
 		{
+			if (math::Calc_DistanceSquared(_Collider1->getWorldCenter(), _Collider2->getWorldCenter()) > (_Collider1->getSquaredWorldRadius() + _Collider2->getSquaredWorldRadius()))
+				return false;
+
 			//Données boite 1
 			sf::Vector2f Box1Center = _Collider1->getWorldCenter();
 			sf::Vector2f Box1HalfSize = _Collider1->getWorldSize() * 0.5f;
@@ -265,9 +264,11 @@ namespace sfgmk
 			return OverlapBoxes(Box1Center, Box1HalfSize, Box1Ortho, Box2Center, Box2HalfSize, Box2Ortho);
 		}
 
-
 		bool PhysicManager::collisionSphereObb(SphereCollider* _SphereCollider, ObbCollider* _BoxCollider, sfgmk::Entity* _Entity1, sfgmk::Entity* _Entity2)
 		{
+			if (math::Calc_DistanceSquared(_SphereCollider->getWorldCenter(), _BoxCollider->getWorldCenter()) > (_SphereCollider->getSquaredWorldRadius() + _BoxCollider->getSquaredWorldRadius()))
+				return false;
+
 			float fSphereRadius(_SphereCollider->getWorldRadius()), fDifference(0.0f), fDistance(0.0);
 			sf::Vector2f Scale = _BoxCollider->getEntity()->getScale();
 			sf::Vector2f MinVector(_BoxCollider->getMin()), MaxVector(_BoxCollider->getMax());

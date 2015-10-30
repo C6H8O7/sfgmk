@@ -21,6 +21,12 @@ namespace sfgmk
 			return m_fRadius * MAX(Scale.x, Scale.y);
 		}
 
+		float SphereCollider::getSquaredWorldRadius()
+		{
+			float r = getWorldRadius();
+			return r * r;
+		}
+
 		void SphereCollider::setRadius(const float& _Radius)
 		{
 			m_fRadius = _Radius;
