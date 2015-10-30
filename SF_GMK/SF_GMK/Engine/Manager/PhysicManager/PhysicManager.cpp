@@ -25,27 +25,39 @@ namespace sfgmk
 
 		void PhysicManager::update()
 		{
+			for (unsigned int i(0U); i < m_PhysicObjects.getElementNumber(); i++)
+				if (m_PhysicObjects[i]->isActive())
+					m_PhysicObjects[i]->getEntity()->onPhysicEnter();
+
 			for( unsigned int i(0U); i < m_PhysicObjects.getElementNumber(); i++ )
 			{
 				if( m_PhysicObjects[i]->isActive() )
 				{
+					Entity *i_entity = m_PhysicObjects[i]->getEntity();
+
 					for( unsigned int j(i + 1U); j < m_PhysicObjects.getElementNumber(); j++ )
 					{
 						if( m_PhysicObjects[j]->isActive() )
 						{
+							Entity *j_entity = m_PhysicObjects[j]->getEntity();
+
 							if( testCollision(m_PhysicObjects[i], m_PhysicObjects[j]) )
 							{
 								m_PhysicObjects[i]->setCollide(true);
 								m_PhysicObjects[j]->setCollide(true);
 
 								//Callbacks
-								m_PhysicObjects[i]->getEntity()->physicCallBack(m_PhysicObjects[j]->getType());
-								m_PhysicObjects[j]->getEntity()->physicCallBack(m_PhysicObjects[i]->getType());
+								i_entity->onPhysicCollision(j_entity);
+								j_entity->onPhysicCollision(i_entity);
 							}
 						}
 					}
 				}
 			}
+
+			for (unsigned int i(0U); i < m_PhysicObjects.getElementNumber(); i++)
+				if (m_PhysicObjects[i]->isActive())
+					m_PhysicObjects[i]->getEntity()->onPhysicExit();
 		}
 
 		void PhysicManager::draw(sf::RenderTexture* _RenderTexture)
@@ -60,10 +72,8 @@ namespace sfgmk
 			bool bIsColliding = _Collider->Collide();
 			sf::CircleShape CircleShape;
 			sf::RectangleShape RectShape;
-			const sf::Transform* Transform = NULL;
-			sf::Vector2f ShapeOrigin(sf::Vector2f(0.0f, 0.0));
+			const sf::Transform* Transform = &Entity->getVirtualTransform().getTransform();
 			float fSphereRadius;
-			Entity->getIsComputatedByParralax() ? Transform = &Entity->getVirtualTransform().getTransform() : Transform = &Entity->getTransform();
 
 			if( _Collider->isActive() )
 			{
@@ -73,9 +83,6 @@ namespace sfgmk
 						fSphereRadius = ((SphereCollider*)_Collider)->getRadius();
 						CircleShape.setRadius(fSphereRadius);
 						CircleShape.setOutlineThickness(1);
-
-						ShapeOrigin = sf::Vector2f(fSphereRadius * Entity->getOrigin().x * 2.0f, fSphereRadius * Entity->getOrigin().y * 2.0f);
-						CircleShape.setOrigin(ShapeOrigin.x, ShapeOrigin.y);
 
 						if( bIsColliding )
 						{
@@ -93,10 +100,7 @@ namespace sfgmk
 
 					case eCOLLIDER_TYPE::eOBB:
 						RectShape.setSize(((ObbCollider*)_Collider)->getSize());
-						RectShape.setOutlineThickness(1);
-
-						ShapeOrigin = sf::Vector2f(RectShape.getSize().x * Entity->getOrigin().x, RectShape.getSize().y * Entity->getOrigin().y);
-						RectShape.setOrigin(ShapeOrigin.x, ShapeOrigin.y);
+						RectShape.setOutlineThickness(1 / Entity->getScale().x);
 
 						if( bIsColliding )
 						{

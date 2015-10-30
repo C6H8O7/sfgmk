@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="SF_GMK\Engine\Core\Core.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\DebugManager\DebugManager.cpp" />
+    <ClCompile Include="SF_GMK\Engine\Manager\DebugManager\Selector.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\EntityManager\EntityManager.cpp" />
     <ClCompile Include="SF_GMK\Graphic\Animation.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\GraphicManager\GraphicManager.cpp" />
@@ -81,6 +82,7 @@
   <ItemGroup>
     <ClInclude Include="SF_GMK\Engine\Core\Core.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\DebugManager\DebugManager.hpp" />
+    <ClInclude Include="SF_GMK\Engine\Manager\DebugManager\Selector.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\EntityManager\EntityManager.hpp" />
     <ClInclude Include="SF_GMK\Graphic\Animation.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\GraphicManager\GraphicManager.hpp" />

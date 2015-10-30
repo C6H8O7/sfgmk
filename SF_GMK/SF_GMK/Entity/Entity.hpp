@@ -73,7 +73,9 @@ namespace sfgmk
 			void addObbCollider();
 			void addObbCollider(const sf::Vector2f& _Size);
 
-			virtual void physicCallBack(const int& _ColliderId);
+			virtual void onPhysicEnter();
+			virtual void onPhysicCollision(Entity* _entity);
+			virtual void onPhysicExit();
 	};
 }
 

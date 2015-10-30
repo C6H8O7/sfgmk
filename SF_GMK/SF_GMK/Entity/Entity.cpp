@@ -240,7 +240,17 @@ namespace sfgmk
 		m_Collider = new ObbCollider(this, _Size);
 	}
 
-	void Entity::physicCallBack(const int& _ColliderId)
+	void Entity::onPhysicEnter()
+	{
+
+	}
+
+	void Entity::onPhysicCollision(Entity* _entity)
+	{
+
+	}
+
+	void Entity::onPhysicExit()
 	{
 
 	}

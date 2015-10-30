@@ -120,6 +120,7 @@
 	#include "Engine\Manager\PhysicManager\PhysicManager.hpp"
 	#include "Engine\Manager\SoundManager\SoundManager.hpp"
 	#include "Engine\Manager\DebugManager\Console.hpp"
+	#include "Engine\Manager\DebugManager\Selector.hpp"
 
 	#include "Engine\Manager\StateMachineManager\State.hpp"
 	#include "Engine\Manager\StateMachineManager\LoadingState\StateLoading.hpp"

@@ -64,7 +64,7 @@ namespace sfgmk
 			sf::Vector2f ViewPosition(CurrentCamera->getCenter());
 			sf::Vector2f ViewSize(CurrentCamera->getSize());
 
-			return sf::Vector2f(getWindowPosition()) * CurrentCamera->getZoomFactor() + ViewPosition - (ViewSize * 0.5f);
+			return sf::Vector2f(getWindowPosition()) / CurrentCamera->getZoomFactor() + ViewPosition - (ViewSize * 0.5f);
 		}
 
 

@@ -4,6 +4,7 @@ namespace sfgmk
 	{
 		DebugManager::DebugManager()
 		{
+			Selector *selector = new Selector();
 		}
 
 		DebugManager::~DebugManager()
