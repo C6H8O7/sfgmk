@@ -47,6 +47,7 @@
 	#include <vector>
 	#include <random>
 
+	//Monitoring
 	#pragma comment(lib, "Powrprof.lib")
 	#include <Powrprof.h>
 
@@ -54,7 +55,7 @@
 	#include <XInput.h>
 	#pragma comment(lib, "XInput9_1_0.lib")
 
-	// Compression
+	//Compression
 	#include <zlib-1.2.3-lib\include\zlib.h>
 
 	//Fmod
@@ -68,7 +69,8 @@
 	#include "Tool\GenericList.hpp"
 	#include "Tool\DynamicArray.hpp"
 	#include "Tool\ThreadTemplate.hpp"
-	#include "SF_GMK.hpp"
+	#include "Tool\Parser\Parser.hpp"
+	#include "Tool\DesignPattern\SingletonTemplate.hpp"
 
 	#include "Math\Math.hpp"
 	#include "Math\Curb\Curb.hpp"
@@ -79,12 +81,6 @@
 	#include "Math\Curb\CoordinateSystem\GraphCurb.hpp"
 	#include "Math\Curb\CoordinateSystem\Graph.hpp"
 
-	#include "Engine\Manager\InputManager\Joystick.hpp"
-	#include "Engine\Manager\InputManager\Keyboard.hpp"
-	#include "Engine\Manager\InputManager\Mouse.hpp"
-
-	#include "Tool\Parser\Parser.hpp"
-
 	#include "Physic\Collider.hpp"
 	#include "Physic\SphereCollider.hpp"
 	#include "Physic\ObbCollider.hpp"
@@ -92,8 +88,10 @@
 	#include "Graphic\Animation.hpp"
 	#include "Graphic\Sprite.hpp"
 	#include "Graphic\FX\LifeBar\LifeBar.hpp"
+
 	#include "Entity\Entity.hpp"
 	#include "Entity\EntityWithPv.hpp"
+
 	#include "Entity\Transformation\EntityTransformation.hpp"
 	#include "Entity\Transformation\TransformationTranslation.hpp"
 	#include "Entity\Transformation\TransformationRotation.hpp"
@@ -115,23 +113,26 @@
 	#include "Engine\Manager\GraphicManager\Camera.hpp"
 	#include "Engine\Manager\GraphicManager\Parallaxe.hpp"
 
-	#include "Tool\DesignPattern\SingletonTemplate.hpp"
-	#include "Engine\Manager\DataManager\DataManager.hpp"
-	#include "Engine\Manager\PhysicManager\PhysicManager.hpp"
-	#include "Engine\Manager\SoundManager\SoundManager.hpp"
+	#include "Engine\Manager\InputManager\Joystick.hpp"
+	#include "Engine\Manager\InputManager\Keyboard.hpp"
+	#include "Engine\Manager\InputManager\Mouse.hpp"
+
 	#include "Engine\Manager\DebugManager\Console.hpp"
 	#include "Engine\Manager\DebugManager\Selector.hpp"
 
 	#include "Engine\Manager\StateMachineManager\State.hpp"
 	#include "Engine\Manager\StateMachineManager\LoadingState\StateLoading.hpp"
 	#include "Engine\Manager\StateMachineManager\StateMachine.hpp"
+
+	#include "Engine\Manager\DataManager\DataManager.hpp"
+	#include "Engine\Manager\PhysicManager\PhysicManager.hpp"
+	#include "Engine\Manager\SoundManager\SoundManager.hpp"
 	#include "Engine\Manager\StateMachineManager\StateMachineManager.hpp"
-
 	#include "Engine\Manager\InputManager\InputManager.hpp"
-
 	#include "Engine\Manager\EntityManager\EntityManager.hpp"
 	#include "Engine\Manager\GraphicManager\GraphicManager.hpp"
 	#include "Engine\Manager\DebugManager\DebugManager.hpp"
+
 	#include "Engine\Core\Core.hpp"
  
 namespace sfgmk
@@ -208,6 +209,5 @@ namespace sfgmk
 	#define DIRECTIONAL_CROSS_VERTICAL sf::Joystick::PovX //100 en haut, -100 en bas
 	#define DIRECTIONAL_CROSS_HORIZONTAL sf::Joystick::PovY //-100 à gauche, 100 à droite
 }
-
 
 #endif
