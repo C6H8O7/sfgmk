@@ -13,11 +13,9 @@ namespace sfgmk
 	{
 		ClearPtrCntr(m_Transformation);
 
-		if( m_Sprite )
-			delete m_Sprite;
+		SAFE_DELETE(m_Sprite);
 
-		if( m_Collider )
-			delete m_Collider;
+		SAFE_DELETE(m_Collider);
 	}
 
 

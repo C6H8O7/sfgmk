@@ -4,11 +4,28 @@ namespace sfgmk
 	{
 		Core::Core()
 		{
+			sfgmk::FoncterMethodTemplate<StateMachineManager, void>* Ptr1 = new sfgmk::FoncterMethodTemplate<StateMachineManager, void>(STATE_MACHINE_MANAGER, &StateMachineManager::update);
+			m_MainFunctions.m_FunctionsArray.pushBack(Ptr1);
+			sfgmk::FoncterMethodTemplate<EntityManager, void>* Ptr2 = new sfgmk::FoncterMethodTemplate<EntityManager, void>(ENTITY_MANAGER, &EntityManager::update);
+			m_MainFunctions.m_FunctionsArray.pushBack(Ptr2);
+			sfgmk::FoncterMethodTemplate<PhysicManager, void>* Ptr3 = new sfgmk::FoncterMethodTemplate<PhysicManager, void>(PHYSIC_MANAGER, &PhysicManager::update);
+			m_MainFunctions.m_FunctionsArray.pushBack(Ptr3);
+			sfgmk::FoncterMethodTemplate<EntityManager, void>* Ptr4 = new sfgmk::FoncterMethodTemplate<EntityManager, void>(ENTITY_MANAGER, &EntityManager::sortEntityVector);
+			m_MainFunctions.m_FunctionsArray.pushBack(Ptr4);
+			sfgmk::FoncterMethodTemplate<GraphicManager, void>* Ptr5 = new sfgmk::FoncterMethodTemplate<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::compute);
+			m_MainFunctions.m_FunctionsArray.pushBack(Ptr5);
+			sfgmk::FoncterMethodTemplate<GraphicManager, void>* Ptr6 = new sfgmk::FoncterMethodTemplate<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::draw);
+			m_MainFunctions.m_FunctionsArray.pushBack(Ptr6);
+			sfgmk::FoncterMethodTemplate<StateMachineManager, void>* Ptr7 = new sfgmk::FoncterMethodTemplate<StateMachineManager, void>(STATE_MACHINE_MANAGER, &StateMachineManager::draw);
+			m_MainFunctions.m_FunctionsArray.pushBack(Ptr7);
+			sfgmk::FoncterMethodTemplate<GraphicManager, void>* Ptr8 = new 	sfgmk::FoncterMethodTemplate<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::display);
+			m_MainFunctions.m_FunctionsArray.pushBack(Ptr8);
 		}
 
 		Core::~Core()
 		{
 		}
+
 
 		void Core::update()
 		{
@@ -24,13 +41,12 @@ namespace sfgmk
 			INPUT_MANAGER->update();
 
 			//Boucle events
-			sf::Event event;
-			while( GRAPHIC_MANAGER->getRenderWindow()->pollEvent(event) )
+			while( GRAPHIC_MANAGER->getRenderWindow()->pollEvent(m_Event) )
 			{
-				if( event.type == sf::Event::Closed )
+				if( m_Event.type == sf::Event::Closed )
 					GRAPHIC_MANAGER->getRenderWindow()->close();
 
-				INPUT_MANAGER->handleEvent(event);
+				INPUT_MANAGER->handleEvent(m_Event);
 			}
 			GRAPHIC_MANAGER->set();
 
@@ -44,38 +60,31 @@ namespace sfgmk
 		void Core::loop()
 		{
 			//Update état(s) courant(s)
-			void(StateMachineManager::*ptr6)(void) = &StateMachineManager::update;
-			m_ExecutionTimes.dStateUpdate = measureFunctionExecutionTime(ptr6, STATE_MACHINE_MANAGER);
+			measureFoncterExecutionTime(m_ExecutionTimes.dStateUpdate, m_MainFunctions.m_FunctionsArray[eStateMachineUpdate]);
 
 			//Update des entités
-			void(EntityManager::*ptr4)(void) = &EntityManager::update;
-			m_ExecutionTimes.dEntityUpdate = measureFunctionExecutionTime(ptr4, ENTITY_MANAGER);
+			measureFoncterExecutionTime(m_ExecutionTimes.dEntityUpdate, m_MainFunctions.m_FunctionsArray[eEntityManagerUpdate]);
 
 			//Physique
-			void(PhysicManager::*ptr5)(void) = &PhysicManager::update;
-			m_ExecutionTimes.dPhysic = measureFunctionExecutionTime(ptr5, PHYSIC_MANAGER);
+			measureFoncterExecutionTime(m_ExecutionTimes.dPhysic, m_MainFunctions.m_FunctionsArray[ePhysicManagerUpdate]);
 
 			//Trie les entités du vector en fonction de leur Z
-			void(EntityManager::*ptr)(void) = &EntityManager::sortEntityVector;
-			m_ExecutionTimes.dEntitySort = measureFunctionExecutionTime(ptr, ENTITY_MANAGER);
+			measureFoncterExecutionTime(m_ExecutionTimes.dEntitySort, m_MainFunctions.m_FunctionsArray[eEntityManagerSort]);
 
 			//Parallaxe
-			void(GraphicManager::*ptr2)(void) = &GraphicManager::compute;
-			m_ExecutionTimes.dParallaxeComputation = measureFunctionExecutionTime(ptr2, GRAPHIC_MANAGER);
+			measureFoncterExecutionTime(m_ExecutionTimes.dParallaxeComputation, m_MainFunctions.m_FunctionsArray[eGraphicManagerCompute]);
 
 			//Draw parallaxe
-			void(GraphicManager::*ptr3)(void) = &GraphicManager::draw;
-			m_ExecutionTimes.dParallaxeDisplay = measureFunctionExecutionTime(ptr3, GRAPHIC_MANAGER);
+			measureFoncterExecutionTime(m_ExecutionTimes.dParallaxeDisplay, m_MainFunctions.m_FunctionsArray[eGraphicManagerDraw]);
 
 			//Draw état(s) courant(s)
-			void(StateMachineManager::*ptr7)(void) = &StateMachineManager::draw;
-			m_ExecutionTimes.dStateDraw = measureFunctionExecutionTime(ptr7, STATE_MACHINE_MANAGER);
+			measureFoncterExecutionTime(m_ExecutionTimes.dStateDraw, m_MainFunctions.m_FunctionsArray[eStateMachineDraw]);
 		}
 
 		void Core::postLoop()
 		{
-			void(GraphicManager::*ptr)(void) = &GraphicManager::display;
-			m_ExecutionTimes.dParallaxeDisplay += measureFunctionExecutionTime(ptr, GRAPHIC_MANAGER);
+			//Finalisation affichage
+			m_MainFunctions[eGraphicManagerDisplay];
 		}
 	}
 }

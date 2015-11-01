@@ -35,6 +35,21 @@ namespace sfgmk
 
 				sf::Clock m_ClockTimeDelta;
 				float m_fTimeDelta;
+				sf::Event m_Event;
+
+				FoncterTemplateArray m_MainFunctions;
+				enum eMAIN_FUNCTIONS
+				{
+					eStateMachineUpdate = 0,
+					eEntityManagerUpdate,
+					ePhysicManagerUpdate,
+					eEntityManagerSort,
+					eGraphicManagerCompute,
+					eGraphicManagerDraw,
+					eStateMachineDraw,
+					eGraphicManagerDisplay,
+					eMAIN_FUNCTIONS_NUMBER
+				};
 
 				sSfgmkExecutionTimes m_ExecutionTimes;
 				

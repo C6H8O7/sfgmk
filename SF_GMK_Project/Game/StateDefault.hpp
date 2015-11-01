@@ -1,10 +1,9 @@
 #ifndef STATE_DEFAULT_HPP
 #define STATE_DEFAULT_HPP
 
+
 class StateDefault : public sfgmk::engine::State
 {
-	private:
-
 	public:
 		StateDefault();
 		~StateDefault();
@@ -15,5 +14,6 @@ class StateDefault : public sfgmk::engine::State
 
 		void draw();
 };
+
 
 #endif

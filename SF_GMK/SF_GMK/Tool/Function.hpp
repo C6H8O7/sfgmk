@@ -67,23 +67,33 @@ namespace sfgmk
 
 	//Execute une fonction, et renvoie la durée d'exécution de celle-ci
 	template<typename T, typename... Args>
-	signed long long measureFunctionExecutionTime(std::function<T(Args... _Args)>& _Function, Args... _Args)
+	signed long long measureFunctionExecutionTime(signed long long& _Out, std::function<T(Args... _Args)>& _Function, Args... _Args)
 	{
 		sf::Clock Timer;
 
 		_Function(_Args...);
 
-		return (Timer.getElapsedTime().asMicroseconds());
+		return (_Out = Timer.getElapsedTime().asMicroseconds());
 	}
 
 	template<typename T, typename T2, typename... Args>
-	signed long long measureFunctionExecutionTime(T2(T::*ptr)(Args... _Args), T* _Instance)
+	signed long long measureFunctionExecutionTime(signed long long& _Out, T2(T::*ptr)(Args... _Args), T* _Instance)
 	{
 		sf::Clock Timer;
 
 		(_Instance->*ptr)(_Args...);
 
-		return (Timer.getElapsedTime().asMicroseconds());
+		return (_Out = Timer.getElapsedTime().asMicroseconds());
+	}
+
+	template<typename... Args>
+	signed long long measureFoncterExecutionTime(signed long long& _Out, FoncterTemplate* _Fonc, Args... _Args)
+	{
+		sf::Clock Timer;
+
+		_Fonc->Execute(_Args...);
+
+		return (_Out = Timer.getElapsedTime().asMicroseconds());
 	}
 
 	//Met tous les éléments d'un tableau à la valeur donnée

@@ -20,6 +20,7 @@ StateDefault::~StateDefault()
 	PARALLAXE.unloadLevel(m_sRessourcesPath);
 }
 
+
 void StateDefault::init()
 {
 	GRAPHIC_MANAGER->getCurrentCamera()->setFreeMove();
@@ -39,25 +40,17 @@ void StateDefault::init()
 
 		ADD_ENTITY(entity);
 	}
-
-	/*sfgmk::Entity* NewEntity = new sfgmk::Entity();
-	sfgmk::math::Bezier* Curb = new sfgmk::math::Bezier(sf::Vector3f(0.0f, 0.0f, 0.0f), sf::Vector3f(0.0f, 0.0f, 0.0f), sf::Vector3f(0.0f, 0.0f, 0.0f), sf::Vector3f(0.0f, 0.0f, 0.0f));
-	NewEntity->addTransformation(new sfgmk::TransformationBezier(Curb, 5.0f, true));
-	ADD_ENTITY(NewEntity);*/
 }
 
 void StateDefault::update()
 {
-
-
 }
 
 void StateDefault::deinit()
 {
-
 }
+
 
 void StateDefault::draw()
 {
-
 }

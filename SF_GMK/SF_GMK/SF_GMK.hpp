@@ -65,9 +65,10 @@
 	#include "dirent/dirent.h"
 
 	//SF_GMK
+	#include "Tool\DynamicArray.hpp"
+	#include "Tool\FoncterTemplate.hpp"
 	#include "Tool\Function.hpp"
 	#include "Tool\GenericList.hpp"
-	#include "Tool\DynamicArray.hpp"
 	#include "Tool\ThreadTemplate.hpp"
 	#include "Tool\Parser\Parser.hpp"
 	#include "Tool\DesignPattern\SingletonTemplate.hpp"
