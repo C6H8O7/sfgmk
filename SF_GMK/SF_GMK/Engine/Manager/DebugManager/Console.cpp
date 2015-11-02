@@ -58,11 +58,6 @@ namespace sfgmk
 			m_CameraText.setCharacterSize(18);
 			m_CameraText.setColor(sf::Color(100, 200, 100, 255));
 			m_CameraText.setPosition(505.0f, 68.0f);
-
-			//Commandes
-			//registerCommand("/freecam", TODO GRAPHIC_MANAGER->getCurrentCamera()->setFreeMove(), "Camera libre activee\n", "Camera libre desactivee\n");
-			//registerCommand("/physic", TODO PHYSIC_MANAGER->setDraw(), "Affichage physique active\n", "Affichage physique desactive\n");
-			// /life
 		}
 
 		ConsoleDev::~ConsoleDev()
@@ -326,7 +321,7 @@ namespace sfgmk
 				//Envoyer commande
 				if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Return) == KeyStates::KEY_PRESSED )
 				{
-					command();
+					command(m_sSeizureBuffer);
 					m_EnteredCommands.push_back(m_sSeizureBuffer);
 					m_sSeizureBuffer.clear();
 					m_iEnteredCommandsIndex = -1;
@@ -471,52 +466,28 @@ namespace sfgmk
 		}
 
 
-		void ConsoleDev::command()
+		void ConsoleDev::command(std::string _Seizure)
 		{
-			std::transform(m_sSeizureBuffer.begin(), m_sSeizureBuffer.end(), m_sSeizureBuffer.begin(), ::tolower);
+			std::transform(_Seizure.begin(), _Seizure.end(), _Seizure.begin(), ::tolower);
 
-			std::map<std::string, stCONSOLE_COMMAND>::iterator it = m_Commands.find(m_sSeizureBuffer);
+			//Recherche de la commande entrée dans la liste de commandes
+			auto it = m_Commands.find(_Seizure);
 			if( it != m_Commands.end() )
 			{
-				(*it).second.bBeenCalled = !((*it).second.bBeenCalled);
-				/*if( (*it).second.bBeenCalled )
-					(*it).second.sOnCallOutput;
-				else
-					(*it).second.sOnRecallOutput;
-				(*it).second.function();*/
-			}
-
-			//Caméra libre
-			if( m_sSeizureBuffer == "/freecam" )
-			{
-				bool bIsFreeMove = GRAPHIC_MANAGER->getCurrentCamera()->setFreeMove();
-				bIsFreeMove ? m_sConsoleStrings[m_iConsoleStringsIndex] = "Camera libre activee" : m_sConsoleStrings[m_iConsoleStringsIndex] = "Camera libre desactivee";
-				incrementConsoleStringsIndex();
-			}
-			//Draw colliders
-			else if( m_sSeizureBuffer == "/physic" )
-			{
-				bool bIsPhysicDraw = PHYSIC_MANAGER->getDraw();
-				PHYSIC_MANAGER->setDraw(!bIsPhysicDraw);
-				bIsPhysicDraw ? m_sConsoleStrings[m_iConsoleStringsIndex] = "Affichage physique desactivee" : m_sConsoleStrings[m_iConsoleStringsIndex] = "Affichage physique activee";
-				incrementConsoleStringsIndex();
-			}
-			//Draw lifebars
-			else if( m_sSeizureBuffer == "/life" )
-			{
-				bool bIsLifeBarDraw = EntityWithPv::getLifeBarDraw();
-				EntityWithPv::setLifeBarDraw(!bIsLifeBarDraw);
-				bIsLifeBarDraw ? m_sConsoleStrings[m_iConsoleStringsIndex] = "Affichage vie desactivee" : m_sConsoleStrings[m_iConsoleStringsIndex] = "Affichage vie activee";
+				(*it).second.Foncter->Execute();
+				(*it).second.bBeenCalled = !(*it).second.bBeenCalled;
+				(*it).second.bBeenCalled ? m_sConsoleStrings[m_iConsoleStringsIndex] = (*it).second.sOnCallOutput : m_sConsoleStrings[m_iConsoleStringsIndex] = (*it).second.sOnRecallOutput;
+				
 				incrementConsoleStringsIndex();
 			}
 		}
 
-		void ConsoleDev::registerCommand(const std::string& _commandName, CONSOLE_CALLBACK _commandFunction, const std::string& _CallOutput, const std::string& _RecallOutput)
+		void ConsoleDev::registerCommand(const std::string& _commandName, FoncterTemplate* _Foncter, const std::string& _CallOutput, const std::string& _RecallOutput, const bool& _InitialState)
 		{
-			stCONSOLE_COMMAND NewCommand = { _commandFunction,
-											 false,
-											 _CallOutput,
-											 _RecallOutput };
+			stCONSOLE_COMMAND NewCommand = { _Foncter,
+											_InitialState,
+											_CallOutput,
+											_RecallOutput };
 
 			m_Commands.insert(std::pair<std::string, stCONSOLE_COMMAND>(_commandName, NewCommand));
 		}

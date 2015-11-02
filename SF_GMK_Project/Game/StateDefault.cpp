@@ -23,8 +23,8 @@ StateDefault::~StateDefault()
 
 void StateDefault::init()
 {
-	GRAPHIC_MANAGER->getCurrentCamera()->setFreeMove();
-	PHYSIC_MANAGER->setDraw(true);
+	sfgmk::CONSOLE.command("/freecam");
+	sfgmk::CONSOLE.command("/physic");
 
 	for( int i(0); i < 100; i++ )
 	{

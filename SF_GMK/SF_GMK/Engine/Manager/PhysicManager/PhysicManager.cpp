@@ -18,9 +18,9 @@ namespace sfgmk
 			return m_bDrawCollider;
 		}
 
-		void PhysicManager::setDraw(const bool& _Boolean)
+		void PhysicManager::setDraw()
 		{
-			m_bDrawCollider = _Boolean;
+			m_bDrawCollider = !m_bDrawCollider;
 		}
 
 		void PhysicManager::update()

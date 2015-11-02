@@ -37,11 +37,9 @@ namespace sfgmk
 			eCONSOLE_DEV_TEXT_NUMBER
 		};
 
-		typedef std::string(*CONSOLE_CALLBACK) (std::string&);
-
 		struct stCONSOLE_COMMAND
 		{
-			CONSOLE_CALLBACK function;
+			FoncterTemplate* Foncter;
 			bool bBeenCalled;
 			std::string sOnCallOutput;
 			std::string sOnRecallOutput;
@@ -124,8 +122,8 @@ namespace sfgmk
 				void initCpuUsage();
 				float cpuUsage();
 
-				void command();
-				void registerCommand(const std::string& _commandName, CONSOLE_CALLBACK _commandFunction, const std::string& _CallOutput, const std::string& _RecallOutput);
+				void command(std::string _Seizure);
+				void registerCommand(const std::string& _commandName, FoncterTemplate* _Foncter, const std::string& _CallOutput, const std::string& _RecallOutput, const bool& _InitialState = false);
 				void incrementConsoleStringsIndex();
 		};
 	}

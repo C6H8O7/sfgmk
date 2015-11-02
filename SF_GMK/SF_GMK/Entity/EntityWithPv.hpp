@@ -54,10 +54,9 @@ namespace sfgmk
 			{ 
 				bEntityWithPvLifeBarDraw = _Boolean; 
 			}
-			static bool setLifeBarDraw() 
+			static void setLifeBarDraw() 
 			{
 				bEntityWithPvLifeBarDraw = !bEntityWithPvLifeBarDraw; 
-				return bEntityWithPvLifeBarDraw; 
 			}
 	};
 }

@@ -5,6 +5,11 @@ namespace sfgmk
 		DebugManager::DebugManager()
 		{
 			ADD_ENTITY(&m_Selector);
+
+			//Commandes console
+			m_Console.registerCommand("/freecam", new sfgmk::FoncterMethodTemplate<Camera, void>(GraphicManager::getSingleton()->getCurrentCamera(), &Camera::setFreeMove), "Camera libre activee\n", "Camera libre desactivee\n");
+			m_Console.registerCommand("/physic", new sfgmk::FoncterMethodTemplate<PhysicManager, void>(PHYSIC_MANAGER, &PhysicManager::setDraw), "Affichage physique activee\n", "Affichage physique desactivee\n");
+			m_Console.registerCommand("/life", new sfgmk::FoncterFunctionTemplate<void>(&EntityWithPv::setLifeBarDraw), "Affichage vie activee\n", "Affichage vie desactivee\n");
 		}
 
 		DebugManager::~DebugManager()

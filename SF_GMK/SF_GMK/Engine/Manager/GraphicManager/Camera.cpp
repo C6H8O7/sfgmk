@@ -89,11 +89,9 @@ namespace sfgmk
 			return m_bFreeMove;
 		}
 
-		bool Camera::setFreeMove()
+		void Camera::setFreeMove()
 		{
 			m_bFreeMove = !m_bFreeMove;
-
-			return m_bFreeMove;
 		}
 
 		void Camera::freeMove(float _TimeDelta)

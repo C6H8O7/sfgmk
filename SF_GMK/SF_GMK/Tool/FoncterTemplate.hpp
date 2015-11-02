@@ -57,7 +57,7 @@ namespace sfgmk
 
 			DynamicArray<FoncterTemplate*> m_FunctionsArray;
 
-			inline void FoncterTemplateArray::operator [] (const unsigned int& _Index) { m_FunctionsArray[_Index]->Execute(); }
+			inline auto FoncterTemplateArray::operator [] (const unsigned int& _Index) { return m_FunctionsArray[_Index]->Execute(); }
 	};
 }
 
