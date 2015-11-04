@@ -44,7 +44,7 @@ namespace sfgmk
 
 				void drawLayers(int _MaxZ, int _MinZ);
 
-				bool loadLevel(const std::string& _DirPath, StateLoading* _State = NULL);
+				bool loadLevel(const std::string& _DirPath);
 				bool unloadLevel(std::string _DirPath);
 				void unloadAll();
 

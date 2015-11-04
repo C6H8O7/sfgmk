@@ -24,6 +24,7 @@ int main()
 	sfgmk::GRAPHIC_MANAGER->init(sf::VideoMode(1280, 720), "SF_GMK", sf::Style::Default);
 
 	//Init states V2
+	sfgmk::STATE_MACHINE_MANAGER->RegisterState<sfgmk::engine::StateLoading>(sfgmk::eSTATES::eStateLoading, DATA_PATH + "/stateLoading");
 	sfgmk::STATE_MACHINE_MANAGER->RegisterState<StateDefault>(sfgmk::eSTATES::eStateDefault, "../data/states/stateDefault");
 	sfgmk::STATE_MACHINE->init(sfgmk::eSTATES::eStateDefault);
 

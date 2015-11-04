@@ -23,12 +23,15 @@ namespace sfgmk
 
 				ConsoleDev m_Console;
 
-				Selector m_Selector;
+				Selector* m_Selector;
 
 			public:
 				void update(const float& _TimeDelta);
 
 				inline ConsoleDev& getConsole() { return m_Console; };
+
+				void SetSelector();
+				void DeleteSelector();
 		};
 	}
 }

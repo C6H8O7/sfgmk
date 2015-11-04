@@ -20,33 +20,30 @@ namespace sfgmk
 
 			//Déclarer ici les prototypes de fonctions
 			virtual inline void Execute() {}
-	};
-
-	template<typename T, typename... Args>
-	class FoncterFunctionTemplate : public FoncterTemplate
-	{
-		private:
-			T(*m_FuncPtr)(Args...);
-
-		public:
-			FoncterFunctionTemplate(T(*_FuncPtr)(Args...)) : m_FuncPtr(_FuncPtr) {}
-			~FoncterFunctionTemplate() {}
-
-			inline T Execute(Args... _Args) { return (*m_FuncPtr)(_Args...); }
+			virtual inline bool Execute(const std::string&) { return false; }
 	};
 
 	template<typename InstanceType, typename T, typename... Args>
-	class FoncterMethodTemplate : public FoncterTemplate
+	class FoncterTemplateInstance : public FoncterTemplate
 	{
+		public:
+			FoncterTemplateInstance(InstanceType* _Instance, T(InstanceType::*_Method)(Args...)) : m_Instance(_Instance), m_MethodPtr(_Method), m_FunctionPtr(NULL) {} //Constructeur methode
+			FoncterTemplateInstance(T(*m_Function)(Args...)) : m_Instance(NULL), m_MethodPtr(NULL), m_FunctionPtr(m_Function) {} //Constructeur fonction
+			~FoncterTemplateInstance() {}
+
 		private:
 			void* m_Instance;
-			T(InstanceType::*m_FuncPtr)(Args...);
+			T(*m_FunctionPtr)(Args...);
+			T(InstanceType::*m_MethodPtr)(Args...);
 
 		public:
-			FoncterMethodTemplate(InstanceType* _Instance, T(InstanceType::*_FuncPtr)(Args...)) : m_Instance(_Instance), m_FuncPtr(_FuncPtr) {}
-			~FoncterMethodTemplate() {}
-
-			inline T Execute(Args... _Args) { return (((InstanceType*)(m_Instance))->*m_FuncPtr)(_Args...); }
+			inline T Execute(Args... _Args) 
+			{ 
+				if( m_Instance )
+					return (((InstanceType*)(m_Instance))->*m_MethodPtr)(_Args...); 
+				else
+					return (*m_FunctionPtr)(_Args...);
+			}
 	};
 
 	class FoncterTemplateArray
@@ -63,33 +60,3 @@ namespace sfgmk
 
 
 #endif
-
-
-
-/*if( state < 0 ) 
-{ 
-	if(0) 
-	{
-		return( true ); 
-	} 
-} 
-else if( a == state ) 
-{ 
-	if(0) 
-	{
-		return( true ); 
-	} 
-	else if( a == event ) 
-	{
-		OnEvent( EVENT_Enter )
-		OnEvent( EVENT_Update )
-		OnEvent( EVENT_Exit )
-
-		return(true); 
-	} 
-}
-else 
-{
-	assert(0); return(false); 
-}  
-return(false);*/

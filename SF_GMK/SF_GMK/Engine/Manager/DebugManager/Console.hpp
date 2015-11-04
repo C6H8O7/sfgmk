@@ -22,6 +22,10 @@ namespace sfgmk
 		#define CONSOLE_UPDATE_TIMING 1.0f
 		#define CONSOLE_DISPLAY_TIMING 0.1f
 		#define CONSOLE_STRING_MAX_LINE 9
+		#define CONSOLE_COMMAND_PER_LINE 3
+		#define COMMAND_COLOR_ACTIVE sf::Color(100, 255, 200, 255)
+		#define COMMAND_COLOR_DEACTIVE sf::Color(205, 51, 51, 255)
+		#define HELP_COMMAND_COLOR sf::Color(255, 165, 0, 255)
 
 		enum eCONSOLE_DEV_TEXT
 		{
@@ -55,6 +59,12 @@ namespace sfgmk
 			ULONG  CurrentIdleState;
 		} PROCESSOR_POWER_INFORMATION, *PPROCESSOR_POWER_INFORMATION;
 
+		struct stCONSOLE_STRINGS
+		{
+			std::string sString;
+			sf::Color Color;
+		};
+
 		class DebugManager;
 
 		class SFGMK_API ConsoleDev
@@ -72,7 +82,7 @@ namespace sfgmk
 				bool m_bIsActive;
 				bool m_bIsSeizureActive;
 				std::string m_sSeizureBuffer;
-				std::string m_sConsoleStrings[CONSOLE_STRING_MAX_LINE];
+				stCONSOLE_STRINGS m_sConsoleStrings[CONSOLE_STRING_MAX_LINE];
 				int m_iConsoleStringsIndex;
 
 				sf::Sprite m_RenderSprite;
@@ -122,6 +132,7 @@ namespace sfgmk
 				void initCpuUsage();
 				float cpuUsage();
 
+				void helpCommand();
 				void command(std::string _Seizure);
 				void registerCommand(const std::string& _commandName, FoncterTemplate* _Foncter, const std::string& _CallOutput, const std::string& _RecallOutput, const bool& _InitialState = false);
 				void incrementConsoleStringsIndex();

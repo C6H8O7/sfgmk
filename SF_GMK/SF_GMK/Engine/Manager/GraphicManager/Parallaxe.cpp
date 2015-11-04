@@ -140,7 +140,7 @@ namespace sfgmk
 		}
 
 
-		bool Parallaxe::loadLevel(const std::string& _DirPath, StateLoading* _State)
+		bool Parallaxe::loadLevel(const std::string& _DirPath)
 		{
 			sfgmk::engine::DataManager* DataManager = DATA_MANAGER;
 			DIR* LevelRepertory = NULL;

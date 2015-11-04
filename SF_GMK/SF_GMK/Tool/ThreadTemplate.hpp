@@ -12,37 +12,41 @@
 
 namespace sfgmk
 {
-	template<typename T, typename... Args>
+	template<typename... Args>
 	class SFGMK_API ThreadTemplate
 	{
 		private:
 			std::thread m_Thread;
-			std::function<T(Args... _Args)> m_Function;
+			FoncterTemplate* m_Function;
 			bool m_bLaunched;
-		
+
 		public:
-			ThreadTemplate(std::function<T(Args... _Args)> _Function, Args... _Args, bool _LaunchThreadNow = false) : m_Function(_Function), m_bLaunched(_LaunchThreadNow)
-			{
-				if( _LaunchThreadNow )
-					Launch(_Args);
-			}
+			ThreadTemplate(FoncterTemplate* _Foncter = NULL) : m_Function(_Foncter), m_bLaunched(false) {}
+			~ThreadTemplate() { Wait(); }
 
-			~ThreadTemplate()
+			bool SetFunc(FoncterTemplate* _Foncter)
 			{
-				Wait();
-			}
+				if( m_bLaunched )
+					return false;
 
+				m_Function = _Foncter;
+				return true;
+			}
 
 			bool Launch(Args... _Args)
 			{
-				if( !m_bLaunched )
+				if( !m_bLaunched && m_Function )
 				{
-					m_bLaunched = true;
-					m_Thread = std::thread(m_Function, _Args);
+					m_Thread = std::thread(&ThreadTemplate::Run, this, _Args...);
 					return true;
 				}
 
 				return false;
+			}
+
+			void Run(Args... _Args)
+			{
+				m_Function->Execute(_Args...);
 			}
 
 			void Wait()

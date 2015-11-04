@@ -285,7 +285,7 @@ namespace sfgmk
 		}
 
 
-		bool DataManager::loadRessource(const eResourceType& _DataType, std::string _Name, std::string _FilePath, StateLoading* _State)
+		bool DataManager::loadRessource(const eResourceType& _DataType, std::string _Name, std::string _FilePath)
 		{
 			switch (_DataType)
 			{
@@ -317,7 +317,7 @@ namespace sfgmk
 			return true;
 		}
 
-		bool DataManager::loadLevel(const std::string& _DirPath, StateLoading* _State)
+		bool DataManager::loadLevel(const std::string& _DirPath)
 		{
 			DIR* LevelRepertory = NULL;
 			struct dirent* ReadFile = NULL;
@@ -345,7 +345,7 @@ namespace sfgmk
 				{
 					std::string Name = ReadFile->d_name;
 					Name = Name.substr(0, Name.find('.'));
-					loadRessource(TYPE_IMAGE, Name, DataDir + '/' + ReadFile->d_name, _State);
+					loadRessource(TYPE_IMAGE, Name, DataDir + '/' + ReadFile->d_name);
 				}
 				closedir(LevelRepertory);
 			}
@@ -373,7 +373,7 @@ namespace sfgmk
 
 					std::string Name = ReadFile->d_name;
 					Name = Name.substr(0, Name.find('.'));
-					loadRessource(TYPE_ANIM, Name, DataDir + '/' + ReadFile->d_name, _State);
+					loadRessource(TYPE_ANIM, Name, DataDir + '/' + ReadFile->d_name);
 				}
 				closedir(LevelRepertory);
 			}
@@ -401,7 +401,7 @@ namespace sfgmk
 
 					std::string Name = ReadFile->d_name;
 					Name = Name.substr(0, Name.find('.'));
-					loadRessource(TYPE_FONT, Name, DataDir + '/' + ReadFile->d_name, _State);
+					loadRessource(TYPE_FONT, Name, DataDir + '/' + ReadFile->d_name);
 
 				}
 				closedir(LevelRepertory);
@@ -434,7 +434,7 @@ namespace sfgmk
 					else if (Name.substr(Name.find('.')) == "vert")
 						ShaderType = TYPE_SHADER_VERTEX;
 					Name = Name.substr(0, Name.find('.'));
-					loadRessource(ShaderType, Name, DataDir + '/' + ReadFile->d_name, _State);
+					loadRessource(ShaderType, Name, DataDir + '/' + ReadFile->d_name);
 				}
 				closedir(LevelRepertory);
 			}

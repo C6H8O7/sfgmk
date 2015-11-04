@@ -141,7 +141,8 @@ namespace sfgmk
 				//Commandes entrées
 				for( int i(0); i < CONSOLE_STRING_MAX_LINE; ++i )
 				{
-					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setString(m_sConsoleStrings[i]);
+					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setString(m_sConsoleStrings[i].sString);
+					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setColor(m_sConsoleStrings[i].Color);
 					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setPosition(sf::Vector2f(25.0f, 225.0f) + sf::Vector2f(0.0f, i * 20.0f));
 					m_ConsoleRender.draw(m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText]);
 				}
@@ -466,6 +467,24 @@ namespace sfgmk
 		}
 
 
+		void ConsoleDev::helpCommand()
+		{
+			auto it = m_Commands.begin();
+			
+			while( it != m_Commands.end() )
+			{
+				m_sConsoleStrings[m_iConsoleStringsIndex].sString.clear();
+
+				for( int i(0); i < CONSOLE_COMMAND_PER_LINE && it != m_Commands.end(); i++, ++it )
+				{
+					m_sConsoleStrings[m_iConsoleStringsIndex].sString += "\t\t" + (*it).first + "\t\t";
+					m_sConsoleStrings[m_iConsoleStringsIndex].Color = HELP_COMMAND_COLOR;
+				}
+
+				incrementConsoleStringsIndex();
+			}
+		}
+
 		void ConsoleDev::command(std::string _Seizure)
 		{
 			std::transform(_Seizure.begin(), _Seizure.end(), _Seizure.begin(), ::tolower);
@@ -476,10 +495,22 @@ namespace sfgmk
 			{
 				(*it).second.Foncter->Execute();
 				(*it).second.bBeenCalled = !(*it).second.bBeenCalled;
-				(*it).second.bBeenCalled ? m_sConsoleStrings[m_iConsoleStringsIndex] = (*it).second.sOnCallOutput : m_sConsoleStrings[m_iConsoleStringsIndex] = (*it).second.sOnRecallOutput;
+
+				if( (*it).second.bBeenCalled )
+				{
+					m_sConsoleStrings[m_iConsoleStringsIndex].sString = (*it).second.sOnCallOutput;
+					m_sConsoleStrings[m_iConsoleStringsIndex].Color = COMMAND_COLOR_ACTIVE;
+				}
+				else
+				{
+					m_sConsoleStrings[m_iConsoleStringsIndex].sString = (*it).second.sOnRecallOutput;
+					m_sConsoleStrings[m_iConsoleStringsIndex].Color = COMMAND_COLOR_DEACTIVE;
+				}
 				
 				incrementConsoleStringsIndex();
 			}
+			else if( _Seizure == "/help" )
+				helpCommand();
 		}
 
 		void ConsoleDev::registerCommand(const std::string& _commandName, FoncterTemplate* _Foncter, const std::string& _CallOutput, const std::string& _RecallOutput, const bool& _InitialState)

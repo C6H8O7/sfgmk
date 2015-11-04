@@ -90,6 +90,7 @@
 	#include "Graphic\Sprite.hpp"
 	#include "Graphic\FX\LifeBar\LifeBar.hpp"
 
+	#include "Engine\Manager\AiManager\AIManager.hpp"
 	#include "Entity\Entity.hpp"
 	#include "Entity\EntityWithPv.hpp"
 
@@ -140,6 +141,7 @@ namespace sfgmk
 { 
 	enum eSTATES
 	{
+		eStateLoading = 0,
 		eStateDefault = 1,
 		eSTATES_NUMBER
 	};
@@ -169,7 +171,7 @@ namespace sfgmk
 	#define PARALLAXE					GRAPHIC_MANAGER->getParallaxe()
 
 	//States
-	#define CHANGE_STATE(a)				STATE_MACHINE_MANAGER->getStateMachine()->changeState(a);
+	#define CHANGE_STATE(a, b)			STATE_MACHINE_MANAGER->getStateMachine()->changeState(a, b);
 	#define STATE_MACHINE				STATE_MACHINE_MANAGER->getStateMachine()
 	#define CURRENT_STATE				STATE_MACHINE_MANAGER->getStateMachine()->Get_CurrentState()
 

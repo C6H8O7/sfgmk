@@ -14,11 +14,6 @@ namespace sfgmk
 {
 	#define SAFE_DELETE(a) if( a != NULL ) { delete a; a = NULL; }
 
-	//Opérations sur les bits
-	#define SET_BIT(flag, bit) ((flag) |= (1 << (bit))) 
-	#define CLEAR_BIT(flag, bit) ((flag) &= ~(1 << (bit))) 
-	#define GET_BIT(flag, bit) ((flag) & (1 << (bit)))
-
 	//Supprime les éléments d'un conteneur, et le clear
 	template<typename T> 
 	void ClearPtrCntr(T& _Cntr)

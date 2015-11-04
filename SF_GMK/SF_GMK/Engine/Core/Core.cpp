@@ -4,26 +4,27 @@ namespace sfgmk
 	{
 		Core::Core()
 		{
-			sfgmk::FoncterMethodTemplate<StateMachineManager, void>* Ptr1 = new sfgmk::FoncterMethodTemplate<StateMachineManager, void>(STATE_MACHINE_MANAGER, &StateMachineManager::update);
+			sfgmk::FoncterTemplateInstance<StateMachineManager, void>* Ptr1 = new sfgmk::FoncterTemplateInstance<StateMachineManager, void>(STATE_MACHINE_MANAGER, &StateMachineManager::update);
 			m_MainFunctions.m_FunctionsArray.pushBack(Ptr1);
-			sfgmk::FoncterMethodTemplate<EntityManager, void>* Ptr2 = new sfgmk::FoncterMethodTemplate<EntityManager, void>(ENTITY_MANAGER, &EntityManager::update);
+			sfgmk::FoncterTemplateInstance<EntityManager, void>* Ptr2 = new sfgmk::FoncterTemplateInstance<EntityManager, void>(ENTITY_MANAGER, &EntityManager::update);
 			m_MainFunctions.m_FunctionsArray.pushBack(Ptr2);
-			sfgmk::FoncterMethodTemplate<PhysicManager, void>* Ptr3 = new sfgmk::FoncterMethodTemplate<PhysicManager, void>(PHYSIC_MANAGER, &PhysicManager::update);
+			sfgmk::FoncterTemplateInstance<PhysicManager, void>* Ptr3 = new sfgmk::FoncterTemplateInstance<PhysicManager, void>(PHYSIC_MANAGER, &PhysicManager::update);
 			m_MainFunctions.m_FunctionsArray.pushBack(Ptr3);
-			sfgmk::FoncterMethodTemplate<EntityManager, void>* Ptr4 = new sfgmk::FoncterMethodTemplate<EntityManager, void>(ENTITY_MANAGER, &EntityManager::sortEntityVector);
+			sfgmk::FoncterTemplateInstance<EntityManager, void>* Ptr4 = new sfgmk::FoncterTemplateInstance<EntityManager, void>(ENTITY_MANAGER, &EntityManager::sortEntityVector);
 			m_MainFunctions.m_FunctionsArray.pushBack(Ptr4);
-			sfgmk::FoncterMethodTemplate<GraphicManager, void>* Ptr5 = new sfgmk::FoncterMethodTemplate<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::compute);
+			sfgmk::FoncterTemplateInstance<GraphicManager, void>* Ptr5 = new sfgmk::FoncterTemplateInstance<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::compute);
 			m_MainFunctions.m_FunctionsArray.pushBack(Ptr5);
-			sfgmk::FoncterMethodTemplate<GraphicManager, void>* Ptr6 = new sfgmk::FoncterMethodTemplate<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::draw);
+			sfgmk::FoncterTemplateInstance<GraphicManager, void>* Ptr6 = new sfgmk::FoncterTemplateInstance<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::draw);
 			m_MainFunctions.m_FunctionsArray.pushBack(Ptr6);
-			sfgmk::FoncterMethodTemplate<StateMachineManager, void>* Ptr7 = new sfgmk::FoncterMethodTemplate<StateMachineManager, void>(STATE_MACHINE_MANAGER, &StateMachineManager::draw);
+			sfgmk::FoncterTemplateInstance<StateMachineManager, void>* Ptr7 = new sfgmk::FoncterTemplateInstance<StateMachineManager, void>(STATE_MACHINE_MANAGER, &StateMachineManager::draw);
 			m_MainFunctions.m_FunctionsArray.pushBack(Ptr7);
-			sfgmk::FoncterMethodTemplate<GraphicManager, void>* Ptr8 = new 	sfgmk::FoncterMethodTemplate<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::display);
+			sfgmk::FoncterTemplateInstance<GraphicManager, void>* Ptr8 = new sfgmk::FoncterTemplateInstance<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::display);
 			m_MainFunctions.m_FunctionsArray.pushBack(Ptr8);
 		}
 
 		Core::~Core()
 		{
+			m_MainFunctions.m_FunctionsArray.clear();
 		}
 
 
@@ -61,10 +62,10 @@ namespace sfgmk
 		{
 			//Update état(s) courant(s)
 			measureFoncterExecutionTime(m_ExecutionTimes.dStateUpdate, m_MainFunctions.m_FunctionsArray[eStateMachineUpdate]);
-
+			
 			//Update des entités
 			measureFoncterExecutionTime(m_ExecutionTimes.dEntityUpdate, m_MainFunctions.m_FunctionsArray[eEntityManagerUpdate]);
-
+		
 			//Physique
 			measureFoncterExecutionTime(m_ExecutionTimes.dPhysic, m_MainFunctions.m_FunctionsArray[ePhysicManagerUpdate]);
 

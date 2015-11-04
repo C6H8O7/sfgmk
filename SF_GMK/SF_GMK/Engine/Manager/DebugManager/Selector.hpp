@@ -27,9 +27,10 @@ namespace sfgmk
 			SELECTOR_STATE m_State;
 			sf::Vector2f m_Start, m_End;
 
-		public:
+			bool m_bIsDebugManagerSelector;
 
-			Selector();
+		public:
+			Selector(bool _IsDebugManagerSelector = false);
 			~Selector();
 
 			void update(const float& _TimeDelta);

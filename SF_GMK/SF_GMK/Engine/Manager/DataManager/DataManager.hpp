@@ -80,8 +80,8 @@ namespace sfgmk
 				bool loadFromDataBank(std::string _filePath);
 				static void encryptDecryptData(unsigned char *_data, int _dataSize, const char *_key, int _keyLength);
 
-				bool loadRessource(const eResourceType& _DataType, std::string _Name, std::string _FilePath, StateLoading* _State);
-				bool loadLevel(const std::string& _DirPath, StateLoading* _State = NULL);
+				bool loadRessource(const eResourceType& _DataType, std::string _Name, std::string _FilePath);
+				bool loadLevel(const std::string& _DirPath);
 				bool unloadLevel(const std::string& _DirPath);
 				void unloadAll();
 		};

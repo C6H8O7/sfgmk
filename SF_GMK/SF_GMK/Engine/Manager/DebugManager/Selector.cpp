@@ -2,7 +2,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		Selector::Selector()
+		Selector::Selector(bool _IsDebugManagerSelector) : m_bIsDebugManagerSelector(_IsDebugManagerSelector)
 		{
 			getSprite()->setTexture(DATA_MANAGER->getTexture("sfgmk_pix"));
 			getSprite()->setColor(sf::Color(0, 255, 255, 64));
@@ -15,7 +15,8 @@ namespace sfgmk
 
 		Selector::~Selector()
 		{
-
+			if( m_bIsDebugManagerSelector )
+				DEBUG_MANAGER->DeleteSelector();
 		}
 
 		void Selector::update(const float& _TimeDelta)

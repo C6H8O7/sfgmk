@@ -27,7 +27,7 @@ namespace sfgmk
 			}
 
 		public:
-			static T* getSingleton()
+			inline static T* getSingleton()
 			{
 				if( m_Instance == NULL )
 					m_Instance = new T;

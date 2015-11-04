@@ -19,7 +19,7 @@ namespace sfgmk
 			for( int i(m_EntityVector.size() - 1); i >= 0; i-- )
 			{
 				m_EntityVector[i]->update(TIME_DELTA);
-
+			
 				//Suppression entités en fin de vie
 				if( !m_EntityVector[i]->getIsAlive() )
 					removeEntity(i);

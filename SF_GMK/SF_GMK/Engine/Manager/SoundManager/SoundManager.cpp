@@ -158,7 +158,7 @@ namespace sfgmk
 			}
 		}
 
-		bool SoundManager::loadLevel(const std::string& _Dir, engine::StateLoading* _State)
+		bool SoundManager::loadLevel(const std::string& _Dir)
 		{
 			DIR* LevelRepertory = NULL;
 			struct dirent* ReadFile = NULL;
