@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="e310f543-5992-4b47-ae3c-2db874f3beff" name="SF_GMK UML" linkedPackageId="ab09b50f-c43a-4264-b322-aa677574ef9c" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="6ef6730d-7aca-4ce3-baf5-070e59cf2f09">
+      <profileInstance Id="4b3274e9-39b7-475b-90d2-05b68cae6c0d" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="ec11472e-304f-4680-8088-7d139994f2c1">
+      <profileInstance Id="0f5a4c93-3aad-4702-9c58-da8d0235e457" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="072f9ee3-bcbe-4428-8f5b-e69f91cb3b0d" name="Engine">
+        <elementDefinition Id="947f406d-ea44-484a-8b56-54675ff7284a" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <class Id="5235f0fc-233e-4fa2-af9e-70d2b087456b" name="Core" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="a634e13d-c3bc-47b0-b1c1-0e7c585e5615" />
+              <generalsInternal>
+                <generalization Id="7a14ee62-d60c-4ae8-845a-5219a5f3142d" isSubstitutable="false">
+                  <classMoniker Id="9abceb71-9508-4348-bfe4-fba0f740cd45" LastKnownName="SingletonTemplate" />
+                  <elementDefinition Id="41551cc6-8638-42f4-832e-f7b20a910642" />
+                </generalization>
+              </generalsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="69f7c27c-176d-445b-85f1-be1bfe96aed8" name="Managers">
+              <elementDefinition Id="b341f4ae-4b81-40a7-93b2-fe7ea674c0f5" />
+              <packagedElements>
+                <packageHasNamedElement>
+                  <class Id="e3e768f1-5c8a-4d75-9b1e-4bda9afbc56e" name="DataManager" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="63e83a6d-68ca-484f-9a91-2820945258e9" />
+                    <generalsInternal>
+                      <generalization Id="4a201ea3-4d99-49da-aa4f-903ff0750c97" isSubstitutable="false">
+                        <classMoniker Id="9abceb71-9508-4348-bfe4-fba0f740cd45" LastKnownName="SingletonTemplate" />
+                        <elementDefinition Id="1b79f944-f074-460f-b678-3640c72afe83" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="b9e4c6bc-66c9-4c37-a72c-446c6d378ed2" name="DebugManager" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="c170e54b-5a7e-4a04-874c-b6cb38db2e2b" />
+                    <generalsInternal>
+                      <generalization Id="ad22c25e-ef23-484c-afa5-76cdd66f1492" isSubstitutable="false">
+                        <classMoniker Id="9abceb71-9508-4348-bfe4-fba0f740cd45" LastKnownName="SingletonTemplate" />
+                        <elementDefinition Id="b4b65bb9-86f1-4597-8c46-a1d7289ea7a7" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="652d3ea5-2953-44ae-b7d1-d59f98115886" name="Console" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="927d98f4-fb35-48c7-9378-548818722e70" />
+                    <targetEnds>
+                      <association Id="7bc59e49-2709-413c-9a5e-eba3cc1f5c53" isDerived="false" sourceEndRoleName="Console" targetEndRoleName="DebugManager" isLeaf="false" isAbstract="false">
+                        <classMoniker Id="b9e4c6bc-66c9-4c37-a72c-446c6d378ed2" LastKnownName="DebugManager" />
+                        <relationshipOwnedElementsInternal>
+                          <associationHasOwnedEnds>
+                            <memberEnd Id="a784c843-bd54-46ce-b189-46c324e0dfed" name="Console" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                              <elementDefinition Id="9731678a-6749-488f-9d8a-2fb4a659b69e" />
+                            </memberEnd>
+                          </associationHasOwnedEnds>
+                          <associationHasOwnedEnds>
+                            <memberEnd Id="e1b1f731-f845-4891-8412-e6b448bb21ba" name="DebugManager" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                              <elementDefinition Id="b18cf99b-f336-4663-bba6-9f92d8c8255b" />
+                            </memberEnd>
+                          </associationHasOwnedEnds>
+                        </relationshipOwnedElementsInternal>
+                        <elementDefinition Id="5414800c-d51c-4348-b557-da342e89dd9d" />
+                      </association>
+                    </targetEnds>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="9c1ad3ed-283a-442d-aaca-7d83312bc38e" name="EntityManager" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="c2d81d40-1a83-435f-9e6d-669fc4f66cbc" />
+                    <generalsInternal>
+                      <generalization Id="d1005fe3-d139-4ce0-8c74-ed15b41bc848" isSubstitutable="false">
+                        <classMoniker Id="9abceb71-9508-4348-bfe4-fba0f740cd45" LastKnownName="SingletonTemplate" />
+                        <elementDefinition Id="2496fe46-869c-44a4-a7c6-1c64f8e45afc" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="b7305793-2eb8-446c-a37b-3fbd49195571" name="GraphicManager" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="a1444ed5-113d-4702-9365-1b8c67ef91d4" />
+                    <generalsInternal>
+                      <generalization Id="b8df40d4-77a9-45ed-aeaa-907625e7b35d" isSubstitutable="false">
+                        <classMoniker Id="9abceb71-9508-4348-bfe4-fba0f740cd45" LastKnownName="SingletonTemplate" />
+                        <elementDefinition Id="864f98a2-ad16-4419-a58b-8c67d30145a3" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="42f6f732-ee9d-4bad-84d5-0abbc96e292e" name="InputManager" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="b55a5331-1da6-4f40-8963-f990ddc0f532" />
+                    <generalsInternal>
+                      <generalization Id="72d7f883-6d45-4616-ada8-05cdd54e92d5" isSubstitutable="false">
+                        <classMoniker Id="9abceb71-9508-4348-bfe4-fba0f740cd45" LastKnownName="SingletonTemplate" />
+                        <elementDefinition Id="9e876a76-048f-4215-b9c8-37ff994b141c" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="d929eca3-21d4-46d0-8f56-2758f2223e15" name="PhysicManager" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="28036e29-c8df-4efa-83a4-dc5666493a59" />
+                    <generalsInternal>
+                      <generalization Id="9a206b3d-60db-4400-9b8a-cc670dee5fe4" isSubstitutable="false">
+                        <classMoniker Id="9abceb71-9508-4348-bfe4-fba0f740cd45" LastKnownName="SingletonTemplate" />
+                        <elementDefinition Id="adda8ae0-c26d-46e3-8279-125b107dd748" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="03dced38-cb20-4d6d-8eba-883f0c978c43" name="SoundManager" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="97ad02bc-e2c7-4db5-805c-9a03e006896b" />
+                    <generalsInternal>
+                      <generalization Id="29de125a-d8ae-462a-9a93-de85cf83abd7" isSubstitutable="false">
+                        <classMoniker Id="9abceb71-9508-4348-bfe4-fba0f740cd45" LastKnownName="SingletonTemplate" />
+                        <elementDefinition Id="833bec09-0a42-40da-a10f-89cb0b8f0201" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="8c92c585-42ab-4693-94bf-3ae625149f43" name="StateMachineManager" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="3fc57984-c446-4364-a938-fd24d3114f51" />
+                    <generalsInternal>
+                      <generalization Id="c5a445a6-9065-46ca-843f-bf7ac4bfce80" isSubstitutable="false">
+                        <classMoniker Id="9abceb71-9508-4348-bfe4-fba0f740cd45" LastKnownName="SingletonTemplate" />
+                        <elementDefinition Id="8d0aca13-567e-4b8a-848b-f8a994646f2c" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="f2073441-20ff-4c59-aa65-7d152d35d2e5" name="Parallaxe" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="f2acd78e-0b17-4276-a99f-306a462ad362" />
+                    <targetEnds>
+                      <association Id="e82a1200-351e-4eba-a749-6122de80ebce" isDerived="false" sourceEndRoleName="Parallaxe" targetEndRoleName="GraphicManager" isLeaf="false" isAbstract="false">
+                        <classMoniker Id="b7305793-2eb8-446c-a37b-3fbd49195571" LastKnownName="GraphicManager" />
+                        <relationshipOwnedElementsInternal>
+                          <associationHasOwnedEnds>
+                            <memberEnd Id="162b2216-cc0e-469b-b872-6fac6711ab6e" name="Parallaxe" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                              <elementDefinition Id="82bdf654-3e41-4730-a099-1fdf83f5b025" />
+                            </memberEnd>
+                          </associationHasOwnedEnds>
+                          <associationHasOwnedEnds>
+                            <memberEnd Id="73cc35e8-a8f6-4ea8-a518-77d9ac2ca97a" name="GraphicManager" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                              <elementDefinition Id="1202e359-973b-441a-866f-dadacb5a2a47" />
+                            </memberEnd>
+                          </associationHasOwnedEnds>
+                        </relationshipOwnedElementsInternal>
+                        <elementDefinition Id="81748e97-affb-49f7-8b36-b68dbd51d070" />
+                      </association>
+                    </targetEnds>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="b7131a7f-76d4-48ab-9459-4312f8372d74" name="StateMachine" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="97cfb3a6-69d3-4c95-bbe0-f171e58d166d" />
+                    <targetEnds>
+                      <association Id="3b4cf6a8-db6b-4b5b-8a05-bb6dfc68900a" isDerived="false" sourceEndRoleName="StateMachine" targetEndRoleName="StateMachineManager" isLeaf="false" isAbstract="false">
+                        <classMoniker Id="8c92c585-42ab-4693-94bf-3ae625149f43" LastKnownName="StateMachineManager" />
+                        <relationshipOwnedElementsInternal>
+                          <associationHasOwnedEnds>
+                            <memberEnd Id="5fe19948-7b09-4a13-b69e-5b445360714b" name="StateMachine" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                              <elementDefinition Id="54459b93-bd70-4b37-8dad-02c31eec42e8" />
+                            </memberEnd>
+                          </associationHasOwnedEnds>
+                          <associationHasOwnedEnds>
+                            <memberEnd Id="32b25f6c-694c-44ab-abb0-7f862b746f58" name="StateMachineManager" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                              <elementDefinition Id="3a9a5855-d537-4673-afe5-0cc1c6c104ec" />
+                            </memberEnd>
+                          </associationHasOwnedEnds>
+                        </relationshipOwnedElementsInternal>
+                        <elementDefinition Id="11b5bc01-e22d-43a8-9cef-525251939eb3" />
+                      </association>
+                    </targetEnds>
+                  </class>
+                </packageHasNamedElement>
+              </packagedElements>
+            </package>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="d5831b78-b24a-4c0d-a148-5349bc801537" name="Tools">
+        <elementDefinition Id="0d585548-c943-4233-9da4-f73a898c69e5" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <package Id="96a0e975-7893-41c0-a83e-9b957dabde08" name="Design Patterns">
+              <elementDefinition Id="c8d69f40-fcbc-4345-add1-c4c24c7618b0" />
+              <packagedElements>
+                <packageHasNamedElement>
+                  <class Id="9abceb71-9508-4348-bfe4-fba0f740cd45" name="SingletonTemplate" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="567c9591-0599-4071-8abb-c1935dc9215e" />
+                  </class>
+                </packageHasNamedElement>
+              </packagedElements>
+            </package>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="ee79c915-7775-46f0-8dc2-5131bbee999e" name="Parser" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="81e252ca-04e9-496e-93a3-b0bf8c6732b6" />
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="43a449e5-062d-4563-8fec-b310041d9508" name="DynamicArray" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="3b39e162-25cd-4134-8e54-16511db4a798" />
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="3f1defa3-a459-4012-aa93-faa5f8a1016e" name="FoncterTemplate" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="0fe34981-f77e-4b70-8bc5-09f15656e386" />
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="87b83c2b-a698-460a-809e-f8f3b12a047e" name="FoncterTemplateArray" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="d4f2134a-46a7-4348-b10c-296f7ea3a947" />
+              <targetEnds>
+                <association Id="ee666696-df6f-4fe7-9701-44166843a16b" isDerived="false" sourceEndRoleName="FoncterTemplateArray" targetEndRoleName="DynamicArray&lt;FoncterTemplate*&gt;" isLeaf="false" isAbstract="false">
+                  <classMoniker Id="43a449e5-062d-4563-8fec-b310041d9508" LastKnownName="DynamicArray" />
+                  <relationshipOwnedElementsInternal>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="9b41f69e-1c3d-4313-b557-1f5ca391b29a" name="FoncterTemplateArray" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                        <elementDefinition Id="e576e587-6bd7-4295-930c-b7848e4e3425" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="1adf8e13-d5ca-48ec-b19c-009fbb058661" name="DynamicArray&lt;FoncterTemplate*&gt;" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                        <elementDefinition Id="3e6ed217-f9a9-4d59-a0ac-82ca97b51c4f" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                  </relationshipOwnedElementsInternal>
+                  <elementDefinition Id="b9f86345-4207-4509-82d4-ae3035e46d19" />
+                </association>
+              </targetEnds>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="b733911f-1d09-403d-853d-3c0fa928d735" name="ThreadTemplate" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="df28f163-4892-417d-8b04-129de006e1fc" />
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+  </packagedElements>
+  <package Id="ab09b50f-c43a-4264-b322-aa677574ef9c" name="UML">
+    <elementDefinition Id="f643aaf8-e709-4cf9-ae19-053af7cf063d" />
+  </package>
+</logicalClassDesignerModel>

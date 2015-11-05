@@ -34,6 +34,10 @@ namespace sfgmk
 
 				std::vector<PostShader*> m_PostShaders;
 
+				sf::Image m_ScreenshotImage;
+				std::thread* m_ScreenshotThread;
+				bool m_bScreenshot;
+
 			public:
 				void init(sf::VideoMode& _Mode, const std::string& _WindowName, int _Style);
 				void initDefaultCamera();
@@ -58,7 +62,8 @@ namespace sfgmk
 				void applyPostShaders();
 				void freePostShaderVector();
 
-				void screenshot();
+				bool screenshot();
+				void screenshotSave();
 		};
 	}
 }

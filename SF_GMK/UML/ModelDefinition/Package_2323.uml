@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="947f406d-ea44-484a-8b56-54675ff7284a"
+  name="Engine" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="a634e13d-c3bc-47b0-b1c1-0e7c585e5615"
+        name="Core"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="41551cc6-8638-42f4-832e-f7b20a910642"
+            isSubstitutable="false">
+            <classMoniker
+              Id="567c9591-0599-4071-8abb-c1935dc9215e"
+              LastKnownName="SingletonTemplate"
+              LastKnownLocation="Package1_2333.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="cdc14f51-c7e0-4634-88f8-281fba77fe9d"
+        LastKnownName="AI"
+        LastKnownLocation="Package_2324.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="0445d8ed-78a3-4f17-bec9-909d76dfaf0a"
+        LastKnownName="Package1"
+        LastKnownLocation="Package1_2324.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="b341f4ae-4b81-40a7-93b2-fe7ea674c0f5"
+        LastKnownName="Managers"
+        LastKnownLocation="Package2_2324.uml" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

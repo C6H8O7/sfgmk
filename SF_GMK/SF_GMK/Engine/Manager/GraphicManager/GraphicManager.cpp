@@ -2,7 +2,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		GraphicManager::GraphicManager() : m_RenderWindow(NULL), m_RenderTexture(NULL), m_CurrentCamera(NULL)
+		GraphicManager::GraphicManager() : m_RenderWindow(NULL), m_RenderTexture(NULL), m_CurrentCamera(NULL), m_bScreenshot(true)
 		{
 		}
 
@@ -83,6 +83,10 @@ namespace sfgmk
 			//Affichage fenetre
 			m_RenderWindow->draw(m_RenderSprite);
 			m_RenderWindow->display();
+
+			//Screenshot
+			if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::F12) == KEY_PRESSED )
+				screenshot();
 		}
 
 
@@ -180,23 +184,38 @@ namespace sfgmk
 		}
 
 
-		/*void GraphicManager::screenshot()
+		bool GraphicManager::screenshot()
 		{
-			m_ScreenshotImage = m_MainRenderWindow->capture();
+			if( m_bScreenshot )
+			{
+				m_bScreenshot = false;
+	
+				m_ScreenshotImage = m_RenderWindow->capture();
+				m_ScreenshotThread = new std::thread(&GraphicManager::screenshotSave, this);
 
-			time_t ttSecondes = 0;
+				return true;
+			}
+
+			return false;
+		}
+
+		void GraphicManager::screenshotSave()
+		{
+			time_t ttSecondes;
 			struct tm TimeSave;
 			FILE* fSave = NULL;
-			char cNomFichier[sizeof("%d-%d-%d_%dh%dm%ds.png")] = { '\0' };
-			std::string sFileName = SFGMK_DATA_PATH + "screenshot/";
-
+			char cNomFichier[64] = { '\0' };
+			std::string sFileName = "../data/screenshot/";
+			
 			//Recuperation date
 			time(&ttSecondes);
-			localtime_s(&TimeSave, &ttSecondes);;
+			localtime_s(&TimeSave, &ttSecondes);
 			sprintf_s(cNomFichier, "%d-%d-%d_%dh%dm%ds.png", TimeSave.tm_year + 1900, TimeSave.tm_mon + 1, TimeSave.tm_mday, TimeSave.tm_hour, TimeSave.tm_min, TimeSave.tm_sec);
 			sFileName += cNomFichier;
-
+		
 			m_ScreenshotImage.saveToFile(sFileName);
-		}*/
+		
+			m_bScreenshot = true;
+		}
 	}
 }

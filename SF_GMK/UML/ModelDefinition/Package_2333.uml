@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="0d585548-c943-4233-9da4-f73a898c69e5"
+  name="Tools" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="c8d69f40-fcbc-4345-add1-c4c24c7618b0"
+        LastKnownName="Design Patterns"
+        LastKnownLocation="Package1_2333.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="81e252ca-04e9-496e-93a3-b0bf8c6732b6"
+        name="Parser"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3b39e162-25cd-4134-8e54-16511db4a798"
+        name="DynamicArray"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="0fe34981-f77e-4b70-8bc5-09f15656e386"
+        name="FoncterTemplate"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="d4f2134a-46a7-4348-b10c-296f7ea3a947"
+        name="FoncterTemplateArray"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="b9f86345-4207-4509-82d4-ae3035e46d19"
+            isDerived="false"
+            sourceEndRoleName="FoncterTemplateArray"
+            targetEndRoleName="DynamicArray&lt;FoncterTemplate*&gt;"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="3b39e162-25cd-4134-8e54-16511db4a798"
+              LastKnownName="DynamicArray"
+              LastKnownLocation="Package_2333.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e576e587-6bd7-4295-930c-b7848e4e3425"
+                  name="FoncterTemplateArray"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Composite"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3e6ed217-f9a9-4d59-a0ac-82ca97b51c4f"
+                  name="DynamicArray&lt;FoncterTemplate*&gt;"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="true" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="df28f163-4892-417d-8b04-129de006e1fc"
+        name="ThreadTemplate"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>
