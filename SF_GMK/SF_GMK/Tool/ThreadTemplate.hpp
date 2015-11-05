@@ -20,6 +20,11 @@ namespace sfgmk
 			FoncterTemplate* m_Function;
 			bool m_bLaunched;
 
+			inline void Run(Args... _Args)
+			{
+				m_Function->Execute(_Args...);
+			}
+
 		public:
 			ThreadTemplate(FoncterTemplate* _Foncter = NULL) : m_Thread(NULL), m_Function(_Foncter), m_bLaunched(false) {}
 			~ThreadTemplate() { Wait(); SAFE_DELETE(m_Function); }
@@ -42,11 +47,6 @@ namespace sfgmk
 				}
 
 				return false;
-			}
-
-			void Run(Args... _Args)
-			{
-				m_Function->Execute(_Args...);
 			}
 
 			void Wait()
