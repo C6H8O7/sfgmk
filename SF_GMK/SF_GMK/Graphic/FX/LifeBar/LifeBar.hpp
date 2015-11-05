@@ -24,7 +24,7 @@ namespace sfgmk
 			sf::RectangleShape m_GaugeRect;
 			sf::Text m_PvText;
 			sf::Font m_PvFont;
-			std::string m_PvString;
+			std::string m_sPvString;
 
 			float m_fPvRatio;
 			sf::Vector2f m_Scale;

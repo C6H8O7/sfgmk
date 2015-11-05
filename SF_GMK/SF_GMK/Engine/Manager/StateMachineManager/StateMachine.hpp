@@ -31,7 +31,7 @@ namespace sfgmk
 
 				State *CreateState(int _id);
 
-				void init(int _id);
+				void init(int _id, int _StateToLoadId = 0);
 				void update();
 				bool changeState(int _id, int _StateToLoadId = 0);
 

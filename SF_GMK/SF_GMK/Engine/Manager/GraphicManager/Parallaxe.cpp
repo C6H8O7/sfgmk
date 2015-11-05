@@ -2,7 +2,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		Parallaxe::Parallaxe() : m_iEntityIndex(0), m_iDrawAccount(0)
+		Parallaxe::Parallaxe() : m_iEntityIndex(0), m_iDrawAccount(0), m_uiLastLoadLevelDataAccount(0U)
 		{
 		}
 
@@ -146,6 +146,8 @@ namespace sfgmk
 			DIR* LevelRepertory = NULL;
 			struct dirent* ReadFile = NULL;
 
+			m_uiLastLoadLevelDataAccount = 0U;
+
 			//Path
 			std::string sDirpath = _DirPath + "/layer";
 			const char* cLayerFilePath = sDirpath.c_str();
@@ -215,11 +217,17 @@ namespace sfgmk
 
 					//Insertion dans la multimap
 					m_Layers.insert(std::pair<int, sLAYER_ELEMENT*>(iPositionZ, NewLayer));
+					m_uiLastLoadLevelDataAccount++;
 				}
 				closedir(LevelRepertory);
 				return true;
 			}
 			return false;
+		}
+
+		const unsigned int& Parallaxe::getLastLoadLevelDataAccount()
+		{
+			return m_uiLastLoadLevelDataAccount;
 		}
 
 		bool Parallaxe::unloadLevel(std::string _DirPath)

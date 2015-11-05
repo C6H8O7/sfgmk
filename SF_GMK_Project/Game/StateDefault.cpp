@@ -11,8 +11,6 @@ using namespace sfgmk;
 
 StateDefault::StateDefault()
 {
-	DATA_MANAGER->loadLevel(m_sRessourcesPath);
-	PARALLAXE.loadLevel(m_sRessourcesPath);
 }
 
 StateDefault::~StateDefault()
@@ -20,6 +18,7 @@ StateDefault::~StateDefault()
 	ENTITY_MANAGER->freeEntityVector();
 	DATA_MANAGER->unloadLevel(m_sRessourcesPath);
 	PARALLAXE.unloadLevel(m_sRessourcesPath);
+	SOUND_MANAGER->unloadLevel(m_sRessourcesPath);
 }
 
 
@@ -47,8 +46,6 @@ void StateDefault::init()
 
 void StateDefault::update()
 {
-	if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::U) == sfgmk::engine::KEY_PRESSED )
-		CHANGE_STATE(sfgmk::eSTATES::eStateLoading, sfgmk::eSTATES::eStateDefault);
 }
 
 void StateDefault::deinit()

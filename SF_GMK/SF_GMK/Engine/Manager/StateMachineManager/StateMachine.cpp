@@ -22,8 +22,11 @@ namespace sfgmk
 			return conv._statefunc();
 		}
 
-		void StateMachine::init(int _id)
+		void StateMachine::init(int _id, int _StateToLoadId)
 		{
+			//Id du prochain state si on est en train d'utiliser un state loading
+			m_iStateToLoad = _StateToLoadId;
+
 			m_CurrentState = CreateState(_id);
 			m_CurrentState->init();
 		}
@@ -37,7 +40,7 @@ namespace sfgmk
 		{
 			//Id du prochain state si on est en train d'utiliser un state loading
 			m_iStateToLoad = _StateToLoadId;
-
+		
 			State* CurrentState = m_CurrentState;
 			StateOptions& Options = CurrentState->getOptions();
 			bool bDeinit(false);
@@ -53,7 +56,7 @@ namespace sfgmk
 					m_CurrentState->getChild() = 0;
 				}
 			}
-
+		
 			bool bGotoParent(false);
 			if (!(bGotoParent = Options.goToParent))
 			{
@@ -71,14 +74,14 @@ namespace sfgmk
 						newState->getParent() = CurrentState->getParent();
 				}
 			}
-
+			
 			if (!Options.isContinuing && !Options.deinitAfter)
 			{
 				bDeinit = true;
 				CurrentState->deinit();
 				delete CurrentState;
 			}
-
+		
 			if (!bGotoParent)
 				m_CurrentState->init();
 

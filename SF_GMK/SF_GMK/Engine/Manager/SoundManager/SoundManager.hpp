@@ -38,6 +38,7 @@ namespace sfgmk
 			bool loadSound(char* _FilePath, char* _SoundName = NULL, int _FmodMode = FMOD_3D);
 			bool unloadSound(char* _SoundName);
 			bool loadLevel(const std::string& _Dir);
+			const unsigned int& getLastLoadLevelDataAccount();
 			bool unloadLevel(std::string _Dir);
 			void unloadAll();
 
@@ -96,6 +97,8 @@ namespace sfgmk
 			bool m_bBeat;
 			float fBeatTimer;
 			sf::RectangleShape m_RecShape;
+
+			unsigned int m_uiLastLoadLevelDataAccount;
 		};
 	}
 }

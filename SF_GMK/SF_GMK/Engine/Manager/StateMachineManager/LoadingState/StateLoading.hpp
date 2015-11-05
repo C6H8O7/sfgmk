@@ -16,7 +16,7 @@ namespace sfgmk
 	{
 		class SFGMK_API StateLoading : public State
 		{
-			private:
+			protected:
 				enum eSTATE_LOADING_DATA_TYPE
 				{
 					eLevel = 0,
@@ -25,26 +25,33 @@ namespace sfgmk
 					eSTATE_LOADING_DATA_TYPE_NUMBER
 				};
 
-				bool m_bThreadsLaunched;
-
-				void ThreadLevel();
-				void ThreadAsset();
-				void ThreadSound();
-
-			protected:
 				int m_iStateToLoadId;
 				std::string m_sStateToLoadDataPath;
 
 				ThreadTemplate<const std::string&> m_LoadThreads[eSTATE_LOADING_DATA_TYPE_NUMBER];
+				std::thread* m_WaitForLoadThread;
+				bool m_bThreadsLaunched;
+				bool m_bLoadThreadsOver;
 
 				struct sLOADING_RESSOURCE
 				{
+					std::string sRessourcesName;
 					unsigned int uiRessourceToLoad;
 					unsigned int uiRessourceLoaded;
 				}m_RessourcesCounters[eSTATE_LOADING_DATA_TYPE_NUMBER];
 
+				sf::RenderTexture m_RenderTexture;
 				sf::Texture m_ButtonTexture[2];
+				Sprite m_Sprite;
+				sf::Text m_Text;
 				sf::Font m_Font;
+				float m_fAngle;
+
+				sf::RectangleShape m_BarRect;
+				sf::RectangleShape m_GaugeRect;
+				sf::Text m_LoadText;
+				sf::Font m_LoadFont;
+				std::string m_sLoadString;
 
 			public:
 				StateLoading();
@@ -55,6 +62,8 @@ namespace sfgmk
 				virtual void deinit();
 
 				virtual void draw();
+
+				void WaitForLoadThreads();
 		};
 	}
 }

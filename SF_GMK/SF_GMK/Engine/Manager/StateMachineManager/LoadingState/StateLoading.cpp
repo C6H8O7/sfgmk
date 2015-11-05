@@ -2,11 +2,27 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		StateLoading::StateLoading() : m_iStateToLoadId(STATE_MACHINE->getStateToLoadId()), m_sStateToLoadDataPath(STATE_MACHINE_MANAGER->getStateRessourcePath(m_iStateToLoadId)), m_bThreadsLaunched(false)
+		StateLoading::StateLoading() : m_iStateToLoadId(STATE_MACHINE->getStateToLoadId()), m_sStateToLoadDataPath(STATE_MACHINE_MANAGER->getStateRessourcePath(m_iStateToLoadId)), m_bThreadsLaunched(false), m_bLoadThreadsOver(false), m_fAngle(0.0f), m_sLoadString("")
 		{
+			m_RessourcesCounters[eLevel].sRessourcesName = "Layers";
+			m_RessourcesCounters[eAsset].sRessourcesName = "Assets";
+			m_RessourcesCounters[eSound].sRessourcesName = "Sons";
+
 			m_ButtonTexture[0] = DATA_MANAGER->getTexture("sfgmk_toucheEnter");
 			m_ButtonTexture[1] = DATA_MANAGER->getTexture("sfgmk_buttonA");
 			m_Font = DATA_MANAGER->getFont("sfgmk_Fipps-Regular");
+
+			//Barres de progression
+			m_LoadFont = DATA_MANAGER->getFont("sfgmk_ConsoleFont1");
+			m_LoadText.setFont(m_LoadFont);
+			m_LoadText.setCharacterSize(22);
+			m_LoadText.setColor(sf::Color::Black);
+
+			m_BarRect.setOutlineThickness(2.0f);
+			m_BarRect.setOutlineColor(sf::Color::Black);
+			m_BarRect.setFillColor(sf::Color::White);
+
+			m_GaugeRect.setOutlineThickness(0);
 		}
 
 		StateLoading::~StateLoading()
@@ -16,6 +32,18 @@ namespace sfgmk
 
 		void StateLoading::init()
 		{
+			//Rendu
+			unsigned int uiTextSize = 32U;
+			sf::Vector2f TextRectSize;
+			m_Text.setFont(m_Font);
+			m_Text.setCharacterSize(uiTextSize);
+			m_Text.setString("Press      or    to continue");
+			m_Text.setColor(sf::Color(150, 150, 150, 255));
+			m_Text.setPosition(sf::Vector2f(0.0f, (float)uiTextSize * 0.25f));
+			TextRectSize = sf::Vector2f(m_Text.getLocalBounds().width, m_Text.getLocalBounds().height);
+
+			m_RenderTexture.create((unsigned int)TextRectSize.x, (unsigned int)TextRectSize.y);
+
 			//Calcule le nombre de fichiers à charger
 			m_RessourcesCounters[eLevel].uiRessourceLoaded = 0;
 			m_RessourcesCounters[eLevel].uiRessourceToLoad = getNumberOfFileInDir(m_sStateToLoadDataPath + "/layer");
@@ -42,30 +70,32 @@ namespace sfgmk
 
 		void StateLoading::update()
 		{
-			std::cout << "		UP		" << std::endl;
-
 			if( !m_bThreadsLaunched )
 			{
 				m_LoadThreads[eLevel].Launch(m_sStateToLoadDataPath);
 				m_LoadThreads[eAsset].Launch(m_sStateToLoadDataPath);
 				m_LoadThreads[eSound].Launch(m_sStateToLoadDataPath);
+
 				m_bThreadsLaunched = true;
-				std::cout << "LAUNCH THREADS" << std::endl;
+				m_WaitForLoadThread = new std::thread(&StateLoading::WaitForLoadThreads, this);
 			}
 
-			m_LoadThreads[eLevel].Wait();
-			m_LoadThreads[eAsset].Wait();
-			m_LoadThreads[eSound].Wait();
-
-			std::cout << "THREADS finis" << std::endl;
-
-			//Threads terminés, permet de passer à l'état suivant
-/*			else if( m_bThreadOver )
+			//Chargement terminé, on peut passer à l'état suivant
+			if( m_bLoadThreadsOver )
 			{
+				//Clignotement du texte
+				m_fAngle += PI_2 * TIME_DELTA;
+
+				//Input
 				if( INPUT_MANAGER->getKeyboard().getKeyState(sf::Keyboard::Return) == KEY_PRESSED
 				   || JOYSTICK_GET_BUTTON(0, BUTTON_A) == KEY_PRESSED )
 					CHANGE_STATE(m_iStateToLoadId);
-			}*/
+			}
+
+			//Update counters
+			m_RessourcesCounters[eLevel].uiRessourceLoaded = PARALLAXE.getLastLoadLevelDataAccount();
+			m_RessourcesCounters[eAsset].uiRessourceLoaded = DATA_MANAGER->getLastLoadLevelDataAccount();
+			m_RessourcesCounters[eSound].uiRessourceLoaded = SOUND_MANAGER->getLastLoadLevelDataAccount();
 		}
 
 		void StateLoading::deinit()
@@ -75,79 +105,75 @@ namespace sfgmk
 
 		void StateLoading::draw()
 		{
-			//Affiche les touches à presser pour passer à l'état suivant
-			/*if( m_bThreadOver )
+			sf::RenderTexture* MainRenderTexture(GRAPHIC_MANAGER->getRenderTexture());
+			sf::Vector2u MainRenderTextureSize = MainRenderTexture->getSize();
+
+			//Clear texture
+			m_RenderTexture.clear(EMPTY_COLOR);
+
+			//Barres de progression
+			for( int i(0); i < eSTATE_LOADING_DATA_TYPE_NUMBER; i++ )
 			{
-				sf::RenderTexture* MainRenderTexture(GRAPHIC_MANAGER->getRenderTexture());
-				sf::Vector2u MainRenderTextureSize = MainRenderTexture->getSize();
-				Sprite Sprite;
-				unsigned int uiTextSize = 32U;
-				sf::Vector2f TextRectSize;
-				sf::Vector2f WindowSizeRatio(MainRenderTextureSize.x / 1920.0f, MainRenderTextureSize.y / 1080.0f);
+				m_BarRect.setSize(sf::Vector2f((float)MainRenderTextureSize.x * 0.25f, 26.0f));
+				m_GaugeRect.setSize(m_BarRect.getSize());
 
-				//Clignotement du texte
-				m_fAngle += PI_2 * TIME_DELTA;
-				unsigned int uiAlpha = (unsigned int)(255 * ABS(cos(m_fAngle)));
+				float fRatio = 1.0f;
+				if( m_RessourcesCounters[i].uiRessourceToLoad != 0 )
+					fRatio = m_RessourcesCounters[i].uiRessourceLoaded / m_RessourcesCounters[i].uiRessourceToLoad;
+				sf::Vector2f GaugeScale(fRatio, 1.0f);
 
-				//Création texte
-				sf::Text Text("Press      or    to continue", m_Font, uiTextSize);
-				Text.setColor(sf::Color(150, 150, 150, 255));
-				Text.setPosition(sf::Vector2f(0.0f, (float)uiTextSize * 0.25f));
-				TextRectSize = sf::Vector2f(Text.getLocalBounds().width, Text.getLocalBounds().height);
-
-				//Init texture de rendu à la bonne taille lors du premier appel
-				if( !m_bRenderTextureCreated )
+				//Gauge color
+				if( fRatio > 0.5f )
+					m_GaugeRect.setFillColor(sf::Color::Green);
+				else
 				{
-					m_bRenderTextureCreated = true;
-					m_RenderTexture.create((unsigned int)TextRectSize.x, (unsigned int)TextRectSize.y);
+					if( fRatio > 0.25f )
+						m_GaugeRect.setFillColor(sf::Color(255, 140, 0, 255));
+					else
+						m_GaugeRect.setFillColor(sf::Color::Red);
 				}
 
-				//Clear texture
-				m_RenderTexture.clear(sf::Color(0, 0, 0, 0));
+				m_LoadText.setString(m_RessourcesCounters[i].sRessourcesName + ": " + std::to_string(m_RessourcesCounters[i].uiRessourceLoaded) + "/" + std::to_string(m_RessourcesCounters[i].uiRessourceToLoad));
 
+				m_BarRect.setPosition(sf::Vector2f(MainRenderTextureSize.x * 0.5f - m_BarRect.getSize().x * 0.5f, MainRenderTextureSize.y - m_BarRect.getSize().y * (eSTATE_LOADING_DATA_TYPE_NUMBER - (i - 1)) - 10.0f * (eSTATE_LOADING_DATA_TYPE_NUMBER - i)));
+				MainRenderTexture->draw(m_BarRect);
+				m_GaugeRect.setPosition(m_BarRect.getPosition());
+				MainRenderTexture->draw(m_GaugeRect);
+				m_LoadText.setPosition(m_BarRect.getPosition() + sf::Vector2f(m_BarRect.getSize().x * 0.5f - m_LoadText.getGlobalBounds().width * 0.5f, m_BarRect.getSize().y * 0.5f - m_LoadText.getGlobalBounds().height * 0.5f));
+				MainRenderTexture->draw(m_LoadText);
+			}
+
+			//Affiche les touches à presser pour passer à l'état suivant
+			if( m_bLoadThreadsOver )
+			{
 				//Draw et finalisation du rendu
-				Sprite.setTexture(m_ButtonTexture[0], true);
-				Sprite.setPosition(sf::Vector2f(170.0f, 0.0f));
-				m_RenderTexture.draw(Sprite);
-				Sprite.setTexture(m_ButtonTexture[1], true);
-				Sprite.setPosition(sf::Vector2f(300.0f, -10.0f));
-				m_RenderTexture.draw(Sprite);
-				m_RenderTexture.draw(Text);
+				m_Sprite.setTexture(m_ButtonTexture[0], true);
+				m_Sprite.setPosition(sf::Vector2f(170.0f, 0.0f));
+				m_RenderTexture.draw(m_Sprite);
+
+				m_Sprite.setTexture(m_ButtonTexture[1], true);
+				m_Sprite.setPosition(sf::Vector2f(300.0f, -10.0f));
+				m_RenderTexture.draw(m_Sprite);
+
+				m_RenderTexture.draw(m_Text);
 				m_RenderTexture.display();
 
 				//Draw dans le rendu principal
-				Sprite.setTexture(m_RenderTexture.getTexture(), true);
-				Sprite.setScale(WindowSizeRatio.x, WindowSizeRatio.y);
-				Sprite.setColor(sf::Color(255, 255, 255, uiAlpha));
-				Sprite.setPosition((MainRenderTextureSize.x * 0.5f - TextRectSize.x * 0.5f * WindowSizeRatio.x), (MainRenderTextureSize.y - 2.5f * TextRectSize.y * WindowSizeRatio.y));
-				GRAPHIC_MANAGER->getRenderTexture()->draw(Sprite);
-			}*/
+				m_Sprite.setTexture(m_RenderTexture.getTexture(), true);
+				m_Sprite.setColor(sf::Color(255, 255, 255, (unsigned int)(255 * ABS(cos(m_fAngle)))));
+				m_Sprite.setPosition(sf::Vector2f(MainRenderTextureSize.x * 0.5f - m_Sprite.getSize().x * 0.5f, MainRenderTextureSize.y - m_Sprite.getSize().y * 2.75f));
+				GRAPHIC_MANAGER->getRenderTexture()->draw(m_Sprite);
+			}
 		}
 
 
-		
-			/*std::lock_guard<std::mutex> Lock(m_Mutex);
+		void StateLoading::WaitForLoadThreads()
+		{
+			m_LoadThreads[eLevel].Wait();
+			m_LoadThreads[eAsset].Wait();
+			m_LoadThreads[eSound].Wait();
 
-			unsigned int uiCounter(0u);
-
-			for( int i(0); i < eSTATE_LOADING_DATA_TYPE_NUMBER; i++ )
-			{
-				//Sécurité division par 0
-				if( m_iRessourcesCounter[i].iRessourceToLoad == 0 )
-					m_iLoadingPercentage[i] = 100;
-
-				//Calcul pourcentage chargé
-				else
-					m_iLoadingPercentage[i] = (int)((float)m_iRessourcesCounter[i].iRessourceLoaded / (float)m_iRessourcesCounter[i].iRessourceToLoad * 100.0f);
-
-				//Compte les chargements terminés
-				if( m_iRessourcesCounter[i].iRessourceLoaded == m_iRessourcesCounter[i].iRessourceToLoad )
-					uiCounter++;
-			}
-
-			//Si tous les chargements terminés, on signale que le passage à l'état suivant est ok
-			if( uiCounter == eSTATE_LOADING_DATA_TYPE_NUMBER )
-				m_bLoadOver = true;*/
-		
+			m_bLoadThreadsOver = true;
+		}
 	}
 }

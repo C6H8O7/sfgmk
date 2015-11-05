@@ -45,6 +45,7 @@ namespace sfgmk
 				void drawLayers(int _MaxZ, int _MinZ);
 
 				bool loadLevel(const std::string& _DirPath);
+				const unsigned int& getLastLoadLevelDataAccount();
 				bool unloadLevel(std::string _DirPath);
 				void unloadAll();
 
@@ -64,6 +65,8 @@ namespace sfgmk
 				int m_iEntityIndex;
 
 				int m_iDrawAccount;
+
+				unsigned int m_uiLastLoadLevelDataAccount;
 		};
 	}
 }

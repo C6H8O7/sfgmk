@@ -2,7 +2,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		DataManager::DataManager()
+		DataManager::DataManager() : m_uiLastLoadLevelDataAccount(0U)
 		{
 			sf::Image image;
 			image.create(64U, 64U, sf::Color(255, 0, 255, 255));
@@ -323,6 +323,8 @@ namespace sfgmk
 			struct dirent* ReadFile = NULL;
 			bool bReturn(true);
 
+			m_uiLastLoadLevelDataAccount = 0U;
+
 			//Textures
 			std::string DataDir = _DirPath + "/texture";
 			LevelRepertory = opendir(DataDir.c_str());
@@ -346,6 +348,7 @@ namespace sfgmk
 					std::string Name = ReadFile->d_name;
 					Name = Name.substr(0, Name.find('.'));
 					loadRessource(TYPE_IMAGE, Name, DataDir + '/' + ReadFile->d_name);
+					m_uiLastLoadLevelDataAccount++;
 				}
 				closedir(LevelRepertory);
 			}
@@ -374,6 +377,7 @@ namespace sfgmk
 					std::string Name = ReadFile->d_name;
 					Name = Name.substr(0, Name.find('.'));
 					loadRessource(TYPE_ANIM, Name, DataDir + '/' + ReadFile->d_name);
+					m_uiLastLoadLevelDataAccount++;
 				}
 				closedir(LevelRepertory);
 			}
@@ -402,6 +406,7 @@ namespace sfgmk
 					std::string Name = ReadFile->d_name;
 					Name = Name.substr(0, Name.find('.'));
 					loadRessource(TYPE_FONT, Name, DataDir + '/' + ReadFile->d_name);
+					m_uiLastLoadLevelDataAccount++;
 
 				}
 				closedir(LevelRepertory);
@@ -435,11 +440,17 @@ namespace sfgmk
 						ShaderType = TYPE_SHADER_VERTEX;
 					Name = Name.substr(0, Name.find('.'));
 					loadRessource(ShaderType, Name, DataDir + '/' + ReadFile->d_name);
+					m_uiLastLoadLevelDataAccount++;
 				}
 				closedir(LevelRepertory);
 			}
 
 			return bReturn;
+		}
+
+		const unsigned int& DataManager::getLastLoadLevelDataAccount()
+		{
+			return m_uiLastLoadLevelDataAccount;
 		}
 
 		bool DataManager::unloadLevel(const std::string& _DirPath)

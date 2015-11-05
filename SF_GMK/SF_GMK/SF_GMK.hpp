@@ -151,43 +151,44 @@ namespace sfgmk
 	#define DATA_PATH std::string("../data/sfgmk")
 
 	//Core
-	#define CORE						engine::Core::getSingleton()
-	#define TIME_DELTA					CORE->getTimeDelta()
+	#define CORE							engine::Core::getSingleton()
+	#define TIME_DELTA						CORE->getTimeDelta()
 
 	//Managers
-	#define DATA_MANAGER				engine::DataManager::getSingleton()
-	#define DEBUG_MANAGER				engine::DebugManager::getSingleton()
-	#define ENTITY_MANAGER				engine::EntityManager::getSingleton()
-	#define GRAPHIC_MANAGER				engine::GraphicManager::getSingleton()
-	#define INPUT_MANAGER				engine::InputManager::getSingleton()
-	#define PHYSIC_MANAGER				engine::PhysicManager::getSingleton()
-	#define SOUND_MANAGER				engine::SoundManager::getSingleton()
-	#define STATE_MACHINE_MANAGER		engine::StateMachineManager::getSingleton()
+	#define DATA_MANAGER					engine::DataManager::getSingleton()
+	#define DEBUG_MANAGER					engine::DebugManager::getSingleton()
+	#define ENTITY_MANAGER					engine::EntityManager::getSingleton()
+	#define GRAPHIC_MANAGER					engine::GraphicManager::getSingleton()
+	#define INPUT_MANAGER					engine::InputManager::getSingleton()
+	#define PHYSIC_MANAGER					engine::PhysicManager::getSingleton()
+	#define SOUND_MANAGER					engine::SoundManager::getSingleton()
+	#define STATE_MACHINE_MANAGER			engine::StateMachineManager::getSingleton()
 	
-	#define ADD_ENTITY(a)				sfgmk::engine::EntityManager::getSingleton()->addEntity(a)
-	#define FREE_ENTITY_VECTOR			sfgmk::engine::EntityManager::getSingleton()->freeEntityVector()
-	#define CAMERA						sfgmk::engine::GraphicManager::getSingleton()->getCurrentCamera()
-	#define CONSOLE						DEBUG_MANAGER->getConsole()
-	#define PARALLAXE					GRAPHIC_MANAGER->getParallaxe()
+	#define ADD_ENTITY(a)					sfgmk::engine::EntityManager::getSingleton()->addEntity(a)
+	#define FREE_ENTITY_VECTOR				sfgmk::engine::EntityManager::getSingleton()->freeEntityVector()
+	#define CAMERA							sfgmk::engine::GraphicManager::getSingleton()->getCurrentCamera()
+	#define CONSOLE							DEBUG_MANAGER->getConsole()
+	#define PARALLAXE						GRAPHIC_MANAGER->getParallaxe()
 
 	//States
-	#define CHANGE_STATE(a, b)			STATE_MACHINE_MANAGER->getStateMachine()->changeState(a, b);
-	#define STATE_MACHINE				STATE_MACHINE_MANAGER->getStateMachine()
-	#define CURRENT_STATE				STATE_MACHINE_MANAGER->getStateMachine()->Get_CurrentState()
+	#define CHANGE_STATE(a)					STATE_MACHINE_MANAGER->getStateMachine()->changeState(a);
+	#define CHANGE_STATE_WITH_LOADING(a, b)	STATE_MACHINE_MANAGER->getStateMachine()->changeState(a, b);
+	#define STATE_MACHINE					STATE_MACHINE_MANAGER->getStateMachine()
+	#define CURRENT_STATE					STATE_MACHINE_MANAGER->getStateMachine()->Get_CurrentState()
 
 	//Keyboard
-	#define KEYBOARD					getKeyboard()
-	#define KEYBOARD_KEY(a)				KEYBOARD.getKeyState(a)
+	#define KEYBOARD						getKeyboard()
+	#define KEYBOARD_KEY(a)					KEYBOARD.getKeyState(a)
 
 	//Mouse
-	#define MOUSE						INPUT_MANAGER->getMouse()
-	#define MOUSE_WINDOW_POS			MOUSE.getWindowPosition()
-	#define MOUSE_WORLD_POS				MOUSE.getWorldPosition()
+	#define MOUSE							INPUT_MANAGER->getMouse()
+	#define MOUSE_WINDOW_POS				MOUSE.getWindowPosition()
+	#define MOUSE_WORLD_POS					MOUSE.getWorldPosition()
 
 	//Joystick
-	#define JOYSTICK(a)					INPUT_MANAGER->getJoystick(a)
-	#define JOYSTICK_GET_BUTTON(a, b)	JOYSTICK(a).getButtonState(b)
-	#define JOYSTICK_GET_AXIS(a, b)		JOYSTICK(a).getAxis(b)   
+	#define JOYSTICK(a)						INPUT_MANAGER->getJoystick(a)
+	#define JOYSTICK_GET_BUTTON(a, b)		JOYSTICK(a).getButtonState(b)
+	#define JOYSTICK_GET_AXIS(a, b)			JOYSTICK(a).getAxis(b)   
 
 	//Manette XBOX-360
 	#define BUTTON_A 0

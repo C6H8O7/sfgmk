@@ -2,7 +2,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		SoundManager::SoundManager() : m_3DMinDistanceDefault(MIN_3D_DISTANCE_DEFAULT), m_3DMaxDistanceDefault(MAX_3D_DISTANCE_DEFAULT), m_bAnalyze(false), m_iChannelToAnalyze(0), m_bBeat(false)
+		SoundManager::SoundManager() : m_3DMinDistanceDefault(MIN_3D_DISTANCE_DEFAULT), m_3DMaxDistanceDefault(MAX_3D_DISTANCE_DEFAULT), m_bAnalyze(false), m_iChannelToAnalyze(0), m_bBeat(false), m_uiLastLoadLevelDataAccount(0U)
 		{
 			//Initialisation FMOD System
 			FMOD::System_Create(&m_SoundSystem);
@@ -225,6 +225,11 @@ namespace sfgmk
 			}
 
 			return bReturn;
+		}
+
+		const unsigned int& SoundManager::getLastLoadLevelDataAccount()
+		{
+			return m_uiLastLoadLevelDataAccount;
 		}
 
 		bool SoundManager::unloadLevel(std::string _Dir)

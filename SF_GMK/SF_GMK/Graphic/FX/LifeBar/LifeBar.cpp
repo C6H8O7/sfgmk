@@ -1,6 +1,6 @@
 namespace sfgmk
 {
-	LifeBar::LifeBar(const sf::IntRect& _EntityRect, const bool& _DrawText) : m_bDrawPv(_DrawText), m_PvString(""), m_fPvRatio(0.0f), m_Scale(sf::Vector2f(1.0f, 1.0f)), m_GaugeScale(sf::Vector2f(1.0f, 1.0f))
+	LifeBar::LifeBar(const sf::IntRect& _EntityRect, const bool& _DrawText) : m_bDrawPv(_DrawText), m_sPvString(""), m_fPvRatio(0.0f), m_Scale(sf::Vector2f(1.0f, 1.0f)), m_GaugeScale(sf::Vector2f(1.0f, 1.0f))
 	{
 		m_BarRect.setSize(sf::Vector2f((float)_EntityRect.width, 10.0f));
 		m_BarRect.setOutlineThickness(2.0f);

@@ -33,6 +33,8 @@ namespace sfgmk
 
 				std::map<std::string, sf::Shader*> m_ShaderMap;
 
+				unsigned int m_uiLastLoadLevelDataAccount;
+
 			public:
 				enum eResourceType
 				{
@@ -82,6 +84,7 @@ namespace sfgmk
 
 				bool loadRessource(const eResourceType& _DataType, std::string _Name, std::string _FilePath);
 				bool loadLevel(const std::string& _DirPath);
+				const unsigned int& getLastLoadLevelDataAccount();
 				bool unloadLevel(const std::string& _DirPath);
 				void unloadAll();
 		};
