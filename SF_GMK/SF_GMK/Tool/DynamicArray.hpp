@@ -84,7 +84,7 @@ namespace sfgmk
 
 			const unsigned int& DynamicArray::getSize()
 			{
-				return m_iSize;
+				return m_uiSize;
 			}
 
 

@@ -119,7 +119,7 @@ namespace sfgmk
 
 				float fRatio = 1.0f;
 				if( m_RessourcesCounters[i].uiRessourceToLoad != 0 )
-					fRatio = m_RessourcesCounters[i].uiRessourceLoaded / m_RessourcesCounters[i].uiRessourceToLoad;
+					fRatio = (float)(m_RessourcesCounters[i].uiRessourceLoaded / m_RessourcesCounters[i].uiRessourceToLoad);
 				sf::Vector2f GaugeScale(fRatio, 1.0f);
 
 				//Gauge color
