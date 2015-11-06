@@ -47,7 +47,7 @@ namespace sfgmk
 		{
 			m_Sprite->finalize(_TimeDelta);
 
-			m_Sprite->setRelativeOrigin(m_VirtualTransform.getOrigin().x, m_VirtualTransform.getOrigin().y);
+			m_Sprite->setOrigin(m_VirtualTransform.getOrigin());
 			m_Sprite->setScale(m_VirtualTransform.getScale());
 			m_Sprite->setRotation(m_VirtualTransform.getRotation());
 			m_Sprite->setPosition(m_VirtualTransform.getPosition());
@@ -156,11 +156,14 @@ namespace sfgmk
 
 	sf::Vector2f Entity::getCenter()
 	{
-		sf::Vector2f Size = m_Sprite->getSize();
 		sf::Vector2f Origin = getOrigin();
-		sf::Vector2f Position = getPosition();
+		Origin.x *= getScale().x;
+		Origin.y *= getScale().y;
 
-		return sf::Vector2f(Position.x + ((0.5f - Origin.x) * Size.x), Position.y + ((0.5f - Origin.y) * Size.y));
+		sf::Vector2f Position = getPosition();
+		sf::Vector2f Size = m_Sprite->getSize();
+
+		return sf::Vector2f(Position.x - Origin.x + Size.x / 2.0f, Position.y - Origin.y + Size.y / 2.0f);
 	}
 
 	sf::Vector3f Entity::getPosition3D()

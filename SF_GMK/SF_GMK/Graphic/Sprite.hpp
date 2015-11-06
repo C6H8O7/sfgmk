@@ -21,7 +21,7 @@ namespace sfgmk
 
 			void setAnimation(Animation& _animation);
 
-			void setRelativeOrigin(float _rox, float _roy);
+			void setRelativOrigin(float _rox, float _roy);
 
 			sf::Vector2f getCenter();
 			sf::Vector2f getSize();

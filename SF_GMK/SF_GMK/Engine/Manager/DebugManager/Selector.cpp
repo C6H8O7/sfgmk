@@ -92,7 +92,7 @@ namespace sfgmk
 
 		void Selector::onPhysicExit()
 		{
-			printf("Selected entities = %d\n", m_SelectedEntities.getElementNumber());
+			
 		}
 	}
 }

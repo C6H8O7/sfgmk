@@ -14,7 +14,7 @@ namespace sfgmk
 		m_Animation = 0;
 
 		if( m_isAnim )
-			setAnimation(DATA_MANAGER->getAnimation(_resName));
+			setAnimation(dataman->getAnimation(_resName));
 		else
 			sf::Sprite::setTexture(dataman->getTexture(_resName));
 	}
@@ -40,9 +40,9 @@ namespace sfgmk
 		m_Animation->update(*this, 0.0f);
 	}
 
-	void Sprite::setRelativeOrigin(float _rox, float _roy)
+	void Sprite::setRelativOrigin(float _rox, float _roy)
 	{
-		sf::FloatRect rec = getLocalBounds();
+		const sf::IntRect& rec = getTextureRect();
 
 		return setOrigin(rec.width * _rox, rec.height * _roy);
 	}
@@ -54,7 +54,7 @@ namespace sfgmk
 
 	sf::Vector2f Sprite::getSize()
 	{
-		return sf::Vector2f((float)getTextureRect().width, (float)getTextureRect().height);
+		return sf::Vector2f(getGlobalBounds().width, getGlobalBounds().height);
 	}
 
 	void Sprite::FinalizeSprite(float _timeDelta)

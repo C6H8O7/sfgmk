@@ -17,8 +17,8 @@ namespace sfgmk
 
 		float SphereCollider::getWorldRadius()
 		{
-			sf::Vector2f Scale = m_Entity->getScale();
-			return m_fRadius * MAX(Scale.x, Scale.y);
+			const sf::Vector2f& scale = m_Entity->getScale();
+			return m_fRadius * MAX(scale.x, scale.y);
 		}
 
 		float SphereCollider::getSquaredWorldRadius()

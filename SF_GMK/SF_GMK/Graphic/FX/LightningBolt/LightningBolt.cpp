@@ -5,7 +5,7 @@ namespace sfgmk
 		{
 			m_Sprite = new Sprite();
 			m_Sprite->setTexture(DATA_MANAGER->getTexture("sfgmk_lightningCorpse"));
-			m_Sprite->setRelativeOrigin(0.0f, 0.5f);
+			m_Sprite->setRelativOrigin(0.0f, 0.5f);
 
 			//Init
 			sf::Vector2f Tangent = _Destination - math::Convert3dTo2d(_Position);
