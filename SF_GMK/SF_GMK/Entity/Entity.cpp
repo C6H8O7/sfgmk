@@ -1,6 +1,6 @@
 namespace sfgmk
 {
-	Entity::Entity(const int& _Id) : m_iId(_Id), m_bIsAlive(true), m_bIsComputatedByParallax(true), m_bIsScaledByParallax(true), m_fPositionZ(0.0f), m_Sprite(NULL), m_Collider(NULL)
+	Entity::Entity(const int& _Id) : m_iId(_Id), m_bIsAlive(true), m_bIsComputatedByParallax(true), m_bIsScaledByParallax(true), m_fPositionZ(0.0f), m_Sprite(NULL), m_Collider(NULL), m_AI(NULL)
 	{
 	}
 
@@ -21,6 +21,9 @@ namespace sfgmk
 
 	void Entity::update(const float& _TimeDelta)
 	{
+		if (m_AI)
+			m_AI->process(_TimeDelta);
+
 		if( m_Collider )
 			m_Collider->setCollide(false);
 
@@ -254,5 +257,23 @@ namespace sfgmk
 	void Entity::onPhysicExit()
 	{
 
+	}
+
+	engine::AIStateMachine* Entity::getAiFsm()
+	{
+		return m_AI;
+	}
+
+	void Entity::addAiFsm(int _InitState)
+	{
+		m_AI = new engine::AIStateMachine(this, _InitState);
+	}
+
+	bool Entity::addAiState(int _StateId, FoncterTemplate* _NewFunction)
+	{
+		if (!m_AI)
+			return false;
+
+		return m_AI->addState(_StateId, _NewFunction);
 	}
 }
