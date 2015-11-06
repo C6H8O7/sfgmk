@@ -31,6 +31,8 @@ namespace sfgmk
 
 			Collider* m_Collider;
 
+			engine::AIStateMachine* m_AI;
+
 		public:
 			Entity(const int& _Id = 0);
 			Entity(const sf::Vector3f& _Position, const int& _Id = 0);
@@ -76,6 +78,10 @@ namespace sfgmk
 			virtual void onPhysicEnter();
 			virtual void onPhysicCollision(Entity* _entity);
 			virtual void onPhysicExit();
+
+			engine::AIStateMachine* getAiFsm();
+			void addAiFsm(int _InitState = 0);
+			bool addAiState(int _StateId, FoncterTemplate* _NewFunction);
 	};
 }
 

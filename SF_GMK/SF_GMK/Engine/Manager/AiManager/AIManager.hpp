@@ -14,16 +14,24 @@ namespace sfgmk
 {
 	namespace engine
 	{
+		enum eAIState_Progress
+		{
+			eEnter = 0,
+			eUpdate,
+			eExit,
+			eAIState_Progress_NUMBER
+		};
+
 		struct stAIStateFunctions
 		{
-			int iAdvance;
-			FoncterTemplate* CurrentFunc[3];
+			eAIState_Progress StateProgress;
+			FoncterTemplate* CurrentFunc[eAIState_Progress_NUMBER];
 		};
 
 		class AIStateMachine
 		{
 			public:
-				AIStateMachine();
+				AIStateMachine(Entity* _Parent, int _InitState = 0);
 				~AIStateMachine();
 
 			private:
@@ -31,16 +39,12 @@ namespace sfgmk
 				int* m_iNextState;
 				DynamicArray<stAIStateFunctions> m_StatesFunctionsArray;
 
-			public:
-				void update();
-		};
+				Entity* m_EntityParent;
 
-
-		class AIManager
-		{
 			public:
-				AIManager();
-				~AIManager();
+				void process(const float& _TimeDelta);
+
+				bool addState(int _StateId, FoncterTemplate* _NewFunction);
 		};
 	}
 }

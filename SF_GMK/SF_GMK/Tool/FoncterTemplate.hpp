@@ -10,8 +10,14 @@
 #define FONCTER_TEMPLATE_HPP
 
 
+#define CLASS_NULL FoncterTemplateNullInstance
+
 namespace sfgmk
 {
+	class FoncterTemplateNullInstance
+	{
+	};
+
 	class FoncterTemplate
 	{
 		public:
@@ -20,6 +26,7 @@ namespace sfgmk
 
 			//Déclarer ici les prototypes de fonctions
 			virtual inline void Execute() {}
+			virtual inline void Execute(const float&) {}
 			virtual inline bool Execute(const std::string&) { return false; }
 	};
 

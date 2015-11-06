@@ -7,7 +7,7 @@ namespace sfgmk
 			//Commandes console
 			m_Console.registerCommand("/freecam", new sfgmk::FoncterTemplateInstance<Camera, void>(GraphicManager::getSingleton()->getCurrentCamera(), &Camera::setFreeMove), "Camera libre activee\n", "Camera libre desactivee\n");
 			m_Console.registerCommand("/physic", new sfgmk::FoncterTemplateInstance<PhysicManager, void>(PHYSIC_MANAGER, &PhysicManager::setDraw), "Affichage physique activee\n", "Affichage physique desactivee\n");
-			m_Console.registerCommand("/life", new sfgmk::FoncterTemplateInstance<EntityWithPv, void>(&EntityWithPv::setLifeBarDraw), "Affichage vie activee\n", "Affichage vie desactivee\n");
+			m_Console.registerCommand("/life", new sfgmk::FoncterTemplateInstance<CLASS_NULL, void>(&EntityWithPv::setLifeBarDraw), "Affichage vie activee\n", "Affichage vie desactivee\n");
 			m_Console.registerCommand("/selector", new sfgmk::FoncterTemplateInstance<DebugManager, void>(this, &DebugManager::SetSelector), "Selector active\n", "Selector desactive\n");
 		}
 
