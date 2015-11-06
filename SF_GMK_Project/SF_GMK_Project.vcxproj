@@ -279,6 +279,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Goomba.hpp" />
     <ClInclude Include="Game\StateDefault.hpp" />
     <ClInclude Include="Game\IncludesProjet.hpp" />
     <ClInclude Include="stdafx.h" />

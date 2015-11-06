@@ -5,7 +5,6 @@
 #include <omp.h>
 #include <conio.h>
 #include <iostream>
-#include <bitset>
 
 using namespace sfgmk;
 
@@ -21,16 +20,6 @@ StateDefault::~StateDefault()
 	SOUND_MANAGER->unloadLevel(m_sRessourcesPath);
 }
 
-
-/*void GoombaIdle()
-{
-	std::cout << "IDLE" << std::endl;
-}
-
-void GoombaMove()
-{
-	std::cout << "MOVE" << std::endl;
-}*/
 
 void StateDefault::init()
 {
@@ -53,25 +42,9 @@ void StateDefault::init()
 		ADD_ENTITY(entity);
 	}
 
-	//Démo IA
-	enum eGoombaAiState
-	{
-		eIdle = 0,
-		eMove,
-		eGoombaAiState_NUMBER
-	};
-
-	/*sfgmk::FoncterTemplateInstance<CLASS_NULL, void>* PtrIdle = new sfgmk::FoncterTemplateInstance<CLASS_NULL, void>(&GoombaIdle);
-	sfgmk::FoncterTemplateInstance<CLASS_NULL, void>* PtrMove = new sfgmk::FoncterTemplateInstance<CLASS_NULL, void>(&GoombaMove);
-
-	Entity* NewEntity = new Entity(sf::Vector3f(250.0f, 250.0f, 0.0f));
-	NewEntity->getSprite()->setAnimation(DATA_MANAGER->getAnimation("goomba"));
-
-	NewEntity->addAiFsm(eIdle);
-	NewEntity->addAiState(eIdle, PtrIdle);
-	NewEntity->addAiState(eMove, PtrMove);
-	
-	ADD_ENTITY(NewEntity);*/
+	//Démo IA (voir classe Goomba)
+	Goomba* NewCleverGoomba = new Goomba();
+	ADD_ENTITY(NewCleverGoomba);
 }
 
 void StateDefault::update()

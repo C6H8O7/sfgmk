@@ -16,6 +16,8 @@ namespace sfgmk
 		SAFE_DELETE(m_Sprite);
 
 		SAFE_DELETE(m_Collider);
+
+		SAFE_DELETE(m_AI);
 	}
 
 

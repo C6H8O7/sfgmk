@@ -2,16 +2,20 @@
 
 	@author		GMK
 	@date		02/11/2015
-	@brief		Fichier d'entête de l'AI Manager
+	@brief		FSM de l'AI (ATTENTION, implémentation actuelle = 32 states MAXIMUM)
 
 --------------------------------------------------------------------------------------------------*/
 
-#ifndef AI_MANAGER_HPP
-#define AI_MANAGER_HPP
+#ifndef AI_FSM_HPP
+#define AI_FSM_HPP
 
 
 namespace sfgmk
 {
+	#define OnEnter if( _Progress == engine::eEnter )
+	#define OnUpdate else if( _Progress == engine::eUpdate )
+	#define OnExit else if( _Progress == engine::eExit )
+
 	namespace engine
 	{
 		enum eAIState_Progress
@@ -25,24 +29,31 @@ namespace sfgmk
 		struct stAIStateFunctions
 		{
 			eAIState_Progress StateProgress;
-			FoncterTemplate* CurrentFunc[eAIState_Progress_NUMBER];
+			FoncterTemplate* CurrentFunc;
 		};
 
-		class AIStateMachine
+		class SFGMK_API AIStateMachine
 		{
+			friend class Entity;
+
 			public:
 				AIStateMachine(Entity* _Parent, int _InitState = 0);
 				~AIStateMachine();
 
 			private:
 				int m_iState;
-				int* m_iNextState;
-				DynamicArray<stAIStateFunctions> m_StatesFunctionsArray;
+				int m_iNextState;
+				DynamicArray<stAIStateFunctions*> m_StatesFunctionsArray;
 
 				Entity* m_EntityParent;
 
-			public:
 				void process(const float& _TimeDelta);
+
+			public:
+				void progress();
+				void changeState();
+				void changeState(const int& _NextState);
+				void setNextState(const int& _NextState);
 
 				bool addState(int _StateId, FoncterTemplate* _NewFunction);
 		};

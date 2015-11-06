@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="d60f788d-4ab8-42d7-a719-f77925d57114"
+  name="Entity" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="8624c35e-5fb4-47fa-9893-fc45d8bfcdde"
+        name="Entity"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="15c0b643-0ec1-4e1d-a618-343dfb239261"
+            isDerived="false"
+            sourceEndRoleName="Entity"
+            targetEndRoleName="EntityManager"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="c2d81d40-1a83-435f-9e6d-669fc4f66cbc"
+              LastKnownName="EntityManager"
+              LastKnownLocation="Package2_2324.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e9e62a1a-7857-45d5-ad5b-0cd80384113e"
+                  name="Entity"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="ea8e1585-b646-46b9-8752-7d3eb687bc73"
+                      name="Lower"
+                      value="Vector" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="fd813373-55e2-487d-9eb4-7f19f2e66aae"
+                      name="Upper"
+                      value="Vector" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="50dac96e-c140-4a3e-a48a-76b30d3d321b"
+                  name="EntityManager"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="1160758b-85b3-4b53-aaeb-c1beb5a0b1ac"
+        name="EntityWithPv"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="2b739c86-0cc7-4f59-8795-1176bf9dfd13"
+            isSubstitutable="false">
+            <classMoniker
+              Id="8624c35e-5fb4-47fa-9893-fc45d8bfcdde"
+              LastKnownName="Entity"
+              LastKnownLocation="Package_1457.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="367df049-5dc0-496e-9fc3-7eeb7b8ac2e9"
+        name="Entitytransformation"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="4a162013-9151-404d-99f2-be2b8d5d4405"
+            isDerived="false"
+            sourceEndRoleName="Entitytransformation"
+            targetEndRoleName="Entity"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="8624c35e-5fb4-47fa-9893-fc45d8bfcdde"
+              LastKnownName="Entity"
+              LastKnownLocation="Package_1457.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f786f6cd-b33d-47a9-a4e1-92923aa045d5"
+                  name="Entitytransformation"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="0c77fa17-c9f9-4274-a7f8-24df213516f3"
+                      name="Lower"
+                      value="Vector" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="517f196d-feb0-4aa0-9e12-0ffa8fae8e89"
+                      name="Upper"
+                      value="Vector" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="55782bbe-6e5a-4881-b885-bb06cfe82c42"
+                  name="Entity"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="6edcae70-0d8a-4f53-a572-e2863f9cd4ba"
+        name="AiStateMachine"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="82439323-e3af-4728-8b16-bfde3b2afaa8"
+        name="Collider"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="1f91469b-73b6-4f91-8781-02a17e556580"
+        name="SphereCollider"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="cebef9b2-4251-4375-b7cc-a7bc135b9f43"
+        name="ObbCollider"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

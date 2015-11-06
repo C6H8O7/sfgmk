@@ -30,6 +30,42 @@
         LastKnownName="Tools"
         LastKnownLocation="Package_2333.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="d60f788d-4ab8-42d7-a719-f77925d57114"
+        LastKnownName="Entity"
+        LastKnownLocation="Package_1457.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="d82d540d-3273-4323-a512-6964229eb3cf"
+        LastKnownName="Physic"
+        LastKnownLocation="Package_1503.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="de6463b6-eaae-4772-afad-0d12e10d8015"
+        LastKnownName="AI"
+        LastKnownLocation="Package_1510.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="352ad817-8d48-4275-bc1b-97535533af02"
+        LastKnownName="Graphic"
+        LastKnownLocation="Package_1512.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="324b34d3-7832-44de-b21a-b54efb674567"
+        LastKnownName="FX"
+        LastKnownLocation="Package_1516.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="778b9695-bb0c-452a-bdb8-622f55822426"
+        LastKnownName="States"
+        LastKnownLocation="Package_1523.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

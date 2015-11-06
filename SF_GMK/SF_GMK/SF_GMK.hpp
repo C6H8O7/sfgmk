@@ -90,7 +90,7 @@
 	#include "Graphic\Sprite.hpp"
 	#include "Graphic\FX\LifeBar\LifeBar.hpp"
 
-	#include "Engine\Manager\AiManager\AIManager.hpp"
+	#include "Engine\AI\FSM.hpp"
 	#include "Entity\Entity.hpp"
 	#include "Entity\EntityWithPv.hpp"
 

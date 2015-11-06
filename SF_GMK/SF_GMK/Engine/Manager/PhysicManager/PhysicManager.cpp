@@ -12,7 +12,7 @@ namespace sfgmk
 			m_PhysicObjects.clear();
 		}
 
-		//return _Entity1->getSprite()->getGlobalBounds().intersects(_Entity2->getSprite()->getGlobalBounds());
+		
 		const bool& PhysicManager::getDraw()
 		{
 			return m_bDrawCollider;

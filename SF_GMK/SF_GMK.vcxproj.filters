@@ -241,7 +241,7 @@
     <ClCompile Include="SF_GMK\Engine\Manager\DebugManager\Selector.cpp">
       <Filter>sfgmk</Filter>
     </ClCompile>
-    <ClCompile Include="SF_GMK\Engine\Manager\AiManager\AIManager.cpp">
+    <ClCompile Include="SF_GMK\Engine\AI\FSM.cpp">
       <Filter>sfgmk</Filter>
     </ClCompile>
   </ItemGroup>
@@ -405,6 +405,6 @@
     <ClInclude Include="SF_GMK\Engine\Manager\DebugManager\DebugManager.hpp" />
     <ClInclude Include="SF_GMK\Graphic\FX\LifeBar\LifeBar.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\DebugManager\Selector.hpp" />
-    <ClInclude Include="SF_GMK\Engine\Manager\AiManager\AIManager.hpp" />
+    <ClInclude Include="SF_GMK\Engine\AI\FSM.hpp" />
   </ItemGroup>
 </Project>

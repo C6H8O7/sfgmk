@@ -26,6 +26,7 @@ namespace sfgmk
 
 			//Déclarer ici les prototypes de fonctions
 			virtual inline void Execute() {}
+			virtual inline void Execute(const int&) {}
 			virtual inline void Execute(const float&) {}
 			virtual inline bool Execute(const std::string&) { return false; }
 	};

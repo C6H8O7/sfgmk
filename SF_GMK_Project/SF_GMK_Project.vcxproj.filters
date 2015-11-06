@@ -9,5 +9,6 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Game\StateDefault.hpp" />
     <ClInclude Include="Game\IncludesProjet.hpp" />
+    <ClInclude Include="Game\Goomba.hpp" />
   </ItemGroup>
 </Project>

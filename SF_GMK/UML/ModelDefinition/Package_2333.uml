@@ -90,7 +90,62 @@
         name="ThreadTemplate"
         isAbstract="false"
         isLeaf="false"
-        isActiveClass="false" />
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="df3b742a-e300-4a22-9783-1b548f8da69a"
+            isDerived="false"
+            sourceEndRoleName="ThreadTemplate"
+            targetEndRoleName="StateLoading"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="f6228382-7ecf-4435-bf52-a11321a7aaee"
+              LastKnownName="StateLoading"
+              LastKnownLocation="Package_1523.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="8de063ae-4a10-47f9-a332-bfb669699e32"
+                  name="ThreadTemplate"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Composite"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="2a3ee36a-11f8-4924-9150-040fac579c93"
+                      name="Lower"
+                      value="Array" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="01a2d27e-7871-4afd-9bd2-ddb35f511a95"
+                      name="Upper"
+                      value="Array" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="88c75597-591b-49b1-a307-f099b37762e6"
+                  name="StateLoading"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="true" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
     </packageHasNamedElement>
   </packagedElements>
 </package>
