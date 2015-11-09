@@ -70,8 +70,9 @@ namespace sfgmk
 			applyPostShaders();
 
 			//Rendu moteur physique
-			if( PHYSIC_MANAGER->getDraw() )
-				PHYSIC_MANAGER->draw(m_RenderTexture);
+			PHYSIC_MANAGER->draw(m_RenderTexture);
+
+			AI_MANAGER->draw();
 
 			//Rendu console
 			CONSOLE.draw(m_RenderTexture);

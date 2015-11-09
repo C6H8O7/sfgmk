@@ -28,7 +28,7 @@ namespace sfgmk
 			public:
 				void update();
 
-				const std::vector<Entity*>& getEntityVector();
+				std::vector<Entity*>& getEntityVector();
 				const unsigned int& getEntityNumber();
 				void addEntity(Entity* _Entity);
 				void removeEntity(const unsigned int& _Index);

@@ -28,8 +28,9 @@ class Goomba : public Entity
 			FoncterTemplateInstance<Goomba, void, const int&>* PtrMove = new sfgmk::FoncterTemplateInstance<Goomba, void, const int&>(this, &Goomba::GoombaMove);
 
 			addAiFsm(eIdle);
-			addAiState(eIdle, PtrIdle);
-			addAiState(eMove, PtrMove);
+			//Seulement 5 premiers caractères pris en compte pour la string du state
+			addAiState(eIdle, PtrIdle, "Idle");
+			addAiState(eMove, PtrMove, "Move");
 		}
 
 		~Goomba()
@@ -43,7 +44,6 @@ class Goomba : public Entity
 
 			OnEnter
 			{
-				std::cout << "IDLE Enter" << std::endl;
 				if( m_fTimer > 2.5f )
 				{
 					m_fTimer = 0.0f;
@@ -53,7 +53,6 @@ class Goomba : public Entity
 
 			OnUpdate
 			{
-				std::cout << "IDLE Update" << std::endl;
 				if( m_fTimer > 2.5f )
 				{
 					m_fTimer = 0.0f;
@@ -63,7 +62,6 @@ class Goomba : public Entity
 
 			OnExit
 			{
-				std::cout << "IDLE Exit" << std::endl;
 				if( m_fTimer > 2.5f )
 				{
 					m_fTimer = 0.0f;
@@ -75,10 +73,9 @@ class Goomba : public Entity
 		void GoombaMove(const int& _Progress)
 		{
 			m_fTimer += TIME_DELTA;
-
+	
 			OnEnter
 			{
-				std::cout << "MOVE Enter" << std::endl;
 				if( m_fTimer > 2.5f )
 				{
 					m_fTimer = 0.0f;
@@ -88,7 +85,6 @@ class Goomba : public Entity
 
 			OnUpdate
 			{
-				std::cout << "MOVE Update" << std::endl;
 				move(sf::Vector2f(100.0f * TIME_DELTA, 0.0f));
 
 				if( m_fTimer > 2.5f )
@@ -100,7 +96,6 @@ class Goomba : public Entity
 
 			OnExit
 			{
-				std::cout << "MOVE Exit" << std::endl;
 				if( m_fTimer > 2.5f )
 				{
 					m_fTimer = 0.0f;

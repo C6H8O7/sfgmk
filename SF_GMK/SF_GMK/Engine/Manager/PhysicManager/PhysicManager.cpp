@@ -60,8 +60,11 @@ namespace sfgmk
 
 		void PhysicManager::draw(sf::RenderTexture* _RenderTexture)
 		{
-			for( unsigned int i(0U); i < m_PhysicObjects.getElementNumber(); i++ )
-				drawCollider(m_PhysicObjects[i], _RenderTexture);
+			if( m_bDrawCollider )
+			{
+				for( unsigned int i(0U); i < m_PhysicObjects.getElementNumber(); i++ )
+					drawCollider(m_PhysicObjects[i], _RenderTexture);
+			}
 		}
 
 		void PhysicManager::drawCollider(Collider* _Collider, sf::RenderTexture* _RenderTexture)

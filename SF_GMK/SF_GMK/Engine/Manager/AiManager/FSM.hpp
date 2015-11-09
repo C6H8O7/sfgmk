@@ -16,6 +16,8 @@ namespace sfgmk
 	#define OnUpdate else if( _Progress == engine::eUpdate )
 	#define OnExit else if( _Progress == engine::eExit )
 
+	#define STATE_NAME_STRING_LENGTH 5
+
 	namespace engine
 	{
 		enum eAIState_Progress
@@ -30,6 +32,7 @@ namespace sfgmk
 		{
 			eAIState_Progress StateProgress;
 			FoncterTemplate* CurrentFunc;
+			std::string sStateName;
 		};
 
 		class SFGMK_API AIStateMachine
@@ -49,13 +52,18 @@ namespace sfgmk
 
 				void process(const float& _TimeDelta);
 
+				static std::string m_StateProgressString[eAIState_Progress_NUMBER];
+
 			public:
 				void progress();
 				void changeState();
 				void changeState(const int& _NextState);
 				void setNextState(const int& _NextState);
 
-				bool addState(int _StateId, FoncterTemplate* _NewFunction);
+				bool addState(int _StateId, FoncterTemplate* _NewFunction, const std::string& _StateName);
+
+				const std::string& getCurrentStateName();
+				const std::string& getCurrentProgressString();
 		};
 	}
 }

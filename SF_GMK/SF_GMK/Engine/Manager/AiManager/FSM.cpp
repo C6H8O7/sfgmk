@@ -2,6 +2,8 @@ namespace sfgmk
 {
 	namespace engine
 	{
+		std::string AIStateMachine::m_StateProgressString[eAIState_Progress_NUMBER] = {"Enter", "Update", "Exit"};
+
 		AIStateMachine::AIStateMachine(Entity* _Parent, int _InitState) : m_iState(_InitState), m_iNextState(0), m_EntityParent(_Parent)
 		{
 		}
@@ -48,16 +50,29 @@ namespace sfgmk
 		}
 
 
-		bool AIStateMachine::addState(int _StateId, FoncterTemplate* _NewFunction)
+		bool AIStateMachine::addState(int _StateId, FoncterTemplate* _NewFunction, const std::string& _StateName)
 		{
 			stAIStateFunctions* NewState = new stAIStateFunctions;
 			NewState->StateProgress = eEnter;
 			NewState->CurrentFunc = _NewFunction;
+			NewState->sStateName = _StateName;
+			NewState->sStateName.resize(STATE_NAME_STRING_LENGTH);
 		
 			SAFE_DELETE(m_StatesFunctionsArray[_StateId]);
 			m_StatesFunctionsArray[_StateId] = NewState;
 
 			return true;
+		}
+
+
+		const std::string& AIStateMachine::getCurrentStateName()
+		{
+			return m_StatesFunctionsArray[m_iState]->sStateName;
+		}
+
+		const std::string& AIStateMachine::getCurrentProgressString()
+		{
+			return m_StateProgressString[m_StatesFunctionsArray[m_iState]->StateProgress];
 		}
 	}
 }

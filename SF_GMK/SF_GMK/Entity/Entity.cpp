@@ -271,11 +271,11 @@ namespace sfgmk
 		m_AI = new engine::AIStateMachine(this, _InitState);
 	}
 
-	bool Entity::addAiState(int _StateId, FoncterTemplate* _NewFunction)
+	bool Entity::addAiState(int _StateId, FoncterTemplate* _NewFunction, const std::string& _StateName)
 	{
-		if (!m_AI)
+		if( !m_AI )
 			return false;
 
-		return m_AI->addState(_StateId, _NewFunction);
+		return m_AI->addState(_StateId, _NewFunction, _StateName);
 	}
 }

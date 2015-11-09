@@ -21,6 +21,7 @@ namespace sfgmk
 				DebugManager();
 				~DebugManager();
 
+				std::thread* m_ConsoleThread;
 				ConsoleDev m_Console;
 
 				Selector* m_Selector;

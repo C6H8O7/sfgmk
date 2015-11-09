@@ -72,7 +72,6 @@
 	#include "Tool\ThreadTemplate.hpp"
 	#include "Tool\Parser\Parser.hpp"
 	#include "Tool\DesignPattern\SingletonTemplate.hpp"
-
 	#include "Math\Math.hpp"
 	#include "Math\Curb\Curb.hpp"
 	#include "Math\Curb\Bezier.hpp"
@@ -90,7 +89,7 @@
 	#include "Graphic\Sprite.hpp"
 	#include "Graphic\FX\LifeBar\LifeBar.hpp"
 
-	#include "Engine\AI\FSM.hpp"
+	#include "Engine\Manager\AiManager\FSM.hpp"
 	#include "Entity\Entity.hpp"
 	#include "Entity\EntityWithPv.hpp"
 
@@ -126,6 +125,7 @@
 	#include "Engine\Manager\StateMachineManager\LoadingState\StateLoading.hpp"
 	#include "Engine\Manager\StateMachineManager\StateMachine.hpp"
 
+	#include "Engine\Manager\AiManager\AIManager.hpp"
 	#include "Engine\Manager\DataManager\DataManager.hpp"
 	#include "Engine\Manager\PhysicManager\PhysicManager.hpp"
 	#include "Engine\Manager\SoundManager\SoundManager.hpp"
@@ -155,6 +155,7 @@ namespace sfgmk
 	#define TIME_DELTA						CORE->getTimeDelta()
 
 	//Managers
+	#define AI_MANAGER						engine::AIManager::getSingleton()
 	#define DATA_MANAGER					engine::DataManager::getSingleton()
 	#define DEBUG_MANAGER					engine::DebugManager::getSingleton()
 	#define ENTITY_MANAGER					engine::EntityManager::getSingleton()

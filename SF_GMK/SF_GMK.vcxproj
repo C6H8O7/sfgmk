@@ -19,8 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SF_GMK\Engine\Manager\AiManager\AIManager.cpp" />
     <ClCompile Include="SF_GMK\Engine\Core\Core.cpp" />
-    <ClCompile Include="SF_GMK\Engine\AI\FSM.cpp" />
+    <ClCompile Include="SF_GMK\Engine\Manager\AiManager\FSM.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\DebugManager\DebugManager.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\DebugManager\Selector.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\EntityManager\EntityManager.cpp" />
@@ -81,8 +82,9 @@
     <ClCompile Include="SF_GMK\Entity\Transformation\TransformationTranslation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SF_GMK\Engine\Manager\AiManager\AIManager.hpp" />
     <ClInclude Include="SF_GMK\Engine\Core\Core.hpp" />
-    <ClInclude Include="SF_GMK\Engine\AI\FSM.hpp" />
+    <ClInclude Include="SF_GMK\Engine\Manager\AiManager\FSM.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\DebugManager\DebugManager.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\DebugManager\Selector.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\EntityManager\EntityManager.hpp" />

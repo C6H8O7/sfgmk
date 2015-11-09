@@ -27,7 +27,7 @@ namespace sfgmk
 		}
 
 
-		const std::vector<Entity*>& EntityManager::getEntityVector()
+		std::vector<Entity*>& EntityManager::getEntityVector()
 		{
 			return m_EntityVector;
 		}

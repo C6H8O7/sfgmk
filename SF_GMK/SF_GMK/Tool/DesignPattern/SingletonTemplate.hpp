@@ -42,7 +42,7 @@ namespace sfgmk
 	};
 
 	template <typename T>
-	T *SingletonTemplate<T>::m_Instance = NULL;
+	T* SingletonTemplate<T>::m_Instance = NULL;
 }
 
 

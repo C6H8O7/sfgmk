@@ -69,6 +69,8 @@ namespace sfgmk
 			//Physique
 			measureFoncterExecutionTime(m_ExecutionTimes.dPhysic, m_MainFunctions.m_FunctionsArray[ePhysicManagerUpdate]);
 
+			AI_MANAGER->update(m_fTimeDelta);
+
 			//Trie les entités du vector en fonction de leur Z
 			measureFoncterExecutionTime(m_ExecutionTimes.dEntitySort, m_MainFunctions.m_FunctionsArray[eEntityManagerSort]);
 

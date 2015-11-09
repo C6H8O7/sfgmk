@@ -81,7 +81,7 @@ namespace sfgmk
 
 			engine::AIStateMachine* getAiFsm();
 			void addAiFsm(int _InitState = 0);
-			bool addAiState(int _StateId, FoncterTemplate* _NewFunction);
+			bool addAiState(int _StateId, FoncterTemplate* _NewFunction, const std::string& _StateName);
 	};
 }
 
