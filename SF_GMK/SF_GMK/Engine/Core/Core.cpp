@@ -2,32 +2,76 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		Core::Core()
+		Core::Core() : m_fTimeDelta(0.0f)
 		{
-			sfgmk::FoncterTemplateInstance<StateMachineManager, void>* Ptr1 = new sfgmk::FoncterTemplateInstance<StateMachineManager, void>(STATE_MACHINE_MANAGER, &StateMachineManager::update);
-			m_MainFunctions.m_FunctionsArray.pushBack(Ptr1);
-			sfgmk::FoncterTemplateInstance<EntityManager, void>* Ptr2 = new sfgmk::FoncterTemplateInstance<EntityManager, void>(ENTITY_MANAGER, &EntityManager::update);
-			m_MainFunctions.m_FunctionsArray.pushBack(Ptr2);
-			sfgmk::FoncterTemplateInstance<PhysicManager, void>* Ptr3 = new sfgmk::FoncterTemplateInstance<PhysicManager, void>(PHYSIC_MANAGER, &PhysicManager::update);
-			m_MainFunctions.m_FunctionsArray.pushBack(Ptr3);
-			sfgmk::FoncterTemplateInstance<EntityManager, void>* Ptr4 = new sfgmk::FoncterTemplateInstance<EntityManager, void>(ENTITY_MANAGER, &EntityManager::sortEntityVector);
-			m_MainFunctions.m_FunctionsArray.pushBack(Ptr4);
-			sfgmk::FoncterTemplateInstance<GraphicManager, void>* Ptr5 = new sfgmk::FoncterTemplateInstance<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::compute);
-			m_MainFunctions.m_FunctionsArray.pushBack(Ptr5);
-			sfgmk::FoncterTemplateInstance<GraphicManager, void>* Ptr6 = new sfgmk::FoncterTemplateInstance<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::draw);
-			m_MainFunctions.m_FunctionsArray.pushBack(Ptr6);
-			sfgmk::FoncterTemplateInstance<StateMachineManager, void>* Ptr7 = new sfgmk::FoncterTemplateInstance<StateMachineManager, void>(STATE_MACHINE_MANAGER, &StateMachineManager::draw);
-			m_MainFunctions.m_FunctionsArray.pushBack(Ptr7);
-			sfgmk::FoncterTemplateInstance<GraphicManager, void>* Ptr8 = new sfgmk::FoncterTemplateInstance<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::display);
-			m_MainFunctions.m_FunctionsArray.pushBack(Ptr8);
+		#ifdef SFGMK_DEBUG
+			memset(m_ExecutionTimes, 0, sizeof(sMANAGER_EXECUTION_TIMES[eMANAGERS_NUMBER]));
+		#endif
 		}
 
 		Core::~Core()
 		{
-			m_MainFunctions.m_FunctionsArray.clear();
 		}
 
 
+		bool Core::initManagers()
+		{
+			//AIManager
+			sfgmk::FoncterTemplateInstance<AIManager, void, const float&>* AIManagerUpdatePtr = new sfgmk::FoncterTemplateInstance<AIManager, void, const float&>(AI_MANAGER, &AIManager::update);
+			m_MainFunctions.m_FunctionsArray.pushBack(AIManagerUpdatePtr);
+		
+			//EntityManager
+			sfgmk::FoncterTemplateInstance<EntityManager, void>* EntityManagerUpdatePtr = new sfgmk::FoncterTemplateInstance<EntityManager, void>(ENTITY_MANAGER, &EntityManager::update);
+			m_MainFunctions.m_FunctionsArray.pushBack(EntityManagerUpdatePtr);
+
+			//GraphicManager
+			sfgmk::FoncterTemplateInstance<GraphicManager, void>* GraphicManagerSetPtr = new sfgmk::FoncterTemplateInstance<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::set);
+			m_MainFunctions.m_FunctionsArray.pushBack(GraphicManagerSetPtr);
+			sfgmk::FoncterTemplateInstance<GraphicManager, void>* GraphicManagerUpdatePtr = new sfgmk::FoncterTemplateInstance<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::update);
+			m_MainFunctions.m_FunctionsArray.pushBack(GraphicManagerUpdatePtr);
+			sfgmk::FoncterTemplateInstance<GraphicManager, void>* GraphicManagerDrawPtr = new sfgmk::FoncterTemplateInstance<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::draw);
+			m_MainFunctions.m_FunctionsArray.pushBack(GraphicManagerDrawPtr);
+			sfgmk::FoncterTemplateInstance<GraphicManager, void>* GraphicManagerDisplayPtr = new sfgmk::FoncterTemplateInstance<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::display);
+			m_MainFunctions.m_FunctionsArray.pushBack(GraphicManagerDisplayPtr);
+
+			//InputManager
+			sfgmk::FoncterTemplateInstance<InputManager, void>* InputManagerUpdatePtr = new sfgmk::FoncterTemplateInstance<InputManager, void>(INPUT_MANAGER, &InputManager::update);
+			m_MainFunctions.m_FunctionsArray.pushBack(InputManagerUpdatePtr);
+
+			//PhysicManager
+			sfgmk::FoncterTemplateInstance<PhysicManager, void>* PhysicManagerUpdatePtr = new sfgmk::FoncterTemplateInstance<PhysicManager, void>(PHYSIC_MANAGER, &PhysicManager::update);
+			m_MainFunctions.m_FunctionsArray.pushBack(PhysicManagerUpdatePtr);
+
+			//SoundManager
+			sfgmk::FoncterTemplateInstance<SoundManager, void>* SoundManagerUpdatePtr = new sfgmk::FoncterTemplateInstance<SoundManager, void>(SOUND_MANAGER, &SoundManager::update);
+			m_MainFunctions.m_FunctionsArray.pushBack(SoundManagerUpdatePtr);
+
+			//StateMachineManager
+			sfgmk::FoncterTemplateInstance<StateMachineManager, void>* StateMachineManagerUpdatePtr = new sfgmk::FoncterTemplateInstance<StateMachineManager, void>(STATE_MACHINE_MANAGER, &StateMachineManager::update);
+			m_MainFunctions.m_FunctionsArray.pushBack(StateMachineManagerUpdatePtr);
+			sfgmk::FoncterTemplateInstance<StateMachineManager, void>* StateMachineManagerDrawPtr = new sfgmk::FoncterTemplateInstance<StateMachineManager, void>(STATE_MACHINE_MANAGER, &StateMachineManager::draw);
+			m_MainFunctions.m_FunctionsArray.pushBack(StateMachineManagerDrawPtr);
+
+			return true;
+		}
+
+		bool Core::releaseManagers()
+		{
+			m_MainFunctions.m_FunctionsArray.clear();
+
+			AI_MANAGER->releaseSingleton();
+			DATA_MANAGER->releaseSingleton();
+			ENTITY_MANAGER->releaseSingleton();
+			GRAPHIC_MANAGER->releaseSingleton();
+			INPUT_MANAGER->releaseSingleton();
+			PHYSIC_MANAGER->releaseSingleton();
+			SOUND_MANAGER->releaseSingleton();
+			STATE_MACHINE_MANAGER->releaseSingleton();
+
+			return true;
+		}
+
+	
 		void Core::update()
 		{
 			//Update du time delta
@@ -38,56 +82,28 @@ namespace sfgmk
 		{
 			this->update();
 
-			//Update inputs
-			INPUT_MANAGER->update();
-
-			//Boucle events
-			while( GRAPHIC_MANAGER->getRenderWindow()->pollEvent(m_Event) )
-			{
-				if( m_Event.type == sf::Event::Closed )
-					GRAPHIC_MANAGER->getRenderWindow()->close();
-
-				INPUT_MANAGER->handleEvent(m_Event);
-			}
-			GRAPHIC_MANAGER->set();
-
-			//Debug
 			DEBUG_MANAGER->update(m_fTimeDelta);
 
-			//Son
-			SOUND_MANAGER->update();
+			INPUT_MANAGER_UPDATE
+			GRAPHIC_MANAGER_SET
+			SOUND_MANAGER_UPDATE
 		}
 
 		void Core::loop()
 		{
-			//Update état(s) courant(s)
-			measureFoncterExecutionTime(m_ExecutionTimes.dStateUpdate, m_MainFunctions.m_FunctionsArray[eStateMachineUpdate]);
-			
-			//Update des entités
-			measureFoncterExecutionTime(m_ExecutionTimes.dEntityUpdate, m_MainFunctions.m_FunctionsArray[eEntityManagerUpdate]);
-		
-			//Physique
-			measureFoncterExecutionTime(m_ExecutionTimes.dPhysic, m_MainFunctions.m_FunctionsArray[ePhysicManagerUpdate]);
+			STATE_MACHINE_MANAGER_UPDATE
+			AI_MANAGER_UPDATE
+			ENTITY_MANAGER_UPDATE
+			PHYSIC_MANAGER_UPDATE
+			GRAPHIC_MANAGER_UPDATE
 
-			AI_MANAGER->update(m_fTimeDelta);
-
-			//Trie les entités du vector en fonction de leur Z
-			measureFoncterExecutionTime(m_ExecutionTimes.dEntitySort, m_MainFunctions.m_FunctionsArray[eEntityManagerSort]);
-
-			//Parallaxe
-			measureFoncterExecutionTime(m_ExecutionTimes.dParallaxeComputation, m_MainFunctions.m_FunctionsArray[eGraphicManagerCompute]);
-
-			//Draw parallaxe
-			measureFoncterExecutionTime(m_ExecutionTimes.dParallaxeDisplay, m_MainFunctions.m_FunctionsArray[eGraphicManagerDraw]);
-
-			//Draw état(s) courant(s)
-			measureFoncterExecutionTime(m_ExecutionTimes.dStateDraw, m_MainFunctions.m_FunctionsArray[eStateMachineDraw]);
+			GRAPHIC_MANAGER_DRAW
+			STATE_MACHINE_MANAGER_DRAW
 		}
 
 		void Core::postLoop()
 		{
-			//Finalisation affichage
-			m_MainFunctions[eGraphicManagerDisplay];
+			GRAPHIC_MANAGER_DISPLAY
 		}
 	}
 }

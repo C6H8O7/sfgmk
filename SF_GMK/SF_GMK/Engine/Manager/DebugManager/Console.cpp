@@ -10,23 +10,29 @@ namespace sfgmk
 
 			for( int i(0); i < 60; i++ )
 				m_iFpsArray[i] = 0;
+
+			m_LastSecondFps.m_fTime = 0.0f;
+			m_LastSecondFps.uiFrames = 0U;
 			
 			//Rendu
 			m_FpsCurbImageOriginal = DATA_MANAGER->getTexture("sfgmk_fpsTab").copyToImage();
 			m_Font[0] = DATA_MANAGER->getFont("sfgmk_ConsoleFont1");
 			m_Font[1] = DATA_MANAGER->getFont("sfgmk_ConsoleFont2");
-			m_Texture[0] = DATA_MANAGER->getTexture("sfgmk_background");
+			m_Texture[0] = DATA_MANAGER->getTexture("sfgmk_backgroundConsole");
 			m_ConsoleSprite.setTexture(m_Texture[0], true);
 			m_ConsoleSprite.setPosition(0.0f, 0.0f);
 
 			//Texts
 			for( int i(0); i < eCONSOLE_DEV_TEXT::eCONSOLE_DEV_TEXT_NUMBER; i++ )
 			{
-				if( i < eCONSOLE_DEV_TEXT::eSeizure )
+				if( i < eCONSOLE_DEV_TEXT::eSeizureConsoleText )
 				{
 					m_TextArray[i].setFont(m_Font[0]);
-					m_TextArray[i].setCharacterSize(20);
 					m_TextArray[i].setColor(sf::Color(100, 200, 100, 255));
+					if( i > eFmodConsoleText )
+						m_TextArray[i].setCharacterSize(16);
+					else
+						m_TextArray[i].setCharacterSize(20);
 				}
 				else
 				{
@@ -36,28 +42,35 @@ namespace sfgmk
 				}
 			}
 
-			m_TextArray[eCONSOLE_DEV_TEXT::eEntity].setCharacterSize(14);
+			m_TextArray[eCONSOLE_DEV_TEXT::eCpuConsoleText].setPosition(32.0f, 35.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eRamConsoleText].setPosition(32.0f, 52.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eFmodConsoleText].setPosition(32.0f, 69.0f);
+			
+			m_TextArray[eCONSOLE_DEV_TEXT::eInputConsoleText].setPosition(32.0f, 90.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eSoundConsoleText].setPosition(32.0f, 104.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eStateConsoleText].setPosition(32.0f, 118.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eAIConsoleText].setPosition(32.0f, 132.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eEntityConsoleText].setPosition(32.0f, 146.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::ePhysicConsoleText].setPosition(32.0f, 160.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eGraphicConsoleText].setPosition(32.0f, 174.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eDebugConsoleText].setPosition(32.0f, 188.0f);
 
-			m_TextArray[eCONSOLE_DEV_TEXT::eCpu].setPosition(26.0f, 25.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eFmod].setPosition(26.0f, 65.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eRam].setPosition(26.0f, 45.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eState].setPosition(26.0f, 88.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eParallaxe].setPosition(26.0f, 110.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eEntity].setPosition(340.0f, 135.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eFps].setPosition(28.0f, 140.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eSeizure].setPosition(26.0f, 450.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setPosition(26.0f, 225.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eTotalTimeUpdate].setPosition(140.0f, 205.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eTotalTimeDraw].setPosition(295.0f, 205.0f);
 
-			m_FpsCurbSprite.setPosition(95.0f, m_TextArray[eCONSOLE_DEV_TEXT::eFps].getPosition().y);
+			m_TextArray[eCONSOLE_DEV_TEXT::eFpsConsoleText].setPosition(32.0f, 235.0f);
+			m_FpsCurbSprite.setPosition(95.0f, m_TextArray[eCONSOLE_DEV_TEXT::eFpsConsoleText].getPosition().y - 7.0f);
+
+			m_TextArray[eCONSOLE_DEV_TEXT::eSeizureConsoleText].setPosition(26.0f, 652.0f);
 
 			//Camera
 			m_Texture[1] = DATA_MANAGER->getTexture("sfgmk_camera");
 			m_CameraSprite.setTexture(m_Texture[1], true);
-			m_CameraSprite.setPosition(500.0f, 0.0f);
+			m_CameraSprite.setPosition(512.0f, 0.0f);
 			m_CameraText.setFont(m_Font[0]);
 			m_CameraText.setCharacterSize(18);
 			m_CameraText.setColor(sf::Color(100, 200, 100, 255));
-			m_CameraText.setPosition(505.0f, 68.0f);
+			m_CameraText.setPosition(517.0f, 68.0f);
 		}
 
 		ConsoleDev::~ConsoleDev()
@@ -66,15 +79,6 @@ namespace sfgmk
 			m_EnteredCommands.clear();
 		}
 
-
-		bool ConsoleDev::setActive(bool _Boolean)
-		{
-			m_bIsActive = _Boolean;
-			m_fTimer = 0.0f;
-			m_ConsoleRender.clear(EMPTY_COLOR);
-
-			return m_bIsActive;
-		}
 
 		bool ConsoleDev::setActive()
 		{
@@ -90,12 +94,20 @@ namespace sfgmk
 			m_fTimer += _TimeDelta;
 			m_fDisplayTimer += _TimeDelta;
 
+			//Stocke les fps pour faire une moyenne sur 1 seconde
+			m_LastSecondFps.m_fTime += _TimeDelta;
+			m_LastSecondFps.uiFrames++;
+
 			//Update des valeurs de "performance"
 			if( m_fTimer >= CONSOLE_UPDATE_TIMING )
 			{
 				m_fTimer = 0.0f;
 
-				updateFps(_TimeDelta);
+				//Moyenne fps depuis dernière update
+				updateFps(m_LastSecondFps.m_fTime / (float)m_LastSecondFps.uiFrames);
+				m_LastSecondFps.m_fTime = 0.0f;
+				m_LastSecondFps.uiFrames = 0U;
+
 				updateFpsCurb();
 
 				if( m_bIsActive )
@@ -132,7 +144,7 @@ namespace sfgmk
 
 			//Draw
 				//Console
-				m_bOpacity ? m_ConsoleRender.clear(sf::Color(0, 0, 0, 255)) : m_ConsoleRender.clear(sf::Color(0, 0, 0, 0));
+				m_bOpacity ? m_ConsoleRender.clear(sf::Color(0, 0, 0, 255)) : m_ConsoleRender.clear(EMPTY_COLOR);
 
 				m_ConsoleRender.draw(m_ConsoleSprite, sf::RenderStates::Default);
 				for( int i(0); i < eCONSOLE_DEV_TEXT::eCONSOLE_DEV_TEXT_NUMBER - 1; ++i )
@@ -143,7 +155,7 @@ namespace sfgmk
 				{
 					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setString(m_sConsoleStrings[i].sString);
 					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setColor(m_sConsoleStrings[i].Color);
-					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setPosition(sf::Vector2f(25.0f, 225.0f) + sf::Vector2f(0.0f, i * 20.0f));
+					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setPosition(sf::Vector2f(32.0f, 322.0f) + sf::Vector2f(0.0f, i * 20.0f));
 					m_ConsoleRender.draw(m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText]);
 				}
 
@@ -166,12 +178,12 @@ namespace sfgmk
 
 				m_ConsoleRender.display();
 				m_RenderSprite.setTexture(m_ConsoleRender.getTexture(), true);
-				m_RenderSprite.setPosition(GRAPHIC_MANAGER->getCurrentCamera()->getRelativOrigin());
 				m_RenderSprite.setScale(fScale, fScale);
 		}
 
 		void ConsoleDev::draw(sf::RenderTexture* _Render)
 		{
+			m_RenderSprite.setPosition(CAMERA->getRelativOrigin());
 			_Render->draw(m_RenderSprite);
 		}
 
@@ -193,20 +205,20 @@ namespace sfgmk
 
 		void ConsoleDev::updateFpsDraw()
 		{
-			char cFps[32] = { 0 };
+			char cFps[64] = { 0 };
 			int iFps = m_iFpsArray[CONSOLE_FPS_SAMPLING - 1];
 			sprintf_s(cFps, "Max:%d\nFPS:%d\nMin:%d", m_iMaxFps, iFps, m_iMinFps);
 
 			//Change la couleur du texte en fonction du framerate
 			if( iFps >= 60 )
-				m_TextArray[eCONSOLE_DEV_TEXT::eFps].setColor(sf::Color::Green);
+				m_TextArray[eCONSOLE_DEV_TEXT::eFpsConsoleText].setColor(sf::Color::Green);
 			else if( iFps >= 30 )
-				m_TextArray[eCONSOLE_DEV_TEXT::eFps].setColor(sf::Color::Yellow);
+				m_TextArray[eCONSOLE_DEV_TEXT::eFpsConsoleText].setColor(sf::Color::Yellow);
 			else
-				m_TextArray[eCONSOLE_DEV_TEXT::eFps].setColor(sf::Color::Red);
+				m_TextArray[eCONSOLE_DEV_TEXT::eFpsConsoleText].setColor(sf::Color::Red);
 
 			//Set le nombre de fps au texte
-			m_TextArray[eCONSOLE_DEV_TEXT::eFps].setString(cFps);
+			m_TextArray[eCONSOLE_DEV_TEXT::eFpsConsoleText].setString(cFps);
 		}
 
 		void ConsoleDev::updateFpsCurb()
@@ -267,11 +279,11 @@ namespace sfgmk
 
 		float ConsoleDev::updateFmodCharge()
 		{
-			char cCharge[24] = { 0 };
+			char cCharge[32] = { 0 };
 			float fValue = SoundManager::getSingleton()->getCpuCharge();
 
-			sprintf_s(cCharge, "FMOD system:  %2.2f %%", fValue);
-			m_TextArray[eCONSOLE_DEV_TEXT::eFmod].setString(cCharge);
+			sprintf_s(cCharge, "FMOD:  %2.2f %%", fValue);
+			m_TextArray[eCONSOLE_DEV_TEXT::eFmodConsoleText].setString(cCharge);
 
 			return fValue;
 		}
@@ -340,20 +352,88 @@ namespace sfgmk
 
 				//Update text
 				if( iSize == 0 && m_fTimer > 0.5f )
-					m_TextArray[eCONSOLE_DEV_TEXT::eSeizure].setString("_");
+					m_TextArray[eCONSOLE_DEV_TEXT::eSeizureConsoleText].setString("_");
 				else
-					m_TextArray[eCONSOLE_DEV_TEXT::eSeizure].setString(m_sSeizureBuffer);
+					m_TextArray[eCONSOLE_DEV_TEXT::eSeizureConsoleText].setString(m_sSeizureBuffer);
 			}
 		}
 
 		void ConsoleDev::updateCounters()
 		{
-			sSfgmkExecutionTimes Timers = CORE->getExecutionTimes();
+			sMANAGER_EXECUTION_TIMES* Timers = CORE->getManagersExecutionTimes();
+			std::string sBuffers[2];
+			signed long long llTotals[2] = { (signed long long)0.0, (signed long long)0.0 };
 
-			Parallaxe* GameParallaxe = &GraphicManager::getSingleton()->getParallaxe();
+			//Calcul du total
+			for( int i(0); i < eMANAGERS_NUMBER; i++ )
+			{
+				llTotals[0] += Timers[i].llUpdate;
+				llTotals[1] += Timers[i].llDraw;
+			}
+
+			sBuffers[0] = std::to_string((double)(llTotals[0] * 0.001f));
+			sBuffers[0] = sBuffers[0].substr(0, sBuffers[0].find('.') + 3);
+			m_TextArray[eCONSOLE_DEV_TEXT::eTotalTimeUpdate].setString(sBuffers[0] + "ms (" + std::to_string((int)(1.0f / (llTotals[0] * 0.000001f))) + " FPS)");
+														
+			sBuffers[1] = std::to_string((double)(llTotals[1] * 0.001f));
+			sBuffers[1] = sBuffers[1].substr(0, sBuffers[1].find('.') + 3);
+			m_TextArray[eCONSOLE_DEV_TEXT::eTotalTimeDraw].setString(sBuffers[1] + "ms (" + std::to_string((int)(1.0f / (llTotals[1] * 0.000001f))) + " FPS)");
+
+			//Affichage chaque manager
+			sBuffers[0] = std::to_string((double)(Timers[eInputManager].llUpdate * 0.001f));
+			sBuffers[0] = sBuffers[0].substr(0, sBuffers[0].find('.') + 3);
+			sBuffers[1] = std::to_string((double)(Timers[eInputManager].llDraw * 0.001f));
+			sBuffers[1] = sBuffers[1].substr(0, sBuffers[1].find('.') + 3);
+			m_TextArray[eCONSOLE_DEV_TEXT::eInputConsoleText].setString("Input:       \tUpdate: " + sBuffers[0] + "ms");
+
+			sBuffers[0] = std::to_string((double)(Timers[eSoundManager].llUpdate * 0.001f));
+			sBuffers[0] = sBuffers[0].substr(0, sBuffers[0].find('.') + 3);
+			m_TextArray[eCONSOLE_DEV_TEXT::eSoundConsoleText].setString("Sound:       \tUpdate: " + sBuffers[0] + "ms");
+
+			sBuffers[0] = std::to_string((double)(Timers[eStateMachineManager].llUpdate * 0.001f));
+			sBuffers[0] = sBuffers[0].substr(0, sBuffers[0].find('.') + 3);
+			sBuffers[1] = std::to_string((double)(Timers[eStateMachineManager].llDraw * 0.001f));
+			sBuffers[1] = sBuffers[1].substr(0, sBuffers[1].find('.') + 3);
+			m_TextArray[eCONSOLE_DEV_TEXT::eStateConsoleText].setString("StateMachine:\tUpdate: " + sBuffers[0] + "ms\t\t"
+																		+ "Draw: " + sBuffers[1] + "ms");
+
+			sBuffers[0] = std::to_string((double)(Timers[eAIManager].llUpdate * 0.001f));
+			sBuffers[0] = sBuffers[0].substr(0, sBuffers[0].find('.') + 3);
+			sBuffers[1] = std::to_string((double)(Timers[eAIManager].llDraw * 0.001f));
+			sBuffers[1] = sBuffers[1].substr(0, sBuffers[1].find('.') + 3);
+			m_TextArray[eCONSOLE_DEV_TEXT::eAIConsoleText].setString("AI:          \tUpdate: " + sBuffers[0] + "ms\t\t"
+																	+ "Draw: " + sBuffers[1] + "ms");
+
+			sBuffers[0] = std::to_string((double)(Timers[eEntityManager].llUpdate * 0.001f));
+			sBuffers[0] = sBuffers[0].substr(0, sBuffers[0].find('.') + 3);
+			m_TextArray[eCONSOLE_DEV_TEXT::eEntityConsoleText].setString("Entity:      \tUpdate: " + sBuffers[0] + "ms");
+
+			sBuffers[0] = std::to_string((double)(Timers[ePhysicManager].llUpdate * 0.001f));
+			sBuffers[0] = sBuffers[0].substr(0, sBuffers[0].find('.') + 3);
+			sBuffers[1] = std::to_string((double)(Timers[ePhysicManager].llDraw * 0.001f));
+			sBuffers[1] = sBuffers[1].substr(0, sBuffers[1].find('.') + 3);
+			m_TextArray[eCONSOLE_DEV_TEXT::ePhysicConsoleText].setString("Physic:      \tUpdate: " + sBuffers[0] + "ms\t\t"
+																		+ "Draw: " + sBuffers[1] + "ms");
+
+			sBuffers[0] = std::to_string((double)(Timers[eGraphicManager].llUpdate * 0.001f));
+			sBuffers[0] = sBuffers[0].substr(0, sBuffers[0].find('.') + 3);
+			sBuffers[1] = std::to_string((double)(Timers[eGraphicManager].llDraw * 0.001f));
+			sBuffers[1] = sBuffers[1].substr(0, sBuffers[1].find('.') + 3);
+			m_TextArray[eCONSOLE_DEV_TEXT::eGraphicConsoleText].setString("Graphic:     \tUpdate: " + sBuffers[0] + "ms\t\t"
+																		+ "Draw: " + sBuffers[1] + "ms");
+
+			sBuffers[0] = std::to_string((double)(Timers[eDebugManager].llUpdate * 0.001f));
+			sBuffers[0] = sBuffers[0].substr(0, sBuffers[0].find('.') + 3);
+			sBuffers[1] = std::to_string((double)(Timers[eDebugManager].llDraw * 0.001f));
+			sBuffers[1] = sBuffers[1].substr(0, sBuffers[1].find('.') + 3);
+			m_TextArray[eCONSOLE_DEV_TEXT::eDebugConsoleText].setString("Debug:       \tUpdate: " + sBuffers[0] + "ms\t\t"
+																		+ "Draw: " + sBuffers[1] + "ms");
+
+			/*m_TextArray[eCONSOLE_DEV_TEXT::eTotalTime].setString(std::to_string((double)(dTotals[0])) + "ms\t"
+			std::to_string((double)(dTotals[1])) + "ms");*/
 
 			//Current state
-			std::string sStateUpdate = std::to_string((double)(Timers.dStateUpdate * 0.001f));
+			/*std::string sStateUpdate = std::to_string((double)(Timers.dStateUpdate * 0.001f));
 			sStateUpdate = sStateUpdate.substr(0, sStateUpdate.find('.') + 3);
 			std::string sStateDisplay = std::to_string((double)(Timers.dStateDraw * 0.001f));
 			sStateDisplay = sStateDisplay.substr(0, sStateDisplay.find('.') + 3);
@@ -382,7 +462,7 @@ namespace sfgmk
 																				 + "\n\tSort: " + sSort + " ms"
 																				 + "\n\tParallaxe: " + sParallaxe + " ms"
 																				 + "\n\tPhysic: " + sPhysic + " ms"
-																				 + "\n\tDraw: " + sDisplay + " ms");
+																				 + "\n\tDraw: " + sDisplay + " ms");*/
 		}
 
 
@@ -401,7 +481,7 @@ namespace sfgmk
 			sUsedRam2 = sUsedRam2.substr(0, 3);
 
 			std::string PhysicRam("RAM:  Current: " + sUsedRam2 + " Mo / Max: " + sTotalRam2 + " Mo");
-			m_TextArray[eCONSOLE_DEV_TEXT::eRam].setString(PhysicRam);
+			m_TextArray[eCONSOLE_DEV_TEXT::eRamConsoleText].setString(PhysicRam);
 		}
 
 		void ConsoleDev::initCpuUsage()
@@ -460,7 +540,7 @@ namespace sfgmk
 				std::cout << "CallNtPowerInformation failed. Status: " << status << std::endl;
 
 			sprintf_s(cCpuUSage, "CPU:  %2.2f %%  (%d logical cores, %d MHz)", m_fCpuUsagePercent, m_NumProcessors, ppi->CurrentMhz);
-			m_TextArray[eCONSOLE_DEV_TEXT::eCpu].setString(cCpuUSage);
+			m_TextArray[eCONSOLE_DEV_TEXT::eCpuConsoleText].setString(cCpuUSage);
 
 			delete[]pBuffer;
 			return m_fCpuUsagePercent;

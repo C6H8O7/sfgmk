@@ -14,16 +14,52 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		struct sSfgmkExecutionTimes
+		struct sMANAGER_EXECUTION_TIMES
 		{
-			signed long long dEntityUpdate;
-			signed long long dEntitySort;
-			signed long long dParallaxeComputation;
-			signed long long dPhysic;
-			signed long long dParallaxeDisplay;
-			signed long long dStateUpdate;
-			signed long long dStateDraw;
+			signed long long llUpdate;
+			signed long long llDraw;
 		};
+
+		enum eMANAGERS
+		{
+			eAIManager = 0,
+			eEntityManager,
+			eGraphicManager,
+			eInputManager,
+			ePhysicManager,
+			eSoundManager,
+			eStateMachineManager,
+			eDebugManager,
+			eMANAGERS_NUMBER
+		};
+
+	#ifdef SFGMK_DEBUG
+		#define AI_MANAGER_UPDATE				m_ExecutionTimes[eAIManager].llUpdate = measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[0], m_fTimeDelta);
+		#define ENTITY_MANAGER_UPDATE			m_ExecutionTimes[eEntityManager].llUpdate = measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[1]);
+		#define GRAPHIC_MANAGER_SET				m_ExecutionTimes[eGraphicManager].llUpdate = measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[2]);
+		#define GRAPHIC_MANAGER_UPDATE			m_ExecutionTimes[eGraphicManager].llUpdate += measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[3]);
+		#define GRAPHIC_MANAGER_DRAW			m_ExecutionTimes[eGraphicManager].llDraw = measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[4]);
+		#define GRAPHIC_MANAGER_DISPLAY			m_ExecutionTimes[eGraphicManager].llDraw += measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[5]);
+		#define INPUT_MANAGER_UPDATE			m_ExecutionTimes[eInputManager].llUpdate = measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[6]);
+		#define PHYSIC_MANAGER_UPDATE			m_ExecutionTimes[ePhysicManager].llUpdate = measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[7]);
+		#define SOUND_MANAGER_UPDATE			m_ExecutionTimes[eSoundManager].llUpdate = measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[8]);
+		#define STATE_MACHINE_MANAGER_UPDATE	m_ExecutionTimes[eStateMachineManager].llUpdate = measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[9]);
+		#define STATE_MACHINE_MANAGER_DRAW		m_ExecutionTimes[eStateMachineManager].llDraw = measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[10]);
+	#endif
+
+	#ifndef SFGMK_DEBUG
+		#define AI_MANAGER_UPDATE				m_MainFunctions.m_FunctionsArray[0]->Execute(m_fTimeDelta);
+		#define ENTITY_MANAGER_UPDATE			m_MainFunctions.m_FunctionsArray[1]->Execute();
+		#define GRAPHIC_MANAGER_SET				m_MainFunctions.m_FunctionsArray[2]->Execute();
+		#define GRAPHIC_MANAGER_UPDATE			m_MainFunctions.m_FunctionsArray[3]->Execute();
+		#define GRAPHIC_MANAGER_DRAW			m_MainFunctions.m_FunctionsArray[4]->Execute();
+		#define GRAPHIC_MANAGER_DISPLAY			m_MainFunctions.m_FunctionsArray[5]->Execute();
+		#define INPUT_MANAGER_UPDATE			m_MainFunctions.m_FunctionsArray[6]->Execute();
+		#define PHYSIC_MANAGER_UPDATE			m_MainFunctions.m_FunctionsArray[7]->Execute();
+		#define SOUND_MANAGER_UPDATE			m_MainFunctions.m_FunctionsArray[8]->Execute();
+		#define STATE_MACHINE_MANAGER_UPDATE	m_MainFunctions.m_FunctionsArray[9]->Execute();
+		#define STATE_MACHINE_MANAGER_DRAW		m_MainFunctions.m_FunctionsArray[10]->Execute();
+	#endif
 
 		class SFGMK_API Core : public SingletonTemplate<Core>
 		{
@@ -35,33 +71,22 @@ namespace sfgmk
 
 				sf::Clock m_ClockTimeDelta;
 				float m_fTimeDelta;
-				sf::Event m_Event;
 
 				FoncterTemplateArray m_MainFunctions;
-				enum eMAIN_FUNCTIONS
-				{
-					eStateMachineUpdate = 0,
-					eEntityManagerUpdate,
-					ePhysicManagerUpdate,
-					eEntityManagerSort,
-					eGraphicManagerCompute,
-					eGraphicManagerDraw,
-					eStateMachineDraw,
-					eGraphicManagerDisplay,
-					eMAIN_FUNCTIONS_NUMBER
-				};
+				sMANAGER_EXECUTION_TIMES m_ExecutionTimes[eMANAGERS_NUMBER];
 
-				sSfgmkExecutionTimes m_ExecutionTimes;
-				
 			public:
+				bool initManagers();
+				bool releaseManagers();
+
 				void update();
+
 				void preLoop();
 				void loop();
 				void postLoop();
 
 				inline const float& getTimeDelta() { return m_fTimeDelta; }
-
-				const sSfgmkExecutionTimes& getExecutionTimes() { return m_ExecutionTimes; }
+				inline sMANAGER_EXECUTION_TIMES* getManagersExecutionTimes() { return m_ExecutionTimes; }
 		};
 	}
 }

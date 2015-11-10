@@ -3,7 +3,7 @@
 
 using namespace sfgmk;
 
-class Goomba : public Entity
+class Goomba : public EntityWithPv
 {
 	private:
 		enum eGoombaAiState
@@ -19,9 +19,11 @@ class Goomba : public Entity
 		Goomba() : m_fTimer(0.0f)
 		{
 			setScale(2.0f, 2.0f);
-			setPosition(sf::Vector3f(250.0f, 250.0f, 0.0f));
+			setPosition(sf::Vector3f(1000.0f, 250.0f, 0.0f));
 			getSprite()->setAnimation(DATA_MANAGER->getAnimation("goomba"));
 			getSprite()->setColor(sf::Color::Red);
+
+			addLifeBar(true);
 
 			//AI (attention si on utilise les foncterTemplate, le prototype correspondant doit figuré dans la classe "FoncterTemplate")
 			FoncterTemplateInstance<Goomba, void, const int&>* PtrIdle = new sfgmk::FoncterTemplateInstance<Goomba, void, const int&>(this, &Goomba::GoombaIdle);
@@ -44,7 +46,7 @@ class Goomba : public Entity
 
 			OnEnter
 			{
-				if( m_fTimer > 2.5f )
+				if( m_fTimer > 1.0f )
 				{
 					m_fTimer = 0.0f;
 					m_AI->progress();
@@ -53,7 +55,7 @@ class Goomba : public Entity
 
 			OnUpdate
 			{
-				if( m_fTimer > 2.5f )
+				if( m_fTimer > 1.0f )
 				{
 					m_fTimer = 0.0f;
 					m_AI->progress();
@@ -62,7 +64,7 @@ class Goomba : public Entity
 
 			OnExit
 			{
-				if( m_fTimer > 2.5f )
+				if( m_fTimer > 1.0f )
 				{
 					m_fTimer = 0.0f;
 					m_AI->changeState(eMove);
@@ -76,7 +78,7 @@ class Goomba : public Entity
 	
 			OnEnter
 			{
-				if( m_fTimer > 2.5f )
+				if( m_fTimer > 1.0f )
 				{
 					m_fTimer = 0.0f;
 					m_AI->progress();
@@ -96,7 +98,7 @@ class Goomba : public Entity
 
 			OnExit
 			{
-				if( m_fTimer > 2.5f )
+				if( m_fTimer > 1.0f )
 				{
 					m_fTimer = 0.0f;
 					m_AI->setNextState(eIdle);

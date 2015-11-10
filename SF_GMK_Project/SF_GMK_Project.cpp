@@ -23,6 +23,8 @@ int main()
 	//Init fenêtre V2
 	sfgmk::GRAPHIC_MANAGER->init(sf::VideoMode(1280, 720), "SF_GMK", sf::Style::Default);
 
+	sfgmk::CORE->initManagers();
+
 	//Init states V2
 	sfgmk::STATE_MACHINE_MANAGER->RegisterState<sfgmk::engine::StateLoading>(sfgmk::eSTATES::eStateLoading, DATA_PATH + "/stateLoading");
 	sfgmk::STATE_MACHINE_MANAGER->RegisterState<StateDefault>(sfgmk::eSTATES::eStateDefault, "../data/states/stateDefault");
@@ -36,15 +38,7 @@ int main()
 	}
 
 	//Release des singletons
-	sfgmk::DATA_MANAGER->releaseSingleton();
-	sfgmk::DEBUG_MANAGER->releaseSingleton();
-	sfgmk::ENTITY_MANAGER->releaseSingleton();
-	sfgmk::GRAPHIC_MANAGER->releaseSingleton();
-	sfgmk::INPUT_MANAGER->releaseSingleton();
-	sfgmk::PHYSIC_MANAGER->releaseSingleton();
-	sfgmk::SOUND_MANAGER->releaseSingleton();
-	sfgmk::STATE_MACHINE_MANAGER->releaseSingleton();
-
+	sfgmk::CORE->releaseManagers();
 	sfgmk::CORE->releaseSingleton();
 	
 	return 0;

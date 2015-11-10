@@ -43,7 +43,7 @@ namespace sfgmk
 				void initDefaultCamera();
 
 				void set();
-				void compute();
+				void update();
 				void draw();
 				void display();
 

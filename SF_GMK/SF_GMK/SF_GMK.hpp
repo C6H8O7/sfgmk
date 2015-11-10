@@ -19,6 +19,8 @@
 	#define SFGMK_API
 #endif
 
+#define SFGMK_DEBUG
+
 	//SFML (à laisser au début pour éviter conflits entre "headers windows" et implémentation de la SFML
 	#include <SFML\Config.hpp>
 	#include <SFML\Graphics.hpp>

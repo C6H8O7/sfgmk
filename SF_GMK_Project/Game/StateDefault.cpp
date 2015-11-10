@@ -26,8 +26,10 @@ void StateDefault::init()
 	sfgmk::CONSOLE.command("/freecam");
 	sfgmk::CONSOLE.command("/physic");
 	sfgmk::CONSOLE.command("/selector");
+	sfgmk::CONSOLE.command("/life");
+	sfgmk::CONSOLE.command("/ai");
 
-	/*for( int i(0); i < 100; i++ )
+	for( int i(0); i < 25; i++ )
 	{
 		int iInitialPv = RAND(1, 100);
 		EntityWithPv* entity = new EntityWithPv(sf::Vector3f((float)RAND(100, 1180), (float)RAND(100, 620), 0.0f), iInitialPv, RAND(1, iInitialPv));
@@ -40,12 +42,11 @@ void StateDefault::init()
 			entity->addSphereCollider();
 
 		ADD_ENTITY(entity);
-	}*/
+	}
 
 	//Démo IA (voir classe Goomba)
 	Goomba* NewCleverGoomba = new Goomba();
 	ADD_ENTITY(NewCleverGoomba);
-	sfgmk::CONSOLE.command("/ai");
 }
 
 void StateDefault::update()

@@ -54,7 +54,7 @@ namespace sfgmk
 			m_RenderTexture->clear(sf::Color::Black);
 		}
 
-		void GraphicManager::compute()
+		void GraphicManager::update()
 		{
 			m_Parallaxe.update();
 		}

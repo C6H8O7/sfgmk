@@ -25,12 +25,12 @@ namespace sfgmk
 
 		void AIManager::update(const float& _TimeDelta)
 		{
+			m_Render.clear(EMPTY_COLOR);
+			m_Render.setView(*CAMERA);
 		}
 
 		void AIManager::draw()
 		{
-			m_Render.clear(EMPTY_COLOR);
-
 			if( m_bDrawAiState )
 			{
 				std::vector<Entity*>* Entities = &ENTITY_MANAGER->getEntityVector();
@@ -57,6 +57,7 @@ namespace sfgmk
 				m_Render.display();
 				m_Sprite.setTexture(m_Render.getTexture());
 
+				m_Sprite.setPosition(CAMERA->getRelativOrigin());
 				GRAPHIC_MANAGER->getRenderTexture()->draw(m_Sprite);
 			}
 		}

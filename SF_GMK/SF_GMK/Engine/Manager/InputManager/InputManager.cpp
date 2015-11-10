@@ -24,18 +24,26 @@ namespace sfgmk
 				if( sf::Joystick::isConnected(i) )
 					m_Joystick[i].updateJoystick();
 			}
+
+			handleEvents();
 		}
 
-		void InputManager::handleEvent(sf::Event _Event)
+		void InputManager::handleEvents()
 		{
-			m_Keyboard.handleEvent(_Event);
-
-			m_Mouse.handleEvent(_Event);
-
-			for( int i(0); i < sf::Joystick::Count; i++ )
+			while( GRAPHIC_MANAGER->getRenderWindow()->pollEvent(m_Event) )
 			{
-				if( sf::Joystick::isConnected(i) )
-					m_Joystick[i].handleEvent(_Event);
+				if( m_Event.type == sf::Event::Closed )
+					GRAPHIC_MANAGER->getRenderWindow()->close();
+
+				m_Keyboard.handleEvent(m_Event);
+
+				m_Mouse.handleEvent(m_Event);
+
+				for( int i(0); i < sf::Joystick::Count; i++ )
+				{
+					if( sf::Joystick::isConnected(i) )
+						m_Joystick[i].handleEvent(m_Event);
+				}
 			}
 		}
 

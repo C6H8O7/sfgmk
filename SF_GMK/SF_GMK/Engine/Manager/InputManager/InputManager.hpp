@@ -34,25 +34,27 @@ namespace sfgmk
 			friend class SingletonTemplate<InputManager>;
 
 			public:
-			void update();
-			void handleEvent(sf::Event _Event);
+				void update();
+				void handleEvents();
 
-			Keyboard& getKeyboard();
-			Mouse& getMouse();
-			Joystick& getJoystick(int _Index);
+				Keyboard& getKeyboard();
+				Mouse& getMouse();
+				Joystick& getJoystick(int _Index);
 
-			sf::Vector2f getJoystickUnitVector(int _Id, sf::Joystick::Axis _AxisVertical, sf::Joystick::Axis _AxisHorizontal);
-			float getJoystickAngle(int _Id, sf::Joystick::Axis _AxisVertical, sf::Joystick::Axis _AxisHorizontal);
+				sf::Vector2f getJoystickUnitVector(int _Id, sf::Joystick::Axis _AxisVertical, sf::Joystick::Axis _AxisHorizontal);
+				float getJoystickAngle(int _Id, sf::Joystick::Axis _AxisVertical, sf::Joystick::Axis _AxisHorizontal);
 
-			void setGeneralVibration(float _Time, sf::Vector2i _Vibration);
+				void setGeneralVibration(float _Time, sf::Vector2i _Vibration);
 
 			private:
-			InputManager();
-			~InputManager();
+				InputManager();
+				~InputManager();
 
-			Keyboard m_Keyboard;
-			Mouse m_Mouse;
-			Joystick m_Joystick[sf::Joystick::Count];
+				sf::Event m_Event;
+
+				Keyboard m_Keyboard;
+				Mouse m_Mouse;
+				Joystick m_Joystick[sf::Joystick::Count];
 		};
 	}
 }

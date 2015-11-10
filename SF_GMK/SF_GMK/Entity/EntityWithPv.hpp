@@ -26,7 +26,7 @@ namespace sfgmk
 			LifeBar* m_Lifebar;
 		
 		public:
-			EntityWithPv(const sf::Vector3f& _Position, const int& _InitialPv = ENTITY_DEFAULT_PV, const int& _CurrentPv = ENTITY_DEFAULT_PV, const bool& _DieWhenPvNull = true);
+			EntityWithPv(const sf::Vector3f& _Position = sf::Vector3f(0.0f, 0.0f, 0.0f), const int& _InitialPv = ENTITY_DEFAULT_PV, const int& _CurrentPv = ENTITY_DEFAULT_PV, const bool& _DieWhenPvNull = true);
 			virtual ~EntityWithPv();
 
 			void update(const float& _TimeDelta);

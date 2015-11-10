@@ -31,9 +31,9 @@ namespace sfgmk
 		setPosition(_Position + sf::Vector2f(0.0f, -m_BarRect.getSize().y));
 
 		m_fPvRatio = (float)_CurrentLife / (float)_InitialLife;
-		m_GaugeScale.x = m_fPvRatio;
+		m_GaugeScale.x = m_fPvRatio * m_Scale.x;
 
-		m_PvText.setString(std::to_string(_CurrentLife) + "/" + std::to_string(_InitialLife));
+		m_PvText.setString(std::to_string(_CurrentLife) + " / " + std::to_string(_InitialLife));
 
 		//Gauge color
 		if( m_fPvRatio > 0.5f )

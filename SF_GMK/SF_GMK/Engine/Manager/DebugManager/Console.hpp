@@ -17,11 +17,11 @@ namespace sfgmk
 	{
 		#define CONSOLE_SEIZURE_SIZE 32
 		#define CONSOLE_FPS_SAMPLING 60
-		#define CONSOLE_SIZE_X 564
-		#define CONSOLE_SIZE_Y 500
+		#define CONSOLE_SIZE_X 576
+		#define CONSOLE_SIZE_Y 720
 		#define CONSOLE_UPDATE_TIMING 1.0f
 		#define CONSOLE_DISPLAY_TIMING 0.1f
-		#define CONSOLE_STRING_MAX_LINE 9
+		#define CONSOLE_STRING_MAX_LINE 14
 		#define CONSOLE_COMMAND_PER_LINE 3
 		#define COMMAND_COLOR_ACTIVE sf::Color(100, 255, 200, 255)
 		#define COMMAND_COLOR_DEACTIVE sf::Color(205, 51, 51, 255)
@@ -29,14 +29,25 @@ namespace sfgmk
 
 		enum eCONSOLE_DEV_TEXT
 		{
-			eCpu = 0,
-			eRam,
-			eFmod,
-			eFps,
-			eState,
-			eParallaxe,
-			eEntity,
-			eSeizure,
+			eCpuConsoleText = 0,
+			eRamConsoleText,
+			eFmodConsoleText,
+
+			eInputConsoleText,
+			eSoundConsoleText,
+			eStateConsoleText,
+			eAIConsoleText,
+			eEntityConsoleText,
+			ePhysicConsoleText,
+			eGraphicConsoleText,
+			eDebugConsoleText,
+
+			eTotalTimeUpdate,
+			eTotalTimeDraw,
+
+			eFpsConsoleText,
+
+			eSeizureConsoleText,
 			eConsoleText,
 			eCONSOLE_DEV_TEXT_NUMBER
 		};
@@ -91,6 +102,12 @@ namespace sfgmk
 				sf::Font m_Font[2];
 				sf::Texture m_Texture[2];
 
+				struct sFPS_ON_A_SECOND 
+				{
+					float m_fTime;
+					unsigned int uiFrames;
+				}m_LastSecondFps;
+
 				int m_iMinFps, m_iMaxFps;
 				MEMORYSTATUSEX m_MemInfo;
 				ULARGE_INTEGER m_LastCPU;
@@ -114,7 +131,6 @@ namespace sfgmk
 				int m_iEnteredCommandsIndex;
 
 			public:
-				bool setActive(bool _Boolean);
 				bool setActive();
 				void update(float _TimeDelta);
 				void display();
