@@ -171,7 +171,7 @@ namespace sfgmk
 	#define PHYSIC_MANAGER					engine::PhysicManager::getSingleton()
 	#define SOUND_MANAGER					engine::SoundManager::getSingleton()
 	#define STATE_MACHINE_MANAGER			engine::StateMachineManager::getSingleton()
-	#define MESSAGE_MANAGER					MsgManager::GetInstance() // reste à utiliser le singleton de SFGMK 
+	#define MESSAGE_MANAGER					sfgmk::engine::MsgManager::GetInstance() // reste à utiliser le singleton de SFGMK 
 	
 	#define ADD_ENTITY(a)					sfgmk::engine::EntityManager::getSingleton()->addEntity(a)
 	#define FREE_ENTITY_VECTOR				sfgmk::engine::EntityManager::getSingleton()->freeEntityVector()
