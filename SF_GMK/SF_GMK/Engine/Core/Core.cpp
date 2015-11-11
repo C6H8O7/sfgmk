@@ -87,6 +87,7 @@ namespace sfgmk
 			INPUT_MANAGER_UPDATE
 			GRAPHIC_MANAGER_SET
 			SOUND_MANAGER_UPDATE
+			MESSAGE_MANAGER->Update();
 		}
 
 		void Core::loop()

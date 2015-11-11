@@ -137,6 +137,11 @@
 	#include "Engine\Manager\GraphicManager\GraphicManager.hpp"
 	#include "Engine\Manager\DebugManager\DebugManager.hpp"
 
+	#include "Engine\Manager\MsgManager\Msg.hpp"
+	#include "Engine\Manager\MsgManager\MsgActor.hpp"
+	#include "Engine\Manager\MsgManager\MsgManager.hpp"
+
+
 	#include "Engine\Core\Core.hpp"
  
 namespace sfgmk
@@ -166,6 +171,7 @@ namespace sfgmk
 	#define PHYSIC_MANAGER					engine::PhysicManager::getSingleton()
 	#define SOUND_MANAGER					engine::SoundManager::getSingleton()
 	#define STATE_MACHINE_MANAGER			engine::StateMachineManager::getSingleton()
+	#define MESSAGE_MANAGER					MsgManager::GetInstance() // reste à utiliser le singleton de SFGMK 
 	
 	#define ADD_ENTITY(a)					sfgmk::engine::EntityManager::getSingleton()->addEntity(a)
 	#define FREE_ENTITY_VECTOR				sfgmk::engine::EntityManager::getSingleton()->freeEntityVector()
