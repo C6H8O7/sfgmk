@@ -135,21 +135,37 @@
                   <class Id="f2073441-20ff-4c59-aa65-7d152d35d2e5" name="Parallaxe" isAbstract="false" isLeaf="false" isActiveClass="false">
                     <elementDefinition Id="f2acd78e-0b17-4276-a99f-306a462ad362" />
                     <targetEnds>
-                      <association Id="e82a1200-351e-4eba-a749-6122de80ebce" isDerived="false" sourceEndRoleName="Parallaxe" targetEndRoleName="GraphicManager" isLeaf="false" isAbstract="false">
+                      <association Id="f930086d-771f-4d38-9c48-1e02278ab76f" isDerived="false" sourceEndRoleName="Parallaxe" targetEndRoleName="GraphicManager" isLeaf="false" isAbstract="false">
                         <classMoniker Id="b7305793-2eb8-446c-a37b-3fbd49195571" LastKnownName="GraphicManager" />
                         <relationshipOwnedElementsInternal>
                           <associationHasOwnedEnds>
-                            <memberEnd Id="162b2216-cc0e-469b-b872-6fac6711ab6e" name="Parallaxe" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
-                              <elementDefinition Id="82bdf654-3e41-4730-a099-1fdf83f5b025" />
+                            <memberEnd Id="83e66143-cf4a-4433-a59b-54320d51ab45" name="Parallaxe" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                              <elementDefinition Id="e1dcd91f-8912-495e-a850-4a0cdc86f67e" />
                             </memberEnd>
                           </associationHasOwnedEnds>
                           <associationHasOwnedEnds>
-                            <memberEnd Id="73cc35e8-a8f6-4ea8-a518-77d9ac2ca97a" name="GraphicManager" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
-                              <elementDefinition Id="1202e359-973b-441a-866f-dadacb5a2a47" />
+                            <memberEnd Id="e6518a92-cc08-4d3d-9505-1d108edccd17" name="GraphicManager" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                              <elementDefinition Id="77d0f062-d081-46ba-8da6-44e0c7e49fef" />
                             </memberEnd>
                           </associationHasOwnedEnds>
                         </relationshipOwnedElementsInternal>
-                        <elementDefinition Id="81748e97-affb-49f7-8b36-b68dbd51d070" />
+                        <elementDefinition Id="626bacdc-3954-49f2-9896-f5863b77f6e3" />
+                      </association>
+                      <association Id="2c802eee-c54c-4b50-8f02-2615848fba71" isDerived="false" sourceEndRoleName="Parallaxe" targetEndRoleName="StateLoading" isLeaf="false" isAbstract="false">
+                        <classMoniker Id="e1d4f003-fd52-4f0f-bb8d-ad84f9c6a393" LastKnownName="StateLoading" />
+                        <relationshipOwnedElementsInternal>
+                          <associationHasOwnedEnds>
+                            <memberEnd Id="833b4c25-f46d-42fb-b1ed-b9fa09398de3" name="Parallaxe" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                              <elementDefinition Id="1ade3321-bebf-40fc-ad4f-15a189bfe895" />
+                            </memberEnd>
+                          </associationHasOwnedEnds>
+                          <associationHasOwnedEnds>
+                            <memberEnd Id="251ca3fb-3afb-4174-aaba-255cb46f68bb" name="StateLoading" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                              <elementDefinition Id="3a4d933a-f6fd-49c1-9447-0de3c155a62f" />
+                            </memberEnd>
+                          </associationHasOwnedEnds>
+                        </relationshipOwnedElementsInternal>
+                        <elementDefinition Id="a798d155-e26d-47a8-86e0-520da2b1dac8" />
                       </association>
                     </targetEnds>
                   </class>
@@ -175,6 +191,11 @@
                         <elementDefinition Id="11b5bc01-e22d-43a8-9cef-525251939eb3" />
                       </association>
                     </targetEnds>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="f1e915c7-431c-491c-92ea-115da30be3a8" name="MsgManager" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="3d8fa829-0365-4c39-8a39-f74693dede46" />
                   </class>
                 </packageHasNamedElement>
               </packagedElements>
@@ -591,6 +612,79 @@
                   <elementDefinition Id="9b2b316f-3838-4e05-b0dc-b5ac3d6e672c" />
                 </generalization>
               </generalsInternal>
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="d3796078-a9e8-4917-9534-0afc42f6e537" name="Msg">
+        <elementDefinition Id="47796950-ca76-4f32-9892-1d4df94ff724" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <class Id="c4241a1e-e68c-43d8-a280-53a7f48b5a5a" name="Msg" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="e40a39a6-0a5f-4660-8bf3-030a6125530a" />
+              <targetEnds>
+                <association Id="6dec5f7a-38b9-4b78-8f2d-abab3a86943c" isDerived="false" sourceEndRoleName="Msg" targetEndRoleName="MsgManager" isLeaf="false" isAbstract="false">
+                  <classMoniker Id="f1e915c7-431c-491c-92ea-115da30be3a8" LastKnownName="MsgManager" />
+                  <relationshipOwnedElementsInternal>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="2c4ca290-ef67-4ed1-9c82-d32aabbb4caa" name="Msg" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                        <lowerValueInternal>
+                          <literalString Id="796368c3-a55f-4ecd-b323-4b11e15423e3" name="Lower" value="Array">
+                            <elementDefinition Id="c4c668c6-4b36-4958-b2ae-8c43ed83c25f" />
+                          </literalString>
+                        </lowerValueInternal>
+                        <upperValueInternal>
+                          <literalString Id="ceb7b904-0f98-4dff-81d4-f1aa8787b37d" name="Upper" value="Array">
+                            <elementDefinition Id="34f08453-b027-4550-8a4b-2dbc93c3199a" />
+                          </literalString>
+                        </upperValueInternal>
+                        <elementDefinition Id="b41e59d0-75f2-43a9-9665-8851cb911ac8" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="da78e31a-2331-47a9-9576-99dd1cb1c1eb" name="MsgManager" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <elementDefinition Id="7ed40d34-23c0-4a41-8e03-aec512f4ae1c" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                  </relationshipOwnedElementsInternal>
+                  <elementDefinition Id="0393b6e9-1487-44bb-9997-93a2957b3f95" />
+                </association>
+              </targetEnds>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="0b8231d3-8b66-4a56-9862-c127b15ca68c" name="MSgActor" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="1136b85d-346d-40c2-8030-f146b024635a" />
+              <targetEnds>
+                <association Id="a62f140b-233d-467b-9907-3108ece6f2ba" isDerived="false" sourceEndRoleName="MSgActor" targetEndRoleName="MsgManager" isLeaf="false" isAbstract="false">
+                  <classMoniker Id="f1e915c7-431c-491c-92ea-115da30be3a8" LastKnownName="MsgManager" />
+                  <relationshipOwnedElementsInternal>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="209b7ce4-bf5b-4264-ba0c-72c7b2ddff7f" name="MSgActor" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                        <lowerValueInternal>
+                          <literalString Id="03bb91b3-6552-4d9d-a338-2f20263a475d" name="Lower" value="Array">
+                            <elementDefinition Id="4ce17b10-4f77-4f85-adb5-0e2251ae8b21" />
+                          </literalString>
+                        </lowerValueInternal>
+                        <upperValueInternal>
+                          <literalString Id="9aa72ec0-3928-4ea1-92a8-528ee712ec7b" name="Upper" value="Array">
+                            <elementDefinition Id="4f725c19-b916-4596-9f23-b31b5b7d7937" />
+                          </literalString>
+                        </upperValueInternal>
+                        <elementDefinition Id="f27e3afd-a1bc-4451-9d1a-9a08648c48d2" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="4a95e9d4-8c59-45ba-ac07-8212f20e1adc" name="MsgManager" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <elementDefinition Id="12639860-72ed-4932-b547-08930af0c5e9" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                  </relationshipOwnedElementsInternal>
+                  <elementDefinition Id="58d0a64a-9619-486a-ad4e-a508d2e02fbc" />
+                </association>
+              </targetEnds>
             </class>
           </packageHasNamedElement>
         </packagedElements>

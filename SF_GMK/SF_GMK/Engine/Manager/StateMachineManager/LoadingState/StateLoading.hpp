@@ -25,6 +25,8 @@ namespace sfgmk
 					eSTATE_LOADING_DATA_TYPE_NUMBER
 				};
 
+				Parallaxe m_Parallaxe;
+
 				int m_iStateToLoadId;
 				std::string m_sStateToLoadDataPath;
 

@@ -2,15 +2,19 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		GraphicManager::GraphicManager() : m_RenderWindow(NULL), m_RenderTexture(NULL), m_CurrentCamera(NULL), m_bScreenshot(true)
+		GraphicManager::GraphicManager() : m_RenderWindow(NULL), m_RenderTexture(NULL), m_CurrentParallaxe(NULL), m_Parallaxe(NULL), m_CurrentCamera(NULL), m_bScreenshot(true)
 		{
+			m_Parallaxe = new Parallaxe();
+			m_CurrentParallaxe = m_Parallaxe;
 		}
 
 		GraphicManager::~GraphicManager()
 		{
-			SAFE_DELETE(m_RenderWindow);
+			m_CurrentParallaxe = NULL;
+			SAFE_DELETE(m_Parallaxe);
 			SAFE_DELETE(m_RenderTexture);
-
+			SAFE_DELETE(m_RenderWindow);
+			
 			//Destruction std::map caméras
 			for( auto rit(m_Cameras.rbegin()); rit != m_Cameras.rend(); ++rit )
 				delete(rit->second);
@@ -56,13 +60,13 @@ namespace sfgmk
 
 		void GraphicManager::update()
 		{
-			m_Parallaxe.update();
+			m_CurrentParallaxe->update();
 		}
 
 		void GraphicManager::draw()
 		{
-			m_Parallaxe.drawLayers(PARALLAXE_MAX_Z, PARALLAXE_MEDIUM_PLAN_Z);
-			m_Parallaxe.drawLayers(PARALLAXE_BEFORE_MEDIUM_PLAN_Z, PARALLAXE_MIN_Z);
+			m_CurrentParallaxe->drawLayers(PARALLAXE_MAX_Z, PARALLAXE_MEDIUM_PLAN_Z);
+			m_CurrentParallaxe->drawLayers(PARALLAXE_BEFORE_MEDIUM_PLAN_Z, PARALLAXE_MIN_Z);
 		}
 
 		void GraphicManager::display()
@@ -103,9 +107,17 @@ namespace sfgmk
 			return m_RenderTexture;
 		}
 
-		Parallaxe& GraphicManager::getParallaxe()
+		Parallaxe* GraphicManager::getParallaxe()
 		{
 			return m_Parallaxe;
+		}
+
+		void GraphicManager::setCurrentParallaxe(Parallaxe* _Instance)
+		{
+			if( _Instance == NULL )
+				m_CurrentParallaxe = m_Parallaxe;
+			else
+				m_CurrentParallaxe = _Instance;
 		}
 
 

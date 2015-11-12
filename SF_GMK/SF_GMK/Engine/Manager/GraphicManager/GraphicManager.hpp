@@ -19,6 +19,7 @@ namespace sfgmk
 		class SFGMK_API GraphicManager : public SingletonTemplate<GraphicManager>
 		{
 			friend class SingletonTemplate<GraphicManager>;
+			friend class StateLoading;
 
 			private:
 				GraphicManager();
@@ -27,7 +28,8 @@ namespace sfgmk
 				sf::RenderWindow* m_RenderWindow;
 				sf::RenderTexture* m_RenderTexture;
 				sf::Sprite m_RenderSprite;
-				Parallaxe m_Parallaxe;
+				Parallaxe* m_CurrentParallaxe;
+				Parallaxe* m_Parallaxe;
 
 				std::map<std::string, Camera*> m_Cameras;
 				Camera* m_CurrentCamera;
@@ -37,6 +39,8 @@ namespace sfgmk
 				sf::Image m_ScreenshotImage;
 				std::thread* m_ScreenshotThread;
 				bool m_bScreenshot;
+
+				void setCurrentParallaxe(Parallaxe* _Instance = NULL);
 
 			public:
 				void init(sf::VideoMode& _Mode, const std::string& _WindowName, int _Style);
@@ -49,7 +53,7 @@ namespace sfgmk
 
 				sf::RenderWindow* getRenderWindow();
 				sf::RenderTexture* getRenderTexture();
-				Parallaxe& getParallaxe();
+				Parallaxe* getParallaxe();
 
 				void registerCamera(std::string _CameraName, Camera* _Camera);
 				Camera* getCamera(std::string _CameraName);

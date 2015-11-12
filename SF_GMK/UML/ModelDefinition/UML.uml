@@ -66,6 +66,12 @@
         LastKnownName="States"
         LastKnownLocation="Package_1523.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="47796950-ca76-4f32-9892-1d4df94ff724"
+        LastKnownName="Msg"
+        LastKnownLocation="Package_1651.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

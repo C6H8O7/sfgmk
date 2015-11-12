@@ -444,7 +444,7 @@ namespace sfgmk
 				}
 				closedir(LevelRepertory);
 			}
-
+	
 			return bReturn;
 		}
 

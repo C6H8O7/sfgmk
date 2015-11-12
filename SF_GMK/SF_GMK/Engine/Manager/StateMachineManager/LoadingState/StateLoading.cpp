@@ -4,6 +4,12 @@ namespace sfgmk
 	{
 		StateLoading::StateLoading() : m_iStateToLoadId(STATE_MACHINE->getStateToLoadId()), m_sStateToLoadDataPath(STATE_MACHINE_MANAGER->getStateRessourcePath(m_iStateToLoadId)), m_bThreadsLaunched(false), m_bLoadThreadsOver(false), m_fAngle(0.0f), m_sLoadString("")
 		{
+			//Charge le state loading en lui-même
+			DATA_MANAGER->loadLevel(m_sRessourcesPath);
+			m_Parallaxe.loadLevel(m_sRessourcesPath);	//Attention on charge la parallaxe "privé" du loading, pas la générale du programme
+			GRAPHIC_MANAGER->setCurrentParallaxe(&m_Parallaxe);
+			SOUND_MANAGER->loadLevel(m_sRessourcesPath);
+
 			m_RessourcesCounters[eLevel].sRessourcesName = "Layers";
 			m_RessourcesCounters[eAsset].sRessourcesName = "Assets";
 			m_RessourcesCounters[eSound].sRessourcesName = "Sons";
@@ -21,12 +27,18 @@ namespace sfgmk
 			m_BarRect.setOutlineThickness(2.0f);
 			m_BarRect.setOutlineColor(sf::Color::Black);
 			m_BarRect.setFillColor(sf::Color::White);
+			m_BarRect.setSize(sf::Vector2f((float)GRAPHIC_MANAGER->getRenderTexture()->getSize().x * 0.25f, 26.0f));
 
 			m_GaugeRect.setOutlineThickness(0);
+			m_GaugeRect.setSize(m_BarRect.getSize());
 		}
 
 		StateLoading::~StateLoading()
 		{
+			DATA_MANAGER->unloadLevel(m_sRessourcesPath);
+			GRAPHIC_MANAGER->setCurrentParallaxe();
+			m_Parallaxe.unloadLevel(m_sRessourcesPath);
+			SOUND_MANAGER->unloadLevel(m_sRessourcesPath);
 		}
 
 
@@ -59,7 +71,7 @@ namespace sfgmk
 															+ getNumberOfFileInDir(m_sStateToLoadDataPath + "/audio/sound");
 
 			//Init les fonctions
-			sfgmk::FoncterTemplateInstance<Parallaxe, bool, const std::string&>* PtrFuncLevel = new sfgmk::FoncterTemplateInstance<Parallaxe, bool, const std::string&>(&PARALLAXE, &Parallaxe::loadLevel);
+			sfgmk::FoncterTemplateInstance<Parallaxe, bool, const std::string&>* PtrFuncLevel = new sfgmk::FoncterTemplateInstance<Parallaxe, bool, const std::string&>(PARALLAXE, &Parallaxe::loadLevel);
 			sfgmk::FoncterTemplateInstance<DataManager, bool, const std::string&>* PtrFuncAsset = new sfgmk::FoncterTemplateInstance<DataManager, bool, const std::string&>(DATA_MANAGER, &DataManager::loadLevel);
 			sfgmk::FoncterTemplateInstance<SoundManager, bool, const std::string&>* PtrFuncAudio = new sfgmk::FoncterTemplateInstance<SoundManager, bool, const std::string&>(SOUND_MANAGER, &SoundManager::loadLevel);
 
@@ -80,6 +92,14 @@ namespace sfgmk
 				m_WaitForLoadThread = new std::thread(&StateLoading::WaitForLoadThreads, this);
 			}
 
+			//Update counters
+			m_RessourcesCounters[eLevel].uiRessourceLoaded = PARALLAXE->getLastLoadLevelDataAccount();
+			m_RessourcesCounters[eAsset].uiRessourceLoaded = DATA_MANAGER->getLastLoadLevelDataAccount();
+			m_RessourcesCounters[eSound].uiRessourceLoaded = SOUND_MANAGER->getLastLoadLevelDataAccount();
+
+			//Clear texture
+			m_RenderTexture.clear(EMPTY_COLOR);
+
 			//Chargement terminé, on peut passer à l'état suivant
 			if( m_bLoadThreadsOver )
 			{
@@ -91,11 +111,6 @@ namespace sfgmk
 				   || JOYSTICK_GET_BUTTON(0, BUTTON_A) == KEY_PRESSED )
 					CHANGE_STATE(m_iStateToLoadId);
 			}
-
-			//Update counters
-			m_RessourcesCounters[eLevel].uiRessourceLoaded = PARALLAXE.getLastLoadLevelDataAccount();
-			m_RessourcesCounters[eAsset].uiRessourceLoaded = DATA_MANAGER->getLastLoadLevelDataAccount();
-			m_RessourcesCounters[eSound].uiRessourceLoaded = SOUND_MANAGER->getLastLoadLevelDataAccount();
 		}
 
 		void StateLoading::deinit()
@@ -108,15 +123,9 @@ namespace sfgmk
 			sf::RenderTexture* MainRenderTexture(GRAPHIC_MANAGER->getRenderTexture());
 			sf::Vector2u MainRenderTextureSize = MainRenderTexture->getSize();
 
-			//Clear texture
-			m_RenderTexture.clear(EMPTY_COLOR);
-
 			//Barres de progression
 			for( int i(0); i < eSTATE_LOADING_DATA_TYPE_NUMBER; i++ )
 			{
-				m_BarRect.setSize(sf::Vector2f((float)MainRenderTextureSize.x * 0.25f, 26.0f));
-				m_GaugeRect.setSize(m_BarRect.getSize());
-
 				float fRatio = 1.0f;
 				if( m_RessourcesCounters[i].uiRessourceToLoad != 0 )
 					fRatio = (float)(m_RessourcesCounters[i].uiRessourceLoaded / m_RessourcesCounters[i].uiRessourceToLoad);
@@ -172,7 +181,7 @@ namespace sfgmk
 			m_LoadThreads[eLevel].Wait();
 			m_LoadThreads[eAsset].Wait();
 			m_LoadThreads[eSound].Wait();
-
+		
 			m_bLoadThreadsOver = true;
 		}
 	}

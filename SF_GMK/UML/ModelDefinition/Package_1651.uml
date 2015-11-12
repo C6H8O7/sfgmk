@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="47796950-ca76-4f32-9892-1d4df94ff724"
+  name="Msg" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="e40a39a6-0a5f-4660-8bf3-030a6125530a"
+        name="Msg"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="0393b6e9-1487-44bb-9997-93a2957b3f95"
+            isDerived="false"
+            sourceEndRoleName="Msg"
+            targetEndRoleName="MsgManager"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="3d8fa829-0365-4c39-8a39-f74693dede46"
+              LastKnownName="MsgManager"
+              LastKnownLocation="Package2_2324.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b41e59d0-75f2-43a9-9665-8851cb911ac8"
+                  name="Msg"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="c4c668c6-4b36-4958-b2ae-8c43ed83c25f"
+                      name="Lower"
+                      value="Array" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="34f08453-b027-4550-8a4b-2dbc93c3199a"
+                      name="Upper"
+                      value="Array" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7ed40d34-23c0-4a41-8e03-aec512f4ae1c"
+                  name="MsgManager"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="1136b85d-346d-40c2-8030-f146b024635a"
+        name="MSgActor"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="58d0a64a-9619-486a-ad4e-a508d2e02fbc"
+            isDerived="false"
+            sourceEndRoleName="MSgActor"
+            targetEndRoleName="MsgManager"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="3d8fa829-0365-4c39-8a39-f74693dede46"
+              LastKnownName="MsgManager"
+              LastKnownLocation="Package2_2324.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f27e3afd-a1bc-4451-9d1a-9a08648c48d2"
+                  name="MSgActor"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="4ce17b10-4f77-4f85-adb5-0e2251ae8b21"
+                      name="Lower"
+                      value="Array" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="4f725c19-b916-4596-9f23-b31b5b7d7937"
+                      name="Upper"
+                      value="Array" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="12639860-72ed-4932-b547-08930af0c5e9"
+                  name="MsgManager"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

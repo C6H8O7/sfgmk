@@ -106,8 +106,6 @@ namespace sfgmk
 
 				m_iDrawNumber++;
 			}
-
-			PARALLAXE.addDrawToAccount(m_iDrawNumber - 1);
 		}
 
 

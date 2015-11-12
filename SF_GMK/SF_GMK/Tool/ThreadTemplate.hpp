@@ -19,6 +19,7 @@ namespace sfgmk
 			std::thread* m_Thread;
 			FoncterTemplate* m_Function;
 			bool m_bLaunched;
+			bool m_bWaited;
 
 			inline void Run(Args... _Args)
 			{
@@ -26,7 +27,7 @@ namespace sfgmk
 			}
 
 		public:
-			ThreadTemplate(FoncterTemplate* _Foncter = NULL) : m_Thread(NULL), m_Function(_Foncter), m_bLaunched(false) {}
+			ThreadTemplate(FoncterTemplate* _Foncter = NULL) : m_Thread(NULL), m_Function(_Foncter), m_bLaunched(false), m_bWaited(false) {}
 			~ThreadTemplate() { Wait(); SAFE_DELETE(m_Function); }
 
 			bool SetFunc(FoncterTemplate* _Foncter)
@@ -42,6 +43,7 @@ namespace sfgmk
 			{
 				if( !m_bLaunched && m_Function )
 				{
+					m_bLaunched = true;
 					m_Thread = new std::thread(&ThreadTemplate::Run, this, _Args...);
 					return true;
 				}
@@ -51,8 +53,11 @@ namespace sfgmk
 
 			void Wait()
 			{
-				if( m_bLaunched )
+				if( m_bLaunched && !m_bWaited )
+				{
 					m_Thread->join();
+					m_bWaited = true;
+				}
 			}
 	};
 }

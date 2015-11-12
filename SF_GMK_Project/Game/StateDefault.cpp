@@ -16,7 +16,7 @@ StateDefault::~StateDefault()
 {
 	ENTITY_MANAGER->freeEntityVector();
 	DATA_MANAGER->unloadLevel(m_sRessourcesPath);
-	PARALLAXE.unloadLevel(m_sRessourcesPath);
+	PARALLAXE->unloadLevel(m_sRessourcesPath);
 	SOUND_MANAGER->unloadLevel(m_sRessourcesPath);
 }
 

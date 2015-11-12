@@ -215,7 +215,7 @@
         isActiveClass="false">
         <targetEnds>
           <association
-            Id="81748e97-affb-49f7-8b36-b68dbd51d070"
+            Id="626bacdc-3954-49f2-9896-f5863b77f6e3"
             isDerived="false"
             sourceEndRoleName="Parallaxe"
             targetEndRoleName="GraphicManager"
@@ -228,7 +228,46 @@
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="82bdf654-3e41-4730-a099-1fdf83f5b025"
+                  Id="e1dcd91f-8912-495e-a850-4a0cdc86f67e"
+                  name="Parallaxe"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="77d0f062-d081-46ba-8da6-44e0c7e49fef"
+                  name="GraphicManager"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="a798d155-e26d-47a8-86e0-520da2b1dac8"
+            isDerived="false"
+            sourceEndRoleName="Parallaxe"
+            targetEndRoleName="StateLoading"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="f6228382-7ecf-4435-bf52-a11321a7aaee"
+              LastKnownName="StateLoading"
+              LastKnownLocation="Package_1523.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1ade3321-bebf-40fc-ad4f-15a189bfe895"
                   name="Parallaxe"
                   isLeaf="false"
                   isStatic="false"
@@ -241,8 +280,8 @@
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="1202e359-973b-441a-866f-dadacb5a2a47"
-                  name="GraphicManager"
+                  Id="3a4d933a-f6fd-49c1-9447-0de3c155a62f"
+                  name="StateLoading"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -305,6 +344,14 @@
           </association>
         </targetEnds>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3d8fa829-0365-4c39-8a39-f74693dede46"
+        name="MsgManager"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
     </packageHasNamedElement>
   </packagedElements>
 </package>
