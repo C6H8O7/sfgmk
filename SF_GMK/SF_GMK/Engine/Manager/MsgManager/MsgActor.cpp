@@ -19,19 +19,16 @@ namespace sfgmk
 		// Fonctions Public ----------------------------------------------
 
 		Msg* MsgActor::GetLastMessage() {
-			// Elimine les messages déjà lus----------
-			for (size_t i = 0; i < vec_Msg.size(); ++i) {
-				if (vec_Msg[0]->GetReceived() == true)
-				{
-					Msg* _Mem = vec_Msg[vec_Msg.size() - 1];
-					vec_Msg[vec_Msg.size() - 1] = vec_Msg[0];
-					vec_Msg[0] = _Mem;
-					vec_Msg.pop_back();
-				}
+			CleanVecMsg();
+
+			if (vec_Msg.size() >= 1 && vec_Msg[0] != NULL)
+			{
+				Msg* p_Msg;
+				p_Msg = vec_Msg[0];
+				OpenMsg(p_Msg);
+				return p_Msg;
 			}
-			// fin elimination------------------------
-			OpenMsg(vec_Msg[0]);
-			return vec_Msg[0];
+			return 0;
 		}
 
 		void MsgActor::CleanVecMsg() {
@@ -56,14 +53,12 @@ namespace sfgmk
 
 			CleanVecMsg();
 
-
 			if (vec_Msg.size() >= 1 && vec_Msg[0] != NULL)
 			{
 				Msg* p_Msg;
 				p_Msg = vec_Msg[0];
 				OpenMsg(p_Msg);
-				if (p_Msg->GetIsGroup())
-					return p_Msg->GetData();
+				return p_Msg->GetData();
 			}
 			else std::cout << "Pas de messages recus" << std::endl;
 			return 0;
