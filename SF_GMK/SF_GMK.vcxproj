@@ -25,6 +25,9 @@
     <ClCompile Include="SF_GMK\Engine\Manager\DebugManager\DebugManager.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\DebugManager\Selector.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\EntityManager\EntityManager.cpp" />
+    <ClCompile Include="SF_GMK\Engine\Manager\MsgManager\Msg.cpp" />
+    <ClCompile Include="SF_GMK\Engine\Manager\MsgManager\MsgActor.cpp" />
+    <ClCompile Include="SF_GMK\Engine\Manager\MsgManager\MsgManager.cpp" />
     <ClCompile Include="SF_GMK\Graphic\Animation.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\GraphicManager\GraphicManager.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\StateMachineManager\StateMachineManager.cpp" />
@@ -88,6 +91,9 @@
     <ClInclude Include="SF_GMK\Engine\Manager\DebugManager\DebugManager.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\DebugManager\Selector.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\EntityManager\EntityManager.hpp" />
+    <ClInclude Include="SF_GMK\Engine\Manager\MsgManager\Msg.hpp" />
+    <ClInclude Include="SF_GMK\Engine\Manager\MsgManager\MsgActor.hpp" />
+    <ClInclude Include="SF_GMK\Engine\Manager\MsgManager\MsgManager.hpp" />
     <ClInclude Include="SF_GMK\Graphic\Animation.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\GraphicManager\GraphicManager.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\StateMachineManager\StateMachineManager.hpp" />

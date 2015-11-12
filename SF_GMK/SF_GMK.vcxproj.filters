@@ -247,6 +247,15 @@
     <ClCompile Include="SF_GMK\Engine\Manager\AiManager\FSM.cpp">
       <Filter>sfgmk</Filter>
     </ClCompile>
+    <ClCompile Include="SF_GMK\Engine\Manager\MsgManager\Msg.cpp">
+      <Filter>sfgmk</Filter>
+    </ClCompile>
+    <ClCompile Include="SF_GMK\Engine\Manager\MsgManager\MsgActor.cpp">
+      <Filter>sfgmk</Filter>
+    </ClCompile>
+    <ClCompile Include="SF_GMK\Engine\Manager\MsgManager\MsgManager.cpp">
+      <Filter>sfgmk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -410,5 +419,8 @@
     <ClInclude Include="SF_GMK\Engine\Manager\DebugManager\Selector.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\AiManager\AIManager.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\AiManager\FSM.hpp" />
+    <ClInclude Include="SF_GMK\Engine\Manager\MsgManager\Msg.hpp" />
+    <ClInclude Include="SF_GMK\Engine\Manager\MsgManager\MsgActor.hpp" />
+    <ClInclude Include="SF_GMK\Engine\Manager\MsgManager\MsgManager.hpp" />
   </ItemGroup>
 </Project>
