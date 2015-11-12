@@ -20,6 +20,7 @@ namespace sfgmk
 		{
 			friend class SingletonTemplate<GraphicManager>;
 			friend class StateLoading;
+			friend class ConsoleDev;
 
 			private:
 				GraphicManager();
@@ -40,6 +41,7 @@ namespace sfgmk
 				std::thread* m_ScreenshotThread;
 				bool m_bScreenshot;
 
+				Parallaxe* getCurrentParallaxe();
 				void setCurrentParallaxe(Parallaxe* _Instance = NULL);
 
 			public:

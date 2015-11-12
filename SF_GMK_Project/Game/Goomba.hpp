@@ -16,14 +16,13 @@ class Goomba : public EntityWithPv
 
 		float m_fSpeed;
 		float m_fDistanceTolerance;
-		float m_fMoveTolerance;
 		sf::Vector2f* m_Destination;
 
 	public:
-		Goomba() : m_fTimer(0.0f), m_fSpeed(100.0f), m_Destination(NULL), m_fDistanceTolerance(10.0f), m_fMoveTolerance(10.0f)
+		Goomba() : m_fTimer(0.0f), m_fSpeed(100.0f), m_Destination(NULL), m_fDistanceTolerance(10.0f)
 		{
 			setScale(2.0f, 2.0f);
-			setPosition(sf::Vector3f(0.0f, 0.0f, 0.0f));
+			setPosition(sf::Vector3f((float)RAND(100, 1180), (float)RAND(100, 620), 0.0f));
 			getSprite()->setAnimation(DATA_MANAGER->getAnimation("goomba"));
 			getSprite()->setColor(sf::Color::Red);
 
@@ -43,8 +42,9 @@ class Goomba : public EntityWithPv
 
 		~Goomba()
 		{
-
+			SAFE_DELETE(m_Destination);
 		}
+
 
 		void GoombaIdle(const int& _Progress)
 		{

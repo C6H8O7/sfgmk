@@ -25,6 +25,8 @@ namespace sfgmk
 				std::vector<Entity*> m_EntityVector;
 				unsigned int m_uiEntityAccount;
 				unsigned int m_uiEntityGlobalAccount;
+				sf::Clock m_SortTimer;
+				signed long long m_llSortTimer;
 
 				bool m_bDrawId;
 				sf::Sprite m_Sprite;
@@ -48,6 +50,7 @@ namespace sfgmk
 				void freeEntityVector();
 
 				void sortEntityVector();
+				inline const signed long long& getSortTime() { return m_llSortTimer; }
 		};
 
 		//Fonction qui permet de trier les entités par leur Z virtuel

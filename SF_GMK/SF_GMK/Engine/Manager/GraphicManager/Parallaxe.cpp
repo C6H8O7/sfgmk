@@ -2,7 +2,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		Parallaxe::Parallaxe() : m_iEntityIndex(0), m_iDrawAccount(0), m_uiLastLoadLevelDataAccount(0U)
+		Parallaxe::Parallaxe() : m_iEntityIndex(0), m_uiDrawAccount(0U), m_uiLastLoadLevelDataAccount(0U)
 		{
 		}
 
@@ -14,7 +14,7 @@ namespace sfgmk
 
 		void Parallaxe::update()
 		{
-			m_iDrawAccount = 0;
+			m_uiDrawAccount = 0U;
 
 			//Calcule les positions virtuelles des entités en fonction de leur Z
 			virtualCoordsComputation();
@@ -78,7 +78,7 @@ namespace sfgmk
 			_Iterator->second->Sprite->setPosition(sf::Vector2f(_Iterator->second->fVirtualX, _Iterator->second->fVirtualY));
 			_RenderTexture->draw(*_Iterator->second->Sprite);
 
-			m_iDrawAccount++;
+			m_uiDrawAccount++;
 		}
 
 		void Parallaxe::drawLayers(int _MaxZ, int _MinZ)
@@ -131,7 +131,7 @@ namespace sfgmk
 						if( sfgmk::math::RectsIntersects(CameraOrigin.x, CameraOrigin.y, CameraSize.x, CameraSize.y, EntityPosition.x, EntityPosition.y, (float)SpriteSize.width, (float)SpriteSize.height) )
 						{
 							TempEntity->draw(Rendertexture);
-							m_iDrawAccount++;
+							m_uiDrawAccount++;
 						}
 					}
 					m_iEntityIndex--;
@@ -317,12 +317,12 @@ namespace sfgmk
 
 		const int Parallaxe::getDrawAccount() const
 		{
-			return m_iDrawAccount;
+			return m_uiDrawAccount;
 		}
 
-		void Parallaxe::addDrawToAccount(const int _DrawNumber)
+		void Parallaxe::addDrawToAccount(const unsigned int& _DrawNumber)
 		{
-			m_iDrawAccount += _DrawNumber;
+			m_uiDrawAccount += _DrawNumber;
 		}
 	}
 }

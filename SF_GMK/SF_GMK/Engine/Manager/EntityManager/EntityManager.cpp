@@ -2,7 +2,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		EntityManager::EntityManager() : m_uiEntityAccount(0U), m_uiEntityGlobalAccount(0U), m_bDrawId(false)
+		EntityManager::EntityManager() : m_uiEntityAccount(0U), m_uiEntityGlobalAccount(0U), m_llSortTimer(sf::Int64(0.0)), m_bDrawId(false)
 		{
 			sf::Vector2u WindowSize = GRAPHIC_MANAGER->getRenderWindow()->getSize();
 			m_Render.create(WindowSize.x, WindowSize.y);
@@ -121,7 +121,9 @@ namespace sfgmk
 
 		void EntityManager::sortEntityVector()
 		{
+			m_SortTimer.restart();
 			std::sort(m_EntityVector.begin(), m_EntityVector.end(), sortEntityByZ);
+			m_llSortTimer = m_SortTimer.getElapsedTime().asMicroseconds();
 		}
 
 

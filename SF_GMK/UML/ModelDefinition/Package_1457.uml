@@ -64,6 +64,45 @@
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
+          <association
+            Id="3f9046d8-bd6e-490f-9f44-473140d644f1"
+            isDerived="false"
+            sourceEndRoleName="Entity"
+            targetEndRoleName="MSgActor"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="1136b85d-346d-40c2-8030-f146b024635a"
+              LastKnownName="MSgActor"
+              LastKnownLocation="Package_1651.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="577946b0-748a-4f41-9367-358700233908"
+                  name="Entity"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Composite"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c07a7c55-ed38-47cc-8244-58f07a150461"
+                  name="MSgActor"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="true" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
         </targetEnds>
       </class>
     </packageHasNamedElement>

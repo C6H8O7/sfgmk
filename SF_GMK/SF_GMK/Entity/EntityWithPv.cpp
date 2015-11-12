@@ -27,7 +27,10 @@ namespace sfgmk
 	void EntityWithPv::draw(sf::RenderTexture* _Render)
 	{
 		if( bEntityWithPvLifeBarDraw && m_Lifebar )
+		{
 			m_Lifebar->draw();
+			PARALLAXE->addDrawToAccount(1);
+		}
 
 		_Render->draw(*m_Sprite);
 	}

@@ -40,10 +40,14 @@ namespace sfgmk
 			eEntityConsoleText,
 			ePhysicConsoleText,
 			eGraphicConsoleText,
+			eMsgConsoleText,
 			eDebugConsoleText,
 
 			eTotalTimeUpdate,
 			eTotalTimeDraw,
+
+			eEntityCounter,
+			eParallaxeCounter,
 
 			eFpsConsoleText,
 

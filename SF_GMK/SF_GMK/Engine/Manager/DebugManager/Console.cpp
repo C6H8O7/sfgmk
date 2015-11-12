@@ -53,12 +53,18 @@ namespace sfgmk
 			m_TextArray[eCONSOLE_DEV_TEXT::eEntityConsoleText].setPosition(32.0f, 146.0f);
 			m_TextArray[eCONSOLE_DEV_TEXT::ePhysicConsoleText].setPosition(32.0f, 160.0f);
 			m_TextArray[eCONSOLE_DEV_TEXT::eGraphicConsoleText].setPosition(32.0f, 174.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eDebugConsoleText].setPosition(32.0f, 188.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eMsgConsoleText].setPosition(32.0f, 188.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eDebugConsoleText].setPosition(32.0f, 202.0f);
 
-			m_TextArray[eCONSOLE_DEV_TEXT::eTotalTimeUpdate].setPosition(140.0f, 205.0f);
-			m_TextArray[eCONSOLE_DEV_TEXT::eTotalTimeDraw].setPosition(295.0f, 205.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eTotalTimeUpdate].setPosition(140.0f, 218.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eTotalTimeDraw].setPosition(295.0f, 218.0f);
 
-			m_TextArray[eCONSOLE_DEV_TEXT::eFpsConsoleText].setPosition(32.0f, 235.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eEntityCounter].setPosition(352.0f, 245.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eEntityCounter].setCharacterSize(12);
+			m_TextArray[eCONSOLE_DEV_TEXT::eParallaxeCounter].setPosition(352.0f, 270.0f);
+			m_TextArray[eCONSOLE_DEV_TEXT::eParallaxeCounter].setCharacterSize(12);
+
+			m_TextArray[eCONSOLE_DEV_TEXT::eFpsConsoleText].setPosition(32.0f, 241.0f);
 			m_FpsCurbSprite.setPosition(95.0f, m_TextArray[eCONSOLE_DEV_TEXT::eFpsConsoleText].getPosition().y - 7.0f);
 
 			m_TextArray[eCONSOLE_DEV_TEXT::eSeizureConsoleText].setPosition(26.0f, 652.0f);
@@ -422,6 +428,10 @@ namespace sfgmk
 			m_TextArray[eCONSOLE_DEV_TEXT::eGraphicConsoleText].setString("Graphic:     \tUpdate: " + sBuffers[0] + "ms\t\t"
 																		+ "Draw: " + sBuffers[1] + "ms");
 
+			sBuffers[0] = std::to_string((double)(Timers[eMsgManager].llUpdate * 0.001f));
+			sBuffers[0] = sBuffers[0].substr(0, sBuffers[0].find('.') + 3);
+			m_TextArray[eCONSOLE_DEV_TEXT::eMsgConsoleText].setString("Msg:         \tUpdate: " + sBuffers[0] + "ms");
+
 			sBuffers[0] = std::to_string((double)(Timers[eDebugManager].llUpdate * 0.001f));
 			sBuffers[0] = sBuffers[0].substr(0, sBuffers[0].find('.') + 3);
 			sBuffers[1] = std::to_string((double)(Timers[eDebugManager].llDraw * 0.001f));
@@ -429,40 +439,17 @@ namespace sfgmk
 			m_TextArray[eCONSOLE_DEV_TEXT::eDebugConsoleText].setString("Debug:       \tUpdate: " + sBuffers[0] + "ms\t\t"
 																		+ "Draw: " + sBuffers[1] + "ms");
 
-			/*m_TextArray[eCONSOLE_DEV_TEXT::eTotalTime].setString(std::to_string((double)(dTotals[0])) + "ms\t"
-			std::to_string((double)(dTotals[1])) + "ms");*/
+			//Autres compteurs
+			sBuffers[0] = std::to_string(ENTITY_MANAGER->getEntityNumber());
+			sBuffers[1] = std::to_string((double)(ENTITY_MANAGER->getSortTime() * 0.001f));
+			sBuffers[1] = sBuffers[1].substr(0, sBuffers[1].find('.') + 3);
+			m_TextArray[eCONSOLE_DEV_TEXT::eEntityCounter].setString("Entity number:    " + sBuffers[0] + '\n'
+																	 + "Entity sort time: " + sBuffers[1] + "ms");
 
-			//Current state
-			/*std::string sStateUpdate = std::to_string((double)(Timers.dStateUpdate * 0.001f));
-			sStateUpdate = sStateUpdate.substr(0, sStateUpdate.find('.') + 3);
-			std::string sStateDisplay = std::to_string((double)(Timers.dStateDraw * 0.001f));
-			sStateDisplay = sStateDisplay.substr(0, sStateDisplay.find('.') + 3);
-
-			m_TextArray[eCONSOLE_DEV_TEXT::eState].setString("Update:  " + sStateUpdate + " ms\t" + "Draw:  " + sStateDisplay + " ms");
-
-			//Parallaxe
-			std::string sEntity("Entity: " + std::to_string(ENTITY_MANAGER->getEntityNumber()) + "  ");
-			std::string sLayer("Layer: " + std::to_string(GameParallaxe->getLayerAccount()) + "  ");
-			std::string sDraw("Draw: " + std::to_string(GameParallaxe->getDrawAccount()) + "  ");
-			m_TextArray[eCONSOLE_DEV_TEXT::eParallaxe].setString("Parallaxe: " + sEntity + sLayer + sDraw);
-
-			//Entity
-			std::string sUpdate = std::to_string((double)(Timers.dEntityUpdate * 0.001f));
-			sUpdate = sUpdate.substr(0, sUpdate.find('.') + 3);
-			std::string sSort = std::to_string((double)(Timers.dEntitySort * 0.001f));
-			sSort = sSort.substr(0, sSort.find('.') + 3);
-			std::string sParallaxe = std::to_string((double)(Timers.dParallaxeComputation * 0.001f));
-			sParallaxe = sParallaxe.substr(0, sParallaxe.find('.') + 3);
-			std::string sDisplay = std::to_string((double)(Timers.dParallaxeDisplay * 0.001f));
-			sDisplay = sDisplay.substr(0, sDisplay.find('.') + 3);
-			std::string sPhysic = std::to_string((double)(Timers.dPhysic * 0.001f));
-			sPhysic = sPhysic.substr(0, sPhysic.find('.') + 3);
-
-			m_TextArray[eCONSOLE_DEV_TEXT::eEntity].setString("\tUpdate: " + sUpdate + " ms"
-																				 + "\n\tSort: " + sSort + " ms"
-																				 + "\n\tParallaxe: " + sParallaxe + " ms"
-																				 + "\n\tPhysic: " + sPhysic + " ms"
-																				 + "\n\tDraw: " + sDisplay + " ms");*/
+			sBuffers[0] = std::to_string(GRAPHIC_MANAGER->getCurrentParallaxe()->getLastLoadLevelDataAccount());
+			sBuffers[1] = std::to_string(GRAPHIC_MANAGER->getCurrentParallaxe()->getDrawAccount());
+			m_TextArray[eCONSOLE_DEV_TEXT::eParallaxeCounter].setString("Layer number:     " + sBuffers[0] + '\n'
+																	 + "Draw account:     " + sBuffers[1]);
 		}
 
 

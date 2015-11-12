@@ -49,9 +49,6 @@ namespace sfgmk
 			{
 				case SELECTOR_STATE::SELECTION:
 					m_End = mouse_pos;
-					break;
-
-				case SELECTOR_STATE::SELECTED:
 					if( m_Start == m_End )
 					{
 						m_Start += sf::Vector2f(-1.0f, -1.0f);
@@ -59,10 +56,13 @@ namespace sfgmk
 					}
 					break;
 
+				case SELECTOR_STATE::SELECTED:
+					break;
+
 				case SELECTOR_STATE::STANDBY:
 					break;
 			}
-
+			
 			sf::Vector2f scale = m_End - m_Start;
 			scale.x = ABS(scale.x);
 			scale.y = ABS(scale.y);

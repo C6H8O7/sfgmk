@@ -52,7 +52,7 @@ namespace sfgmk
 				sLAYER_ELEMENT* getLayer(const std::string& _Name);
 				const int getLayerAccount() const;
 				const int getDrawAccount() const;
-				void addDrawToAccount(const int _DrawNumber);
+				void addDrawToAccount(const unsigned int& _DrawNumber);
 
 			private:
 				Parallaxe();
@@ -64,7 +64,7 @@ namespace sfgmk
 				std::multimap<int, sLAYER_ELEMENT*>::reverse_iterator m_LayerIterator;
 				int m_iEntityIndex;
 
-				int m_iDrawAccount;
+				unsigned int m_uiDrawAccount;
 
 				unsigned int m_uiLastLoadLevelDataAccount;
 		};

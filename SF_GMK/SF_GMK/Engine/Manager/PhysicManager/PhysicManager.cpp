@@ -75,6 +75,7 @@ namespace sfgmk
 			sf::RectangleShape RectShape;
 			const sf::Transform* Transform = &Entity->getVirtualTransform().getTransform();
 			float fSphereRadius;
+			unsigned int uiDrawNumber(0U);
 
 			if( _Collider->isActive() )
 			{

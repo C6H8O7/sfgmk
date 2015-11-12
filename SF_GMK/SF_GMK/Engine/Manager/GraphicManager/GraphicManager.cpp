@@ -112,6 +112,11 @@ namespace sfgmk
 			return m_Parallaxe;
 		}
 
+		Parallaxe* GraphicManager::getCurrentParallaxe()
+		{
+			return m_CurrentParallaxe;
+		}
+
 		void GraphicManager::setCurrentParallaxe(Parallaxe* _Instance)
 		{
 			if( _Instance == NULL )

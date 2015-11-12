@@ -328,6 +328,22 @@
                   </relationshipOwnedElementsInternal>
                   <elementDefinition Id="15c0b643-0ec1-4e1d-a618-343dfb239261" />
                 </association>
+                <association Id="7724dad9-4549-4f2f-a1ff-8d874450ccf9" isDerived="false" sourceEndRoleName="Entity" targetEndRoleName="MSgActor" isLeaf="false" isAbstract="false">
+                  <classMoniker Id="0b8231d3-8b66-4a56-9862-c127b15ca68c" LastKnownName="MSgActor" />
+                  <relationshipOwnedElementsInternal>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="f4a3e19c-7b9f-4c39-a08c-312237f7eb41" name="Entity" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                        <elementDefinition Id="577946b0-748a-4f41-9367-358700233908" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="7ff7b1c4-db80-4685-8e35-ea0cb9548326" name="MSgActor" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                        <elementDefinition Id="c07a7c55-ed38-47cc-8244-58f07a150461" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                  </relationshipOwnedElementsInternal>
+                  <elementDefinition Id="3f9046d8-bd6e-490f-9f44-473140d644f1" />
+                </association>
               </targetEnds>
             </class>
           </packageHasNamedElement>

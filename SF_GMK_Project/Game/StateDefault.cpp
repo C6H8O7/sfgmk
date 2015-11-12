@@ -46,14 +46,18 @@ void StateDefault::init()
 	}
 
 	//Démo IA (voir classe Goomba)
-	Goomba* NewCleverGoomba = new Goomba();
-	ADD_ENTITY(NewCleverGoomba);
+	Goomba* NewCleverGoomba = NULL;
+	for( int i(0); i < 5; i++ )
+	{
+		NewCleverGoomba = new Goomba();
+		ADD_ENTITY(NewCleverGoomba);
+	}
 }
 
 void StateDefault::update()
 {
 	//Déplacement du goomba si on le sélectionne
-	if (INPUT_MANAGER->MOUSE_BUTTON(sf::Mouse::Right) == KEY_PRESSED)
+	/*if (INPUT_MANAGER->MOUSE_BUTTON(sf::Mouse::Right) == KEY_PRESSED)
 	{
 		sf::Vector2f mouse_pos = INPUT_MANAGER->MOUSE.getWorldPosition();
 
@@ -62,7 +66,7 @@ void StateDefault::update()
 		*(float*)((unsigned int)data + 4) = mouse_pos.y;
 
 		MESSAGE_MANAGER->SendMsgToGroup(1, 0, data, 8);
-	}
+	}*/
 }
 
 void StateDefault::deinit()
