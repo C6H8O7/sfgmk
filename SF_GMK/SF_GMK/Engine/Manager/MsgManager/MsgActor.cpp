@@ -18,6 +18,11 @@ namespace sfgmk
 
 		// Fonctions Public ----------------------------------------------
 
+		MsgActor::MsgActor()
+		{
+			MESSAGE_MANAGER->Register(this);
+		}
+
 		Msg* MsgActor::GetLastMessage() {
 			CleanVecMsg();
 
@@ -60,7 +65,7 @@ namespace sfgmk
 				OpenMsg(p_Msg);
 				return p_Msg->GetData();
 			}
-			else std::cout << "Pas de messages recus" << std::endl;
+			//else std::cout << "Pas de messages recus" << std::endl;
 			return 0;
 
 		}

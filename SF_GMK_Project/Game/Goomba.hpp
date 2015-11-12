@@ -1,6 +1,5 @@
 #pragma once
 
-
 using namespace sfgmk;
 
 class Goomba : public EntityWithPv
@@ -44,12 +43,14 @@ class Goomba : public EntityWithPv
 
 		~Goomba()
 		{
-		}
 
+		}
 
 		void GoombaIdle(const int& _Progress)
 		{
 			m_fTimer += TIME_DELTA;
+
+			updateMsg();
 
 			OnEnter
 			{
@@ -82,6 +83,8 @@ class Goomba : public EntityWithPv
 		void GoombaMove(const int& _Progress)
 		{
 			m_fTimer += TIME_DELTA;
+
+			updateMsg();
 	
 			OnEnter
 			{
@@ -128,5 +131,20 @@ class Goomba : public EntityWithPv
 			SAFE_DELETE(m_Destination);
 
 			m_Destination = new sf::Vector2f(_Destination);
+		}
+
+		void updateMsg()
+		{
+			void* data = m_MsgActor.GetLastMessageData();
+
+			while (data != 0)
+			{
+				float x = *(float*)((unsigned int)data);
+				float y = *(float*)((unsigned int)data + 4);
+
+				setDestination(sf::Vector2f(x, y));
+
+				data = m_MsgActor.GetLastMessageData();
+			}
 		}
 };

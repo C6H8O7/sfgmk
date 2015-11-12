@@ -53,14 +53,15 @@ void StateDefault::init()
 void StateDefault::update()
 {
 	//Déplacement du goomba si on le sélectionne
-	if( INPUT_MANAGER->MOUSE_BUTTON(sf::Mouse::Right) == KEY_PRESSED )
+	if (INPUT_MANAGER->MOUSE_BUTTON(sf::Mouse::Right) == KEY_PRESSED)
 	{
-		DynamicArray<Entity*>* SelectedEntities = SELECTOR->getSelectedEntities();
-		for( unsigned int i(0); i < SelectedEntities->getElementNumber(); i++ )
-		{
-			if( (*SelectedEntities)[i]->getAiFsm() )
-				((Goomba*)((*SelectedEntities)[i]))->setDestination(INPUT_MANAGER->MOUSE.getWorldPosition());
-		}
+		sf::Vector2f mouse_pos = INPUT_MANAGER->MOUSE.getWorldPosition();
+
+		void *data = malloc(8);
+		*(float*)((unsigned int)data) = mouse_pos.x;
+		*(float*)((unsigned int)data + 4) = mouse_pos.y;
+
+		MESSAGE_MANAGER->SendMsgToGroup(1, 0, data, 8);
 	}
 }
 

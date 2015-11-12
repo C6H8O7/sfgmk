@@ -11,7 +11,7 @@
 
 // on préfère un tableau à un vector par commodité : plus rapide et la pompe à message 
 // aura une taille variable en fonction de l'application. Pas besoin d'un vector si 20 ennemis communiquent.
-#define ID_BUFFER_SIZE 5 // <------- Nombre d'inscrits à la poste max
+#define ID_BUFFER_SIZE 1024 // <------- Nombre d'inscrits à la poste max
 #define MSG_BUFFER_SIZE 25 // <----- Courrier max en circulation 
 
 #define ID_EMPTY -1 // l'emplacement du tableau est vide
@@ -27,7 +27,7 @@ namespace sfgmk
 	{
 		using namespace std;
 
-		class MsgManager // ---/!\--- doit encore hériter d'un SINGLETON------------------------------------
+		class SFGMK_API MsgManager // ---/!\--- doit encore hériter d'un SINGLETON------------------------------------
 		{
 			friend class MsgActor;
 

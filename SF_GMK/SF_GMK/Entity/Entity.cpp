@@ -288,4 +288,9 @@ namespace sfgmk
 
 		return m_AI->addState(_StateId, _NewFunction, _StateName);
 	}
+
+	sfgmk::engine::MsgActor& Entity::getMsgActor()
+	{
+		return m_MsgActor;
+	}
 }

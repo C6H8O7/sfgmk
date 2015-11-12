@@ -32,7 +32,7 @@ namespace sfgmk
 		};
 
 
-		class Msg
+		class SFGMK_API Msg
 		{
 		private:
 			MSG_TAG i_Tag; //

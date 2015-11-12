@@ -22,7 +22,7 @@ namespace sfgmk
 			GAMMA
 		};
 
-		class MsgActor {
+		class SFGMK_API MsgActor {
 		private:
 			std::vector<Msg*> vec_Msg;
 			// un vector pour éviter de gaspiller de la mémoire sur un grand nombre d'entités avec un tableau fixe
@@ -34,6 +34,8 @@ namespace sfgmk
 			int i_ID;
 
 		public:
+			MsgActor();
+
 			Msg* GetLastMessage();
 
 			void* GetLastMessageData();

@@ -91,6 +91,9 @@
 	#include "Graphic\Sprite.hpp"
 	#include "Graphic\FX\LifeBar\LifeBar.hpp"
 
+	#include "Engine\Manager\MsgManager\Msg.hpp"
+	#include "Engine\Manager\MsgManager\MsgActor.hpp"
+
 	#include "Engine\Manager\AiManager\FSM.hpp"
 	#include "Entity\Entity.hpp"
 	#include "Entity\EntityWithPv.hpp"
@@ -136,8 +139,6 @@
 	#include "Engine\Manager\EntityManager\EntityManager.hpp"
 	#include "Engine\Manager\GraphicManager\GraphicManager.hpp"
 	#include "Engine\Manager\DebugManager\DebugManager.hpp"
-	#include "Engine\Manager\MsgManager\Msg.hpp"
-	#include "Engine\Manager\MsgManager\MsgActor.hpp"
 	#include "Engine\Manager\MsgManager\MsgManager.hpp"
 
 	#include "Engine\Core\Core.hpp"

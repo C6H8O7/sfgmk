@@ -52,6 +52,10 @@ namespace sfgmk
 			sfgmk::FoncterTemplateInstance<StateMachineManager, void>* StateMachineManagerDrawPtr = new sfgmk::FoncterTemplateInstance<StateMachineManager, void>(STATE_MACHINE_MANAGER, &StateMachineManager::draw);
 			m_MainFunctions.m_FunctionsArray.pushBack(StateMachineManagerDrawPtr);
 
+			//MsgManager
+			sfgmk::FoncterTemplateInstance<MsgManager, void>* MsgManagerUpdatePtr = new sfgmk::FoncterTemplateInstance<MsgManager, void>(MESSAGE_MANAGER, &MsgManager::Update);
+			m_MainFunctions.m_FunctionsArray.pushBack(MsgManagerUpdatePtr);
+
 			return true;
 		}
 
@@ -87,7 +91,7 @@ namespace sfgmk
 			INPUT_MANAGER_UPDATE
 			GRAPHIC_MANAGER_SET
 			SOUND_MANAGER_UPDATE
-			MESSAGE_MANAGER->Update();
+			MSG_MANAGER_UPDATE
 		}
 
 		void Core::loop()

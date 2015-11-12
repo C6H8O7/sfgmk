@@ -30,6 +30,7 @@ namespace sfgmk
 			eSoundManager,
 			eStateMachineManager,
 			eDebugManager,
+			eMsgManager,
 			eMANAGERS_NUMBER
 		};
 
@@ -45,6 +46,7 @@ namespace sfgmk
 		#define SOUND_MANAGER_UPDATE			m_ExecutionTimes[eSoundManager].llUpdate = measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[8]);
 		#define STATE_MACHINE_MANAGER_UPDATE	m_ExecutionTimes[eStateMachineManager].llUpdate = measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[9]);
 		#define STATE_MACHINE_MANAGER_DRAW		m_ExecutionTimes[eStateMachineManager].llDraw = measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[10]);
+		#define MSG_MANAGER_UPDATE				m_ExecutionTimes[eMsgManager].llUpdate = measureFoncterExecutionTime(m_MainFunctions.m_FunctionsArray[11]);
 	#endif
 
 	#ifndef SFGMK_DEBUG
@@ -59,6 +61,7 @@ namespace sfgmk
 		#define SOUND_MANAGER_UPDATE			m_MainFunctions.m_FunctionsArray[8]->Execute();
 		#define STATE_MACHINE_MANAGER_UPDATE	m_MainFunctions.m_FunctionsArray[9]->Execute();
 		#define STATE_MACHINE_MANAGER_DRAW		m_MainFunctions.m_FunctionsArray[10]->Execute();
+		#define MSG_MANAGER_UPDATE				m_MainFunctions.m_FunctionsArray[11]->Execute();
 	#endif
 
 		class SFGMK_API Core : public SingletonTemplate<Core>

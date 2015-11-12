@@ -34,6 +34,8 @@ namespace sfgmk
 
 			engine::AIStateMachine* m_AI;
 
+			sfgmk::engine::MsgActor m_MsgActor;
+
 		public:
 			Entity(const int& _Id = 0);
 			Entity(const sf::Vector3f& _Position, const int& _Id = 0);
@@ -85,6 +87,8 @@ namespace sfgmk
 			engine::AIStateMachine* getAiFsm();
 			void addAiFsm(int _InitState = 0);
 			bool addAiState(int _StateId, FoncterTemplate* _NewFunction, const std::string& _StateName);
+
+			sfgmk::engine::MsgActor& getMsgActor();
 	};
 }
 

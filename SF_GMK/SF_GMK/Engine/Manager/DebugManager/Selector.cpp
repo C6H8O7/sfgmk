@@ -21,7 +21,6 @@ namespace sfgmk
 				DEBUG_MANAGER->DeleteSelector();
 		}
 
-
 		void Selector::update(const float& _TimeDelta)
 		{
 			// Selector::update ==================
@@ -87,23 +86,31 @@ namespace sfgmk
 
 			// ===================================
 		}
-		
 
 		void Selector::onPhysicEnter()
 		{
-			m_SelectedEntities.clear();
+			if (m_State == SELECTOR_STATE::SELECTION)
+			{
+				for (unsigned int i = 0; i < m_SelectedEntities.getElementNumber(); i++)
+					m_SelectedEntities[i]->getMsgActor().Withdrawgroup(0);
+
+				m_SelectedEntities.clear();
+			}
 		}
 
 		void Selector::onPhysicCollision(Entity* _entity)
 		{
-			m_SelectedEntities.pushBack(_entity);
+			if (m_State == SELECTOR_STATE::SELECTION)
+			{
+				m_SelectedEntities.pushBack(_entity);
+				_entity->getMsgActor().AddGroup(0);
+			}
 		}
 
 		void Selector::onPhysicExit()
 		{
 			
 		}
-
 
 		DynamicArray<Entity*>* Selector::getSelectedEntities()
 		{
