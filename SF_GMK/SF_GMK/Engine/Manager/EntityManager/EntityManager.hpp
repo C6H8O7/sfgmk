@@ -24,10 +24,23 @@ namespace sfgmk
 
 				std::vector<Entity*> m_EntityVector;
 				unsigned int m_uiEntityAccount;
+				unsigned int m_uiEntityGlobalAccount;
+
+				bool m_bDrawId;
+				sf::Sprite m_Sprite;
+				sf::Text m_Text;
+				sf::RenderTexture m_Render;
+				sf::Font m_Font;
+				sf::RectangleShape m_Rect;
 
 			public:
 				void update();
 
+				void draw();
+
+				void setDrawId();
+
+				Entity* getEntity(const unsigned int& _Id);
 				std::vector<Entity*>& getEntityVector();
 				const unsigned int& getEntityNumber();
 				void addEntity(Entity* _Entity);

@@ -1,8 +1,8 @@
 /*--------------------------------------------------------------------------------------------------
 
-@author		GMK
-@date		20/10/2015
-@brief		Fichier d'entête de MsgManager : contient la classe de la pompe à messages
+	@author		GMK
+	@date		20/10/2015
+	@brief		Fichier d'entête de MsgManager : contient la classe de la pompe à messages
 
 --------------------------------------------------------------------------------------------------*/
 

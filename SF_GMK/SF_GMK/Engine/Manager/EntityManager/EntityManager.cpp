@@ -1,11 +1,21 @@
-#include <omp.h>
-
 namespace sfgmk
 {
 	namespace engine
 	{
-		EntityManager::EntityManager() : m_uiEntityAccount(0U)
+		EntityManager::EntityManager() : m_uiEntityAccount(0U), m_uiEntityGlobalAccount(0U), m_bDrawId(false)
 		{
+			sf::Vector2u WindowSize = GRAPHIC_MANAGER->getRenderWindow()->getSize();
+			m_Render.create(WindowSize.x, WindowSize.y);
+
+			m_Rect.setSize(sf::Vector2f(32.0f, 12.0f));
+			m_Rect.setOutlineThickness(1.0f);
+			m_Rect.setOutlineColor(sf::Color::Black);
+			m_Rect.setFillColor(sf::Color(255, 255, 255, 200));
+
+			m_Font = DATA_MANAGER->getFont("sfgmk_ConsoleFont1");
+			m_Text.setFont(m_Font);
+			m_Text.setCharacterSize(12);
+			m_Text.setColor(sf::Color::Black);
 		}
 
 		EntityManager::~EntityManager()
@@ -24,8 +34,58 @@ namespace sfgmk
 				if( !m_EntityVector[i]->getIsAlive() )
 					removeEntity(i);
 			}
+
+			m_Render.clear(EMPTY_COLOR);
+			m_Render.setView(*CAMERA);
 		}
 
+
+		void EntityManager::draw()
+		{
+			if( m_bDrawId )
+			{
+				sf::Vector2f Position;
+				unsigned int uiId;
+
+				for( Entity*& entity : m_EntityVector )
+				{
+					uiId = entity->getSingleId();
+					Position = entity->getPosition() + sf::Vector2f(-m_Rect.getSize().x, entity->getSprite()->getSize().y * 0.25f);
+
+					m_Rect.setPosition(Position);
+					m_Render.draw(m_Rect);
+
+					m_Text.setString(std::to_string(uiId));
+					m_Text.setPosition(Position + sf::Vector2f(1.0f, 1.0f));
+					m_Render.draw(m_Text);
+				}
+
+				m_Render.display();
+				m_Sprite.setTexture(m_Render.getTexture());
+
+				m_Sprite.setPosition(CAMERA->getRelativOrigin());
+				GRAPHIC_MANAGER->getRenderTexture()->draw(m_Sprite);
+			}
+		}
+
+
+		void EntityManager::setDrawId()
+		{
+			m_bDrawId = !m_bDrawId;
+		}
+
+
+		Entity* EntityManager::getEntity(const unsigned int& _Id)
+		{
+			for( Entity*& entity : m_EntityVector )
+			{
+				if( entity->getSingleId() == _Id )
+					return entity;
+			}
+
+			perror("Single ID of Entity not found");
+			return NULL;
+		}
 
 		std::vector<Entity*>& EntityManager::getEntityVector()
 		{
@@ -39,6 +99,9 @@ namespace sfgmk
 
 		void EntityManager::addEntity(Entity* _Entity)
 		{
+			_Entity->setSingleId(m_uiEntityGlobalAccount);
+			m_uiEntityGlobalAccount++;
+
 			m_EntityVector.push_back(_Entity);
 			m_uiEntityAccount++;
 		}

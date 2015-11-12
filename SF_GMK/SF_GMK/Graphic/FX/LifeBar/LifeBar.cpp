@@ -5,7 +5,7 @@ namespace sfgmk
 		m_BarRect.setSize(sf::Vector2f((float)_EntityRect.width, 10.0f));
 		m_BarRect.setOutlineThickness(2.0f);
 		m_BarRect.setOutlineColor(sf::Color::Black);
-		m_BarRect.setFillColor(sf::Color::White);
+		m_BarRect.setFillColor(sf::Color(155, 155, 155, 150));
 
 		m_GaugeRect.setOutlineThickness(0);
 		m_GaugeRect.setSize(m_BarRect.getSize());

@@ -74,6 +74,8 @@ namespace sfgmk
 
 			AI_MANAGER->draw();
 
+			ENTITY_MANAGER->draw();
+
 			//Rendu console
 			CONSOLE.draw(m_RenderTexture);
 

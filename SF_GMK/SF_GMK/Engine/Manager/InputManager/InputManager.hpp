@@ -14,19 +14,19 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		enum KeyStates
+		enum eKeyStates
 		{
-			KEY_UP = 0,
-			KEY_PRESSED = 1 << 0,
-			KEY_DOWN = KEY_PRESSED | 1 << 1,
-			KEY_RELEASED = 1 << 2,
+			eKEY_UP = 0,
+			eKEY_PRESSED = 1 << 0,
+			eKEY_DOWN = eKEY_PRESSED | 1 << 1,
+			eKEY_RELEASED = 1 << 2,
 		};
 
 		enum eMouseWheelStates
 		{
-			WHEEL_BOT = -1,
-			WHEEL_CENTER = 0,
-			WHEEL_TOP = 1
+			eWHEEL_BOT = -1,
+			eWHEEL_CENTER = 0,
+			eWHEEL_TOP = 1
 		};
 
 		class SFGMK_API InputManager : public SingletonTemplate<InputManager>

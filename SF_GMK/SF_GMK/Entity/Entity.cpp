@@ -1,6 +1,6 @@
 namespace sfgmk
 {
-	Entity::Entity(const int& _Id) : m_iId(_Id), m_bIsAlive(true), m_bIsComputatedByParallax(true), m_bIsScaledByParallax(true), m_fPositionZ(0.0f), m_Sprite(NULL), m_Collider(NULL), m_AI(NULL)
+	Entity::Entity(const int& _Id) : m_iId(_Id), m_bIsAlive(true), m_uiSingleId(0U), m_bIsComputatedByParallax(true), m_bIsScaledByParallax(true), m_fPositionZ(0.0f), m_Sprite(NULL), m_Collider(NULL), m_AI(NULL)
 	{
 	}
 
@@ -83,6 +83,16 @@ namespace sfgmk
 	void Entity::setIsAlive(bool _State)
 	{
 		m_bIsAlive = _State;
+	}
+
+	const unsigned int& Entity::getSingleId()
+	{
+		return m_uiSingleId;
+	}
+
+	void Entity::setSingleId(const unsigned int& _Id)
+	{
+		m_uiSingleId = _Id;
 	}
 
 

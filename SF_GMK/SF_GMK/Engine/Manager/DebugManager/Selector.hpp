@@ -38,6 +38,8 @@ namespace sfgmk
 			virtual void onPhysicEnter();
 			virtual void onPhysicCollision(Entity* _entity);
 			virtual void onPhysicExit();
+
+			DynamicArray<Entity*>* getSelectedEntities();
 		};
 	}
 }

@@ -10,6 +10,7 @@ namespace sfgmk
 			m_Console.registerCommand("/life", new sfgmk::FoncterTemplateInstance<CLASS_NULL, void>(&EntityWithPv::setLifeBarDraw), "Affichage vie activee\n", "Affichage vie desactivee\n");
 			m_Console.registerCommand("/selector", new sfgmk::FoncterTemplateInstance<DebugManager, void>(this, &DebugManager::SetSelector), "Selector active\n", "Selector desactive\n");
 			m_Console.registerCommand("/ai", new sfgmk::FoncterTemplateInstance<AIManager, void>(AI_MANAGER, &AIManager::setDrawAiState), "Affichage AI active\n", "Affichage AI desactive\n");
+			m_Console.registerCommand("/id", new sfgmk::FoncterTemplateInstance<EntityManager, void>(ENTITY_MANAGER, &EntityManager::setDrawId), "Affichage ID active\n", "Affichage ID desactive\n");
 		}
 
 		DebugManager::~DebugManager()
@@ -20,7 +21,7 @@ namespace sfgmk
 		void DebugManager::update(const float& _TimeDelta)
 		{
 			//Console
-			if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Quote) == sfgmk::engine::KeyStates::KEY_PRESSED )
+			if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Quote) == KEY_PRESSED )
 				m_Console.setActive();
 
 			m_Console.update(_TimeDelta);

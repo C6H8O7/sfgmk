@@ -51,13 +51,13 @@ namespace sfgmk
 			{
 				case sf::Event::JoystickButtonPressed:
 					key = _Event.joystickButton.button;
-					if( m_KeyStates[key] == KeyStates::KEY_UP )
-						m_KeyStates[key] = KeyStates::KEY_PRESSED;
+					if( m_KeyStates[key] == eKeyStates::eKEY_UP )
+						m_KeyStates[key] = eKeyStates::eKEY_PRESSED;
 					break;
 
 				case sf::Event::JoystickButtonReleased:
 					key = _Event.joystickButton.button;
-					m_KeyStates[key] = KeyStates::KEY_RELEASED;
+					m_KeyStates[key] = eKeyStates::eKEY_RELEASED;
 					break;
 
 				default:

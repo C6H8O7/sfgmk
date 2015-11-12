@@ -10,7 +10,7 @@ namespace sfgmk
 			m_Rect.setSize(sf::Vector2f(64.0f, 12.0f));
 			m_Rect.setOutlineThickness(1.0f);
 			m_Rect.setOutlineColor(sf::Color::Black);
-			m_Rect.setFillColor(sf::Color::White);
+			m_Rect.setFillColor(sf::Color(255, 255, 255, 225));
 
 			m_Font = DATA_MANAGER->getFont("sfgmk_ConsoleFont1");
 			m_Text.setFont(m_Font);

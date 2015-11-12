@@ -123,7 +123,7 @@ namespace sfgmk
 			if( m_bIsActive )
 			{
 				//Console opaque ou non
-				if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Tab) == KeyStates::KEY_PRESSED )
+				if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Tab) == KEY_PRESSED )
 					m_bOpacity = !m_bOpacity;
 
 				//Update saisie
@@ -291,7 +291,7 @@ namespace sfgmk
 		void ConsoleDev::updateSeizure()
 		{
 			sf::Vector2i MousePosition = MOUSE_WINDOW_POS;
-			int iMouseLeftClick = MOUSE.getButtonState(sf::Mouse::Left);
+			int iMouseLeftClick = INPUT_MANAGER->MOUSE.getButtonState(sf::Mouse::Left);
 
 			//Activation mode saisie texte
 			if( iMouseLeftClick == KEY_PRESSED && (MousePosition.x > 0 && MousePosition.x < CONSOLE_SIZE_X && MousePosition.y > 0 && MousePosition.y < CONSOLE_SIZE_Y) )
@@ -332,14 +332,14 @@ namespace sfgmk
 				}
 
 				//Envoyer commande
-				if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Return) == KeyStates::KEY_PRESSED )
+				if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Return) == KEY_PRESSED )
 				{
 					command(m_sSeizureBuffer);
 					m_EnteredCommands.push_back(m_sSeizureBuffer);
 					m_sSeizureBuffer.clear();
 					m_iEnteredCommandsIndex = -1;
 				}
-				else if( iSize > 0 && INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::BackSpace) == KeyStates::KEY_PRESSED )
+				else if( iSize > 0 && INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::BackSpace) == KEY_PRESSED )
 				{
 					m_sSeizureBuffer.pop_back();
 					m_iEnteredCommandsIndex = -1;

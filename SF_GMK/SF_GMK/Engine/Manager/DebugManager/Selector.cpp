@@ -15,9 +15,12 @@ namespace sfgmk
 
 		Selector::~Selector()
 		{
+			m_SelectedEntities.clear();
+
 			if( m_bIsDebugManagerSelector )
 				DEBUG_MANAGER->DeleteSelector();
 		}
+
 
 		void Selector::update(const float& _TimeDelta)
 		{
@@ -29,16 +32,16 @@ namespace sfgmk
 
 			switch (mouse.getButtonState(sf::Mouse::Left))
 			{
-				case KeyStates::KEY_PRESSED:
+				case KEY_PRESSED:
 					m_Start = mouse_pos;
 					m_State = SELECTOR_STATE::SELECTION;
 					break;
 
-				case KeyStates::KEY_RELEASED:
+				case KEY_RELEASED:
 					m_State = SELECTOR_STATE::SELECTED;
 					break;
 
-				case KeyStates::KEY_UP:
+				case KEY_UP:
 					m_State = SELECTOR_STATE::STANDBY;
 					break;
 			}
@@ -50,6 +53,11 @@ namespace sfgmk
 					break;
 
 				case SELECTOR_STATE::SELECTED:
+					if( m_Start == m_End )
+					{
+						m_Start += sf::Vector2f(-1.0f, -1.0f);
+						m_End += sf::Vector2f(1.0f, 1.0f);
+					}
 					break;
 
 				case SELECTOR_STATE::STANDBY:
@@ -59,7 +67,7 @@ namespace sfgmk
 			sf::Vector2f scale = m_End - m_Start;
 			scale.x = ABS(scale.x);
 			scale.y = ABS(scale.y);
-
+		
 			sf::Vector2f pos = 0.5f * (m_End + m_Start);
 
 			setPosition(pos);
@@ -80,6 +88,7 @@ namespace sfgmk
 			// ===================================
 		}
 		
+
 		void Selector::onPhysicEnter()
 		{
 			m_SelectedEntities.clear();
@@ -93,6 +102,12 @@ namespace sfgmk
 		void Selector::onPhysicExit()
 		{
 			
+		}
+
+
+		DynamicArray<Entity*>* Selector::getSelectedEntities()
+		{
+			return &m_SelectedEntities;
 		}
 	}
 }

@@ -28,6 +28,7 @@ void StateDefault::init()
 	sfgmk::CONSOLE.command("/selector");
 	sfgmk::CONSOLE.command("/life");
 	sfgmk::CONSOLE.command("/ai");
+	sfgmk::CONSOLE.command("/id");
 
 	for( int i(0); i < 25; i++ )
 	{
@@ -51,6 +52,16 @@ void StateDefault::init()
 
 void StateDefault::update()
 {
+	//Déplacement du goomba si on le sélectionne
+	if( INPUT_MANAGER->MOUSE_BUTTON(sf::Mouse::Right) == KEY_PRESSED )
+	{
+		DynamicArray<Entity*>* SelectedEntities = SELECTOR->getSelectedEntities();
+		for( unsigned int i(0); i < SelectedEntities->getElementNumber(); i++ )
+		{
+			if( (*SelectedEntities)[i]->getAiFsm() )
+				((Goomba*)((*SelectedEntities)[i]))->setDestination(INPUT_MANAGER->MOUSE.getWorldPosition());
+		}
+	}
 }
 
 void StateDefault::deinit()

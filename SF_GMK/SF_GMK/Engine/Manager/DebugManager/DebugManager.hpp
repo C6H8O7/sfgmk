@@ -30,6 +30,7 @@ namespace sfgmk
 				void update(const float& _TimeDelta);
 
 				inline ConsoleDev& getConsole() { return m_Console; };
+				inline Selector* getSelector() { return m_Selector; };
 
 				void SetSelector();
 				void DeleteSelector();

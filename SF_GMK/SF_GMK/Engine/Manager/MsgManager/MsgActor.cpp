@@ -20,7 +20,7 @@ namespace sfgmk
 
 		Msg* MsgActor::GetLastMessage() {
 			// Elimine les messages déjà lus----------
-			for (int i = 0; i < vec_Msg.size(); ++i) {
+			for (size_t i = 0; i < vec_Msg.size(); ++i) {
 				if (vec_Msg[0]->GetReceived() == true)
 				{
 					Msg* _Mem = vec_Msg[vec_Msg.size() - 1];
@@ -35,7 +35,7 @@ namespace sfgmk
 		}
 
 		void MsgActor::CleanVecMsg() {
-			for (int i = 0; i < vec_Msg.size(); ++i) {
+			for ( size_t i = 0; i < vec_Msg.size(); ++i) {
 				if (vec_Msg[i]->GetReceived() == true) {
 					delete vec_Msg[i];
 					vec_Msg[i] = NULL;
@@ -76,7 +76,7 @@ namespace sfgmk
 
 		void MsgActor::AddGroup(int _ID_Group) {
 			bool b_CanBeAdded = true;
-			for (int i = 0; i < vec_groups.size(); ++i) {
+			for ( size_t i = 0; i < vec_groups.size(); ++i) {
 				if (vec_groups[i] == _ID_Group)
 					b_CanBeAdded = false;
 			}
@@ -93,7 +93,7 @@ namespace sfgmk
 
 			int _place = -1;
 
-			for (int i = 0; i < vec_groups.size(); ++i) {
+			for ( size_t i = 0; i < vec_groups.size(); ++i) {
 				if (vec_groups[i] == _ID_Group)
 					_place = i;
 			}
@@ -112,14 +112,14 @@ namespace sfgmk
 
 		void MsgActor::ShowGroupsInConsole() {
 			std::cout << "Groupes de l'actor : ";
-			for (int i = 0; i < vec_groups.size(); ++i) {
+			for ( size_t i = 0; i < vec_groups.size(); ++i) {
 				std::cout << vec_groups[i] << ", ";
 			}
 			std::cout << std::endl;
 		}
 
 		bool MsgActor::IsInGroup(int _ID_Group) {
-			for (int i = 0; i < vec_groups.size(); ++i) {
+			for ( size_t i = 0; i < vec_groups.size(); ++i) {
 				if (vec_groups[i] == _ID_Group)
 					return true;
 			}

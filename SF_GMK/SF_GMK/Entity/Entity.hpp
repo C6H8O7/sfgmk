@@ -19,6 +19,7 @@ namespace sfgmk
 		protected:
 			int m_iId;
 			bool m_bIsAlive;
+			unsigned int m_uiSingleId;
 
 			bool m_bIsComputatedByParallax;
 			bool m_bIsScaledByParallax;
@@ -46,6 +47,8 @@ namespace sfgmk
 			void setId(int _Id);
 			const bool& getIsAlive();
 			void setIsAlive(bool _State);
+			const unsigned int& getSingleId();
+			void setSingleId(const unsigned int& _Id);
 
 			const bool& getIsComputatedByParralax();
 			void setIsComputatedByParralax(bool _Boolean);

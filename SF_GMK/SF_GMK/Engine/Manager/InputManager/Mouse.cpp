@@ -34,13 +34,13 @@ namespace sfgmk
 			{
 				case sf::Event::MouseButtonPressed:
 					key = _Event.key.code;
-					if( m_KeyStates[key] == KeyStates::KEY_UP )
-						m_KeyStates[key] = KeyStates::KEY_PRESSED;
+					if( m_KeyStates[key] == eKeyStates::eKEY_UP )
+						m_KeyStates[key] = eKeyStates::eKEY_PRESSED;
 					break;
 
 				case sf::Event::MouseButtonReleased:
 					key = _Event.key.code;
-					m_KeyStates[key] = KeyStates::KEY_RELEASED;
+					m_KeyStates[key] = eKeyStates::eKEY_RELEASED;
 					break;
 
 				case sf::Event::MouseWheelMoved:

@@ -99,28 +99,28 @@ namespace sfgmk
 			//Clavier / Souris
 				//Déplacements
 					//Gauche
-					if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Left) == KeyStates::KEY_DOWN )
+					if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Left) == KEY_DOWN )
 					{
 						this->move(-m_Speed.x * _TimeDelta, 0);
 						CONSOLE.setDisplayTimer(CONSOLE_DISPLAY_TIMING);
 					}
 
 					//Droite
-					else if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Right) == KeyStates::KEY_DOWN )
+					else if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Right) == KEY_DOWN )
 					{
 						this->move(m_Speed.x * _TimeDelta, 0);
 						CONSOLE.setDisplayTimer(CONSOLE_DISPLAY_TIMING);
 					}
 
 					//Haut
-					if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Up) == KeyStates::KEY_DOWN )
+					if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Up) == KEY_DOWN )
 					{
 						this->move(0, -m_Speed.y * _TimeDelta);
 						CONSOLE.setDisplayTimer(CONSOLE_DISPLAY_TIMING);
 					}
 
 					//Bas
-					else if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Down) == KeyStates::KEY_DOWN )
+					else if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Down) == KEY_DOWN )
 					{
 						this->move(0, m_Speed.y * _TimeDelta);
 						CONSOLE.setDisplayTimer(CONSOLE_DISPLAY_TIMING);
@@ -128,14 +128,14 @@ namespace sfgmk
 
 					//Zoom
 						//Arriere
-						if( MOUSE.getWheelState() == -1 )
+						if( INPUT_MANAGER->MOUSE.getWheelState() == -1 )
 						{
 							this->zoom(2.0f);
 							CONSOLE.setDisplayTimer(CONSOLE_DISPLAY_TIMING);
 						}
 
 						//Avant
-						else if( MOUSE.getWheelState() == 1 )
+						else if( INPUT_MANAGER->MOUSE.getWheelState() == 1 )
 						{
 							this->zoom(0.5f);
 							CONSOLE.setDisplayTimer(CONSOLE_DISPLAY_TIMING);

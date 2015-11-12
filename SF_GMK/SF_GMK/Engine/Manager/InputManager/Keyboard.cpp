@@ -40,13 +40,13 @@ namespace sfgmk
 
 				case sf::Event::KeyPressed:
 					key = _event.key.code;
-					if( m_KeyStates[key] == KeyStates::KEY_UP )
-						m_KeyStates[key] = KeyStates::KEY_PRESSED;
+					if( m_KeyStates[key] == KEY_UP )
+						m_KeyStates[key] =KEY_PRESSED;
 					break;
 
 				case sf::Event::KeyReleased:
 					key = _event.key.code;
-					m_KeyStates[key] = KeyStates::KEY_RELEASED;
+					m_KeyStates[key] = KEY_RELEASED;
 					break;
 			}
 		}

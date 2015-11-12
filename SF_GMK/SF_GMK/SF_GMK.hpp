@@ -136,11 +136,9 @@
 	#include "Engine\Manager\EntityManager\EntityManager.hpp"
 	#include "Engine\Manager\GraphicManager\GraphicManager.hpp"
 	#include "Engine\Manager\DebugManager\DebugManager.hpp"
-
 	#include "Engine\Manager\MsgManager\Msg.hpp"
 	#include "Engine\Manager\MsgManager\MsgActor.hpp"
 	#include "Engine\Manager\MsgManager\MsgManager.hpp"
-
 
 	#include "Engine\Core\Core.hpp"
  
@@ -171,7 +169,7 @@ namespace sfgmk
 	#define PHYSIC_MANAGER					engine::PhysicManager::getSingleton()
 	#define SOUND_MANAGER					engine::SoundManager::getSingleton()
 	#define STATE_MACHINE_MANAGER			engine::StateMachineManager::getSingleton()
-	#define MESSAGE_MANAGER					sfgmk::engine::MsgManager::GetInstance() // reste à utiliser le singleton de SFGMK 
+	#define MESSAGE_MANAGER					sfgmk::engine::MsgManager::GetInstance() // reste  - utiliser le singleton de SFGMK
 	
 	#define ADD_ENTITY(a)					sfgmk::engine::EntityManager::getSingleton()->addEntity(a)
 	#define FREE_ENTITY_VECTOR				sfgmk::engine::EntityManager::getSingleton()->freeEntityVector()
@@ -179,20 +177,29 @@ namespace sfgmk
 	#define CONSOLE							DEBUG_MANAGER->getConsole()
 	#define PARALLAXE						GRAPHIC_MANAGER->getParallaxe()
 
+	#define SELECTOR						DEBUG_MANAGER->getSelector()
+
 	//States
 	#define CHANGE_STATE(a)					STATE_MACHINE_MANAGER->getStateMachine()->changeState(a);
 	#define CHANGE_STATE_WITH_LOADING(a, b)	STATE_MACHINE_MANAGER->getStateMachine()->changeState(a, b);
 	#define STATE_MACHINE					STATE_MACHINE_MANAGER->getStateMachine()
 	#define CURRENT_STATE					STATE_MACHINE_MANAGER->getStateMachine()->Get_CurrentState()
 
+	//INPUT
+	#define KEY_UP							sfgmk::engine::eKeyStates::eKEY_UP
+	#define KEY_PRESSED						sfgmk::engine::eKeyStates::eKEY_PRESSED
+	#define KEY_DOWN						sfgmk::engine::eKeyStates::eKEY_DOWN
+	#define KEY_RELEASED					sfgmk::engine::eKeyStates::eKEY_RELEASED
+
 	//Keyboard
 	#define KEYBOARD						getKeyboard()
 	#define KEYBOARD_KEY(a)					KEYBOARD.getKeyState(a)
 
 	//Mouse
-	#define MOUSE							INPUT_MANAGER->getMouse()
-	#define MOUSE_WINDOW_POS				MOUSE.getWindowPosition()
-	#define MOUSE_WORLD_POS					MOUSE.getWorldPosition()
+	#define MOUSE							getMouse()
+	#define MOUSE_BUTTON(a)					MOUSE.getButtonState(a)
+	#define MOUSE_WINDOW_POS				INPUT_MANAGER->MOUSE.getWindowPosition()
+	#define MOUSE_WORLD_POS					INPUT_MANAGER->MOUSE.getWorldPosition()
 
 	//Joystick
 	#define JOYSTICK(a)						INPUT_MANAGER->getJoystick(a)

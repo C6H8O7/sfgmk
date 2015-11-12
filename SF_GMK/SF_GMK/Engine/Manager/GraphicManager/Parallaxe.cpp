@@ -85,7 +85,7 @@ namespace sfgmk
 		{
 			sf::Vector2f CameraCenter = GRAPHIC_MANAGER->getCurrentCamera()->getCenter();
 			sf::Vector2f CameraSize = GRAPHIC_MANAGER->getCurrentCamera()->getSize();
-			sf::Vector2f CameraOrigin = GRAPHIC_MANAGER->getCurrentCamera()->getCenter() - GRAPHIC_MANAGER->getCurrentCamera()->getSize() / 2.0f;
+			sf::Vector2f CameraOrigin = GRAPHIC_MANAGER->getCurrentCamera()->getRelativOrigin();
 			sf::RenderTexture* Rendertexture = GRAPHIC_MANAGER->getRenderTexture();
 			std::vector<Entity*> EntityVector = ENTITY_MANAGER->getEntityVector();
 			sLAYER_ELEMENT* TempLayer = NULL;
