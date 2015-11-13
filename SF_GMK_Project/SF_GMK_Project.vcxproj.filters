@@ -3,12 +3,14 @@
   <ItemGroup>
     <ClCompile Include="SF_GMK_Project.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Game\StateDefault.cpp" />
+    <ClCompile Include="Game\States\Game.cpp" />
+    <ClCompile Include="Game\States\Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Game\StateDefault.hpp" />
     <ClInclude Include="Game\IncludesProjet.hpp" />
     <ClInclude Include="Game\Goomba.hpp" />
+    <ClInclude Include="Game\States\Game.hpp" />
+    <ClInclude Include="Game\States\Menu.hpp" />
   </ItemGroup>
 </Project>

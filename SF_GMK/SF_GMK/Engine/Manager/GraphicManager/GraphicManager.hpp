@@ -28,9 +28,13 @@ namespace sfgmk
 
 				sf::RenderWindow* m_RenderWindow;
 				sf::RenderTexture* m_RenderTexture;
+				sf::RenderTexture* m_HudRenderTexture;
 				sf::Sprite m_RenderSprite;
 				Parallaxe* m_CurrentParallaxe;
 				Parallaxe* m_Parallaxe;
+
+				DynamicArray<Sprite*> m_Hud;
+				bool m_bDrawHud;
 
 				std::map<std::string, Camera*> m_Cameras;
 				Camera* m_CurrentCamera;
@@ -56,6 +60,11 @@ namespace sfgmk
 				sf::RenderWindow* getRenderWindow();
 				sf::RenderTexture* getRenderTexture();
 				Parallaxe* getParallaxe();
+
+				void addSpriteToHud(Sprite* _NewSprite);
+				DynamicArray<Sprite*>* getHud();
+				void drawHud();
+				void setDrawHud();
 
 				void registerCamera(std::string _CameraName, Camera* _Camera);
 				Camera* getCamera(std::string _CameraName);

@@ -1,18 +1,14 @@
 #include "stdafx.h"
-
-#include "IncludesProjet.hpp"
-
-#include <omp.h>
-#include <conio.h>
-#include <iostream>
+#include "../IncludesProjet.hpp"
 
 using namespace sfgmk;
 
-StateDefault::StateDefault()
+
+StateGame::StateGame()
 {
 }
 
-StateDefault::~StateDefault()
+StateGame::~StateGame()
 {
 	ENTITY_MANAGER->freeEntityVector();
 	DATA_MANAGER->unloadLevel(m_sRessourcesPath);
@@ -21,7 +17,7 @@ StateDefault::~StateDefault()
 }
 
 
-void StateDefault::init()
+void StateGame::init()
 {
 	sfgmk::CONSOLE.command("/freecam");
 	sfgmk::CONSOLE.command("/physic");
@@ -29,21 +25,7 @@ void StateDefault::init()
 	sfgmk::CONSOLE.command("/life");
 	sfgmk::CONSOLE.command("/ai");
 	sfgmk::CONSOLE.command("/id");
-
-	for( int i(0); i < 25; i++ )
-	{
-		int iInitialPv = RAND(1, 100);
-		EntityWithPv* entity = new EntityWithPv(sf::Vector3f((float)RAND(100, 1180), (float)RAND(100, 620), 0.0f), iInitialPv, RAND(1, iInitialPv));
-		entity->getSprite()->setAnimation(DATA_MANAGER->getAnimation("goomba"));
-		entity->addLifeBar(true);
-
-		if( RAND(0, 1) == 0 )
-			entity->addObbCollider();
-		else
-			entity->addSphereCollider();
-
-		ADD_ENTITY(entity);
-	}
+	sfgmk::CONSOLE.command("/hud");
 
 	//Démo IA (voir classe Goomba)
 	Goomba* NewCleverGoomba = NULL;
@@ -52,12 +34,21 @@ void StateDefault::init()
 		NewCleverGoomba = new Goomba();
 		ADD_ENTITY(NewCleverGoomba);
 	}
+
+	//HUD
+	Sprite* HudSprite = new Sprite();
+	HudSprite->setTexture(DATA_MANAGER->getTexture("hud"));
+	HudSprite->setColor(sf::Color(255, 255, 255, 225));
+	float fScale = (float)GRAPHIC_MANAGER->getRenderWindow()->getSize().x / (float)HudSprite->getTexture()->getSize().x;
+	HudSprite->setScale(fScale, fScale);
+	HudSprite->setPosition(0.0f, (float)GRAPHIC_MANAGER->getRenderWindow()->getSize().y - HudSprite->getSize().y);
+	ADD_TO_HUD(HudSprite);
 }
 
-void StateDefault::update()
+void StateGame::update()
 {
-	//Déplacement du goomba si on le sélectionne
-	/*if (INPUT_MANAGER->MOUSE_BUTTON(sf::Mouse::Right) == KEY_PRESSED)
+	//Déplacement de goomba si on en sélectionne
+	if (INPUT_MANAGER->MOUSE_BUTTON(sf::Mouse::Right) == KEY_PRESSED)
 	{
 		sf::Vector2f mouse_pos = INPUT_MANAGER->MOUSE.getWorldPosition();
 
@@ -66,14 +57,14 @@ void StateDefault::update()
 		*(float*)((unsigned int)data + 4) = mouse_pos.y;
 
 		MESSAGE_MANAGER->SendMsgToGroup(1, 0, data, 8);
-	}*/
+	}
 }
 
-void StateDefault::deinit()
+void StateGame::deinit()
 {
 }
 
 
-void StateDefault::draw()
+void StateGame::draw()
 {
 }

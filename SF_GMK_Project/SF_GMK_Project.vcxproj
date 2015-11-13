@@ -280,13 +280,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Game\Goomba.hpp" />
-    <ClInclude Include="Game\StateDefault.hpp" />
+    <ClInclude Include="Game\States\Game.hpp" />
     <ClInclude Include="Game\IncludesProjet.hpp" />
+    <ClInclude Include="Game\States\Menu.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\States\Menu.cpp" />
     <ClCompile Include="SF_GMK_Project.cpp" />
-    <ClCompile Include="Game\StateDefault.cpp" />
+    <ClCompile Include="Game\States\Game.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">Create</PrecompiledHeader>

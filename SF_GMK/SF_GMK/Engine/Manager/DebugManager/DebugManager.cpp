@@ -11,6 +11,7 @@ namespace sfgmk
 			m_Console.registerCommand("/selector", new sfgmk::FoncterTemplateInstance<DebugManager, void>(this, &DebugManager::SetSelector), "Selector active\n", "Selector desactive\n");
 			m_Console.registerCommand("/ai", new sfgmk::FoncterTemplateInstance<AIManager, void>(AI_MANAGER, &AIManager::setDrawAiState), "Affichage AI active\n", "Affichage AI desactive\n");
 			m_Console.registerCommand("/id", new sfgmk::FoncterTemplateInstance<EntityManager, void>(ENTITY_MANAGER, &EntityManager::setDrawId), "Affichage ID active\n", "Affichage ID desactive\n");
+			m_Console.registerCommand("/hud", new sfgmk::FoncterTemplateInstance<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::setDrawHud), "Affichage HUD active\n", "Affichage HUD desactive\n");
 		}
 
 		DebugManager::~DebugManager()

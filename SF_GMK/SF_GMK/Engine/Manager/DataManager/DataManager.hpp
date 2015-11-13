@@ -16,6 +16,18 @@ namespace sfgmk
 		#define ENCRYPT_KEY				"l0lz~H4x0r~2000~Ilum1n4t1~Zl4t4n"
 		#define ENCRYPT_KEY_LENGTH		strlen(ENCRYPT_KEY)
 
+		enum eResourceType
+		{
+			TYPE_IMAGE = 1,
+			TYPE_ANIM,
+			TYPE_SOUND,
+			TYPE_MUSIC,
+			TYPE_FONT,
+			TYPE_SHADER_VERTEX,
+			TYPE_SHADER_FRAGMENT,
+			TYPE_SHADER
+		};
+
 		class SFGMK_API DataManager : public SingletonTemplate<DataManager>
 		{
 			friend class SingletonTemplate<DataManager>;
@@ -36,17 +48,6 @@ namespace sfgmk
 				unsigned int m_uiLastLoadLevelDataAccount;
 
 			public:
-				enum eResourceType
-				{
-					TYPE_IMAGE = 1,
-					TYPE_ANIM,
-					TYPE_SOUND,
-					TYPE_MUSIC,
-					TYPE_FONT,
-					TYPE_SHADER_VERTEX,
-					TYPE_SHADER_FRAGMENT
-				};
-
 				struct GMKFileHeader
 				{
 					unsigned long compressedSize;
@@ -57,6 +58,8 @@ namespace sfgmk
 
 				void loadSfgmkRessources();
 				void unloadSfgmkRessources();
+
+				bool ressourceExists(const std::string& RessourceName, eResourceType _Type);
 
 				bool loadTexture(const std::string& _resName, const std::string& _filePath);
 				bool loadTextureFromMemory(std::string _resName, const void *_memoryLocation, size_t size);

@@ -29,6 +29,47 @@ namespace sfgmk
 		}
 
 
+		bool DataManager::ressourceExists(const std::string& RessourceName, eResourceType _Type)
+		{
+			switch( _Type )
+			{
+				case TYPE_IMAGE:
+				{
+					auto it = m_TextureMap.find(RessourceName);
+					if( it != m_TextureMap.end() )
+						return true;
+					break;
+				}
+
+				case TYPE_ANIM:
+				{
+					auto it = m_AnimationMap.find(RessourceName);
+					if( it != m_AnimationMap.end() )
+						return true;
+					break;
+				}
+
+				case TYPE_FONT:
+				{
+					auto it = m_FontMap.find(RessourceName);
+					if( it != m_FontMap.end() )
+						return true;
+					break;
+				}
+
+				case TYPE_SHADER:
+				{
+					auto it = m_ShaderMap.find(RessourceName);
+					if( it != m_ShaderMap.end() )
+						return true;
+					break;
+				}
+			}
+
+			return false;
+		}
+
+
 		bool DataManager::loadTexture(const std::string& _resName, const std::string& _filePath)
 		{
 			sf::Texture *texture = new sf::Texture;

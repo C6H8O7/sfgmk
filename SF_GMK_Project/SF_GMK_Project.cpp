@@ -2,7 +2,6 @@
 //
 
 #include "stdafx.h"
-
 #include "SF_GMK.hpp"
 
 #include "Game\IncludesProjet.hpp"
@@ -23,13 +22,16 @@ int main()
 	//Init fenêtre V2
 	sfgmk::GRAPHIC_MANAGER->init(sf::VideoMode(1280, 720), "SF_GMK", sf::Style::Default);
 
+	//Init managers
 	sfgmk::CORE->initManagers();
 
 	//Init states V2
-	sfgmk::STATE_MACHINE_MANAGER->RegisterState<sfgmk::engine::StateLoading>(sfgmk::eSTATES::eStateLoading, DATA_PATH + "/stateLoading");
-	sfgmk::STATE_MACHINE_MANAGER->RegisterState<StateDefault>(sfgmk::eSTATES::eStateDefault, "../data/states/stateDefault");
-	sfgmk::STATE_MACHINE->init(sfgmk::eSTATES::eStateLoading, sfgmk::eSTATES::eStateDefault);
+	sfgmk::STATE_MACHINE_MANAGER->RegisterState<sfgmk::engine::StateLoading>(eSTATES::eStateLoading, DATA_PATH + "/stateLoading");
+	sfgmk::STATE_MACHINE_MANAGER->RegisterState<StateMenu>(eSTATES::eStateMenu, "../data/states/Menu");
+	sfgmk::STATE_MACHINE_MANAGER->RegisterState<StateGame>(eSTATES::eStateGame, "../data/states/Game");
+	sfgmk::STATE_MACHINE->init(eSTATES::eStateMenu);
 
+	//Boucle de jeu
 	while( sfgmk::GRAPHIC_MANAGER->getRenderWindow()->isOpen() )
 	{
 		sfgmk::CORE->preLoop();

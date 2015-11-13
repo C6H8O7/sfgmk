@@ -145,13 +145,6 @@
  
 namespace sfgmk
 { 
-	enum eSTATES
-	{
-		eStateLoading = 0,
-		eStateDefault = 1,
-		eSTATES_NUMBER
-	};
-
 	#define EMPTY_COLOR sf::Color(0, 0, 0, 0)
 
 	#define DATA_PATH std::string("../data/sfgmk")
@@ -177,6 +170,7 @@ namespace sfgmk
 	#define CAMERA							sfgmk::engine::GraphicManager::getSingleton()->getCurrentCamera()
 	#define CONSOLE							DEBUG_MANAGER->getConsole()
 	#define PARALLAXE						GRAPHIC_MANAGER->getParallaxe()
+	#define ADD_TO_HUD(a)					GRAPHIC_MANAGER->addSpriteToHud(a)
 
 	#define SELECTOR						DEBUG_MANAGER->getSelector()
 

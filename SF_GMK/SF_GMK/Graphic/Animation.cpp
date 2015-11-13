@@ -67,21 +67,31 @@ namespace sfgmk
 
 	bool Animation::AddFrame(std::string _filePath, float _duration, sf::IntRect _rectangle)
 	{
-		sf::Texture *texture = new sf::Texture;
+		bool result = DATA_MANAGER->ressourceExists(_filePath, engine::TYPE_IMAGE);// texture->loadFromFile(_filePath, _rectangle);
 
-		bool result = texture->loadFromFile(_filePath, _rectangle);
-
-		if( result )
-		{
-			AnimationFrame *frame = new AnimationFrame;
-
-			frame->texture = texture;
-			frame->duration = _duration;
-
-			m_Frames.push_back(frame);
-		}
+		//Si la ressource ne figure pas dans le data manager, on quitte
+		if( !result )
+			perror("Frame d'animation introuvable");
 		else
-			delete texture;
+		{
+			sf::Texture* texture = new sf::Texture;
+			sf::Image Img;
+
+			Img = DATA_MANAGER->getTexture(_filePath).copyToImage();
+			result = texture->loadFromImage(Img, _rectangle);
+
+			if( result )
+			{
+				AnimationFrame *frame = new AnimationFrame;
+
+				frame->texture = texture;
+				frame->duration = _duration;
+
+				m_Frames.push_back(frame);
+			}
+			else
+				delete texture;
+		}
 
 		return result;
 	}
