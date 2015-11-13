@@ -66,6 +66,9 @@
 	//Include C parcours dossier
 	#include "dirent/dirent.h"
 
+	//tinyxml2
+	#include "Tool\Parser\tinyxml2.h"
+
 	//SF_GMK
 	#include "Tool\DynamicArray.hpp"
 	#include "Tool\FoncterTemplate.hpp"
@@ -74,6 +77,7 @@
 	#include "Tool\ThreadTemplate.hpp"
 	#include "Tool\Parser\Parser.hpp"
 	#include "Tool\DesignPattern\SingletonTemplate.hpp"
+
 	#include "Math\Math.hpp"
 	#include "Math\Curb\Curb.hpp"
 	#include "Math\Curb\Bezier.hpp"
@@ -93,6 +97,8 @@
 
 	#include "Engine\Manager\MsgManager\Msg.hpp"
 	#include "Engine\Manager\MsgManager\MsgActor.hpp"
+
+	#include "Map\TiledMap.hpp"
 
 	#include "Engine\Manager\AiManager\FSM.hpp"
 	#include "Entity\Entity.hpp"

@@ -256,6 +256,12 @@
     <ClCompile Include="SF_GMK\Engine\Manager\MsgManager\MsgManager.cpp">
       <Filter>sfgmk</Filter>
     </ClCompile>
+    <ClCompile Include="SF_GMK\Tool\Parser\tinyxml2.cpp">
+      <Filter>sfgmk</Filter>
+    </ClCompile>
+    <ClCompile Include="SF_GMK\Map\TiledMap.cpp">
+      <Filter>sfgmk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -422,5 +428,7 @@
     <ClInclude Include="SF_GMK\Engine\Manager\MsgManager\Msg.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\MsgManager\MsgActor.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\MsgManager\MsgManager.hpp" />
+    <ClInclude Include="SF_GMK\Tool\Parser\tinyxml2.h" />
+    <ClInclude Include="SF_GMK\Map\TiledMap.hpp" />
   </ItemGroup>
 </Project>

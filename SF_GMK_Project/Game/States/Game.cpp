@@ -16,7 +16,6 @@ StateGame::~StateGame()
 	SOUND_MANAGER->unloadLevel(m_sRessourcesPath);
 }
 
-
 void StateGame::init()
 {
 	sfgmk::CONSOLE.command("/freecam");
@@ -43,6 +42,9 @@ void StateGame::init()
 	HudSprite->setScale(fScale, fScale);
 	HudSprite->setPosition(0.0f, (float)GRAPHIC_MANAGER->getRenderWindow()->getSize().y - HudSprite->getSize().y);
 	ADD_TO_HUD(HudSprite);
+
+	//TILED
+	m_map.loadFromFile(std::string("../Data/states/Game/tiled/desert.tmx"));
 }
 
 void StateGame::update()
@@ -62,9 +64,10 @@ void StateGame::update()
 
 void StateGame::deinit()
 {
-}
 
+}
 
 void StateGame::draw()
 {
+	m_map.draw(GRAPHIC_MANAGER->getRenderTexture());
 }
