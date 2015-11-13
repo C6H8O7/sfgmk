@@ -35,6 +35,7 @@ namespace sfgmk
 			const int& getPv();
 			void setPv(const int& _Pv);
 			const int& removePv(const int& _PvToRemove);
+			const int& restorePv(const int& _PvToRestore);
 
 			const int& getInitialPv();
 			void setInitialPv(const int& _Pv);
@@ -46,18 +47,9 @@ namespace sfgmk
 			bool removeLifeBar();
 			LifeBar* getLifeBar();
 
-			static bool getLifeBarDraw()
-			{
-				return bEntityWithPvLifeBarDraw;
-			}
-			static void setLifeBarDraw(const bool& _Boolean)
-			{ 
-				bEntityWithPvLifeBarDraw = _Boolean; 
-			}
-			static void setLifeBarDraw() 
-			{
-				bEntityWithPvLifeBarDraw = !bEntityWithPvLifeBarDraw; 
-			}
+			static bool getLifeBarDraw();
+			static void setLifeBarDraw(const bool& _Boolean);
+			static void setLifeBarDraw();
 	};
 }
 

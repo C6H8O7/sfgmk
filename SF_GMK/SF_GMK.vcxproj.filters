@@ -262,6 +262,9 @@
     <ClCompile Include="SF_GMK\Map\TiledMap.cpp">
       <Filter>sfgmk</Filter>
     </ClCompile>
+    <ClCompile Include="SF_GMK\Graphic\FX\LifeBar\FloatingDamage.cpp">
+      <Filter>sfgmk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -430,5 +433,6 @@
     <ClInclude Include="SF_GMK\Engine\Manager\MsgManager\MsgManager.hpp" />
     <ClInclude Include="SF_GMK\Tool\Parser\tinyxml2.h" />
     <ClInclude Include="SF_GMK\Map\TiledMap.hpp" />
+    <ClInclude Include="SF_GMK\Graphic\FX\LifeBar\FloatingDamage.hpp" />
   </ItemGroup>
 </Project>

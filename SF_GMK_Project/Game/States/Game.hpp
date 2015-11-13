@@ -4,8 +4,6 @@
 
 class StateGame : public sfgmk::engine::State
 {
-	TiledMap m_map;
-
 	public:
 		StateGame();
 		~StateGame();

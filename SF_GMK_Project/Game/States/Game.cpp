@@ -16,6 +16,7 @@ StateGame::~StateGame()
 	SOUND_MANAGER->unloadLevel(m_sRessourcesPath);
 }
 
+
 void StateGame::init()
 {
 	sfgmk::CONSOLE.command("/freecam");
@@ -44,7 +45,9 @@ void StateGame::init()
 	ADD_TO_HUD(HudSprite);
 
 	//TILED
-	m_map.loadFromFile(std::string("../Data/states/Game/tiled/desert.tmx"));
+	TiledMap* m_map = new TiledMap;
+	m_map->loadFromFile(std::string("../Data/states/Game/tiled/desert.tmx"));
+	GRAPHIC_MANAGER->setMap(m_map);
 }
 
 void StateGame::update()
@@ -60,14 +63,28 @@ void StateGame::update()
 
 		MESSAGE_MANAGER->SendMsgToGroup(1, 0, data, 8);
 	}
+
+	//Test floating damage (attention c fait a l'arrache, une fois que y'en a un qu'est mort les pointeurs sont foireux)
+	if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::D) == KEY_PRESSED )
+	{
+		int iGoomba = RAND(0, 5);
+		Goomba* Target = (Goomba*)ENTITY_MANAGER->getEntityVector()[iGoomba];
+		if( Target != NULL )
+		{
+			int iDmg = RAND(1, 25);
+			Target->removePv(iDmg);
+			FloatingDamage* NewFloating = new FloatingDamage(iDmg, Target->getInitialPv(), Target);
+			ADD_ENTITY(NewFloating);
+		}
+	}
 }
 
 void StateGame::deinit()
 {
-
+	GRAPHIC_MANAGER->removeMap();
 }
+
 
 void StateGame::draw()
 {
-	m_map.draw(GRAPHIC_MANAGER->getRenderTexture());
 }

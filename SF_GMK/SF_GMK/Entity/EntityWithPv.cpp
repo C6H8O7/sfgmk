@@ -52,6 +52,12 @@ namespace sfgmk
 		return m_iPv;
 	}
 
+	const int& EntityWithPv::restorePv(const int& _PvToRestore)
+	{
+		m_iPv += _PvToRestore;
+		return m_iPv;
+	}
+
 
 	const int& EntityWithPv::getInitialPv()
 	{
@@ -100,5 +106,21 @@ namespace sfgmk
 	LifeBar* EntityWithPv::getLifeBar()
 	{
 		return m_Lifebar;
+	}
+
+
+	bool EntityWithPv::getLifeBarDraw()
+	{
+		return bEntityWithPvLifeBarDraw;
+	}
+
+	void EntityWithPv::setLifeBarDraw(const bool& _Boolean)
+	{
+		bEntityWithPvLifeBarDraw = _Boolean;
+	}
+
+	void EntityWithPv::setLifeBarDraw()
+	{
+		bEntityWithPvLifeBarDraw = !bEntityWithPvLifeBarDraw;
 	}
 }

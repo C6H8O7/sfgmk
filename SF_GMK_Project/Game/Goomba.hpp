@@ -21,11 +21,11 @@ class Goomba : public EntityWithPv
 	public:
 		Goomba() : m_fTimer(0.0f), m_fSpeed(100.0f), m_Destination(NULL), m_fDistanceTolerance(10.0f)
 		{
-			setScale(2.0f, 2.0f);
 			setPosition(sf::Vector3f((float)RAND(100, 1180), (float)RAND(100, 620), 0.0f));
 			getSprite()->setAnimation(DATA_MANAGER->getAnimation("goomba"));
-			getSprite()->setColor(sf::Color::Red);
 
+			setInitialPv(RAND(10, 100));
+			setPv(getInitialPv());
 			addLifeBar(true);
 
 			addObbCollider();

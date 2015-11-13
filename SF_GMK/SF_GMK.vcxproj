@@ -31,6 +31,7 @@
     <ClCompile Include="SF_GMK\Graphic\Animation.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\GraphicManager\GraphicManager.cpp" />
     <ClCompile Include="SF_GMK\Engine\Manager\StateMachineManager\StateMachineManager.cpp" />
+    <ClCompile Include="SF_GMK\Graphic\FX\LifeBar\FloatingDamage.cpp" />
     <ClCompile Include="SF_GMK\Graphic\FX\LifeBar\LifeBar.cpp" />
     <ClCompile Include="SF_GMK\Map\TiledMap.cpp" />
     <ClCompile Include="SF_GMK\Math\Curb\Bezier.cpp" />
@@ -99,6 +100,7 @@
     <ClInclude Include="SF_GMK\Graphic\Animation.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\GraphicManager\GraphicManager.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\StateMachineManager\StateMachineManager.hpp" />
+    <ClInclude Include="SF_GMK\Graphic\FX\LifeBar\FloatingDamage.hpp" />
     <ClInclude Include="SF_GMK\Graphic\FX\LifeBar\LifeBar.hpp" />
     <ClInclude Include="SF_GMK\Map\TiledMap.hpp" />
     <ClInclude Include="SF_GMK\Math\Curb\Bezier.hpp" />

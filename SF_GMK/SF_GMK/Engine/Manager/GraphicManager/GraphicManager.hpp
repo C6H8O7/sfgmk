@@ -33,6 +33,8 @@ namespace sfgmk
 				Parallaxe* m_CurrentParallaxe;
 				Parallaxe* m_Parallaxe;
 
+				TiledMap* m_Map;
+
 				DynamicArray<Sprite*> m_Hud;
 				bool m_bDrawHud;
 
@@ -60,6 +62,9 @@ namespace sfgmk
 				sf::RenderWindow* getRenderWindow();
 				sf::RenderTexture* getRenderTexture();
 				Parallaxe* getParallaxe();
+
+				void setMap(TiledMap* _NewMap);
+				void removeMap();
 
 				void addSpriteToHud(Sprite* _NewSprite);
 				DynamicArray<Sprite*>* getHud();

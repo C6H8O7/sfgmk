@@ -118,6 +118,7 @@
 	#include "Graphic\FX\Shader\Bloom.hpp"
 	#include "Graphic\FX\Grid\Grid.hpp"
 	#include "Graphic\FX\Grid\BlackHole.hpp"
+	#include "Graphic\FX\LifeBar\FloatingDamage.hpp"
 
 	#include "Graphic\FX\Shader\PostShader.hpp"
 	#include "Graphic\FX\Shader\ShaderWave.hpp"

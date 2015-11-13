@@ -2,7 +2,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		GraphicManager::GraphicManager() : m_RenderWindow(NULL), m_RenderTexture(NULL), m_HudRenderTexture(NULL), m_CurrentParallaxe(NULL), m_Parallaxe(NULL), m_CurrentCamera(NULL), m_bDrawHud(false), m_bScreenshot(true)
+		GraphicManager::GraphicManager() : m_RenderWindow(NULL), m_RenderTexture(NULL), m_HudRenderTexture(NULL), m_CurrentParallaxe(NULL), m_Parallaxe(NULL), m_CurrentCamera(NULL), m_Map(NULL), m_bDrawHud(false), m_bScreenshot(true)
 		{
 			m_Parallaxe = new Parallaxe();
 			m_CurrentParallaxe = m_Parallaxe;
@@ -10,6 +10,7 @@ namespace sfgmk
 
 		GraphicManager::~GraphicManager()
 		{
+			SAFE_DELETE(m_Map);
 			m_Hud.clear();
 
 			m_CurrentParallaxe = NULL;
@@ -71,8 +72,10 @@ namespace sfgmk
 
 		void GraphicManager::draw()
 		{
-			m_CurrentParallaxe->drawLayers(PARALLAXE_MAX_Z, PARALLAXE_MEDIUM_PLAN_Z);
-			m_CurrentParallaxe->drawLayers(PARALLAXE_BEFORE_MEDIUM_PLAN_Z, PARALLAXE_MIN_Z);
+			m_CurrentParallaxe->drawLayers(PARALLAXE_MAX_Z, 2);
+			if( m_Map )
+				m_Map->draw(m_RenderTexture);
+			m_CurrentParallaxe->drawLayers(1, PARALLAXE_MIN_Z);
 		}
 
 		void GraphicManager::display()
@@ -84,10 +87,12 @@ namespace sfgmk
 			PHYSIC_MANAGER->draw(m_RenderTexture);
 			AI_MANAGER->draw();
 			ENTITY_MANAGER->draw();
-			CONSOLE.draw(m_RenderTexture);
 
 			//Rendu hud
 			drawHud();
+
+			//Console
+			CONSOLE.draw(m_RenderTexture);
 
 			//Rendu final
 			m_RenderTexture->display();
@@ -132,6 +137,18 @@ namespace sfgmk
 		}
 
 
+		void GraphicManager::setMap(TiledMap* _NewMap)
+		{
+			SAFE_DELETE(m_Map);
+			m_Map = _NewMap;
+		}
+
+		void GraphicManager::removeMap()
+		{
+			SAFE_DELETE(m_Map);
+		}
+
+
 		void GraphicManager::addSpriteToHud(Sprite* _NewSprite)
 		{
 			m_Hud.pushBack(_NewSprite);
@@ -150,7 +167,7 @@ namespace sfgmk
 
 				if( uiAccount > 0 )
 				{
-					for( int i(0); i < uiAccount; i++ )
+					for( unsigned int i(0); i < uiAccount; i++ )
 						m_HudRenderTexture->draw(*m_Hud[i]);
 
 					m_HudRenderTexture->display();

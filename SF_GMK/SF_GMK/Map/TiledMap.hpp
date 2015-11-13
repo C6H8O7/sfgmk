@@ -21,29 +21,29 @@ namespace sfgmk
 
 	class SFGMK_API TiledMap
 	{
-	public:
+		public:
 
-		bool loadFromFile(std::string& _filePath);
+			bool loadFromFile(std::string& _filePath);
 
-		void draw(sf::RenderTexture* _renderTexture);
+			void draw(sf::RenderTexture* _renderTexture);
 
-	protected:
+		protected:
 
-		int m_width, m_height;
-		int m_tileWidth, m_tileHeight;
+			int m_width, m_height;
+			int m_tileWidth, m_tileHeight;
 
-		int m_firstGid;
-		std::string m_name;
-		int m_spacing, m_margin, m_tileCount;
+			int m_firstGid;
+			std::string m_name;
+			int m_spacing, m_margin, m_tileCount;
 
-		std::string m_source;
-		int m_sourceWidth, m_sourceHeight;
+			std::string m_source;
+			int m_sourceWidth, m_sourceHeight;
 
-		sf::Texture *m_texture;
+			sf::Texture *m_texture;
 
-		sfgmk::Sprite *m_tiles;
+			sfgmk::Sprite *m_tiles;
 
-		DynamicArray<TiledLayer*> m_layers;
+			DynamicArray<TiledLayer*> m_layers;
 	};
 }
 
