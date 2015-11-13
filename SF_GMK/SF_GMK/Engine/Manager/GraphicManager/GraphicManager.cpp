@@ -2,7 +2,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		GraphicManager::GraphicManager() : m_RenderWindow(NULL), m_RenderTexture(NULL), m_HudRenderTexture(NULL), m_CurrentParallaxe(NULL), m_Parallaxe(NULL), m_CurrentCamera(NULL), m_Map(NULL), m_bDrawHud(false), m_bScreenshot(true)
+		GraphicManager::GraphicManager() : m_RenderWindow(NULL), m_RenderTexture(NULL), m_CurrentParallaxe(NULL), m_Parallaxe(NULL), m_CurrentCamera(NULL), m_Map(NULL), m_bDrawHud(false), m_bScreenshot(true)
 		{
 			m_Parallaxe = new Parallaxe();
 			m_CurrentParallaxe = m_Parallaxe;
@@ -32,15 +32,12 @@ namespace sfgmk
 			//Destruction précédent rendu si existant
 			SAFE_DELETE(m_RenderWindow);
 			SAFE_DELETE(m_RenderTexture);
-			SAFE_DELETE(m_HudRenderTexture);
 
 			//Création nouveau rendu
 			m_RenderWindow = new sf::RenderWindow();
 			m_RenderWindow->create(_Mode, _WindowName, _Style);
 			m_RenderTexture = new sf::RenderTexture();
 			m_RenderTexture->create(_Mode.width, _Mode.height);
-			m_HudRenderTexture = new sf::RenderTexture();
-			m_HudRenderTexture->create(_Mode.width, _Mode.height);
 
 			initDefaultCamera();
 		}
@@ -62,7 +59,6 @@ namespace sfgmk
 	
 			//Clear render texture
 			m_RenderTexture->clear(sf::Color::Black);
-			m_HudRenderTexture->clear(EMPTY_COLOR);
 		}
 
 		void GraphicManager::update()
@@ -168,16 +164,13 @@ namespace sfgmk
 				if( uiAccount > 0 )
 				{
 					for( unsigned int i(0); i < uiAccount; i++ )
-						m_HudRenderTexture->draw(*m_Hud[i]);
+					{
+						m_Hud[i]->move(CAMERA->getRelativOrigin());
+						m_RenderTexture->draw(*m_Hud[i]);
+						m_Hud[i]->move(-CAMERA->getRelativOrigin());
+					}
 
-					m_HudRenderTexture->display();
-
-					sf::Sprite S;
-					S.setTexture(m_HudRenderTexture->getTexture());
-					S.setPosition(CAMERA->getRelativOrigin());
-					m_RenderTexture->draw(S);
-
-					m_CurrentParallaxe->addDrawToAccount(uiAccount + 1);
+					m_CurrentParallaxe->addDrawToAccount(uiAccount);
 				}
 			}
 		}

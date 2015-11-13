@@ -4,7 +4,7 @@
 
 namespace sfgmk
 {
-	class FloatingDamage : public Entity
+	class SFGMK_API FloatingDamage : public Entity
 	{
 		public:
 			FloatingDamage(int _Value, int _InitialPv, Entity* _Target);

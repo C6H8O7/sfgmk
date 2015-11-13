@@ -28,7 +28,6 @@ namespace sfgmk
 
 				sf::RenderWindow* m_RenderWindow;
 				sf::RenderTexture* m_RenderTexture;
-				sf::RenderTexture* m_HudRenderTexture;
 				sf::Sprite m_RenderSprite;
 				Parallaxe* m_CurrentParallaxe;
 				Parallaxe* m_Parallaxe;

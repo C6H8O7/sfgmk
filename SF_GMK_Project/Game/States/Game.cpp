@@ -67,7 +67,7 @@ void StateGame::update()
 	//Test floating damage (attention c fait a l'arrache, une fois que y'en a un qu'est mort les pointeurs sont foireux)
 	if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::D) == KEY_PRESSED )
 	{
-		int iGoomba = RAND(0, 5);
+		int iGoomba = RAND(1, 5);
 		Goomba* Target = (Goomba*)ENTITY_MANAGER->getEntityVector()[iGoomba];
 		if( Target != NULL )
 		{
