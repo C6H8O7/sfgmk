@@ -78,6 +78,8 @@
 	#include "Tool\Parser\Parser.hpp"
 	#include "Tool\DesignPattern\SingletonTemplate.hpp"
 
+	#include "Tool\Warden.hpp"
+
 	#include "Math\Math.hpp"
 	#include "Math\Curb\Curb.hpp"
 	#include "Math\Curb\Bezier.hpp"

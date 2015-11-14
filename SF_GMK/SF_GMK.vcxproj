@@ -149,6 +149,7 @@
     <ClInclude Include="SF_GMK\Engine\Manager\StateMachineManager\LoadingState\StateLoading.hpp" />
     <ClInclude Include="SF_GMK\Engine\Manager\StateMachineManager\StateMachine.hpp" />
     <ClInclude Include="SF_GMK\Tool\Parser\tinyxml2.h" />
+    <ClInclude Include="SF_GMK\Tool\Warden.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SF_GMK\Tool\ThreadTemplate.hpp" />
     <ClInclude Include="SF_GMK\Entity\Transformation\TransformationBezier.hpp" />

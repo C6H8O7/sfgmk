@@ -434,5 +434,6 @@
     <ClInclude Include="SF_GMK\Tool\Parser\tinyxml2.h" />
     <ClInclude Include="SF_GMK\Map\TiledMap.hpp" />
     <ClInclude Include="SF_GMK\Graphic\FX\LifeBar\FloatingDamage.hpp" />
+    <ClInclude Include="SF_GMK\Tool\Warden.hpp" />
   </ItemGroup>
 </Project>
