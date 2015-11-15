@@ -146,8 +146,6 @@ namespace sfgmk
 
 		void ConsoleDev::display()
 		{
-			float fScale = 1.0f / GRAPHIC_MANAGER->getCurrentCamera()->getZoomFactor(); //Pour que la console garde sa taille quand on a zoomé/dézoomé la vue
-
 			//Draw
 				//Console
 				m_bOpacity ? m_ConsoleRender.clear(sf::Color(0, 0, 0, 255)) : m_ConsoleRender.clear(EMPTY_COLOR);
@@ -184,13 +182,16 @@ namespace sfgmk
 
 				m_ConsoleRender.display();
 				m_RenderSprite.setTexture(m_ConsoleRender.getTexture(), true);
-				m_RenderSprite.setScale(fScale, fScale);
 		}
 
 		void ConsoleDev::draw(sf::RenderTexture* _Render)
 		{
-			m_RenderSprite.setPosition(CAMERA->getRelativOrigin());
+			_Render->setView(_Render->getDefaultView());
+
 			_Render->draw(m_RenderSprite);
+
+			_Render->setView(*CAMERA);
+
 		}
 
 		void ConsoleDev::setDisplayTimer(const float& _Value)
