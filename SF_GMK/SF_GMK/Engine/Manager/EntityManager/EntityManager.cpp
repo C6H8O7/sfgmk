@@ -40,7 +40,7 @@ namespace sfgmk
 		}
 
 
-		void EntityManager::draw()
+		void EntityManager::draw(sf::RenderTexture *_render)
 		{
 			if( m_bDrawId )
 			{
@@ -53,22 +53,12 @@ namespace sfgmk
 					Position = entity->getPosition() + sf::Vector2f(-m_Rect.getSize().x, entity->getSprite()->getSize().y * 0.25f);
 
 					m_Rect.setPosition(Position);
-					m_Render.draw(m_Rect);
+					_render->draw(m_Rect);
 
 					m_Text.setString(std::to_string(uiId));
 					m_Text.setPosition(Position + sf::Vector2f(1.0f, 1.0f));
-					m_Render.draw(m_Text);
+					_render->draw(m_Text);
 				}
-
-				m_Render.display();
-				m_Sprite.setTexture(m_Render.getTexture());
-
-				m_Sprite.setPosition(CAMERA->getRelativOrigin());
-
-				float scale = 1.0f / CAMERA->getZoomFactor();
-				m_Sprite.setScale(scale, scale);
-
-				GRAPHIC_MANAGER->getRenderTexture()->draw(m_Sprite);
 			}
 		}
 

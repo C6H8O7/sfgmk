@@ -30,7 +30,7 @@ namespace sfgmk
 
 			public:
 				void update(const float& _TimeDelta);
-				void draw();
+				void draw(sf::RenderTexture* _render);
 
 				void setDrawAiState();
 		};

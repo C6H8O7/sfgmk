@@ -60,6 +60,7 @@ namespace sfgmk
 					break;
 
 				case SELECTOR_STATE::STANDBY:
+					m_Start = m_End;
 					break;
 			}
 			

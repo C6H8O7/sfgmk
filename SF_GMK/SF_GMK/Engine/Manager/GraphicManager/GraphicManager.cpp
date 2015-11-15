@@ -69,8 +69,10 @@ namespace sfgmk
 		void GraphicManager::draw()
 		{
 			m_CurrentParallaxe->drawLayers(PARALLAXE_MAX_Z, 2);
+
 			if( m_Map )
 				m_Map->draw(m_RenderTexture);
+
 			m_CurrentParallaxe->drawLayers(1, PARALLAXE_MIN_Z);
 		}
 
@@ -81,8 +83,8 @@ namespace sfgmk
 
 			//Rendu debug
 			PHYSIC_MANAGER->draw(m_RenderTexture);
-			AI_MANAGER->draw();
-			ENTITY_MANAGER->draw();
+			AI_MANAGER->draw(m_RenderTexture);
+			ENTITY_MANAGER->draw(m_RenderTexture);
 
 			//Rendu hud
 			drawHud();

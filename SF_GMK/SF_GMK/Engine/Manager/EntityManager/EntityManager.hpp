@@ -38,7 +38,7 @@ namespace sfgmk
 			public:
 				void update();
 
-				void draw();
+				void draw(sf::RenderTexture *_render);
 
 				void setDrawId();
 

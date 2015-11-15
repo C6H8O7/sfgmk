@@ -29,7 +29,7 @@ namespace sfgmk
 			m_Render.setView(*CAMERA);
 		}
 
-		void AIManager::draw()
+		void AIManager::draw(sf::RenderTexture* _render)
 		{
 			if( m_bDrawAiState )
 			{
@@ -46,23 +46,13 @@ namespace sfgmk
 						Position = (*it)->getPosition() + sf::Vector2f(0.0f, (*it)->getSprite()->getSize().y);
 
 						m_Rect.setPosition(Position);
-						m_Render.draw(m_Rect);
+						_render->draw(m_Rect);
 
 						m_Text.setString(TempAi->getCurrentStateName() + " " + TempAi->getCurrentProgressString());
 						m_Text.setPosition(Position + sf::Vector2f(1.0f, 1.0f));
-						m_Render.draw(m_Text);
+						_render->draw(m_Text);
 					}
 				}
-
-				m_Render.display();
-				m_Sprite.setTexture(m_Render.getTexture());
-
-				m_Sprite.setPosition(CAMERA->getRelativOrigin());
-
-				float scale = 1.0f / CAMERA->getZoomFactor();
-				m_Sprite.setScale(scale, scale);
-
-				GRAPHIC_MANAGER->getRenderTexture()->draw(m_Sprite);
 			}
 		}
 
