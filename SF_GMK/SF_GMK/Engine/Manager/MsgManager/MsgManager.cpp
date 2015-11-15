@@ -69,12 +69,13 @@ namespace sfgmk
 							_Copy->SetDataUnsafe(_dataCpy);
 							tab_Receiver[i]->AddnewMessageToVector(_Copy);
 						}
-					if (i == ID_BUFFER_SIZE) {
-						delete _Message;
-						SetMsgEmpty(_MsgPlace);
-					}
 				}
 
+			}
+
+			if (_Message->GetIsGroup()) {
+				delete _Message;
+				SetMsgEmpty(_MsgPlace);
 			}
 		}
 
