@@ -163,12 +163,14 @@ namespace sfgmk
 
 				if( uiAccount > 0 )
 				{
+					sf::View view = m_RenderTexture->getView();
+
+					m_RenderTexture->setView(m_RenderTexture->getDefaultView());
+
 					for( unsigned int i(0); i < uiAccount; i++ )
-					{
-						m_Hud[i]->move(CAMERA->getRelativOrigin());
 						m_RenderTexture->draw(*m_Hud[i]);
-						m_Hud[i]->move(-CAMERA->getRelativOrigin());
-					}
+
+					m_RenderTexture->setView(view);
 
 					m_CurrentParallaxe->addDrawToAccount(uiAccount);
 				}

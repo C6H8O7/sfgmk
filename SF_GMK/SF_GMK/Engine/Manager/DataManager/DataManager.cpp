@@ -373,7 +373,8 @@ namespace sfgmk
 			//Si erreur ouverture
 			if (LevelRepertory == NULL)
 			{
-				perror(DataDir.c_str());
+				if (SFGML_ENABLE_DIR_DEBUG)
+					perror(DataDir.c_str());
 				bReturn = false;
 			}
 
@@ -401,7 +402,8 @@ namespace sfgmk
 			//Si erreur ouverture
 			if (LevelRepertory == NULL)
 			{
-				perror(DataDir.c_str());
+				if (SFGML_ENABLE_DIR_DEBUG)
+					perror(DataDir.c_str());
 				bReturn = false;
 			}
 
@@ -430,7 +432,8 @@ namespace sfgmk
 			//Si erreur ouverture
 			if (LevelRepertory == NULL)
 			{
-				perror(DataDir.c_str());
+				if (SFGML_ENABLE_DIR_DEBUG)
+					perror(DataDir.c_str());
 				bReturn = false;
 			}
 
@@ -460,7 +463,8 @@ namespace sfgmk
 			//Si erreur ouverture
 			if (LevelRepertory == NULL)
 			{
-				perror(DataDir.c_str());
+				if (SFGML_ENABLE_DIR_DEBUG)
+					perror(DataDir.c_str());
 				bReturn = false;
 			}
 
@@ -508,7 +512,8 @@ namespace sfgmk
 			//Si erreur ouverture
 			if ((LevelRepertory = opendir(sDataFilePath.c_str())) == NULL)
 			{
-				perror(sDataFilePath.c_str());
+				if (SFGML_ENABLE_DIR_DEBUG)
+					perror(sDataFilePath.c_str());
 				bReturn = false;
 			}
 
@@ -534,7 +539,8 @@ namespace sfgmk
 			//Si erreur ouverture
 			if ((LevelRepertory = opendir(sDataFilePath.c_str())) == NULL)
 			{
-				perror(sDataFilePath.c_str());
+				if (SFGML_ENABLE_DIR_DEBUG)
+					perror(sDataFilePath.c_str());
 				bReturn = false;
 			}
 
@@ -560,7 +566,8 @@ namespace sfgmk
 			//Si erreur ouverture
 			if ((LevelRepertory = opendir(sDataFilePath.c_str())) == NULL)
 			{
-				perror(sDataFilePath.c_str());
+				if (SFGML_ENABLE_DIR_DEBUG)
+					perror(sDataFilePath.c_str());
 				bReturn = false;
 			}
 
@@ -586,7 +593,8 @@ namespace sfgmk
 			//Si erreur ouverture
 			if ((LevelRepertory = opendir(sDataFilePath.c_str())) == NULL)
 			{
-				perror(sDataFilePath.c_str());
+				if(SFGML_ENABLE_DIR_DEBUG)
+					perror(sDataFilePath.c_str());
 				bReturn = false;
 			}
 

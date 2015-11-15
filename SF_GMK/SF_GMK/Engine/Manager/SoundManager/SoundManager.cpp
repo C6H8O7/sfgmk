@@ -173,7 +173,8 @@ namespace sfgmk
 			//Si erreur ouverture
 			if( LevelRepertory == NULL )
 			{
-				perror(DataDir.c_str());
+				if (SFGML_ENABLE_DIR_DEBUG)
+					perror(DataDir.c_str());
 				bReturn = false;
 			}
 			//Si dossier trouvé
@@ -204,7 +205,8 @@ namespace sfgmk
 			//Si erreur ouverture
 			if( LevelRepertory == NULL )
 			{
-				perror(DataDir.c_str());
+				if (SFGML_ENABLE_DIR_DEBUG)
+					perror(DataDir.c_str());
 				bReturn = false;
 			}
 			//Si dossier trouvé
@@ -246,7 +248,8 @@ namespace sfgmk
 			//Si erreur ouverture
 			if( LevelRepertory == NULL )
 			{
-				perror(Path);
+				if (SFGML_ENABLE_DIR_DEBUG)
+					perror(Path);
 				bReturn = false;
 			}
 			//Si dossier trouvé
@@ -272,7 +275,8 @@ namespace sfgmk
 			//Si erreur ouverture
 			if( LevelRepertory == NULL )
 			{
-				perror(Path);
+				if (SFGML_ENABLE_DIR_DEBUG)
+					perror(Path);
 				bReturn = false;
 			}
 			//Si dossier trouvé

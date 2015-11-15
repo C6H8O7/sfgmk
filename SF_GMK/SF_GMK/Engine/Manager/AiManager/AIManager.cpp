@@ -58,6 +58,10 @@ namespace sfgmk
 				m_Sprite.setTexture(m_Render.getTexture());
 
 				m_Sprite.setPosition(CAMERA->getRelativOrigin());
+
+				float scale = 1.0f / CAMERA->getZoomFactor();
+				m_Sprite.setScale(scale, scale);
+
 				GRAPHIC_MANAGER->getRenderTexture()->draw(m_Sprite);
 			}
 		}

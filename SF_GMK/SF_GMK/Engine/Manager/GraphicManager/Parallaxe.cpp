@@ -153,8 +153,11 @@ namespace sfgmk
 			const char* cLayerFilePath = sDirpath.c_str();
 
 			//Si erreur ouverture
-			if( (LevelRepertory = opendir(cLayerFilePath)) == NULL )
-				perror(cLayerFilePath);
+			if ((LevelRepertory = opendir(cLayerFilePath)) == NULL)
+			{
+				if (SFGML_ENABLE_DIR_DEBUG)
+					perror(cLayerFilePath);
+			}
 			//Si dossier trouvé
 			else
 			{
@@ -244,7 +247,8 @@ namespace sfgmk
 			//Si erreur ouverture
 			if( (LevelRepertory = opendir(cLayerFilePath)) == NULL )
 			{
-				perror(cLayerFilePath);
+				if (SFGML_ENABLE_DIR_DEBUG)
+					perror(cLayerFilePath);
 				return false;
 			}
 

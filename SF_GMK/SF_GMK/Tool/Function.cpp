@@ -11,7 +11,8 @@ namespace sfgmk
 		//Si erreur ouverture
 		if( LevelRepertory == NULL )
 		{
-			perror("Dossier introuvable");
+			if(SFGML_ENABLE_DIR_DEBUG)
+				perror("Dossier introuvable");
 			return 0;
 		}
 
