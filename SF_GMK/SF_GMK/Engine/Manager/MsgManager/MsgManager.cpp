@@ -52,7 +52,6 @@ namespace sfgmk
 			for (int i = 0; i < ID_BUFFER_SIZE; ++i) {
 				if (_Message->GetIsGroup() == false) { // si msg individuel
 					if (tab_Buffer_ID[i] == _Message->GetReceptorID()) {
-						cout << "Message individuel" << endl;
 						tab_Receiver[i]->AddnewMessageToVector(_Message);
 
 					}
@@ -60,7 +59,6 @@ namespace sfgmk
 				if (_Message->GetIsGroup() == true) {// si message multiple
 					if (tab_Receiver[i] != NULL)
 						if (tab_Receiver[i]->IsInGroup(_Message->GetReceptorID())) {
-							cout << "Message de groupe" << endl;
 							// on créé une copie pour chaque destinataire (car les messages sont consommés à la reception)
 							Msg* _Copy = new Msg;
 							*_Copy = *_Message;
