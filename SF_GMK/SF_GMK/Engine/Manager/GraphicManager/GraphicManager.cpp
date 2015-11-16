@@ -152,6 +152,11 @@ namespace sfgmk
 			m_Hud.pushBack(_NewSprite);
 		}
 
+		void GraphicManager::cleanHud()
+		{
+			m_Hud.clear();
+		}
+
 		DynamicArray<Sprite*>* GraphicManager::getHud()
 		{
 			return &m_Hud;

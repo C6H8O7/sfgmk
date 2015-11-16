@@ -66,6 +66,7 @@ namespace sfgmk
 				void removeMap();
 
 				void addSpriteToHud(Sprite* _NewSprite);
+				void cleanHud();
 				DynamicArray<Sprite*>* getHud();
 				void drawHud();
 				void setDrawHud();

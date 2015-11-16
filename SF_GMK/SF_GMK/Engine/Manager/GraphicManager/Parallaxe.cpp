@@ -281,6 +281,8 @@ namespace sfgmk
 						{
 							bToErase = true;
 							(*rit) = FileNameVector[FileNameVector.size() - 1];
+							delete it->second->Sprite;
+							delete it->second;
 							FileNameVector.pop_back();
 						}
 					}

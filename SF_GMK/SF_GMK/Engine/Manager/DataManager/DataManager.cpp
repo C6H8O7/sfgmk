@@ -157,6 +157,10 @@ namespace sfgmk
 
 		Animation& DataManager::getAnimation(const std::string& _resName)
 		{
+			std::map<std::string, Animation*>::iterator it = m_AnimationMap.find(_resName);
+			if( it == m_AnimationMap.end() )
+				std::cout << "ERROR ANIMATION" << std::endl;
+
 			return *m_AnimationMap[_resName];
 		}
 

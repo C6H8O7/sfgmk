@@ -42,7 +42,6 @@ namespace sfgmk
 					unsigned int uiRessourceLoaded;
 				}m_RessourcesCounters[eSTATE_LOADING_DATA_TYPE_NUMBER];
 
-				sf::RenderTexture m_RenderTexture;
 				sf::Texture m_ButtonTexture[2];
 				Sprite m_Sprite;
 				sf::Text m_Text;

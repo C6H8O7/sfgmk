@@ -54,8 +54,6 @@ namespace sfgmk
 			m_Text.setPosition(sf::Vector2f(0.0f, (float)uiTextSize * 0.25f));
 			TextRectSize = sf::Vector2f(m_Text.getLocalBounds().width, m_Text.getLocalBounds().height);
 
-			m_RenderTexture.create((unsigned int)TextRectSize.x, (unsigned int)TextRectSize.y);
-
 			//Calcule le nombre de fichiers à charger
 			m_RessourcesCounters[eLevel].uiRessourceLoaded = 0;
 			m_RessourcesCounters[eLevel].uiRessourceToLoad = getNumberOfFileInDir(m_sStateToLoadDataPath + "/layer");
@@ -96,9 +94,6 @@ namespace sfgmk
 			m_RessourcesCounters[eLevel].uiRessourceLoaded = PARALLAXE->getLastLoadLevelDataAccount();
 			m_RessourcesCounters[eAsset].uiRessourceLoaded = DATA_MANAGER->getLastLoadLevelDataAccount();
 			m_RessourcesCounters[eSound].uiRessourceLoaded = SOUND_MANAGER->getLastLoadLevelDataAccount();
-
-			//Clear texture
-			m_RenderTexture.clear(EMPTY_COLOR);
 
 			//Chargement terminé, on peut passer à l'état suivant
 			if( m_bLoadThreadsOver )
@@ -155,23 +150,26 @@ namespace sfgmk
 			//Affiche les touches à presser pour passer à l'état suivant
 			if( m_bLoadThreadsOver )
 			{
-				//Draw et finalisation du rendu
+				//Position à l'écran
+				sf::Vector2f Decal(MainRenderTextureSize.x * 0.5f - m_Sprite.getSize().x * 0.5f, MainRenderTextureSize.y - m_Sprite.getSize().y * 2.75f);
+
+				//Texte qui "clignote"
+				m_Sprite.setColor(sf::Color(255, 255, 255, (unsigned int)(255 * ABS(cos(m_fAngle)))));
+				m_Text.setColor(sf::Color(255, 255, 255, (unsigned int)(255 * ABS(cos(m_fAngle)))));
+
+				//Boutons
 				m_Sprite.setTexture(m_ButtonTexture[0], true);
-				m_Sprite.setPosition(sf::Vector2f(170.0f, 0.0f));
-				m_RenderTexture.draw(m_Sprite);
+				m_Sprite.setPosition(sf::Vector2f(-166.0f, 65.0f) + Decal);
+				MainRenderTexture->draw(m_Sprite);
 
 				m_Sprite.setTexture(m_ButtonTexture[1], true);
-				m_Sprite.setPosition(sf::Vector2f(300.0f, -10.0f));
-				m_RenderTexture.draw(m_Sprite);
+				m_Sprite.setPosition(sf::Vector2f(-30.0f, 58.0f) + Decal);
+				MainRenderTexture->draw(m_Sprite);
 
-				m_RenderTexture.draw(m_Text);
-				m_RenderTexture.display();
-
-				//Draw dans le rendu principal
-				m_Sprite.setTexture(m_RenderTexture.getTexture(), true);
-				m_Sprite.setColor(sf::Color(255, 255, 255, (unsigned int)(255 * ABS(cos(m_fAngle)))));
-				m_Sprite.setPosition(sf::Vector2f(MainRenderTextureSize.x * 0.5f - m_Sprite.getSize().x * 0.5f, MainRenderTextureSize.y - m_Sprite.getSize().y * 2.75f));
-				GRAPHIC_MANAGER->getRenderTexture()->draw(m_Sprite);
+				//Texte
+				m_Text.setPosition(Decal - sf::Vector2f(m_Text.getGlobalBounds().width * 0.5f, -75.0f));
+				MainRenderTexture->draw(m_Text);
+				MainRenderTexture->display();
 			}
 		}
 

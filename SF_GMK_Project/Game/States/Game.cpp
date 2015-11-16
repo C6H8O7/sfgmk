@@ -48,10 +48,6 @@ void StateGame::init()
 	TiledMap* m_map = new TiledMap;
 	m_map->loadFromFile(std::string("../Data/states/Game/tiled/desert.tmx"));
 	GRAPHIC_MANAGER->setMap(m_map);
-
-	CONSOLE.print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", sf::Color::Blue);
-	CONSOLE.print("YOupi tralalaaa, hop hop hop. testteeeue euueeueuu eeu eueeuu... .");
-	CONSOLE.print("patatatatatatatatatatatatatatatatattatatatatataatatatatata hsfsdjflksjdlf jshdfkshdf sldkflkd sldfjsdf 50 50 50.", sf::Color::Red);
 }
 
 void StateGame::update()
@@ -82,14 +78,23 @@ void StateGame::update()
 		}
 	}
 
-
 	if (INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::F5) == KEY_PRESSED)
+		//CHANGE_STATE(eStateGame);
 		CHANGE_STATE_WITH_LOADING(eStateLoading, eStateGame);
 }
 
 void StateGame::deinit()
 {
+	sfgmk::CONSOLE.command("/freecam");
+	sfgmk::CONSOLE.command("/physic");
+	sfgmk::CONSOLE.command("/selector");
+	sfgmk::CONSOLE.command("/life");
+	sfgmk::CONSOLE.command("/ai");
+	sfgmk::CONSOLE.command("/id");
+	sfgmk::CONSOLE.command("/hud");
+
 	GRAPHIC_MANAGER->removeMap();
+	GRAPHIC_MANAGER->cleanHud();
 }
 
 
