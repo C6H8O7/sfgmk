@@ -81,6 +81,10 @@ void StateGame::update()
 			ADD_ENTITY(NewFloating);
 		}
 	}
+
+
+	if (INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::F5) == KEY_PRESSED)
+		CHANGE_STATE_WITH_LOADING(eStateLoading, eStateGame);
 }
 
 void StateGame::deinit()

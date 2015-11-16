@@ -32,7 +32,7 @@ namespace sfgmk
 		};
 
 
-		class SFGMK_API Msg
+		class SFGMK_API Msg : WARDEN(Msg)
 		{
 		private:
 			MSG_TAG i_Tag; //

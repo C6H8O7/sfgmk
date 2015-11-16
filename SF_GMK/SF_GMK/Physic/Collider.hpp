@@ -21,7 +21,7 @@ namespace sfgmk
 			eCOLLIDER_TYPE_NUMBER
 		};
 
-		class SFGMK_API Collider
+		class SFGMK_API Collider : WARDEN(Collider)
 		{
 			protected:
 				eCOLLIDER_TYPE m_Type;

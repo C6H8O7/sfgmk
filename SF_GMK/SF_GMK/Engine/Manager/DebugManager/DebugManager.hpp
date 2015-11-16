@@ -34,6 +34,8 @@ namespace sfgmk
 
 				void SetSelector();
 				void DeleteSelector();
+
+				void ShowWarden();
 		};
 	}
 }

@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class SFGMK_API Sprite : public sf::Sprite
+	class SFGMK_API Sprite : public sf::Sprite, WARDEN(Sprite)
 	{
 		public:
 			Sprite();

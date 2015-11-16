@@ -1,5 +1,18 @@
 namespace sfgmk
 {
+	TiledMap::TiledMap() : m_texture(0), m_tiles(0)
+	{
+
+	}
+
+	TiledMap::~TiledMap()
+	{
+		delete [] m_tiles;
+
+		for (int i = 0; i < m_layers.getElementNumber(); i++)
+			delete m_layers[i];
+	}
+
 	bool TiledMap::loadFromFile(std::string& _filePath)
 	{
 		sfgmk::engine::DataManager *dataman = DATA_MANAGER;

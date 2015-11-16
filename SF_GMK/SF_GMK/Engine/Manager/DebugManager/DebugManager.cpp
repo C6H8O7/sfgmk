@@ -12,6 +12,7 @@ namespace sfgmk
 			m_Console.registerCommand("/ai", new sfgmk::FoncterTemplateInstance<AIManager, void>(AI_MANAGER, &AIManager::setDrawAiState), "Affichage AI active\n", "Affichage AI desactive\n");
 			m_Console.registerCommand("/id", new sfgmk::FoncterTemplateInstance<EntityManager, void>(ENTITY_MANAGER, &EntityManager::setDrawId), "Affichage ID active\n", "Affichage ID desactive\n");
 			m_Console.registerCommand("/hud", new sfgmk::FoncterTemplateInstance<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::setDrawHud), "Affichage HUD active\n", "Affichage HUD desactive\n");
+			m_Console.registerCommand("/warden", new sfgmk::FoncterTemplateInstance<DebugManager, void>(this, &DebugManager::ShowWarden), "", "");
 		}
 
 		DebugManager::~DebugManager()
@@ -46,6 +47,21 @@ namespace sfgmk
 		void DebugManager::DeleteSelector()
 		{
 			m_Selector = NULL;
+		}
+
+		void DebugManager::ShowWarden()
+		{
+			sfgmk::WardenReg *reg = sfgmk::WardenReg::getSingleton();
+			DynamicArray<sfgmk::WardenReg::WardenRegEntry*>* entries = reg->getEntriesPtr();
+			sfgmk::WardenReg::WardenRegEntry* entry;
+			std::string str;
+			
+			for (int i = 0; i < entries->getElementNumber(); i++)
+			{
+				entry = (*entries)[i];
+				str = entry->name + "\t\t" + std::to_string(entry->count) + "\n";
+				CONSOLE.print(str, sf::Color(255, 255, 255, 255));
+			}
 		}
 	}
 }

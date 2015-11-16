@@ -23,6 +23,9 @@ namespace sfgmk
 	{
 		public:
 
+			TiledMap();
+			~TiledMap();
+
 			bool loadFromFile(std::string& _filePath);
 
 			void draw(sf::RenderTexture* _renderTexture);
