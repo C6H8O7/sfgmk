@@ -2,7 +2,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		ConsoleDev::ConsoleDev() : m_bOpacity(false), m_fTimer(0.0f), m_fDisplayTimer(0.0f), m_bIsActive(false), m_bIsSeizureActive(false), m_sSeizureBuffer(""), m_iConsoleStringsIndex(0), m_iMinFps(0), m_iMaxFps(0), m_fCpuUsagePercent(0.0f), m_iEnteredCommandsIndex(-1)
+		ConsoleDev::ConsoleDev() : m_bOpacity(false), m_fTimer(0.0f), m_fDisplayTimer(0.0f), m_bIsActive(false), m_bIsSeizureActive(false), m_sSeizureBuffer(""), m_iMinFps(0), m_iMaxFps(0), m_fCpuUsagePercent(0.0f), m_iEnteredCommandsIndex(-1), m_uiConsoleDefillindex(0U)
 		{
 			//Init
 			m_ConsoleRender.create(CONSOLE_SIZE_X, CONSOLE_SIZE_Y);
@@ -21,6 +21,7 @@ namespace sfgmk
 			m_Texture[0] = DATA_MANAGER->getTexture("sfgmk_backgroundConsole");
 			m_ConsoleSprite.setTexture(m_Texture[0], true);
 			m_ConsoleSprite.setPosition(0.0f, 0.0f);
+			m_CursorSprite.setTexture(DATA_MANAGER->getTexture("sfgmk_cursorConsole"));
 
 			//Texts
 			for( int i(0); i < eCONSOLE_DEV_TEXT::eCONSOLE_DEV_TEXT_NUMBER; i++ )
@@ -81,6 +82,7 @@ namespace sfgmk
 
 		ConsoleDev::~ConsoleDev()
 		{
+			ClearPtrCntr(m_sConsoleStrings);
 			m_Commands.clear();
 			m_EnteredCommands.clear();
 		}
@@ -155,15 +157,22 @@ namespace sfgmk
 					m_ConsoleRender.draw(m_TextArray[i]);
 
 				//Commandes entrées
-				for( int i(0); i < CONSOLE_STRING_MAX_LINE; ++i )
+				unsigned int uiStart;
+				(int)(m_sConsoleStrings.size() - CONSOLE_STRING_MAX_LINE) < 0 ? uiStart = 0U : uiStart = (int)(m_sConsoleStrings.size() - CONSOLE_STRING_MAX_LINE);
+
+				for( unsigned int i(uiStart - m_uiConsoleDefillindex), j(0); i < m_sConsoleStrings.size() && i < uiStart + CONSOLE_STRING_MAX_LINE - m_uiConsoleDefillindex; i++, j++ )
 				{
-					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setString(m_sConsoleStrings[i].sString);
-					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setColor(m_sConsoleStrings[i].Color);
-					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setPosition(sf::Vector2f(32.0f, 322.0f) + sf::Vector2f(0.0f, i * 20.0f));
+					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setString(m_sConsoleStrings[i]->sString);
+					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setColor(m_sConsoleStrings[i]->Color);
+					m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText].setPosition(sf::Vector2f(32.0f, 322.0f) + sf::Vector2f(0.0f, j * 20.0f));
 					m_ConsoleRender.draw(m_TextArray[eCONSOLE_DEV_TEXT::eConsoleText]);
 				}
 
 				m_ConsoleRender.draw(m_FpsCurbSprite);
+				
+				//Cursor
+				m_CursorSprite.setPosition(479.0f, CURSOR_MAX_Y - (CURSOR_MAX_Y - CURSOR_MIN_Y) * ((float)m_uiConsoleDefillindex / (m_sConsoleStrings.size() - CONSOLE_STRING_MAX_LINE)));
+				m_ConsoleRender.draw(m_CursorSprite);
 
 				//Caméra (si le free move est activée)
 				Camera* CurrentCam = GRAPHIC_MANAGER->getCurrentCamera();
@@ -187,9 +196,7 @@ namespace sfgmk
 		void ConsoleDev::draw(sf::RenderTexture* _Render)
 		{
 			_Render->setView(_Render->getDefaultView());
-
 			_Render->draw(m_RenderSprite);
-
 			_Render->setView(*CAMERA);
 
 		}
@@ -318,6 +325,12 @@ namespace sfgmk
 				char cLastChar(0);
 				int iSize = m_sSeizureBuffer.length();
 			
+				//Parcours des strings de la console
+				if( INPUT_MANAGER->MOUSE.getWheelState() == 1 && m_uiConsoleDefillindex < m_sConsoleStrings.size() - CONSOLE_STRING_MAX_LINE )
+					m_uiConsoleDefillindex++;
+				else if( INPUT_MANAGER->MOUSE.getWheelState() == -1 && m_uiConsoleDefillindex > 0 )
+					m_uiConsoleDefillindex--;
+
 				//Parcours des commandes entrées
 				if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Up) == KEY_PRESSED && m_iEnteredCommandsIndex < (int)(m_EnteredCommands.size() - 1) )
 				{
@@ -535,15 +548,18 @@ namespace sfgmk
 		}
 
 
-		void ConsoleDev::print(const std::string& _String)
+		void ConsoleDev::print(const std::string& _String, const sf::Color& _Color)
 		{
 			stSTRING_ARRAY* sStrings = cutStringInPart(_String, CONSOLE_STRING_MAX_CHARACTER);
+			stCONSOLE_STRINGS* newConsoleString = NULL;
 
-			for( int i(0); i < sStrings->uiStringNumber; i++ )
+			for( unsigned int i(0U); i < sStrings->uiStringNumber; i++ )
 			{
-				m_sConsoleStrings[m_iConsoleStringsIndex].sString = sStrings->sStrings[i];
-				m_sConsoleStrings[m_iConsoleStringsIndex].Color = OUTPUT_COLOR;
-				incrementConsoleStringsIndex();
+				newConsoleString = new stCONSOLE_STRINGS;
+				newConsoleString->Color = _Color;
+				newConsoleString->sString = sStrings->sStrings[i];
+
+				m_sConsoleStrings.push_back(newConsoleString);
 			}
 
 			delete[] sStrings->sStrings;
@@ -556,15 +572,15 @@ namespace sfgmk
 			
 			while( it != m_Commands.end() )
 			{
-				m_sConsoleStrings[m_iConsoleStringsIndex].sString.clear();
+				stCONSOLE_STRINGS* newCommandString = new stCONSOLE_STRINGS;
 
 				for( int i(0); i < CONSOLE_COMMAND_PER_LINE && it != m_Commands.end(); i++, ++it )
 				{
-					m_sConsoleStrings[m_iConsoleStringsIndex].sString += "\t\t" + (*it).first + "\t\t";
-					m_sConsoleStrings[m_iConsoleStringsIndex].Color = HELP_COMMAND_COLOR;
+					newCommandString->sString += "\t\t" + (*it).first + "\t\t";
+					newCommandString->Color = HELP_COMMAND_COLOR;
 				}
 
-				incrementConsoleStringsIndex();
+				m_sConsoleStrings.push_back(newCommandString);
 			}
 		}
 
@@ -579,18 +595,20 @@ namespace sfgmk
 				(*it).second.Foncter->Execute();
 				(*it).second.bBeenCalled = !(*it).second.bBeenCalled;
 
+				stCONSOLE_STRINGS* newCommandString = new stCONSOLE_STRINGS;
+
 				if( (*it).second.bBeenCalled )
 				{
-					m_sConsoleStrings[m_iConsoleStringsIndex].sString = (*it).second.sOnCallOutput;
-					m_sConsoleStrings[m_iConsoleStringsIndex].Color = COMMAND_COLOR_ACTIVE;
+					newCommandString->sString = (*it).second.sOnCallOutput;
+					newCommandString->Color = COMMAND_COLOR_ACTIVE;
 				}
 				else
 				{
-					m_sConsoleStrings[m_iConsoleStringsIndex].sString = (*it).second.sOnRecallOutput;
-					m_sConsoleStrings[m_iConsoleStringsIndex].Color = COMMAND_COLOR_DEACTIVE;
+					newCommandString->sString = (*it).second.sOnRecallOutput;
+					newCommandString->Color = COMMAND_COLOR_DEACTIVE;
 				}
 				
-				incrementConsoleStringsIndex();
+				m_sConsoleStrings.push_back(newCommandString);
 			}
 			else if( _Seizure == "/help" )
 				helpCommand();
@@ -604,13 +622,6 @@ namespace sfgmk
 											_RecallOutput };
 
 			m_Commands.insert(std::pair<std::string, stCONSOLE_COMMAND>(_commandName, NewCommand));
-		}
-
-		void ConsoleDev::incrementConsoleStringsIndex()
-		{
-			m_iConsoleStringsIndex++;
-			if( m_iConsoleStringsIndex >= CONSOLE_STRING_MAX_LINE )
-				m_iConsoleStringsIndex = 0;
 		}
 	}
 }

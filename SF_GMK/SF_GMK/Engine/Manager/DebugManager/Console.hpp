@@ -22,12 +22,14 @@ namespace sfgmk
 		#define CONSOLE_UPDATE_TIMING 1.0f
 		#define CONSOLE_DISPLAY_TIMING 0.1f
 		#define CONSOLE_STRING_MAX_LINE 14
-		#define CONSOLE_STRING_MAX_CHARACTER 54
-		#define CONSOLE_COMMAND_PER_LINE 3
+		#define CONSOLE_STRING_MAX_CHARACTER 34
+		#define CONSOLE_COMMAND_PER_LINE 4
 		#define COMMAND_COLOR_ACTIVE sf::Color(100, 255, 200, 255)
 		#define COMMAND_COLOR_DEACTIVE sf::Color(205, 51, 51, 255)
 		#define HELP_COMMAND_COLOR sf::Color(255, 165, 0, 255)
 		#define OUTPUT_COLOR sf::Color::Yellow
+		#define CURSOR_MAX_Y 595.0f
+		#define CURSOR_MIN_Y 321.0f
 
 		enum eCONSOLE_DEV_TEXT
 		{
@@ -99,12 +101,12 @@ namespace sfgmk
 				bool m_bIsActive;
 				bool m_bIsSeizureActive;
 				std::string m_sSeizureBuffer;
-				stCONSOLE_STRINGS m_sConsoleStrings[CONSOLE_STRING_MAX_LINE];
-				int m_iConsoleStringsIndex;
+				std::vector<stCONSOLE_STRINGS*> m_sConsoleStrings;
 
 				sf::Sprite m_RenderSprite;
 				sf::RenderTexture m_ConsoleRender;
 				sf::Sprite m_ConsoleSprite;
+				sf::Sprite m_CursorSprite;
 				sf::Font m_Font[2];
 				sf::Texture m_Texture[2];
 
@@ -135,6 +137,7 @@ namespace sfgmk
 				std::map<std::string, stCONSOLE_COMMAND> m_Commands;
 				std::vector<std::string> m_EnteredCommands;
 				int m_iEnteredCommandsIndex;
+				unsigned int m_uiConsoleDefillindex;
 
 			public:
 				bool setActive();
@@ -154,11 +157,10 @@ namespace sfgmk
 				void initCpuUsage();
 				float cpuUsage();
 
-				void print(const std::string& _String);
+				void print(const std::string& _String, const sf::Color& _Color = OUTPUT_COLOR);
 				void helpCommand();
 				void command(std::string _Seizure);
 				void registerCommand(const std::string& _commandName, FoncterTemplate* _Foncter, const std::string& _CallOutput, const std::string& _RecallOutput, const bool& _InitialState = false);
-				void incrementConsoleStringsIndex();
 		};
 	}
 }

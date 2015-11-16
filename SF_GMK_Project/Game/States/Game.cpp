@@ -49,7 +49,9 @@ void StateGame::init()
 	m_map->loadFromFile(std::string("../Data/states/Game/tiled/desert.tmx"));
 	GRAPHIC_MANAGER->setMap(m_map);
 
-	CONSOLE.print("YOupi tralalaaa, hop hop hop. testteeeue euueeueuu eu eueu eueeuu... patatatatatatatatatatatatatatatatattatatatatataatatatatata hsfsdjflksjdlf jshdfkshdf sldkflkd sldfjsdf 50 50 50.");
+	CONSOLE.print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", sf::Color::Blue);
+	CONSOLE.print("YOupi tralalaaa, hop hop hop. testteeeue euueeueuu eeu eueeuu... .");
+	CONSOLE.print("patatatatatatatatatatatatatatatatattatatatatataatatatatata hsfsdjflksjdlf jshdfkshdf sldkflkd sldfjsdf 50 50 50.", sf::Color::Red);
 }
 
 void StateGame::update()
