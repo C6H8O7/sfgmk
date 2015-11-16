@@ -38,9 +38,10 @@ int main()
 		sfgmk::CORE->loop();
 		sfgmk::CORE->postLoop();
 	}
-
+	
 	//Release des singletons
 	sfgmk::CORE->releaseManagers();
+	sfgmk::WardenReg::getSingleton()->releaseSingleton();
 	sfgmk::CORE->releaseSingleton();
 	
 	return 0;

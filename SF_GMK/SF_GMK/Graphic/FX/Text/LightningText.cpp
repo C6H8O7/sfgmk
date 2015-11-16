@@ -13,8 +13,7 @@ namespace sfgmk
 
 	LightningText::~LightningText()
 	{
-		m_Bolts.deleteContent();
-		m_Bolts.clear();
+		m_Bolts.deleteAndClear();
 	}
 
 

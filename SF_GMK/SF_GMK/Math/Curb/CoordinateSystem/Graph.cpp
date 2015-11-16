@@ -19,7 +19,7 @@ namespace sfgmk
 
 		Graph::~Graph()
 		{
-			m_Curbs.clear();
+			m_Curbs.deleteAndClear();
 		}
 
 

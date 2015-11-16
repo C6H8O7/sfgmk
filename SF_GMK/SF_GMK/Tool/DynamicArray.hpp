@@ -243,7 +243,13 @@ namespace sfgmk
 					m_Array[i] = NULL;
 				}
 
-				m_uiElementNumber = 0;
+				m_uiElementNumber = 0U;
+			}
+
+			void DynamicArray::deleteAndClear()
+			{
+				deleteContent();
+				clear();
 			}
 	};
 }

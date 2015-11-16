@@ -10,10 +10,6 @@ StateGame::StateGame()
 
 StateGame::~StateGame()
 {
-	ENTITY_MANAGER->freeEntityVector();
-	DATA_MANAGER->unloadLevel(m_sRessourcesPath);
-	PARALLAXE->unloadLevel(m_sRessourcesPath);
-	SOUND_MANAGER->unloadLevel(m_sRessourcesPath);
 }
 
 
@@ -79,7 +75,6 @@ void StateGame::update()
 	}
 
 	if (INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::F5) == KEY_PRESSED)
-		//CHANGE_STATE(eStateGame);
 		CHANGE_STATE_WITH_LOADING(eStateLoading, eStateGame);
 }
 
@@ -95,6 +90,11 @@ void StateGame::deinit()
 
 	GRAPHIC_MANAGER->removeMap();
 	GRAPHIC_MANAGER->cleanHud();
+
+	ENTITY_MANAGER->freeEntityVector();
+	DATA_MANAGER->unloadLevel(m_sRessourcesPath);
+	PARALLAXE->unloadLevel(m_sRessourcesPath);
+	SOUND_MANAGER->unloadLevel(m_sRessourcesPath);
 }
 
 

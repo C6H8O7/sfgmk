@@ -10,7 +10,7 @@ namespace sfgmk
 
 		AIStateMachine::~AIStateMachine()
 		{
-			m_StatesFunctionsArray.clear();
+			m_StatesFunctionsArray.deleteAndClear();
 		}
 
 

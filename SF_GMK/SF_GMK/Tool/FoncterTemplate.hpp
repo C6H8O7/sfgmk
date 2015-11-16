@@ -58,7 +58,7 @@ namespace sfgmk
 	{
 		public:
 			FoncterTemplateArray() {}
-			~FoncterTemplateArray() { m_FunctionsArray.clear(); }
+			~FoncterTemplateArray() { m_FunctionsArray.deleteAndClear(); }
 
 			DynamicArray<FoncterTemplate*> m_FunctionsArray;
 

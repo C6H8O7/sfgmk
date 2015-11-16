@@ -9,8 +9,7 @@ namespace sfgmk
 	{
 		delete [] m_tiles;
 
-		for (int i = 0; i < m_layers.getElementNumber(); i++)
-			delete m_layers[i];
+		m_layers.deleteAndClear();
 	}
 
 	bool TiledMap::loadFromFile(std::string& _filePath)

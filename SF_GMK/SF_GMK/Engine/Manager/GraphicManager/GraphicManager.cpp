@@ -11,7 +11,7 @@ namespace sfgmk
 		GraphicManager::~GraphicManager()
 		{
 			SAFE_DELETE(m_Map);
-			m_Hud.clear();
+			cleanHud();
 
 			m_CurrentParallaxe = NULL;
 			SAFE_DELETE(m_Parallaxe);
@@ -154,7 +154,7 @@ namespace sfgmk
 
 		void GraphicManager::cleanHud()
 		{
-			m_Hud.clear();
+			m_Hud.deleteAndClear();
 		}
 
 		DynamicArray<Sprite*>* GraphicManager::getHud()

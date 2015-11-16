@@ -39,7 +39,7 @@ namespace sfgmk
 	private:
 
 		WardenReg() {}
-		~WardenReg() {}
+		~WardenReg() { m_entries.clear(); }
 
 		DynamicArray<WardenRegEntry*> m_entries;
 	};
