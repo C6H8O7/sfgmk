@@ -22,10 +22,12 @@ namespace sfgmk
 		#define CONSOLE_UPDATE_TIMING 1.0f
 		#define CONSOLE_DISPLAY_TIMING 0.1f
 		#define CONSOLE_STRING_MAX_LINE 14
+		#define CONSOLE_STRING_MAX_CHARACTER 54
 		#define CONSOLE_COMMAND_PER_LINE 3
 		#define COMMAND_COLOR_ACTIVE sf::Color(100, 255, 200, 255)
 		#define COMMAND_COLOR_DEACTIVE sf::Color(205, 51, 51, 255)
 		#define HELP_COMMAND_COLOR sf::Color(255, 165, 0, 255)
+		#define OUTPUT_COLOR sf::Color::Yellow
 
 		enum eCONSOLE_DEV_TEXT
 		{
@@ -152,6 +154,7 @@ namespace sfgmk
 				void initCpuUsage();
 				float cpuUsage();
 
+				void print(const std::string& _String);
 				void helpCommand();
 				void command(std::string _Seizure);
 				void registerCommand(const std::string& _commandName, FoncterTemplate* _Foncter, const std::string& _CallOutput, const std::string& _RecallOutput, const bool& _InitialState = false);

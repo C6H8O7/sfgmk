@@ -14,6 +14,12 @@ namespace sfgmk
 {
 	#define SAFE_DELETE(a) if( a != NULL ) { delete a; a = NULL; }
 
+	struct stSTRING_ARRAY
+	{
+		std::string* sStrings;
+		unsigned int uiStringNumber;
+	};
+
 	//Supprime les éléments d'un conteneur, et le clear
 	template<typename T> 
 	void ClearPtrCntr(T& _Cntr)
@@ -105,6 +111,9 @@ namespace sfgmk
 
 	//Déplace le curseur de lecture d'un fichier jusqu'au caractère passé en argument
 	bool SFGMK_API goToChar(FILE* _File, const int& _Char);
+
+	//Découpe une string en multiples strings selon la taille max spécifiée
+	stSTRING_ARRAY* cutStringInPart(const std::string& _String, const unsigned int& _MaxSize);
 }
 
 

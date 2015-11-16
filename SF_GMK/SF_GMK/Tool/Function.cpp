@@ -45,4 +45,22 @@ namespace sfgmk
 
 		return false;
 	}
+
+
+	stSTRING_ARRAY* cutStringInPart(const std::string& _String, const unsigned int& _MaxSize)
+	{
+		stSTRING_ARRAY* Strings = new stSTRING_ARRAY;
+
+		//Nombre de parts
+		Strings->uiStringNumber = _String.size() / _MaxSize;
+		if( (_String.length() % _MaxSize) != 0 )
+			Strings->uiStringNumber++;
+
+		//Création des parts
+		Strings->sStrings = new std::string[Strings->uiStringNumber];
+		for( int i(0); i < Strings->uiStringNumber; i++ )
+			Strings->sStrings[i] = std::string(_String.substr(i * _MaxSize, _MaxSize));
+
+		return Strings;
+	}
 }

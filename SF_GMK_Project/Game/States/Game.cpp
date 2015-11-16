@@ -48,6 +48,8 @@ void StateGame::init()
 	TiledMap* m_map = new TiledMap;
 	m_map->loadFromFile(std::string("../Data/states/Game/tiled/desert.tmx"));
 	GRAPHIC_MANAGER->setMap(m_map);
+
+	CONSOLE.print("YOupi tralalaaa, hop hop hop. testteeeue euueeueuu eu eueu eueeuu... patatatatatatatatatatatatatatatatattatatatatataatatatatata hsfsdjflksjdlf jshdfkshdf sldkflkd sldfjsdf 50 50 50.");
 }
 
 void StateGame::update()

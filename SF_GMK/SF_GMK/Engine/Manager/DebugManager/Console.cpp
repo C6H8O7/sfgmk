@@ -535,6 +535,21 @@ namespace sfgmk
 		}
 
 
+		void ConsoleDev::print(const std::string& _String)
+		{
+			stSTRING_ARRAY* sStrings = cutStringInPart(_String, CONSOLE_STRING_MAX_CHARACTER);
+
+			for( int i(0); i < sStrings->uiStringNumber; i++ )
+			{
+				m_sConsoleStrings[m_iConsoleStringsIndex].sString = sStrings->sStrings[i];
+				m_sConsoleStrings[m_iConsoleStringsIndex].Color = OUTPUT_COLOR;
+				incrementConsoleStringsIndex();
+			}
+
+			delete[] sStrings->sStrings;
+			delete sStrings;
+		}
+
 		void ConsoleDev::helpCommand()
 		{
 			auto it = m_Commands.begin();
