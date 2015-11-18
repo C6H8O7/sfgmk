@@ -31,6 +31,10 @@ namespace sfgmk
 			void SetLoop(bool _loop);
 			bool GetLoop();
 
+			void Pause();
+			void Stop();
+			void Play();
+
 		protected:
 			void FinalizeSprite(float _timeDelta);
 

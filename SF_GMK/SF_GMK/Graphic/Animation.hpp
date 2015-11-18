@@ -38,8 +38,14 @@ namespace sfgmk
 
 			void LoadFromFile(std::string _file);
 
+			void Pause();
+			void Stop();
+			void Play();
+
 		private:
 			bool m_isLoop;
+
+			bool m_isPlaying;
 
 			float m_fTimer;
 

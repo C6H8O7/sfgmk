@@ -83,4 +83,22 @@ namespace sfgmk
 
 		return false;
 	}
+
+	void Sprite::Pause()
+	{
+		if (m_Animation)
+			m_Animation->Pause();
+	}
+
+	void Sprite::Stop()
+	{
+		if (m_Animation)
+			m_Animation->Stop();
+	}
+
+	void Sprite::Play()
+	{
+		if (m_Animation)
+			m_Animation->Play();
+	}
 }

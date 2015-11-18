@@ -5,6 +5,7 @@ namespace sfgmk
 		m_fTimer = 0.0f;
 		m_iCurrentFrame = 0;
 		m_isLoop = true;
+		m_isPlaying = true;
 	}
 
 	Animation::Animation(Animation& _copy)
@@ -12,6 +13,7 @@ namespace sfgmk
 		m_isLoop = _copy.m_isLoop;
 		m_fTimer = _copy.m_fTimer;
 		m_iCurrentFrame = _copy.m_iCurrentFrame;
+		m_isPlaying = _copy.m_isPlaying;
 
 		m_Frames = _copy.m_Frames;
 	}
@@ -25,7 +27,8 @@ namespace sfgmk
 	{
 		int currentFrame = m_iCurrentFrame;
 
-		m_fTimer += _timeDelta;
+		if(m_isPlaying)
+			m_fTimer += _timeDelta;
 
 		while( m_fTimer >= m_Frames[m_iCurrentFrame]->duration )
 		{
@@ -159,5 +162,22 @@ namespace sfgmk
 				AddFrame(filePath, duration);
 			}
 		}
+	}
+
+	void Animation::Pause()
+	{
+		m_isPlaying = false;
+	}
+
+	void Animation::Stop()
+	{
+		m_fTimer = 0.0f;
+		m_iCurrentFrame = 0;
+		m_isPlaying = false;
+	}
+
+	void Animation::Play()
+	{
+		m_isPlaying = true;
 	}
 }
