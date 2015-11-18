@@ -58,7 +58,7 @@ namespace sfgmk
 
 		//Création des parts
 		Strings->sStrings = new std::string[Strings->uiStringNumber];
-		for( int i(0); i < Strings->uiStringNumber; i++ )
+		for( unsigned int i(0U); i < Strings->uiStringNumber; i++ )
 			Strings->sStrings[i] = std::string(_String.substr(i * _MaxSize, _MaxSize));
 
 		return Strings;

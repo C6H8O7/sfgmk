@@ -46,8 +46,14 @@ namespace sfgmk
 		m_iPv = _Pv;
 	}
 
-	const int& EntityWithPv::removePv(const int& _PvToRemove)
+	const int& EntityWithPv::removePv(const int& _PvToRemove, const bool& _GenerateFloatingDamage)
 	{
+		if( _GenerateFloatingDamage )
+		{
+			FloatingDamage* NewFloating = new FloatingDamage(_PvToRemove, getInitialPv(), this);
+			ADD_ENTITY(NewFloating);
+		}
+
 		m_iPv -= _PvToRemove;
 		return m_iPv;
 	}

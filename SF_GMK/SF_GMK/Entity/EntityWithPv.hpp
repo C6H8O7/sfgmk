@@ -34,7 +34,7 @@ namespace sfgmk
 
 			const int& getPv();
 			void setPv(const int& _Pv);
-			const int& removePv(const int& _PvToRemove);
+			const int& removePv(const int& _PvToRemove, const bool& _GenerateFloatingDamage = false);
 			const int& restorePv(const int& _PvToRestore);
 
 			const int& getInitialPv();

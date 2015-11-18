@@ -7,25 +7,26 @@ namespace sfgmk
 		m_Text.setFont(DATA_MANAGER->getFont("sfgmk_FontFloatingDamage"));
 
 		//Selon le % de PV perdu, on change l'affichage des dégats
-		float fRatio = (float)_InitialPv / (float)_Value;
+		float fRatio = (float)_Value / (float)_InitialPv;
 		if( fRatio >= 0.5f )
 		{
 			m_Text.setColor(sf::Color::Red);
-			m_Text.setCharacterSize(120);
+			m_Text.setCharacterSize(56);
 		}
 		else if( fRatio >= 0.25f )
 		{
 			m_Text.setColor(sf::Color(255, 140, 0, 255));
-			m_Text.setCharacterSize(60);
+			m_Text.setCharacterSize(44);
 		}
 		else
 		{
-			m_Text.setColor(sf::Color::White);
-			m_Text.setCharacterSize(30);
+			m_Text.setColor(sf::Color::Green);
+			m_Text.setCharacterSize(32);
 		}
 
 		//Position initiale
-		setPosition(_Target->getPosition3D() + sf::Vector3f(0.0f, 0.0f, -1.0f)); //Permet au texte dêtre devant l'entité
+		setOrigin(0.5f, 0.5f);
+		setPosition(_Target->getPosition3D() + sf::Vector3f(0.0f, -m_Text.getGlobalBounds().height, -1.0f)); //Permet au texte dêtre devant l'entité
 		m_Text.setPosition(getPosition());
 	}
 
