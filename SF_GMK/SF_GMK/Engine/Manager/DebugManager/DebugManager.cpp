@@ -56,7 +56,7 @@ namespace sfgmk
 			sfgmk::WardenReg::WardenRegEntry* entry;
 			std::string str;
 			
-			for (int i = 0; i < entries->getElementNumber(); i++)
+			for( unsigned int i = 0U; i < entries->getElementNumber(); i++ )
 			{
 				entry = (*entries)[i];
 				str = entry->name + "\t\t" + std::to_string(entry->count) + "\n";

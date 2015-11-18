@@ -68,9 +68,7 @@ void StateGame::update()
 		if( Target != NULL )
 		{
 			int iDmg = RAND(1, 25);
-			Target->removePv(iDmg);
-			FloatingDamage* NewFloating = new FloatingDamage(iDmg, Target->getInitialPv(), Target);
-			ADD_ENTITY(NewFloating);
+			Target->removePv(iDmg, true);
 		}
 	}
 
