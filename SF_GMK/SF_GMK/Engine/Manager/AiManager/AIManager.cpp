@@ -43,7 +43,7 @@ namespace sfgmk
 
 					if( TempAi )
 					{
-						Position = (*it)->getPosition() + sf::Vector2f(0.0f, (*it)->getSprite()->getSize().y);
+						Position = (*it)->getPosition() + sf::Vector2f(-(*it)->getSprite()->getSize().x * 0.5f, (*it)->getSprite()->getSize().y);
 
 						m_Rect.setPosition(Position);
 						_render->draw(m_Rect);
