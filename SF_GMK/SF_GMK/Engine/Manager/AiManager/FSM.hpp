@@ -13,8 +13,12 @@
 namespace sfgmk
 {
 	#define OnEnter if( _Progress == engine::eEnter )
-	#define OnUpdate else if( _Progress == engine::eUpdate )
-	#define OnExit else if( _Progress == engine::eExit )
+	#define OnUpdate if( _Progress == engine::eUpdate )
+	#define OnExit if( _Progress == engine::eExit )
+
+	#define RetrieveMsg sfgmk::engine::Msg* msg = m_MsgActor.GetLastMessage();
+	#define OnAnyMsg if(msg)
+	#define OnMsg(a) if(msg && msg->GetTag() == a)
 
 	#define STATE_NAME_STRING_LENGTH 5
 
