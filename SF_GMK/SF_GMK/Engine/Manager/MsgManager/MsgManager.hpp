@@ -21,12 +21,12 @@
 #include "MsgActor.hpp"
 #include <iostream>
 
+using namespace std;
+
 namespace sfgmk
 {
 	namespace engine
 	{
-		using namespace std;
-
 		class SFGMK_API MsgManager // ---/!\--- doit encore hériter d'un SINGLETON------------------------------------
 		{
 			friend class MsgActor;
