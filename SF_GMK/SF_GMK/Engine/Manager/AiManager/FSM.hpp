@@ -12,11 +12,12 @@
 
 namespace sfgmk
 {
-	#define OnEnter if( _Progress == engine::eEnter )
-	#define OnUpdate if( _Progress == engine::eUpdate )
-	#define OnExit if( _Progress == engine::eExit )
+	#define OnEnter if( _Progress == sfgmk::engine::eEnter )
+	#define OnUpdate if( _Progress == sfgmk::engine::eUpdate )
+	#define OnExit if( _Progress == sfgmk::engine::eExit )
 
 	#define RetrieveMsg sfgmk::engine::Msg* msg = m_MsgActor.GetLastMessage();
+	#define RetrievedMsg msg
 	#define OnAnyMsg if(msg)
 	#define OnMsg(a) if(msg && msg->GetTag() == a)
 
@@ -54,11 +55,11 @@ namespace sfgmk
 
 				Entity* m_EntityParent;
 
-				void process(const float& _TimeDelta);
-
 				static std::string m_StateProgressString[eAIState_Progress_NUMBER];
 
 			public:
+
+				void process(const float& _TimeDelta);
 				void progress();
 				void changeState();
 				void changeState(const int& _NextState);

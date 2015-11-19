@@ -6,13 +6,13 @@ namespace sfgmk
 
 		AIStateMachine::AIStateMachine(Entity* _Parent, int _InitState) : m_iState(_InitState), m_iNextState(0), m_EntityParent(_Parent)
 		{
+
 		}
 
 		AIStateMachine::~AIStateMachine()
 		{
 			m_StatesFunctionsArray.deleteAndClear();
 		}
-
 
 		void AIStateMachine::process(const float& _TimeDelta)
 		{
@@ -49,7 +49,6 @@ namespace sfgmk
 			m_iNextState = _NextState;
 		}
 
-
 		bool AIStateMachine::addState(int _StateId, FoncterTemplate* _NewFunction, const std::string& _StateName)
 		{
 			stAIStateFunctions* NewState = new stAIStateFunctions;
@@ -63,7 +62,6 @@ namespace sfgmk
 
 			return true;
 		}
-
 
 		const std::string& AIStateMachine::getCurrentStateName()
 		{
