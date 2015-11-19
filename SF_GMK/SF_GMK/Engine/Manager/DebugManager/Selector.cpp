@@ -24,7 +24,6 @@ namespace sfgmk
 		void Selector::update(const float& _TimeDelta)
 		{
 			// Selector::update ==================
-
 			sfgmk::engine::Mouse& mouse = INPUT_MANAGER->getMouse();
 
 			sf::Vector2f mouse_pos = mouse.getWorldPosition();

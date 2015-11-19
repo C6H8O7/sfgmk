@@ -35,6 +35,7 @@ namespace sfgmk
 				TiledMap* m_Map;
 
 				DynamicArray<Sprite*> m_Hud;
+				FoncterTemplate* m_HudDrawFunction;
 				bool m_bDrawHud;
 
 				std::map<std::string, Camera*> m_Cameras;
@@ -70,6 +71,7 @@ namespace sfgmk
 				DynamicArray<Sprite*>* getHud();
 				void drawHud();
 				void setDrawHud();
+				void setHudDrawFunction(FoncterTemplate* _Function);
 
 				void registerCamera(std::string _CameraName, Camera* _Camera);
 				Camera* getCamera(std::string _CameraName);

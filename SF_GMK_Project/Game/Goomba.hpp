@@ -54,6 +54,7 @@ class Goomba : public EntityWithPv
 
 			OnEnter
 			{
+				getSprite()->Stop();
 				if( m_fTimer > 0.5f )
 				{
 					m_fTimer = 0.0f;
@@ -88,6 +89,7 @@ class Goomba : public EntityWithPv
 	
 			OnEnter
 			{
+				getSprite()->Play();
 				if( m_fTimer > 0.5f )
 				{
 					m_fTimer = 0.0f;

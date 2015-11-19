@@ -19,7 +19,10 @@ namespace sfgmk
 			Sprite(std::string _resName, bool _isAnim);
 			~Sprite();
 
-			void setAnimation(Animation& _animation);
+			Animation* getAnimation();
+			void setAnimation(Animation& _animation, const bool& _DeletePrevious = true);
+			void deleteAnimation();
+			bool getIsAnimation();
 
 			void setRelativOrigin(float _rox, float _roy);
 

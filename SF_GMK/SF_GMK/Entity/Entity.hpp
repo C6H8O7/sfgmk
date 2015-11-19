@@ -17,7 +17,7 @@ namespace sfgmk
 	class SFGMK_API Entity : public sf::Transformable, WARDEN(Entity)
 	{
 		protected:
-			int m_iId;
+			int m_iEntityType;
 			bool m_bIsAlive;
 			unsigned int m_uiSingleId;
 
@@ -38,16 +38,16 @@ namespace sfgmk
 			engine::MsgActor m_MsgActor;
 
 		public:
-			Entity(const int& _Id = 0);
-			Entity(const sf::Vector3f& _Position, const int& _Id = 0);
+			Entity(const int& _Type = 0);
+			Entity(const sf::Vector3f& _Position, const int& _Type = 0);
 			virtual ~Entity();
 
 			virtual void update(const float& _TimeDelta);
 			virtual void finalize(const float& _TimeDelta);
 			virtual void draw(sf::RenderTexture* _Render);
 
-			const int& getId();
-			void setId(int _Id);
+			const int& getType();
+			void setType(int _Type);
 			const bool& getIsAlive();
 			void setIsAlive(bool _State);
 			const unsigned int& getSingleId();

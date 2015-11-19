@@ -13,6 +13,8 @@ class StateGame : public sfgmk::engine::State
 		void deinit();
 
 		void draw();
+
+		void drawHud();
 };
 
 

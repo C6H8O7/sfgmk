@@ -25,9 +25,14 @@ namespace sfgmk
 			delete m_Animation;
 	}
 
-	void Sprite::setAnimation(Animation& _animation)
+	Animation* Sprite::getAnimation()
 	{
-		if( m_isAnim && m_Animation )
+		return m_Animation;
+	}
+
+	void Sprite::setAnimation(Animation& _animation, const bool& _DeletePrevious)
+	{
+		if( m_isAnim && m_Animation && _DeletePrevious )
 		{
 			delete m_Animation;
 			m_Animation = 0;
@@ -38,6 +43,21 @@ namespace sfgmk
 		m_isAnim = true;
 
 		m_Animation->update(*this, 0.0f);
+	}
+
+	void Sprite::deleteAnimation()
+	{
+		if( m_isAnim && m_Animation )
+		{
+			m_isAnim = false;
+			delete m_Animation;
+			m_Animation = NULL;
+		}
+	}
+
+	bool Sprite::getIsAnimation()
+	{
+		return m_isAnim;
 	}
 
 	void Sprite::setRelativOrigin(float _rox, float _roy)

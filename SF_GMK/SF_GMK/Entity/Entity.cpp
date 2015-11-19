@@ -1,10 +1,10 @@
 namespace sfgmk
 {
-	Entity::Entity(const int& _Id) : m_iId(_Id), m_bIsAlive(true), m_uiSingleId(0U), m_bIsComputatedByParallax(true), m_bIsScaledByParallax(true), m_fPositionZ(0.0f), m_Sprite(NULL), m_Collider(NULL), m_AI(NULL)
+	Entity::Entity(const int& _Type) : m_iEntityType(_Type), m_bIsAlive(true), m_uiSingleId(0U), m_bIsComputatedByParallax(true), m_bIsScaledByParallax(true), m_fPositionZ(0.0f), m_Sprite(NULL), m_Collider(NULL), m_AI(NULL)
 	{
 	}
 
-	Entity::Entity(const sf::Vector3f& _Position, const int& _Id) : Entity(_Id)
+	Entity::Entity(const sf::Vector3f& _Position, const int& _Type) : Entity(_Type)
 	{
 		setPosition(_Position);
 	}
@@ -65,14 +65,14 @@ namespace sfgmk
 	}
 
 
-	const int& Entity::getId()
+	const int& Entity::getType()
 	{
-		return m_iId;
+		return m_iEntityType;
 	}
 
-	void Entity::setId(int _Id)
+	void Entity::setType(int _Type)
 	{
-		m_iId = _Id;
+		m_iEntityType = _Type;
 	}
 
 	const bool& Entity::getIsAlive()
