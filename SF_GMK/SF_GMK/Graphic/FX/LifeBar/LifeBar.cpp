@@ -1,6 +1,6 @@
 namespace sfgmk
 {
-	LifeBar::LifeBar(const sf::IntRect& _EntityRect, const bool& _DrawText) : m_bDrawPv(_DrawText), m_sPvString(""), m_fPvRatio(0.0f), m_Scale(sf::Vector2f(1.0f, 1.0f)), m_GaugeScale(sf::Vector2f(1.0f, 1.0f))
+	LifeBar::LifeBar(const sf::IntRect& _EntityRect, const bool& _DrawText) : m_bDrawPv(_DrawText), m_sPvString(""), m_fPvRatio(0.0f), m_Scale(sf::Vector2f(1.0f, 1.0f)), m_GaugeScale(sf::Vector2f(1.0f, 1.0f)), m_fRelativOriginY(0.0f)
 	{
 		m_BarRect.setSize(sf::Vector2f((float)_EntityRect.width, 10.0f));
 		m_BarRect.setOutlineThickness(2.0f);
@@ -21,14 +21,17 @@ namespace sfgmk
 	}
 
 
-	void LifeBar::update(const int& _CurrentLife, const int& _InitialLife, const sf::Vector2f& _Origin, const sf::Vector2f& _Scale, const float& _Rotation, const sf::Vector2f& _Position)
+	void LifeBar::update(const int& _CurrentLife, const int& _InitialLife, const sf::Vector2f& _Origin, const sf::Vector2f& _Scale, const float& _Rotation, const sf::Vector2f& _Position, const float& _SpriteSizeY, const float& _RelativOriginY)
 	{
+		m_fRelativOriginY = _RelativOriginY;
+		
 		//Transform
-		setOrigin(_Origin);
+		sf::Vector2f Origin(_Origin.x, getOrigin().y);
+		setOrigin(Origin);
 		m_Scale.x = _Scale.x;
 		setScale(m_Scale);
 		setRotation(_Rotation);
-		setPosition(_Position + sf::Vector2f(0.0f, -m_BarRect.getSize().y));
+		setPosition(_Position + sf::Vector2f(0.0f, -m_BarRect.getSize().y - _SpriteSizeY * m_fRelativOriginY));
 
 		m_fPvRatio = (float)_CurrentLife / (float)_InitialLife;
 		m_GaugeScale.x = m_fPvRatio * m_Scale.x;

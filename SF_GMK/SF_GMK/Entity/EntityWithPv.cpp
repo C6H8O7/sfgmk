@@ -18,7 +18,7 @@ namespace sfgmk
 		Entity::update(_TimeDelta);
 
 		if( m_Lifebar )
-			m_Lifebar->update(m_iPv, m_iInitialPv, m_VirtualTransform.getOrigin(), m_VirtualTransform.getScale(), m_VirtualTransform.getRotation(), m_VirtualTransform.getPosition());
+			m_Lifebar->update(m_iPv, m_iInitialPv, m_VirtualTransform.getOrigin(), m_VirtualTransform.getScale(), m_VirtualTransform.getRotation(), m_VirtualTransform.getPosition(), m_Sprite->getSize().y, m_RelativOrigin.y);
 	
 		if( m_iPv <= 0 && m_bDieWhenPvNull )
 			m_bIsAlive = false;

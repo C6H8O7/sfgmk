@@ -23,6 +23,11 @@ namespace sfgmk
 			MESSAGE_MANAGER->Register(this);
 		}
 
+		MsgActor::~MsgActor()
+		{
+			MESSAGE_MANAGER->Withdraw(i_ID);
+		}
+
 		Msg* MsgActor::GetLastMessage() {
 			CleanVecMsg();
 

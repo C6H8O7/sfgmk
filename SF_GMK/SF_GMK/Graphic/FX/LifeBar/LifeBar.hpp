@@ -31,9 +31,10 @@ namespace sfgmk
 			sf::Vector2f m_GaugeScale;
 
 			bool m_bDrawPv;
+			float m_fRelativOriginY;
 
 		public:
-			void update(const int& _CurrentLife, const int& _InitialLife, const sf::Vector2f& _Origin, const sf::Vector2f& _Scale, const float& _Rotation, const sf::Vector2f& _Position);
+			void update(const int& _CurrentLife, const int& _InitialLife, const sf::Vector2f& _Origin, const sf::Vector2f& _Scale, const float& _Rotation, const sf::Vector2f& _Position, const float& _SpriteSizeY, const float& _RelativOriginY);
 			void draw();
 
 			bool setDrawPv();

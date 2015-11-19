@@ -27,6 +27,7 @@ namespace sfgmk
 
 			Sprite* m_Sprite;
 			std::vector<EntityTransformation*> m_Transformation;
+			sf::Vector2f m_RelativOrigin;
 
 			sf::Transformable m_VirtualTransform;
 
@@ -34,7 +35,7 @@ namespace sfgmk
 
 			engine::AIStateMachine* m_AI;
 
-			sfgmk::engine::MsgActor m_MsgActor;
+			engine::MsgActor m_MsgActor;
 
 		public:
 			Entity(const int& _Id = 0);
@@ -58,6 +59,7 @@ namespace sfgmk
 			void setIsScaledByParralax(bool _Boolean);
 
 			Sprite* getSprite();
+			const sf::Vector2f& getRelativOrigin();
 			void setRelativOrigin(const float& _X, const float& _Y);
 			void addTransformation(EntityTransformation* _Transformation);
 			void removeTransformation(const int _Index);

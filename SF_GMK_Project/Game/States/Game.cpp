@@ -16,7 +16,7 @@ StateGame::~StateGame()
 void StateGame::init()
 {
 	sfgmk::CONSOLE.command("/freecam");
-	sfgmk::CONSOLE.command("/physic");
+	//sfgmk::CONSOLE.command("/physic");
 	sfgmk::CONSOLE.command("/selector");
 	sfgmk::CONSOLE.command("/life");
 	sfgmk::CONSOLE.command("/ai");
@@ -25,9 +25,12 @@ void StateGame::init()
 
 	//Démo IA (voir classe Goomba)
 	Goomba* NewCleverGoomba = NULL;
-	for( int i(0); i < 5; i++ )
+	for( int i(0); i < 10; i++ )
 	{
 		NewCleverGoomba = new Goomba();
+		//NewCleverGoomba->setRelativOrigin(0.5f, 0.5f);
+		int iscale = RAND(1, 8);
+		NewCleverGoomba->setScale(iscale * 0.5f, iscale * 0.5f);
 		ADD_ENTITY(NewCleverGoomba);
 	}
 

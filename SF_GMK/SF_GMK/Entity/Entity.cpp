@@ -125,8 +125,16 @@ namespace sfgmk
 		return m_Sprite;
 	}
 
+	const sf::Vector2f& Entity::getRelativOrigin()
+	{
+		return m_RelativOrigin;
+	}
+
 	void Entity::setRelativOrigin(const float& _X, const float& _Y)
 	{
+		m_RelativOrigin.x = _X;
+		m_RelativOrigin.y = _Y;
+
 		if( m_Sprite )
 		{
 			sf::FloatRect Rec = m_Sprite->getLocalBounds();
@@ -288,6 +296,7 @@ namespace sfgmk
 
 		return m_AI->addState(_StateId, _NewFunction, _StateName);
 	}
+
 
 	sfgmk::engine::MsgActor& Entity::getMsgActor()
 	{

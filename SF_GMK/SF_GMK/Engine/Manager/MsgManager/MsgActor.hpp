@@ -35,6 +35,7 @@ namespace sfgmk
 
 		public:
 			MsgActor();
+			~MsgActor();
 
 			Msg* GetLastMessage();
 

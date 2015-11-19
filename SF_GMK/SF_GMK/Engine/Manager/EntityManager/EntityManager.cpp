@@ -50,11 +50,13 @@ namespace sfgmk
 				for( Entity*& entity : m_EntityVector )
 				{
 					uiId = entity->getSingleId();
-					Position = entity->getPosition() + sf::Vector2f(-m_Rect.getSize().x, entity->getSprite()->getSize().y * 0.25f);
+					Position = entity->getPosition() + sf::Vector2f(-m_Rect.getSize().x, ABS(entity->getSprite()->getSize().y - m_Rect.getSize().y) * 0.5f);
 
+					m_Rect.setOrigin(entity->getOrigin());
 					m_Rect.setPosition(Position);
 					_render->draw(m_Rect);
 
+					m_Text.setOrigin(entity->getOrigin());
 					m_Text.setString(std::to_string(uiId));
 					m_Text.setPosition(Position + sf::Vector2f(1.0f, 1.0f));
 					_render->draw(m_Text);

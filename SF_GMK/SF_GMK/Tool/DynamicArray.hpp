@@ -136,24 +136,27 @@ namespace sfgmk
 				return false;
 			}
 
-			bool DynamicArray::removeElement(const T& _Element)
+			bool DynamicArray::removeElementByIndex(const int& _ElementIndex)
 			{
-				int iElementIndex;
-
-				if( (iElementIndex = findElementIndex(_Element)) == -1 )
+				if( _ElementIndex < 0 )
 					return false;
 
-				else if( iElementIndex == 0 )
+				else if( _ElementIndex == 0 )
 					popFront();
-				else if( iElementIndex == m_uiElementNumber - 1U )
+				else if( _ElementIndex == m_uiElementNumber - 1U )
 					popBack();
 				else
 				{
-					swapIndex(iElementIndex, m_uiElementNumber - 1U);
+					swapIndex(_ElementIndex, m_uiElementNumber - 1U);
 					popBack();
 				}
 
 				return true;
+			}
+
+			bool DynamicArray::removeElement(const T& _Element)
+			{
+				return removeElementByIndex(findElementIndex(_Element));
 			}
 
 			void DynamicArray::sort()
