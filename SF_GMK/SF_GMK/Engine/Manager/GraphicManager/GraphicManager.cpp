@@ -12,6 +12,7 @@ namespace sfgmk
 		{
 			SAFE_DELETE(m_Map);
 			cleanHud();
+			SAFE_DELETE(m_HudDrawFunction);
 
 			m_CurrentParallaxe = NULL;
 			SAFE_DELETE(m_Parallaxe);
@@ -156,6 +157,7 @@ namespace sfgmk
 		void GraphicManager::cleanHud()
 		{
 			m_Hud.deleteAndClear();
+			SAFE_DELETE(m_HudDrawFunction);
 		}
 
 		DynamicArray<Sprite*>* GraphicManager::getHud()
@@ -180,12 +182,20 @@ namespace sfgmk
 
 					m_CurrentParallaxe->addDrawToAccount(uiAccount);
 				}
+
+				if( m_HudDrawFunction )
+					m_HudDrawFunction->Execute();
 			}
 		}
 
 		void GraphicManager::setDrawHud()
 		{
 			m_bDrawHud = !m_bDrawHud;
+		}
+
+		void GraphicManager::setHudDrawFunction(FoncterTemplate* _Function)
+		{
+			m_HudDrawFunction = _Function;
 		}
 
 

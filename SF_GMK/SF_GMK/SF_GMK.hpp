@@ -45,6 +45,7 @@
 	#include <cstdlib>
 	#include <iostream>
 	#include <fstream>
+	#include <sstream>
 	#include <functional>
 	#include <map>
 	#include <string>

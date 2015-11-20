@@ -92,6 +92,9 @@ namespace sfgmk
 			void SendMsgToGroup(int _i_ID_Emettor, int _i_ID_Group, void* _p_Data, int _DataSize,
 				float _f_Delay = 0.0f, MSG_TAG _Tag = TAG_UNKNOWN, bool _b_autodestruct = true); //envoie un message à un groupe
 
+			bool SendMsgToEntity(unsigned int _EntityId, void* _p_Data, int _DataSize,
+								 MSG_TAG _Tag = TAG_UNKNOWN, bool _b_autodestruct = true); //envoie un message à une entité
+
 			void Update();
 			void draw(sf::RenderTexture* _render);
 		};
