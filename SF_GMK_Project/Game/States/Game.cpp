@@ -105,6 +105,11 @@ void StateGame::deinit()
 
 void StateGame::draw()
 {
+	sf::Vertex Line[2] = { sf::Vertex(sf::Vector2f(0.0f, 0.0f), sf::Color::Red), sf::Vertex(sf::Vector2f(250.0f, 250.0f), sf::Color::Blue) };
+	SHAPE_DRAWER.drawLine(Line);
+	SHAPE_DRAWER.drawCircle(sf::Vector2f(300.0f, 100.0f), 50, 25);
+	SHAPE_DRAWER.drawCircle(sf::Vector2f(400.0f, 100.0f), 25, 25, sf::Color::Red);
+	SHAPE_DRAWER.drawRectangle(sf::Vector2f(400.0f, 200.0f), sf::Vector2f(150.0f, 50.0f));
 }
 
 

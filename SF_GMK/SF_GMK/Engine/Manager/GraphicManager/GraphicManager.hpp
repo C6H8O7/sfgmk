@@ -32,6 +32,8 @@ namespace sfgmk
 				Parallaxe* m_CurrentParallaxe;
 				Parallaxe* m_Parallaxe;
 
+				ShapeDrawer m_ShapeDrawer;
+
 				TiledMap* m_Map;
 
 				DynamicArray<Sprite*> m_Hud;
@@ -62,6 +64,8 @@ namespace sfgmk
 				sf::RenderWindow* getRenderWindow();
 				sf::RenderTexture* getRenderTexture();
 				Parallaxe* getParallaxe();
+
+				ShapeDrawer& getShapeDrawer();
 
 				void setMap(TiledMap* _NewMap);
 				void removeMap();

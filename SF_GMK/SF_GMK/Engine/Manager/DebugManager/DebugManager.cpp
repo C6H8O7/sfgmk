@@ -13,6 +13,42 @@ namespace sfgmk
 			m_Console.registerCommand("/id", new sfgmk::FoncterTemplateInstance<EntityManager, void>(ENTITY_MANAGER, &EntityManager::setDrawId), "Affichage ID active\n", "Affichage ID desactive\n");
 			m_Console.registerCommand("/hud", new sfgmk::FoncterTemplateInstance<GraphicManager, void>(GRAPHIC_MANAGER, &GraphicManager::setDrawHud), "Affichage HUD active\n", "Affichage HUD desactive\n");
 			m_Console.registerCommand("/warden", new sfgmk::FoncterTemplateInstance<DebugManager, void>(this, &DebugManager::ShowWarden), "", "");
+
+			//Commandes avec arguments
+			//m_Console.registerCommand("/kill", new sfgmk::FoncterTemplateInstance<DebugManager, void>(this, &DebugManager::ShowWarden), "", "");
+
+			//Destroy goomba
+			/*else if( _Seizure.substr(0, 5) == "/kill" )
+			{
+				_Seizure = _Seizure.substr(6, _Seizure.length() - 6);
+
+				unsigned int uiId;
+				stringstream(_Seizure) >> uiId;
+
+				if( MESSAGE_MANAGER->SendMsgToEntity(uiId, NULL, 0, MSG_TAG::TAG_BOOL) )
+				{
+					stCONSOLE_STRINGS* newCommandString = new stCONSOLE_STRINGS;
+					newCommandString->sString = "Destruction entité " + _Seizure;
+					newCommandString->Color = sf::Color::Cyan;;
+					m_sConsoleStrings.push_back(newCommandString);
+				}*/
+
+				//Pop goomba
+				/* if( _Seizure.substr(0, 4) == "/pop" )
+				{
+				_Seizure = _Seizure.substr(5, _Seizure.length() - 5);
+
+				sf::Vector2f Position;
+				stringstream(_Seizure) >> Position.x;
+				_Seizure = _Seizure.substr(_Seizure.find_first_of(' ') + 1, _Seizure.length());
+				stringstream(_Seizure) >> Position.y;
+
+				Goomba* NewCleverGoomba = new Goomba();
+				int iscale = RAND(1, 4);
+				NewCleverGoomba->setScale(iscale * 0.5f, iscale * 0.5f);
+				NewCleverGoomba->setPosition(Position);
+				ADD_ENTITY(NewCleverGoomba);
+				}*/
 		}
 
 		DebugManager::~DebugManager()

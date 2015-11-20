@@ -40,6 +40,8 @@ namespace sfgmk
 			m_RenderTexture = new sf::RenderTexture();
 			m_RenderTexture->create(_Mode.width, _Mode.height);
 
+			m_ShapeDrawer.setRenderTexture(m_RenderTexture);
+
 			initDefaultCamera();
 		}
 
@@ -134,6 +136,12 @@ namespace sfgmk
 				m_CurrentParallaxe = m_Parallaxe;
 			else
 				m_CurrentParallaxe = _Instance;
+		}
+
+
+		ShapeDrawer& GraphicManager::getShapeDrawer()
+		{
+			return m_ShapeDrawer;
 		}
 
 
