@@ -137,16 +137,27 @@ class Goomba : public EntityWithPv
 
 		void updateMsg()
 		{
-			void* data = m_MsgActor.GetLastMessageData();
-
-			while (data != 0)
+			engine::Msg* NewMessagePtr = m_MsgActor.GetLastMessage();
+			while( NewMessagePtr != NULL )
 			{
-				float x = *(float*)((unsigned int)data);
-				float y = *(float*)((unsigned int)data + 4);
+				engine::Msg* NewMessage = new engine::Msg;
+				memcpy(NewMessage, NewMessagePtr, sizeof(engine::Msg));
+				void* data = NewMessage->GetData();
 
-				setDestination(sf::Vector2f(x, y));
+				//Déplacement
+				if( NewMessage->GetTag() == engine::MSG_TAG::TAG_FLOAT )
+				{
+					float x = *(float*)((unsigned int)data);
+					float y = *(float*)((unsigned int)data + 4);
 
-				data = m_MsgActor.GetLastMessageData();
+					setDestination(sf::Vector2f(x, y));
+				}
+
+				//Kill
+				if( NewMessage->GetTag() == engine::MSG_TAG::TAG_BOOL )
+					setIsAlive(false);
+
+				NewMessagePtr = m_MsgActor.GetLastMessage();
 			}
 		}
 };

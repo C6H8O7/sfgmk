@@ -224,6 +224,21 @@ namespace sfgmk
 
 		}
 
+		bool MsgManager::SendMsgToEntity(unsigned int _EntityId, void* _p_Data, int _DataSize,
+							 MSG_TAG _Tag, bool _b_autodestruct)
+		{
+			Entity* Target = NULL;
+
+			if( (Target = ENTITY_MANAGER->getEntity(_EntityId)) )
+			{
+				Msg* Message = new Msg(0, 0, _p_Data, _DataSize, 0.0f, _b_autodestruct, _Tag, true);
+				Target->getMsgActor().AddnewMessageToVector(Message);
+				return true;
+			}
+
+			return false;
+		}
+
 		void MsgManager::MoveMessageFromTo(int _From, int _To) {
 			Msg* _Mem = tab_Buffer_Msg[_From];
 			tab_Buffer_Msg[_From] = tab_Buffer_Msg[_To];

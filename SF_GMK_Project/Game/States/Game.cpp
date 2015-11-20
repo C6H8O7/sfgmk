@@ -63,11 +63,11 @@ void StateGame::update()
 		*(float*)((unsigned int)data) = mouse_pos.x;
 		*(float*)((unsigned int)data + 4) = mouse_pos.y;
 
-		MESSAGE_MANAGER->SendMsgToGroup(1, 0, data, 8);
+		MESSAGE_MANAGER->SendMsgToGroup(1, 0, data, 8, 0.0f, engine::MSG_TAG::TAG_FLOAT);
 	}
 
 	//Test floating damage (attention c fait a l'arrache, une fois que y'en a un qu'est mort les pointeurs sont foireux)
-	if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::D) == KEY_PRESSED )
+	if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::F7) == KEY_PRESSED )
 	{
 		int iGoomba = RAND(1, 5);
 		Goomba* Target = (Goomba*)ENTITY_MANAGER->getEntityVector()[iGoomba];
@@ -78,6 +78,7 @@ void StateGame::update()
 		}
 	}
 
+	//Reload niveau
 	if (INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::F5) == KEY_PRESSED)
 		CHANGE_STATE_WITH_LOADING(eStateLoading, eStateGame);
 }
