@@ -23,6 +23,8 @@
 
 using namespace std;
 
+class sfgmk::Entity;
+
 namespace sfgmk
 {
 	namespace engine
@@ -45,6 +47,20 @@ namespace sfgmk
 
 			static MsgManager* p_Instance;
 
+			struct MsgEntityTransition
+			{
+				sf::Vector2f sender;
+				sf::Vector2f receiver;
+				sf::Vector2f diff_uni;
+				float length, rotation;
+				float duration, timer;
+				float messageDelay, timerDelay;
+			};
+
+			DynamicArray<MsgEntityTransition*> m_Transitions;
+
+			bool showTransitions;
+
 		public:
 			MsgManager();
 			~MsgManager();
@@ -62,13 +78,13 @@ namespace sfgmk
 			int Register(MsgActor* _rec); // Créé un nouvel Identifiant et l'associe à un receveur. Retourne son ID;
 			void Withdraw(int _ID); // Retire un élément avec l'ID indiqué.
 
-
 			void Organize(); // réagence la liste des messages pour qu'elle soit plus rapide.
-
-			//void Respond(Msg _Msg_Initial, void* _p_Data); // renvoie msg avec les ID inverses de celui reçu à l'envoyeur (plus rapide à écrire)
 
 			void SendMsg(int _i_ID_Emettor, int _i_ID_Receptor, void* _p_Data, int _DataSize,
 				float _f_Delay = 0.0f, bool _b_autodestruct = true); //envoie un message
+
+			void SendTagMsgEntity(Entity* _emetor, Entity* _receptor, void* _p_Data, int _DataSize,
+				float _f_Delay = 0.0f, bool _b_autodestruct = true, MSG_TAG _Tag = TAG_UNKNOWN); //envoie un message d'une entite a une autre
 
 			void SendTagMsg(int _i_ID_Emettor, int _i_ID_Receptor, void* _p_Data, int _DataSize,
 				float _f_Delay = 0.0f, bool _b_autodestruct = true, MSG_TAG _Tag = TAG_UNKNOWN); //envoie un message avec TAG
@@ -77,6 +93,7 @@ namespace sfgmk
 				float _f_Delay = 0.0f, MSG_TAG _Tag = TAG_UNKNOWN, bool _b_autodestruct = true); //envoie un message à un groupe
 
 			void Update();
+			void draw(sf::RenderTexture* _render);
 		};
 
 

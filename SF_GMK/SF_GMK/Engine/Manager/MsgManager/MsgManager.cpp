@@ -21,6 +21,8 @@ namespace sfgmk
 			for (int i = 0; i < MSG_BUFFER_SIZE; ++i) {
 				SetMsgEmpty(i);
 			}
+
+			showTransitions = true;
 		}
 
 		MsgManager::~MsgManager() {
@@ -174,10 +176,6 @@ namespace sfgmk
 
 		}
 
-		//void MsgManager::Respond(Msg _Msg_Initial, void* _p_Data) {
-		//
-		//}
-
 		void MsgManager::SendMsg(int _i_ID_Emettor, int _i_ID_Receptor, void* _p_Data, int _DataSize,
 			float _f_Delay, bool _b_autodestruct) {
 			// Recherche d'emplacement libre dans p_buffer_msg
@@ -192,6 +190,36 @@ namespace sfgmk
 					cout << "Error - Plus assez de place dans tab_Buffer_Msg de MsgManager.hpp" << endl;
 			}
 
+		}
+
+		void MsgManager::SendTagMsgEntity(Entity* _emetor, Entity* _receptor, void* _p_Data, int _DataSize,
+			float _f_Delay, bool _b_autodestruct, MSG_TAG _Tag) {
+
+			MsgEntityTransition* transition = new MsgEntityTransition;
+
+			transition->sender = _emetor->getCenter();
+			transition->receiver = _receptor->getCenter();
+
+			sf::Vector2f diff = transition->receiver - transition->sender;
+
+			transition->length = math::Calc_Norm(diff);
+			transition->diff_uni = math::Calc_UnitVector(diff);
+			transition->rotation = atan2f(diff.y, diff.x) * 180.0f / PI;
+			transition->duration = transition->timer = 1.0f;
+
+			transition->messageDelay = transition->timerDelay = _f_Delay;
+
+			// Recherche d'emplacement libre dans p_buffer_msg
+			for (int i = 0; i < MSG_BUFFER_SIZE; ++i) {
+				if (tab_Buffer_Msg[i] == NULL) // si c'est vide youpi on remplit
+				{
+					tab_Buffer_Msg[i] = new Msg(_emetor->getMsgActor().GetID(), _receptor->getMsgActor().GetID(), _p_Data, _DataSize, _f_Delay, _b_autodestruct, _Tag);
+					tab_Buffer_Msg[i]->OnEmission(); // process du message sur Emission
+					i = MSG_BUFFER_SIZE;
+				}
+			}
+
+			m_Transitions.pushBack(transition);
 		}
 
 		void MsgManager::SendTagMsg(int _i_ID_Emettor, int _i_ID_Receptor, void* _p_Data, int _DataSize,
@@ -239,6 +267,62 @@ namespace sfgmk
 				if (_FirstEmpty != -1 && tab_Buffer_Msg[i] != NULL) {
 					if (_FirstEmpty != i)
 						MoveMessageFromTo(i, _FirstEmpty);
+				}
+			}
+		}
+
+		void MsgManager::draw(sf::RenderTexture* _render)
+		{
+			if (showTransitions)
+			{
+				sf::RectangleShape shape;
+				sf::RectangleShape shapeCursor;
+				MsgEntityTransition* transition;
+				sf::Color color;
+				int alpha;
+				float progress;
+
+				float height = 2.0f;
+
+				shapeCursor.setFillColor(sf::Color(0, 255, 0, 255));
+				shapeCursor.setSize(sf::Vector2f(height, height));
+				
+				for (int i = (int)m_Transitions.getElementNumber() - 1; i >= 0; i--)
+				{
+					transition = m_Transitions[i];
+					alpha = (int)(transition->timer / transition->duration * 255.0f);
+					color = sf::Color(0, 0, 255, alpha);
+
+					shape.setSize(sf::Vector2f(transition->length, height));
+					shape.setFillColor(color);
+					shape.setPosition(transition->sender);
+					shape.setRotation(transition->rotation);
+
+					_render->draw(shape);
+
+					if (transition->messageDelay > 0.0f)
+					{
+						transition->timerDelay -= TIME_DELTA;
+
+						progress = (transition->messageDelay - transition->timerDelay) / transition->messageDelay;
+
+						if (progress > 1.0f)
+							progress = 1.0f;
+
+						shapeCursor.setPosition(transition->sender + progress * (transition->length - height) * transition->diff_uni);
+						shapeCursor.setRotation(transition->rotation);
+
+						_render->draw(shapeCursor);
+					}
+ 
+					if(transition->timerDelay <= 0.0f)
+						transition->timer -= TIME_DELTA;
+
+					if (transition->timer <= 0.0f)
+					{
+						m_Transitions.removeElementByIndex(i);
+						delete transition;
+					}
 				}
 			}
 		}
