@@ -12,7 +12,7 @@
 // on préfère un tableau à un vector par commodité : plus rapide et la pompe à message 
 // aura une taille variable en fonction de l'application. Pas besoin d'un vector si 20 ennemis communiquent.
 #define ID_BUFFER_SIZE 1024 // <------- Nombre d'inscrits à la poste max
-#define MSG_BUFFER_SIZE 25 // <----- Courrier max en circulation 
+#define MSG_BUFFER_SIZE 1000 // <----- Courrier max en circulation 
 
 #define ID_EMPTY -1 // l'emplacement du tableau est vide
 #define ID_VIRGIN -2 // l'emplacement du tableau n'a JAMAIS été écrit : pas besoin d'aller plus loin

@@ -54,6 +54,22 @@ void StateGame::init()
 
 void StateGame::update()
 {
+	// test pour sturer la pompe a message lul
+	/*if (INPUT_MANAGER->MOUSE_BUTTON(sf::Mouse::Right) == KEY_PRESSED)
+	{
+		for (int i = 0; i < 100;++i) {
+
+
+			int* valeurBidon = new int;
+			*valeurBidon = 4;
+			MESSAGE_MANAGER->SendMsg(1, 1, valeurBidon, sizeof(int), MSG_TIME_TO_LIVE + 1, engine::MSG_TAG::TAG_UNKNOWN);
+		}
+	
+	if (INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::W) == KEY_PRESSED)
+	{
+		sfgmk::CONSOLE.command("/warden");
+	}*/
+
 	//Déplacement de goomba si on en sélectionne
 	if (INPUT_MANAGER->MOUSE_BUTTON(sf::Mouse::Right) == KEY_PRESSED)
 	{

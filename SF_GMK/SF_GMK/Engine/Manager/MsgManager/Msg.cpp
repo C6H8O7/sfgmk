@@ -58,6 +58,7 @@ namespace sfgmk
 
 		void Msg::OnMsgUpdate() {
 			f_Delay -= TIME_DELTA;
+			f_Time_Lived += TIME_DELTA;
 		}
 		// Accesseurs/Mutateurs-----------------------------------------------------------------
 		void* Msg::GetData() {
@@ -103,6 +104,14 @@ namespace sfgmk
 
 		void Msg::SetDelay(float _Delay) {
 			f_Delay = _Delay;
+		}
+
+		float Msg::GetLifeTime() {
+			return f_Time_Lived;
+		}
+
+		void Msg::SetLifeTime(float _time) {
+			f_Time_Lived = _time;
 		}
 
 		bool Msg::GetReceived() {

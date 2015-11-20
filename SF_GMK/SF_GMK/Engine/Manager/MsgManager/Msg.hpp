@@ -14,6 +14,8 @@
 #define ID_NULL -1
 
 #define MSG_TIME_DELTA GetTickCount()
+#define MSG_TIME_TO_LIVE 5 // temps de vie (en s) maximum d'un message. Au delà le message s'autodétruit. NB : les messages hors-circuit de la pompe ne se détruisent pas d'eux mêmes.
+
 
 // le tag est optionnel et permet d'identifier grossièrement le contenu du message si il est inconnu
 namespace sfgmk
@@ -43,10 +45,12 @@ namespace sfgmk
 			void* p_Data; // pointeur sur données
 
 			float f_Delay; // retardement du message en ms
+			float f_Time_Lived; // temps depuis la création du message
 
 			bool b_Received; // T = reçu | F = pas reçu
 			bool b_Autodestruct; // True : autodestruction après la 1ere lecture
 			bool b_IsGroupMsg; // Est un message destiné à un groupe
+
 
 			int i_Data_Size;
 
@@ -86,6 +90,9 @@ namespace sfgmk
 
 			float GetDelay();
 			void SetDelay(float);
+
+			float GetLifeTime();
+			void SetLifeTime(float);
 
 			bool GetReceived();
 			void SetReceived(bool);

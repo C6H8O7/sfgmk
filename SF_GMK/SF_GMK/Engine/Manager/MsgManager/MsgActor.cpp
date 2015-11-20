@@ -43,7 +43,7 @@ namespace sfgmk
 
 		void MsgActor::CleanVecMsg() {
 			for ( size_t i = 0; i < vec_Msg.size(); ++i) {
-				if (vec_Msg[i]->GetReceived() == true) {
+				if (vec_Msg[i]->GetReceived() == true || vec_Msg[i]->GetLifeTime() > MSG_TIME_TO_LIVE) {
 					delete vec_Msg[i];
 					vec_Msg[i] = NULL;
 					if (vec_Msg.size() == 1)

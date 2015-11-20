@@ -140,7 +140,7 @@ class Goomba : public EntityWithPv
 			engine::Msg* NewMessagePtr = m_MsgActor.GetLastMessage();
 			while( NewMessagePtr != NULL )
 			{
-				engine::Msg* NewMessage = new engine::Msg;
+				engine::Msg* NewMessage = new engine::Msg; // fuite mémoire les vilains
 				memcpy(NewMessage, NewMessagePtr, sizeof(engine::Msg));
 				void* data = NewMessage->GetData();
 

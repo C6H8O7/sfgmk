@@ -32,7 +32,8 @@ namespace sfgmk
 		void MsgManager::Update() {
 			// lancement de l'Update des Messages
 			for (int i = 0; i < MSG_BUFFER_SIZE; ++i) {
-				if (tab_Buffer_Msg[i] != NULL) {
+				if (tab_Buffer_Msg[i] != NULL) 
+				{
 					if (tab_Buffer_Msg[i]->GetEmettorID() != ID_EMPTY && tab_Buffer_Msg[i]->GetEmettorID() != ID_VIRGIN) {
 						tab_Buffer_Msg[i]->OnTransition();
 						if (tab_Buffer_Msg[i]->GetDelay() <= 0.0f)
@@ -83,16 +84,19 @@ namespace sfgmk
 			if (tab_Buffer_Msg[i] != NULL)
 				if (tab_Buffer_Msg[i]->GetAutodestruct() == true && tab_Buffer_Msg[i]->GetReceived() == true) {
 					// clean des autodestructs	
+					delete tab_Buffer_Msg[i];
 					SetMsgEmpty(i);
 				}
 			if (tab_Buffer_Msg[i] != NULL)
-				if (tab_Buffer_Msg[i]->GetDelay() <= -5) {
+				if (tab_Buffer_Msg[i]->GetLifeTime() > MSG_TIME_TO_LIVE) {
 					// si un message "traine" (erreur lors d'une destruction d'Actor ou autre?) on le détruit
+					delete tab_Buffer_Msg[i];
 					SetMsgEmpty(i);
 				}
 			if (tab_Buffer_Msg[i] != NULL)
 				if (tab_Receiver[tab_Buffer_Msg[i]->GetReceptorID()] == NULL) // si le recepteur n'existe pas/plus
 				{
+					delete tab_Buffer_Msg[i];
 					SetMsgEmpty(i);
 				}
 
