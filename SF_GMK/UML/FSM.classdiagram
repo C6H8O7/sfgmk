@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="b90d57d6-7efd-48b7-9468-5f7912f52bec" name="FSM" linkedPackageId="45b2fd40-6f9f-4bea-8980-b80ed9fc9969" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="8879865f-9df7-4dd9-a05e-6e8e9b394b0b">
+      <profileInstance Id="18a03c89-c7c7-4c06-8dc1-e2a170b20b16" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="504e2056-dca9-4c7b-b964-1ec43eea0a80">
+      <profileInstance Id="e3b728f5-9d58-46a6-9724-449fd93fba6f" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="7b9f51d3-b74e-4e31-8ee0-3ceb4328885a" name="FSM Attack">
+        <elementDefinition Id="4cd0d13f-be63-4caf-be31-a13d697dd242" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <class Id="18929bc5-b856-4451-aff8-d69776e65276" name="Wait" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="aa27b6ad-fccd-4ae6-8e53-74144cdf3f43" />
+              <suppliersInternal>
+                <dependency Id="21567e83-d481-47eb-bcc5-05128a2b0312">
+                  <classMoniker Id="1e9299bb-09f6-4e24-b9af-e5ec973a5bd4" LastKnownName="Blast" />
+                  <elementDefinition Id="6f6bd946-57c4-4685-8a7b-4b35aba20bbd" />
+                </dependency>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="1e9299bb-09f6-4e24-b9af-e5ec973a5bd4" name="Blast" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="b24944a0-b4dd-49bc-94d5-87dddef7e637" />
+              <suppliersInternal>
+                <dependency Id="c1238620-d2d3-4f09-a5e3-d24f66ba9357">
+                  <classMoniker Id="18929bc5-b856-4451-aff8-d69776e65276" LastKnownName="Wait" />
+                  <elementDefinition Id="d8cd9d6f-ff33-420a-8fd9-1630b1f81689" />
+                </dependency>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="84325f2f-39a7-4e57-89b4-8e4ff4ae0caa" name="FSM">
+        <elementDefinition Id="f5654d89-133f-4f97-8c64-dbad368c56b1" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <class Id="72e838c0-9eb3-49a6-9c79-ad13e9251c79" name="Spawn" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="6cb06f58-2d09-4b3a-8a50-8695df510e3e" />
+              <suppliersInternal>
+                <dependency Id="7aacfaa4-2868-4653-bbe4-f1574b1bba88">
+                  <classMoniker Id="d023d95a-c6b8-421c-a7d0-a85fefff40fe" LastKnownName="Idle" />
+                  <elementDefinition Id="ba1e5f7a-60dd-49ab-b38f-d1399d7688d4" />
+                </dependency>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="ed8731a1-2865-442b-ba61-323481dd4f3c" name="Move" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="d5586327-a86c-404c-82d8-0f5e27876b99" />
+              <suppliersInternal>
+                <dependency Id="2d9f3146-0b34-4d8a-9b30-39a51ed528a2">
+                  <classMoniker Id="d023d95a-c6b8-421c-a7d0-a85fefff40fe" LastKnownName="Idle" />
+                  <elementDefinition Id="7a03fcff-6558-466e-a157-e20677c6ca75" />
+                </dependency>
+                <dependency Id="1fed26d5-8191-4cb4-9eea-131498c76312">
+                  <classMoniker Id="d8ec0719-baa7-453e-aa00-e27e0f6fc5da" LastKnownName="Attack" />
+                  <elementDefinition Id="259aed78-0e1f-41db-a087-0d7c7a7bc203" />
+                </dependency>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="7fa07e62-8b2f-470d-a8d1-4a6d2dbdbb01" name="Flee" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="a9f3aa55-78cb-4f66-b35f-9349f7afe729" />
+              <suppliersInternal>
+                <dependency Id="5a72db8f-7dcc-4b35-acc6-b91a5f61535c">
+                  <classMoniker Id="ed8731a1-2865-442b-ba61-323481dd4f3c" LastKnownName="Move" />
+                  <elementDefinition Id="7db73bf4-8e96-4cea-a490-d3b376ed7e24" />
+                </dependency>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="d8ec0719-baa7-453e-aa00-e27e0f6fc5da" name="Attack" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="53b48124-fb4b-4ade-9146-845a031e2d1b" />
+              <suppliersInternal>
+                <dependency Id="8f6ebba8-3055-4bb1-98e5-c3fcc62429df">
+                  <classMoniker Id="7fa07e62-8b2f-470d-a8d1-4a6d2dbdbb01" LastKnownName="Flee" />
+                  <elementDefinition Id="171d52b4-c066-40be-b9a8-4bc5ba0d69d4" />
+                </dependency>
+                <dependency Id="94d06e27-7717-4ced-bfab-0eda1129bf24">
+                  <classMoniker Id="ed8731a1-2865-442b-ba61-323481dd4f3c" LastKnownName="Move" />
+                  <elementDefinition Id="764fbdf2-6dae-4a38-bf6d-feb60198070b" />
+                </dependency>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="d023d95a-c6b8-421c-a7d0-a85fefff40fe" name="Idle" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="64ce398d-7e70-4b19-a618-607b5a3b3baa" />
+              <suppliersInternal>
+                <dependency Id="e35a08a3-23c0-4d2c-b245-6cff641a2c48">
+                  <classMoniker Id="ed8731a1-2865-442b-ba61-323481dd4f3c" LastKnownName="Move" />
+                  <elementDefinition Id="6bfe593d-880f-46ba-b13d-46e229826803" />
+                </dependency>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+  </packagedElements>
+  <package Id="45b2fd40-6f9f-4bea-8980-b80ed9fc9969" name="UML">
+    <elementDefinition Id="f643aaf8-e709-4cf9-ae19-053af7cf063d" />
+  </package>
+</logicalClassDesignerModel>

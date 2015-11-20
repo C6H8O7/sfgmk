@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="f5654d89-133f-4f97-8c64-dbad368c56b1"
+  name="FSM" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="6cb06f58-2d09-4b3a-8a50-8695df510e3e"
+        name="Spawn"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="ba1e5f7a-60dd-49ab-b38f-d1399d7688d4">
+            <classMoniker
+              Id="64ce398d-7e70-4b19-a618-607b5a3b3baa"
+              LastKnownName="Idle"
+              LastKnownLocation="Package1_0935.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="d5586327-a86c-404c-82d8-0f5e27876b99"
+        name="Move"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="7a03fcff-6558-466e-a157-e20677c6ca75">
+            <classMoniker
+              Id="64ce398d-7e70-4b19-a618-607b5a3b3baa"
+              LastKnownName="Idle"
+              LastKnownLocation="Package1_0935.uml" />
+          </dependency>
+          <dependency
+            Id="259aed78-0e1f-41db-a087-0d7c7a7bc203">
+            <classMoniker
+              Id="53b48124-fb4b-4ade-9146-845a031e2d1b"
+              LastKnownName="Attack"
+              LastKnownLocation="Package1_0935.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="a9f3aa55-78cb-4f66-b35f-9349f7afe729"
+        name="Flee"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="7db73bf4-8e96-4cea-a490-d3b376ed7e24">
+            <classMoniker
+              Id="d5586327-a86c-404c-82d8-0f5e27876b99"
+              LastKnownName="Move"
+              LastKnownLocation="Package1_0935.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="53b48124-fb4b-4ade-9146-845a031e2d1b"
+        name="Attack"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="171d52b4-c066-40be-b9a8-4bc5ba0d69d4">
+            <classMoniker
+              Id="a9f3aa55-78cb-4f66-b35f-9349f7afe729"
+              LastKnownName="Flee"
+              LastKnownLocation="Package1_0935.uml" />
+          </dependency>
+          <dependency
+            Id="764fbdf2-6dae-4a38-bf6d-feb60198070b">
+            <classMoniker
+              Id="d5586327-a86c-404c-82d8-0f5e27876b99"
+              LastKnownName="Move"
+              LastKnownLocation="Package1_0935.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="64ce398d-7e70-4b19-a618-607b5a3b3baa"
+        name="Idle"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="6bfe593d-880f-46ba-b13d-46e229826803">
+            <classMoniker
+              Id="d5586327-a86c-404c-82d8-0f5e27876b99"
+              LastKnownName="Move"
+              LastKnownLocation="Package1_0935.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

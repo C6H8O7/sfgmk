@@ -78,6 +78,18 @@
         LastKnownName="Map"
         LastKnownLocation="Package_0910.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="4cd0d13f-be63-4caf-be31-a13d697dd242"
+        LastKnownName="FSM Attack"
+        LastKnownLocation="Package_0935.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="f5654d89-133f-4f97-8c64-dbad368c56b1"
+        LastKnownName="FSM"
+        LastKnownLocation="Package1_0935.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

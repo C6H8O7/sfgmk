@@ -22,6 +22,16 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
   <ItemGroup>
+    <Content Include="FSM.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="FSM.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>FSM.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="ModelDefinition\Package1_0935.uml">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="ModelDefinition\Package1_2324.uml">
       <SubType>Content</SubType>
     </Content>
@@ -32,6 +42,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\Package_0910.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_0935.uml">
       <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\Package_1457.uml">

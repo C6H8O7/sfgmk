@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="4cd0d13f-be63-4caf-be31-a13d697dd242"
+  name="FSM Attack" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="aa27b6ad-fccd-4ae6-8e53-74144cdf3f43"
+        name="Wait"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="6f6bd946-57c4-4685-8a7b-4b35aba20bbd">
+            <classMoniker
+              Id="b24944a0-b4dd-49bc-94d5-87dddef7e637"
+              LastKnownName="Blast"
+              LastKnownLocation="Package_0935.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="b24944a0-b4dd-49bc-94d5-87dddef7e637"
+        name="Blast"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="d8cd9d6f-ff33-420a-8fd9-1630b1f81689">
+            <classMoniker
+              Id="aa27b6ad-fccd-4ae6-8e53-74144cdf3f43"
+              LastKnownName="Wait"
+              LastKnownLocation="Package_0935.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>
