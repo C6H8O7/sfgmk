@@ -265,6 +265,9 @@
     <ClCompile Include="SF_GMK\Graphic\FX\LifeBar\FloatingDamage.cpp">
       <Filter>sfgmk</Filter>
     </ClCompile>
+    <ClCompile Include="SF_GMK\Graphic\ShapeDrawer.cpp">
+      <Filter>sfgmk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -435,5 +438,6 @@
     <ClInclude Include="SF_GMK\Map\TiledMap.hpp" />
     <ClInclude Include="SF_GMK\Graphic\FX\LifeBar\FloatingDamage.hpp" />
     <ClInclude Include="SF_GMK\Tool\Warden.hpp" />
+    <ClInclude Include="SF_GMK\Graphic\ShapeDrawer.hpp" />
   </ItemGroup>
 </Project>

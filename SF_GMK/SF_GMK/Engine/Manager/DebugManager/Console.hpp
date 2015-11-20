@@ -68,6 +68,13 @@ namespace sfgmk
 			std::string sOnRecallOutput;
 		};
 
+		struct stCONSOLE_COMMAND_WITH_ARGS
+		{
+			FoncterTemplate* Foncter;
+			std::string sOnCallOutput;
+			unsigned int uiStringSize;
+		};
+
 		typedef struct _PROCESSOR_POWER_INFORMATION
 		{
 			ULONG  Number;
@@ -135,6 +142,7 @@ namespace sfgmk
 				sf::Text m_CameraText;
 
 				std::map<std::string, stCONSOLE_COMMAND> m_Commands;
+				std::map<std::string, stCONSOLE_COMMAND_WITH_ARGS> m_CommandsWithArgs;
 				std::vector<std::string> m_EnteredCommands;
 				int m_iEnteredCommandsIndex;
 				unsigned int m_uiConsoleDefillindex;
@@ -161,6 +169,7 @@ namespace sfgmk
 				void helpCommand();
 				void command(std::string _Seizure);
 				void registerCommand(const std::string& _commandName, FoncterTemplate* _Foncter, const std::string& _CallOutput, const std::string& _RecallOutput, const bool& _InitialState = false);
+				void registerCommandWithArgs(const std::string& _commandName, FoncterTemplate* _Foncter, const std::string& _CallOutput, const unsigned int& _StringLength);
 		};
 	}
 }

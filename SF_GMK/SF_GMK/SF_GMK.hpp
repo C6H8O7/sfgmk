@@ -83,6 +83,8 @@
 
 	#include "Tool\Warden.hpp"
 
+	#include "Graphic\ShapeDrawer.hpp"
+
 	#include "Math\Math.hpp"
 	#include "Math\Curb\Curb.hpp"
 	#include "Math\Curb\Bezier.hpp"
@@ -183,6 +185,7 @@ namespace sfgmk
 	#define CONSOLE							DEBUG_MANAGER->getConsole()
 	#define PARALLAXE						GRAPHIC_MANAGER->getParallaxe()
 	#define ADD_TO_HUD(a)					GRAPHIC_MANAGER->addSpriteToHud(a)
+	#define SHAPE_DRAWER					GRAPHIC_MANAGER->getShapeDrawer()
 
 	#define SELECTOR						DEBUG_MANAGER->getSelector()
 

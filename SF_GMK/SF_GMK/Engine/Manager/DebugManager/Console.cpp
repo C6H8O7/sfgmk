@@ -1,5 +1,3 @@
-#include "../../../../../SF_GMK_Project/Game/Goomba.hpp"
-
 namespace sfgmk
 {
 	namespace engine
@@ -86,6 +84,7 @@ namespace sfgmk
 		{
 			ClearPtrCntr(m_sConsoleStrings);
 			m_Commands.clear();
+			m_CommandsWithArgs.clear();
 			m_EnteredCommands.clear();
 		}
 
@@ -584,6 +583,21 @@ namespace sfgmk
 
 				m_sConsoleStrings.push_back(newCommandString);
 			}
+
+			auto itTwo = m_CommandsWithArgs.begin();
+
+			while( itTwo != m_CommandsWithArgs.end() )
+			{
+				stCONSOLE_STRINGS* newCommandString = new stCONSOLE_STRINGS;
+
+				for( int i(0); i < CONSOLE_COMMAND_PER_LINE && itTwo != m_CommandsWithArgs.end(); i++, ++itTwo )
+				{
+					newCommandString->sString += "\t\t" + (*itTwo).first + "\t\t";
+					newCommandString->Color = HELP_COMMAND_COLOR;
+				}
+
+				m_sConsoleStrings.push_back(newCommandString);
+			}
 		}
 
 		void ConsoleDev::command(std::string _Seizure)
@@ -614,51 +628,38 @@ namespace sfgmk
 			}
 			else if( _Seizure == "/help" )
 				helpCommand();
-			
-			//TODO a refaire apres la presentation
-			//Destroy goomba
-			else if( _Seizure.substr(0, 5) == "/kill" )
+
+			//Recherche de la commande entrée dans la liste de commandes avec arguments
+			auto itTwo = m_CommandsWithArgs.find(_Seizure);
+			if( itTwo != m_CommandsWithArgs.end() )
 			{
-				_Seizure = _Seizure.substr(6, _Seizure.length() - 6);
-				
-				unsigned int uiId;
-				stringstream(_Seizure) >> uiId;
+				(*itTwo).second.Foncter->Execute();
 
-				if( MESSAGE_MANAGER->SendMsgToEntity(uiId, NULL, 0, MSG_TAG::TAG_BOOL) )
-				{
-					stCONSOLE_STRINGS* newCommandString = new stCONSOLE_STRINGS;
-					newCommandString->sString = "Destruction entité " + _Seizure;
-					newCommandString->Color = sf::Color::Cyan;;
-					m_sConsoleStrings.push_back(newCommandString);
-				}
-			}
+				stCONSOLE_STRINGS* newCommandString = new stCONSOLE_STRINGS;
+				newCommandString->sString = (*itTwo).second.sOnCallOutput;
+				newCommandString->Color = COMMAND_COLOR_ACTIVE;
 
-			//Pop goomba
-			else if( _Seizure.substr(0, 4) == "/pop" )
-			{
-				_Seizure = _Seizure.substr(5, _Seizure.length() - 5);
-			
-				sf::Vector2f Position;
-				stringstream(_Seizure) >> Position.x;
-				_Seizure = _Seizure.substr(_Seizure.find_first_of(' ') + 1, _Seizure.length());
-				stringstream(_Seizure) >> Position.y;
-
-				Goomba* NewCleverGoomba = new Goomba();
-				int iscale = RAND(1, 4);
-				NewCleverGoomba->setScale(iscale * 0.5f, iscale * 0.5f);
-				NewCleverGoomba->setPosition(Position);
-				ADD_ENTITY(NewCleverGoomba);
+				m_sConsoleStrings.push_back(newCommandString);
 			}
 		}
 
 		void ConsoleDev::registerCommand(const std::string& _commandName, FoncterTemplate* _Foncter, const std::string& _CallOutput, const std::string& _RecallOutput, const bool& _InitialState)
 		{
 			stCONSOLE_COMMAND NewCommand = { _Foncter,
-											_InitialState,
-											_CallOutput,
-											_RecallOutput };
+											 _InitialState,
+										     _CallOutput,
+											 _RecallOutput };
 
 			m_Commands.insert(std::pair<std::string, stCONSOLE_COMMAND>(_commandName, NewCommand));
+		}
+
+		void ConsoleDev::registerCommandWithArgs(const std::string& _commandName, FoncterTemplate* _Foncter, const std::string& _CallOutput, const unsigned int& _StringLength)
+		{
+			stCONSOLE_COMMAND_WITH_ARGS NewCommand = { _Foncter,
+													   _CallOutput,
+													   _StringLength };
+
+			m_CommandsWithArgs.insert(std::pair<std::string, stCONSOLE_COMMAND_WITH_ARGS>(_commandName, NewCommand));
 		}
 	}
 }
