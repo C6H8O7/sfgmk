@@ -17,6 +17,7 @@ namespace sfgmk
 	#define OnExit if( _Progress == sfgmk::engine::eExit )
 
 	#define RetrieveMsg sfgmk::engine::Msg* msg = m_MsgActor.GetLastMessage();
+	#define RetrieveAllMsg sfgmk::engine::Msg* msg = 0; while(msg = m_MsgActor.GetLastMessage())
 	#define RetrievedMsg msg
 	#define OnAnyMsg if(msg)
 	#define OnMsg(a) if(msg && msg->GetTag() == a)

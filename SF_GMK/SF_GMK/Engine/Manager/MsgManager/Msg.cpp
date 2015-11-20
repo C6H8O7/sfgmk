@@ -57,7 +57,7 @@ namespace sfgmk
 		}
 
 		void Msg::OnMsgUpdate() {
-			f_Delay -= 1;
+			f_Delay -= TIME_DELTA;
 		}
 		// Accesseurs/Mutateurs-----------------------------------------------------------------
 		void* Msg::GetData() {

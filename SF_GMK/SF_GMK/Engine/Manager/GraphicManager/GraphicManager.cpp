@@ -84,6 +84,7 @@ namespace sfgmk
 			//Rendu debug
 			PHYSIC_MANAGER->draw(m_RenderTexture);
 			AI_MANAGER->draw(m_RenderTexture);
+			sfgmk::engine::MsgManager::GetInstance()->draw(m_RenderTexture);
 			ENTITY_MANAGER->draw(m_RenderTexture);
 
 			//Rendu hud
