@@ -353,5 +353,55 @@
         isLeaf="false"
         isActiveClass="false" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="bc432186-2aab-4337-aa66-8c6893f59d4e"
+        name="TiledMap"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="f46a868b-bf84-48d1-be6a-4f6c49d2dd71"
+            isDerived="false"
+            sourceEndRoleName="TiledMap"
+            targetEndRoleName="GraphicManager"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="a1444ed5-113d-4702-9365-1b8c67ef91d4"
+              LastKnownName="GraphicManager"
+              LastKnownLocation="Package2_2324.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="db3b31d6-df5f-4d9d-926b-c5a08ccfe661"
+                  name="TiledMap"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5fbd44c6-bb6f-4a74-844a-bc67bf89b85d"
+                  name="GraphicManager"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
   </packagedElements>
 </package>

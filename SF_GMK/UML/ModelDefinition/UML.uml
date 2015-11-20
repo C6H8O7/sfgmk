@@ -72,6 +72,12 @@
         LastKnownName="Msg"
         LastKnownLocation="Package_1651.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="c224b81d-1785-4daf-b1f1-1ef4b665428b"
+        LastKnownName="Map"
+        LastKnownLocation="Package_0910.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

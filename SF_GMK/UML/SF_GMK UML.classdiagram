@@ -198,6 +198,29 @@
                     <elementDefinition Id="3d8fa829-0365-4c39-8a39-f74693dede46" />
                   </class>
                 </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="9a1523d2-8100-4586-b8ac-da219cd0d2d0" name="TiledMap" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="bc432186-2aab-4337-aa66-8c6893f59d4e" />
+                    <targetEnds>
+                      <association Id="152a92d1-5ca5-426d-aa51-2ab9ba476514" isDerived="false" sourceEndRoleName="TiledMap" targetEndRoleName="GraphicManager" isLeaf="false" isAbstract="false">
+                        <classMoniker Id="b7305793-2eb8-446c-a37b-3fbd49195571" LastKnownName="GraphicManager" />
+                        <relationshipOwnedElementsInternal>
+                          <associationHasOwnedEnds>
+                            <memberEnd Id="002c78de-b12b-4e17-aec4-328b39ee9dd2" name="TiledMap" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                              <elementDefinition Id="db3b31d6-df5f-4d9d-926b-c5a08ccfe661" />
+                            </memberEnd>
+                          </associationHasOwnedEnds>
+                          <associationHasOwnedEnds>
+                            <memberEnd Id="e018146e-72e4-411b-bff9-681dfc337e89" name="GraphicManager" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                              <elementDefinition Id="5fbd44c6-bb6f-4a74-844a-bc67bf89b85d" />
+                            </memberEnd>
+                          </associationHasOwnedEnds>
+                        </relationshipOwnedElementsInternal>
+                        <elementDefinition Id="f46a868b-bf84-48d1-be6a-4f6c49d2dd71" />
+                      </association>
+                    </targetEnds>
+                  </class>
+                </packageHasNamedElement>
               </packagedElements>
             </package>
           </packageHasNamedElement>
