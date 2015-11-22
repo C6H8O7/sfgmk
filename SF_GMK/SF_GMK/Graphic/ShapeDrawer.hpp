@@ -12,7 +12,7 @@
 
 namespace sfgmk
 {
-	class ShapeDrawer
+	class SFGMK_API ShapeDrawer
 	{
 		public:
 			ShapeDrawer();
@@ -31,14 +31,14 @@ namespace sfgmk
 			void drawLine(const sf::Vertex Points[2], sf::RenderTexture* _Render);
 
 			void drawCircle(const sf::Vector2f& _Position, const float& _Radius, const unsigned short& _PointCount, 
-							const sf::Color& _FilLColor = sf::Color::White, const int& _OutlineThickness = 0, const sf::Color& _OutlineColor = sf::Color::Transparent, const sf::Texture* _texture = NULL, const sf::IntRect& _TextureRect = sf::IntRect());
+							const sf::Color& _FilLColor = sf::Color::White, const float& _OutlineThickness = 0.0f, const sf::Color& _OutlineColor = sf::Color::Transparent, const sf::Texture* _texture = NULL, const sf::IntRect& _TextureRect = sf::IntRect());
 			void drawCircle(const sf::Vector2f& _Position, const float& _Radius, const unsigned short& _PointCount, sf::RenderTexture* _Render, 
-							const sf::Color& _FilLColor = sf::Color::White, const int& _OutlineThickness = 0, const sf::Color& _OutlineColor = sf::Color::Transparent, const sf::Texture* _texture = NULL, const sf::IntRect& _TextureRec = sf::IntRect());
+							const sf::Color& _FilLColor = sf::Color::White, const float& _OutlineThickness = 0.0f, const sf::Color& _OutlineColor = sf::Color::Transparent, const sf::Texture* _texture = NULL, const sf::IntRect& _TextureRec = sf::IntRect());
 
 			void drawRectangle(const sf::Vector2f& _Position, const sf::Vector2f& _Size, 
-							   const sf::Color& _FilLColor = sf::Color::White, const int& _OutlineThickness = 0, const sf::Color& _OutlineColor = sf::Color::Transparent, const sf::Texture* _texture = NULL, const sf::IntRect& _TextureRect= sf::IntRect());
+							   const sf::Color& _FilLColor = sf::Color::White, const float& _OutlineThickness = 0.0f, const sf::Color& _OutlineColor = sf::Color::Transparent, const sf::Texture* _texture = NULL, const sf::IntRect& _TextureRect= sf::IntRect());
 			void drawRectangle(const sf::Vector2f& _Position, const sf::Vector2f& _Size, sf::RenderTexture* _Render, 
-							   const sf::Color& _FilLColor = sf::Color::White, const int& _OutlineThickness = 0, const sf::Color& _OutlineColor = sf::Color::Transparent, const sf::Texture* _texture = NULL, const sf::IntRect& _TextureRect= sf::IntRect());
+							   const sf::Color& _FilLColor = sf::Color::White, const float& _OutlineThickness = 0.0f, const sf::Color& _OutlineColor = sf::Color::Transparent, const sf::Texture* _texture = NULL, const sf::IntRect& _TextureRect= sf::IntRect());
 	};
 }
 

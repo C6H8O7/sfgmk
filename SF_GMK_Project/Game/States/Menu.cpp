@@ -1,6 +1,5 @@
 #include "stdafx.h"
-
-#include "../IncludesProjet.hpp"
+#include "../../IncludesProjet.hpp"
 
 using namespace sfgmk;
 

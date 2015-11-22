@@ -27,7 +27,7 @@ namespace sfgmk
 	}
 
 	void ShapeDrawer::drawCircle(const sf::Vector2f& _Position, const float& _Radius, const unsigned short& _PointCount, 
-								 const sf::Color& _FilLColor, const int& _OutlineThickness, const sf::Color& _OutlineColor, const sf::Texture* _texture, const sf::IntRect& _TextureRect)
+								 const sf::Color& _FilLColor, const float& _OutlineThickness, const sf::Color& _OutlineColor, const sf::Texture* _texture, const sf::IntRect& _TextureRect)
 	{
 		m_Circle.setRadius(_Radius);
 		m_Circle.setPointCount(_PointCount);
@@ -42,7 +42,7 @@ namespace sfgmk
 	}
 
 	void ShapeDrawer::drawCircle(const sf::Vector2f& _Position, const float& _Radius, const unsigned short& _PointCount, sf::RenderTexture* _Render,
-					const sf::Color& _FilLColor, const int& _OutlineThickness, const sf::Color& _OutlineColor, const sf::Texture* _texture, const sf::IntRect& _TextureRect)
+					const sf::Color& _FilLColor, const float& _OutlineThickness, const sf::Color& _OutlineColor, const sf::Texture* _texture, const sf::IntRect& _TextureRect)
 	{
 		m_Circle.setRadius(_Radius);
 		m_Circle.setPointCount(_PointCount);
@@ -57,7 +57,7 @@ namespace sfgmk
 	}
 
 	void ShapeDrawer::drawRectangle(const sf::Vector2f& _Position, const sf::Vector2f& _Size, 
-									const sf::Color& _FilLColor, const int& _OutlineThickness, const sf::Color& _OutlineColor, const sf::Texture* _texture, const sf::IntRect& _TextureRect)
+									const sf::Color& _FilLColor, const float& _OutlineThickness, const sf::Color& _OutlineColor, const sf::Texture* _texture, const sf::IntRect& _TextureRect)
 	{
 		m_Rectangle.setSize(_Size);
 		m_Rectangle.setFillColor(_FilLColor);
@@ -71,7 +71,7 @@ namespace sfgmk
 	}
 
 	void ShapeDrawer::drawRectangle(const sf::Vector2f& _Position, const sf::Vector2f& _Size, sf::RenderTexture* _Render,
-					   const sf::Color& _FilLColor, const int& _OutlineThickness, const sf::Color& _OutlineColor, const sf::Texture* _texture, const sf::IntRect& _TextureRect)
+					   const sf::Color& _FilLColor, const float& _OutlineThickness, const sf::Color& _OutlineColor, const sf::Texture* _texture, const sf::IntRect& _TextureRect)
 	{
 		m_Rectangle.setSize(_Size);
 		m_Rectangle.setFillColor(_FilLColor);

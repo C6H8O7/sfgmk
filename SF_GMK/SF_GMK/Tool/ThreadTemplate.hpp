@@ -13,7 +13,7 @@
 namespace sfgmk
 {
 	template<typename... Args>
-	class SFGMK_API ThreadTemplate
+	class ThreadTemplate
 	{
 		private:
 			std::thread* m_Thread;
@@ -57,6 +57,25 @@ namespace sfgmk
 				{
 					m_Thread->join();
 					m_bWaited = true;
+				}
+			}
+
+			void Reset()
+			{
+				if( !m_bLaunched || m_bWaited )
+				{
+					SAFE_DELETE(m_Thread);
+					m_bLaunched = false;;
+					m_bWaited = false;
+				}
+			}
+
+			void Kill()
+			{
+				if( m_bLaunched && !m_bWaited )
+				{
+					m_Thread->detach();
+					m_Thread->~thread();
 				}
 			}
 	};

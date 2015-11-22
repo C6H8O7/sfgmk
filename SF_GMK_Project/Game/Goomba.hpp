@@ -138,9 +138,9 @@ class Goomba : public EntityWithPv
 		void updateMsg()
 		{
 			engine::Msg* NewMessagePtr = m_MsgActor.GetLastMessage();
+			engine::Msg* NewMessage = new engine::Msg;
 			while( NewMessagePtr != NULL )
 			{
-				engine::Msg* NewMessage = new engine::Msg; // fuite mémoire les vilains
 				memcpy(NewMessage, NewMessagePtr, sizeof(engine::Msg));
 				void* data = NewMessage->GetData();
 
@@ -158,6 +158,8 @@ class Goomba : public EntityWithPv
 					setIsAlive(false);
 
 				NewMessagePtr = m_MsgActor.GetLastMessage();
+				
 			}
+			//delete NewMessage;
 		}
 };

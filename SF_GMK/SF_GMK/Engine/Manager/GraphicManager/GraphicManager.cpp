@@ -2,7 +2,7 @@ namespace sfgmk
 {
 	namespace engine
 	{
-		GraphicManager::GraphicManager() : m_RenderWindow(NULL), m_RenderTexture(NULL), m_CurrentParallaxe(NULL), m_Parallaxe(NULL), m_CurrentCamera(NULL), m_Map(NULL), m_bDrawHud(false), m_bScreenshot(true)
+		GraphicManager::GraphicManager() : m_RenderWindow(NULL), m_RenderTexture(NULL), m_CurrentParallaxe(NULL), m_Parallaxe(NULL), m_CurrentCamera(NULL), m_Map(NULL), m_HudDrawFunction(NULL), m_bDrawHud(false), m_bScreenshot(true)
 		{
 			m_Parallaxe = new Parallaxe();
 			m_CurrentParallaxe = m_Parallaxe;

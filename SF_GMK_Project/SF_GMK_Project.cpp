@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "SF_GMK.hpp"
 
-#include "Game\IncludesProjet.hpp"
+#include "IncludesProjet.hpp"
 
 int main()
 {
@@ -29,7 +29,8 @@ int main()
 	sfgmk::STATE_MACHINE_MANAGER->RegisterState<sfgmk::engine::StateLoading>(eSTATES::eStateLoading, DATA_PATH + "/stateLoading");
 	sfgmk::STATE_MACHINE_MANAGER->RegisterState<StateMenu>(eSTATES::eStateMenu, "../data/states/Menu");
 	sfgmk::STATE_MACHINE_MANAGER->RegisterState<StateGame>(eSTATES::eStateGame, "../data/states/Game");
-	sfgmk::STATE_MACHINE->init(eSTATES::eStateMenu);
+	sfgmk::STATE_MACHINE_MANAGER->RegisterState<StateGamePathfinding>(eSTATES::eStateGamePathfinding, "../data/states/GamePathfinding");
+	sfgmk::STATE_MACHINE->init(eSTATES::eStateGamePathfinding);
 
 	//Boucle de jeu
 	while( sfgmk::GRAPHIC_MANAGER->getRenderWindow()->isOpen() )

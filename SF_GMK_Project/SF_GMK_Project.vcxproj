@@ -160,6 +160,8 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Includes\;..\Includes\SFML-2.3.2\include;..\SF_GMK;..\SF_GMK\SF_GMK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -175,6 +177,8 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>SFGMK_API_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Includes\;..\Includes\SFML-2.3.2\include;..\SF_GMK;..\SF_GMK\SF_GMK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -216,6 +220,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Includes\;..\Includes\SFML-2.3.2\include;..\SF_GMK;..\SF_GMK\SF_GMK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -236,6 +242,8 @@
       <PreprocessorDefinitions>SFGMK_API_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Includes\;..\Includes\SFML-2.3.2\include;..\SF_GMK;..\SF_GMK\SF_GMK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OpenMPSupport>true</OpenMPSupport>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -281,11 +289,13 @@
   <ItemGroup>
     <ClInclude Include="Game\Goomba.hpp" />
     <ClInclude Include="Game\States\Game.hpp" />
-    <ClInclude Include="Game\IncludesProjet.hpp" />
+    <ClInclude Include="IncludesProjet.hpp" />
+    <ClInclude Include="Game\States\GamePathfinding.hpp" />
     <ClInclude Include="Game\States\Menu.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\States\GamePathfinding.cpp" />
     <ClCompile Include="Game\States\Menu.cpp" />
     <ClCompile Include="SF_GMK_Project.cpp" />
     <ClCompile Include="Game\States\Game.cpp" />
