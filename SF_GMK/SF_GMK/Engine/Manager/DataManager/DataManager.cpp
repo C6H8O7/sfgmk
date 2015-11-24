@@ -483,10 +483,12 @@ namespace sfgmk
 				{
 					eResourceType ShaderType;
 					std::string Name = ReadFile->d_name;
-					if (Name.substr(Name.find('.')) == "frag")
+
+					if (strstr(Name.c_str(), "frag"))
 						ShaderType = TYPE_SHADER_FRAGMENT;
-					else if (Name.substr(Name.find('.')) == "vert")
+					else if (strstr(Name.c_str(), "vert"))
 						ShaderType = TYPE_SHADER_VERTEX;
+
 					Name = Name.substr(0, Name.find('.'));
 					loadRessource(ShaderType, Name, DataDir + '/' + ReadFile->d_name);
 					m_uiLastLoadLevelDataAccount++;
