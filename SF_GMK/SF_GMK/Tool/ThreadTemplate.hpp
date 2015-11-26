@@ -13,7 +13,7 @@
 namespace sfgmk
 {
 	template<typename... Args>
-	class ThreadTemplate
+	class ThreadTemplate : WARDEN(ThreadTemplate<Args...>)
 	{
 		private:
 			std::thread* m_Thread;

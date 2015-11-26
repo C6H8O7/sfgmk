@@ -18,7 +18,7 @@ namespace sfgmk
 	{
 	};
 
-	class FoncterTemplate
+	class FoncterTemplate : WARDEN(FoncterTemplate)
 	{
 		public:
 			FoncterTemplate() {}

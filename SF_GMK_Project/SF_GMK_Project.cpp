@@ -44,6 +44,6 @@ int main()
 	sfgmk::CORE->releaseManagers();
 	sfgmk::WardenReg::getSingleton()->releaseSingleton();
 	sfgmk::CORE->releaseSingleton();
-	
+
 	return 0;
 }

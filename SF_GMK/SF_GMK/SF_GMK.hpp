@@ -74,15 +74,14 @@
 	#include "Tool\Parser\tinyxml2.h"
 
 	//SF_GMK
+	#include "Tool\DesignPattern\SingletonTemplate.hpp"
 	#include "Tool\DynamicArray.hpp"
+	#include "Tool\Warden.hpp"
 	#include "Tool\FoncterTemplate.hpp"
 	#include "Tool\Function.hpp"
 	#include "Tool\GenericList.hpp"
 	#include "Tool\ThreadTemplate.hpp"
 	#include "Tool\Parser\Parser.hpp"
-	#include "Tool\DesignPattern\SingletonTemplate.hpp"
-
-	#include "Tool\Warden.hpp"
 
 	#include "Graphic\ShapeDrawer.hpp"
 

@@ -36,6 +36,7 @@ namespace sfgmk
 				void DeleteSelector();
 
 				void ShowWarden();
+				void ShowWardenWindows();
 		};
 	}
 }

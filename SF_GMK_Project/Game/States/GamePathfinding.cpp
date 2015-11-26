@@ -19,8 +19,11 @@ StateGamePathfinding::StateGamePathfinding() : m_Begin(sf::Vector2i(0, 0)), m_En
 		m_CaseArray[i] = (stCASE*)malloc(ARRAY_SIZE_Y * sizeof(stCASE));
 
 	//Tableau d'algos de pathfinding
-	sfgmk::FoncterTemplateInstance<StateGamePathfinding, void>* zPathptr = new sfgmk::FoncterTemplateInstance<StateGamePathfinding, void>(this, &StateGamePathfinding::zPath);
-	m_PathfindingAlgos.m_FunctionsArray.pushBack(zPathptr);
+	sfgmk::FoncterTemplateInstance<StateGamePathfinding, void>* zPathPtr = new sfgmk::FoncterTemplateInstance<StateGamePathfinding, void>(this, &StateGamePathfinding::zPath);
+	m_PathfindingAlgos.m_FunctionsArray.pushBack(zPathPtr);
+
+	sfgmk::FoncterTemplateInstance<StateGamePathfinding, void>* dijkstraPtr = new sfgmk::FoncterTemplateInstance<StateGamePathfinding, void>(this, &StateGamePathfinding::dijkstra);
+	m_PathfindingAlgos.m_FunctionsArray.pushBack(dijkstraPtr);
 
 	//Foncter du thread de pathfinding
 	m_LaunchPathfinding = new sfgmk::FoncterTemplateInstance<StateGamePathfinding, void>(this, &StateGamePathfinding::computePathfinding);
@@ -47,20 +50,31 @@ void StateGamePathfinding::init()
 	m_StepText.setCharacterSize((unsigned int)(ARRAY_CASE_SIZE * 0.5f));
 	m_StepText.setColor(sf::Color::White);
 
+	//String algos
+	m_AlgoStringArray[eZpath] = "Z-Path";
+	m_AlgoStringArray[eDijkstra] = "Dijkstra";
+
+	//Textes HUD
 	m_InstructionText.setFont(m_Font);
 	m_InstructionText.setCharacterSize(16U);
 	m_InstructionText.setColor(sf::Color::White);
-	m_InstructionText.setString("Left click to place Start\nRight click to place End\nMiddle click to place Walls\nMiddle click + shift to remove Walls\nEnter to compute path");
+	m_InstructionText.setString("Left click to place Start\nRight click to place End\nMiddle click to place Walls\nMiddle click + shift to remove Walls\nEnter to compute path\n\"Z\" and \"S\" to change algorythm.");
 	m_InstructionText.setPosition(sf::Vector2f(10.0f, 10.0f));
 	
+	m_AlgoText.setFont(m_Font);
+	m_AlgoText.setCharacterSize(32U);
+
 	//Init tableau
-	initArray();
-	
 	for( int i(0); i < ARRAY_SIZE_X; i++ )
 	{
 		for( int j(0); j < ARRAY_SIZE_Y; j++ )
+		{
 			m_CaseArray[i][j].bIswall = false;
+			m_CaseArray[i][j].Predecessor = NULL;
+		}
 	}
+
+	initArray();
 }
 
 void StateGamePathfinding::update()
@@ -91,6 +105,12 @@ void StateGamePathfinding::update()
 		}
 	}
 
+	//Change current algo
+	if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::S) == KEY_PRESSED && m_uiCurrentAlgo < ePATHFINDING_ALGOS_NUMBER - 1 )
+		m_uiCurrentAlgo++;
+	else if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Z) == KEY_PRESSED && m_uiCurrentAlgo > 0 )
+		m_uiCurrentAlgo--;
+
 	//Lancement pathfinding
 	if( !m_bPathFindingComputing && INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Return) == KEY_PRESSED )
 	{
@@ -112,9 +132,22 @@ void StateGamePathfinding::deinit()
 void StateGamePathfinding::draw()
 {
 	sf::RenderTexture* Render = GRAPHIC_MANAGER->getRenderTexture();
+	unsigned int uiSizeX = GRAPHIC_MANAGER->getRenderWindow()->getSize().x - 150U;
 
 	//Instructions
 	Render->draw(m_InstructionText);
+
+	for( int i(0); i < ePATHFINDING_ALGOS_NUMBER; i++ )
+	{
+		if( i == m_uiCurrentAlgo )
+			m_AlgoText.setColor(sf::Color::Red);
+		else
+			m_AlgoText.setColor(sf::Color::White);
+
+		m_AlgoText.setString(m_AlgoStringArray[i]);
+		m_AlgoText.setPosition((float)uiSizeX, (i + 1 ) * 25.0f);
+		Render->draw(m_AlgoText);
+	}
 
 	//Draw start and end
 	SHAPE_DRAWER.drawRectangle(sf::Vector2f(MAP_POS_X + m_Begin.x * ARRAY_CASE_SIZE, MAP_POS_Y + m_Begin.y * ARRAY_CASE_SIZE), sf::Vector2f(ARRAY_CASE_SIZE, ARRAY_CASE_SIZE), sf::Color::Green);
@@ -135,7 +168,7 @@ void StateGamePathfinding::draw()
 			//Step
 			if( m_CaseArray[i][j].bTested )
 			{
-				m_StepText.setString(std::to_string(m_CaseArray[i][j].uiStep));
+				m_StepText.setString(std::to_string(m_CaseArray[i][j].iStep));
 				m_StepText.setPosition(sf::Vector2f(MAP_POS_X, MAP_POS_Y) + sf::Vector2f(ARRAY_CASE_SIZE * 0.5f, ARRAY_CASE_SIZE * 0.5f) + sf::Vector2f(i * ARRAY_CASE_SIZE, j * ARRAY_CASE_SIZE) - sf::Vector2f(m_StepText.getGlobalBounds().width * 0.5f, m_StepText.getGlobalBounds().height * 0.5f));
 				Render->draw(m_StepText);
 			}
@@ -159,8 +192,12 @@ void StateGamePathfinding::initArray()
 		for( int j(0); j < ARRAY_SIZE_Y; j++ )
 		{
 			m_CaseArray[i][j].bTested = false;
-			m_CaseArray[i][j].uiStep = UINT_MAX;
 			m_CaseArray[i][j].FillColor = sf::Color::Transparent;
+
+			m_CaseArray[i][j].iStep = -1;
+
+			m_CaseArray[i][j].fWeight = -1.0f;
+			SAFE_DELETE(m_CaseArray[i][j].Predecessor);
 		}
 	}
 }
@@ -184,13 +221,23 @@ bool StateGamePathfinding::isInCases(const sf::Vector2i& _Position)
 	return (_Position.x >= 0 && _Position.x < ARRAY_SIZE_X && _Position.y >= 0 && _Position.y < ARRAY_SIZE_Y);
 }
 
+bool StateGamePathfinding::checkDiagonalWall(const sf::Vector2i& _CaseOne, const sf::Vector2i& _CaseTwo)
+{
+	sf::Vector2i CasesToTest[2] = { sf::Vector2i(_CaseOne.x, _CaseTwo.y), sf::Vector2i(_CaseTwo.x, _CaseOne.y) };
+
+	if( m_CaseArray[CasesToTest[0].x][CasesToTest[0].y].bIswall && m_CaseArray[CasesToTest[1].x][CasesToTest[1].y].bIswall )
+		return true;
+	else 
+		return false;
+}
+
 
 void StateGamePathfinding::computePathfinding()
 {
 	std::cout << "Start pathfinding thread" << std::endl;
 
-	m_CaseArray[m_Begin.x][m_Begin.y].uiStep = 0U;
-	m_CaseArray[m_End.x][m_End.y].uiStep = 0U;
+	m_CaseArray[m_Begin.x][m_Begin.y].iStep = 0;
+	m_CaseArray[m_End.x][m_End.y].iStep = 0;
 	
 	//Lance le pathfinding
 	m_llExecutionTime = measureFoncterExecutionTime(m_PathfindingAlgos.m_FunctionsArray[m_uiCurrentAlgo]);
@@ -232,7 +279,7 @@ void StateGamePathfinding::zPath()
 	std::cout << "Start Z-Path algo." << std::endl;
 
 	bool bStartFound(false);
-	unsigned int uiStep = 0U;
+	unsigned int iStep = 0;
 	unsigned int uiListCurrentSize(0U);
 	sf::Vector2i NextCases[eNEXT_CASES_NUMBER_4];
 	stCASE* TempCase = NULL;
@@ -242,9 +289,123 @@ void StateGamePathfinding::zPath()
 	//On démarre de la fin
 	m_List.push(m_End);
 
+	if( !(m_Begin == m_End) )
+	{
+		while( !bStartFound && m_List.size() )
+		{
+			iStep++;
+			uiListCurrentSize = m_List.size();
+
+			for( unsigned int i(0U); i < uiListCurrentSize; i++ )
+			{
+				TempVector = &m_List.front();
+
+				//Cases adjacentes
+				computeNextCases4(*TempVector, NextCases);
+
+				for( int j(0); j < eNEXT_CASES_NUMBER_4; j++ )
+				{
+					//Si on est pas en dehors du tableau
+					if( isInCases(NextCases[j]) )
+					{
+						TempCase = &m_CaseArray[NextCases[j].x][NextCases[j].y];
+
+						//Si on a pas encore été testé, et qu'on est pas un mur
+						if( !(TempCase->bIswall) && !(TempCase->bTested) )
+						{
+							TempCase->bTested = true;
+							TempCase->iStep = iStep;
+							TempCase->FillColor = FILL_COLOR;
+
+							m_List.push(NextCases[j]);
+						}
+
+						//Si on trouve le point de départ
+						if( NextCases[j].x == m_Begin.x && NextCases[j].y == m_Begin.y )
+						{
+							bStartFound = true;
+							j = eNEXT_CASES_NUMBER_4;
+							i = uiListCurrentSize;
+						}
+					}
+				}
+				m_List.pop();
+			}
+		}
+	}
+	
+	//Libére la liste de nodes
+	clearList();
+
+	//Stocke le chemin calculé
+	if( bStartFound )
+		zPathComputeFoundPath(iStep);
+
+	std::cout << "Z-Path algo achieved ( " + std::to_string(iStep) + " steps) in ";
+}
+
+void StateGamePathfinding::zPathComputeFoundPath(unsigned int _Step)
+{
+	sf::Vector2i NextCases[eNEXT_CASES_NUMBER_8];
+	sf::Vector2i TempCaseIndexs = m_Begin;
+	bool bEndFound(false);
+
+	//Mémorisation path
+	m_Path.push_back(TempCaseIndexs);
+
+	if( _Step == 0 )
+		m_Path.push_back(m_End);
+
+	else
+	{
+		while( !bEndFound )
+		{
+			computeNextCases8(TempCaseIndexs, NextCases);
+
+			for( int j(0); j < eNEXT_CASES_NUMBER_8; j++ )
+			{
+				//Si on est pas en dehors du tableau
+				if( isInCases(NextCases[j]) )
+				{
+					//Si la case a été calculée
+					if( m_CaseArray[NextCases[j].x][NextCases[j].y].iStep != -1 )
+					{
+						//Si on est pas un mur et qu'on ne traverse pas un mur en diagonale
+						if( !(m_CaseArray[NextCases[j].x][NextCases[j].y].bIswall) && !checkDiagonalWall(m_Path[m_Path.size() - 1], NextCases[j]) )
+						{
+							if( m_CaseArray[NextCases[j].x][NextCases[j].y].iStep < m_CaseArray[TempCaseIndexs.x][TempCaseIndexs.y].iStep )
+								TempCaseIndexs = NextCases[j];
+						}
+					}
+				}
+			}
+			m_Path.push_back(TempCaseIndexs);
+			if( TempCaseIndexs == m_End )
+				bEndFound = true;
+		}
+	}
+}
+
+
+void StateGamePathfinding::dijkstra()
+{
+	std::cout << "Start Dijkstra algo." << std::endl;
+
+	bool bStartFound(false);
+	unsigned int iStep = 0;
+	unsigned int uiListCurrentSize(0U);
+	sf::Vector2i NextCases[eNEXT_CASES_NUMBER_4];
+	stCASE* TempCase = NULL;
+	sf::Vector2i* TempVector;
+	m_CaseArray[m_Begin.x][m_Begin.y].bTested = true;
+	m_CaseArray[m_Begin.x][m_Begin.y].fWeight = 0.0f;
+
+	//On démarre de la fin
+	m_List.push(m_Begin);
+
 	while( !bStartFound && m_List.size() )
 	{
-		uiStep++;
+		iStep++;
 		uiListCurrentSize = m_List.size();
 
 		for( unsigned int i(0U); i < uiListCurrentSize; i++ )
@@ -254,7 +415,7 @@ void StateGamePathfinding::zPath()
 			//Cases adjacentes
 			computeNextCases4(*TempVector, NextCases);
 
-			for( int j(0); j < eNEXT_CASES_NUMBER_4; j++ )
+			for( int j(0); j < eNEXT_CASES_NUMBER_8; j++ )
 			{
 				//Si on est pas en dehors du tableau
 				if( isInCases(NextCases[j]) )
@@ -262,11 +423,12 @@ void StateGamePathfinding::zPath()
 					TempCase = &m_CaseArray[NextCases[j].x][NextCases[j].y];
 
 					//Si on a pas encore été testé, et qu'on est pas un mur
-					if( !(TempCase->bIswall) && !(TempCase->bTested) )
+					if( !(TempCase->bIswall) && !(TempCase->bTested) && !checkDiagonalWall(*TempVector, NextCases[j]) && TempCase->fWeight < (m_CaseArray[TempVector->x][TempVector->y].fWeight + 1.0f) )
 					{
 						TempCase->bTested = true;
-						TempCase->uiStep = uiStep;
+						TempCase->fWeight = m_CaseArray[TempVector->x][TempVector->y].fWeight + 1.0f;
 						TempCase->FillColor = FILL_COLOR;
+						TempCase->Predecessor = new sf::Vector2i(*TempVector);
 
 						m_List.push(NextCases[j]);
 					}
@@ -275,7 +437,7 @@ void StateGamePathfinding::zPath()
 					if( NextCases[j].x == m_Begin.x && NextCases[j].y == m_Begin.y )
 					{
 						bStartFound = true;
-						j = eNEXT_CASES_NUMBER_4;
+						j = eNEXT_CASES_NUMBER_8;
 						i = uiListCurrentSize;
 					}
 				}
@@ -283,47 +445,9 @@ void StateGamePathfinding::zPath()
 			m_List.pop();
 		}
 	}
-	
+
 	//Libére la liste de nodes
 	clearList();
 
-	//Stocke le chemin calculé
-	if( bStartFound )
-		zPathComputeFoundPath(uiStep - 1U);
-
-	std::cout << "Z-Path algo achieved ( " + std::to_string(uiStep) + " steps) in ";
-}
-
-void StateGamePathfinding::zPathComputeFoundPath(unsigned int _Step)
-{
-	_Step -= 2U; //-2 car on ne compte pas le départ et l'arrivée
-
-	sf::Vector2i NextCases[eNEXT_CASES_NUMBER_8];
-	sf::Vector2i TempCaseIndexs = m_Begin;
-	int iIndex(0);
-
-	//Mémorisation path
-	m_Path.push_back(m_Begin);
-
-	for( unsigned int i(0); i < _Step; i++ )
-	{
-		iIndex++;
-		computeNextCases8(TempCaseIndexs, NextCases);
-
-		for( int j(0); j < eNEXT_CASES_NUMBER_8; j++ )
-		{
-			//Si on est pas en dehors du tableau
-			if( isInCases(NextCases[j]) )
-			{
-				//Si on est pas un mur
-				if( !(m_CaseArray[NextCases[j].x][NextCases[j].y].bIswall) )
-				{
-					if( m_CaseArray[NextCases[j].x][NextCases[j].y].uiStep < m_CaseArray[TempCaseIndexs.x][TempCaseIndexs.y].uiStep )
-						TempCaseIndexs = NextCases[j];
-				}
-			}
-		}
-		m_Path.push_back(TempCaseIndexs);
-	}
-	m_Path.push_back(m_End);
+	std::cout << "Dijkstra algo achieved ( " /*+ std::to_string(uiStep) + " steps) in "*/;
 }

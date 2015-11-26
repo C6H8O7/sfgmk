@@ -15,15 +15,22 @@ class StateGamePathfinding : public sfgmk::engine::State
 		{
 			bool bTested;
 			bool bIswall;
-			unsigned int uiStep;
 			sf::Color FillColor;
+
+			int iStep; //Z-Path
+
+			float fWeight;	//Dijkstra
+			sf::Vector2i* Predecessor; //Dijkstra
 		};
 
 		enum ePATHFINDING_ALGOS
 		{
 			eZpath = 0,
+			eDijkstra,
 			ePATHFINDING_ALGOS_NUMBER
 		};
+
+		std::string m_AlgoStringArray[ePATHFINDING_ALGOS_NUMBER];
 
 		enum eNEXT_CASES
 		{
@@ -39,13 +46,6 @@ class StateGamePathfinding : public sfgmk::engine::State
 			eNEXT_CASES_NUMBER_8
 		};
 
-		std::queue<sf::Vector2i> m_List;
-
-		stCASE** m_CaseArray;
-		sf::Vector2i m_Begin;
-		sf::Vector2i m_End;
-		std::vector<sf::Vector2i> m_Path;
-
 		FoncterTemplateArray m_PathfindingAlgos;
 		FoncterTemplate* m_LaunchPathfinding;
 		unsigned int m_uiCurrentAlgo;
@@ -57,6 +57,18 @@ class StateGamePathfinding : public sfgmk::engine::State
 		sf::Font m_Font;
 
 		sf::Text m_InstructionText;
+		sf::Text m_AlgoText;
+
+		sf::Vector2i m_Begin;
+		sf::Vector2i m_End;
+		std::vector<sf::Vector2i> m_Path;
+		stCASE** m_CaseArray;
+
+		//Z Path
+		std::queue<sf::Vector2i> m_List;
+		
+		//Dijkstra
+	
 
 	public:
 		void init();
@@ -70,6 +82,7 @@ class StateGamePathfinding : public sfgmk::engine::State
 
 		sf::Vector2i getMouseCase(const sf::Vector2f& _MapDecal = sf::Vector2f(0.0f, 0.0f));
 		bool isInCases(const sf::Vector2i& _Position);
+		bool checkDiagonalWall(const sf::Vector2i& _CaseOne, const sf::Vector2i& _CaseTwo);
 
 		void computePathfinding();
 		void computeNextCases4(sf::Vector2i _CurrentCase, sf::Vector2i _Array[eNEXT_CASES_NUMBER_4]);
@@ -78,6 +91,8 @@ class StateGamePathfinding : public sfgmk::engine::State
 		//Algos pathfinding
 		void zPath();
 		void zPathComputeFoundPath(unsigned int _Step);
+
+		void dijkstra();
 };
 
 
