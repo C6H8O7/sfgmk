@@ -27,6 +27,7 @@ class StateGamePathfinding : public sfgmk::engine::State
 		{
 			eZpath = 0,
 			eDijkstra,
+			eAStar,
 			ePATHFINDING_ALGOS_NUMBER
 		};
 
@@ -68,7 +69,36 @@ class StateGamePathfinding : public sfgmk::engine::State
 		std::queue<sf::Vector2i> m_List;
 		
 		//Dijkstra
-	
+		struct NodeDijkstra
+		{
+			sf::Vector2i grid_node;
+
+			NodeDijkstra* parent;
+			float cost_so_far;
+			bool open;
+		};
+		
+		//AStar
+		struct NodeAStar
+		{
+			sf::Vector2i grid_node;
+
+			NodeAStar* parent;
+			float cost_so_far;
+			float heuristic;
+			float estimated_total_cost;
+			bool open;
+
+			NodeAStar(sf::Vector2i _gridNode, NodeAStar* _parent = 0, float _costSoFar = 0.0f, float _heuristic = 0.0f, float _estimatedTotalCost = 0.0f, bool _open = true)
+			{
+				grid_node = _gridNode;
+				parent = _parent;
+				cost_so_far = _costSoFar;
+				heuristic = _heuristic;
+				estimated_total_cost = _estimatedTotalCost;
+				open = _open;
+			}
+		};
 
 	public:
 		void init();
@@ -93,6 +123,13 @@ class StateGamePathfinding : public sfgmk::engine::State
 		void zPathComputeFoundPath(unsigned int _Step);
 
 		void dijkstra();
+
+		// A*
+		int astar_search_in_list(sf::Vector2i _node, std::vector<NodeAStar*>& _list);
+		void astar_remove_from_list(NodeAStar* _node, std::vector<NodeAStar*>& _list, bool _delete);
+		NodeAStar* astar_find_smallest(std::vector<NodeAStar*>& _list);
+		float astar_heuristic(sf::Vector2i& _node);
+		void astar();
 };
 
 
