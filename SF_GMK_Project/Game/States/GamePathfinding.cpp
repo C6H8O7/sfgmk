@@ -4,9 +4,9 @@
 using namespace sfgmk;
 
 
-#define ARRAY_SIZE_X 64
-#define ARRAY_SIZE_Y 64
-#define ARRAY_CASE_SIZE 16.0f
+#define ARRAY_SIZE_X 16
+#define ARRAY_SIZE_Y 16
+#define ARRAY_CASE_SIZE 32.0f
 #define MAP_POS_X 350.0f
 #define MAP_POS_Y 50.0f
 #define FILL_COLOR sf::Color(0, 100, 0, 50);
@@ -36,7 +36,8 @@ StateGamePathfinding::StateGamePathfinding() : m_Begin(sf::Vector2i(0, 0)), m_En
 StateGamePathfinding::~StateGamePathfinding()
 {
 	m_Path.clear();
-	clearList();
+	clearListZpath();
+	clearListDijkstra();
 
 	for( int i(0); i < ARRAY_SIZE_Y; i++ )
 		free(m_CaseArray[i]);
@@ -72,10 +73,7 @@ void StateGamePathfinding::init()
 	for( int i(0); i < ARRAY_SIZE_X; i++ )
 	{
 		for( int j(0); j < ARRAY_SIZE_Y; j++ )
-		{
 			m_CaseArray[i][j].bIswall = false;
-			m_CaseArray[i][j].Predecessor = NULL;
-		}
 	}
 
 	initArray();
@@ -200,16 +198,21 @@ void StateGamePathfinding::initArray()
 
 			m_CaseArray[i][j].iStep = -1;
 
-			m_CaseArray[i][j].fWeight = -1.0f;
-			SAFE_DELETE(m_CaseArray[i][j].Predecessor);
+			m_CaseArray[i][j].fDistanceFromBegin = 0.0f;
+			m_CaseArray[i][j].Parent = sf::Vector2i(-1, -1);
 		}
 	}
 }
 
-void StateGamePathfinding::clearList()
+void StateGamePathfinding::clearListZpath()
 {
-	while( !m_List.empty() )
-		m_List.pop();
+	while( !m_ZPathList.empty() )
+		m_ZPathList.pop();
+}
+
+void StateGamePathfinding::clearListDijkstra()
+{
+	m_DijkstraList.clear();
 }
 
 
@@ -242,8 +245,6 @@ void StateGamePathfinding::computePathfinding()
 
 	m_CaseArray[m_Begin.x][m_Begin.y].iStep = 0;
 	m_CaseArray[m_End.x][m_End.y].iStep = 0;
-
-	m_Path.clear();
 	
 	//Lance le pathfinding
 	m_llExecutionTime = measureFoncterExecutionTime(m_PathfindingAlgos.m_FunctionsArray[m_uiCurrentAlgo]);
@@ -285,7 +286,7 @@ void StateGamePathfinding::zPath()
 	std::cout << "Start Z-Path algo." << std::endl;
 
 	bool bStartFound(false);
-	unsigned int iStep = 0;
+	unsigned int uiStep = 0U;
 	unsigned int uiListCurrentSize(0U);
 	sf::Vector2i NextCases[eNEXT_CASES_NUMBER_4];
 	stCASE* TempCase = NULL;
@@ -293,18 +294,17 @@ void StateGamePathfinding::zPath()
 	m_CaseArray[m_End.x][m_End.y].bTested = true;
 
 	//On démarre de la fin
-	m_List.push(m_End);
+	m_ZPathList.push(m_End);
 
 	if( !(m_Begin == m_End) )
 	{
-		while( !bStartFound && m_List.size() )
+		while( !bStartFound && (uiListCurrentSize = m_ZPathList.size()) )
 		{
-			iStep++;
-			uiListCurrentSize = m_List.size();
+			uiStep++;
 
 			for( unsigned int i(0U); i < uiListCurrentSize; i++ )
 			{
-				TempVector = &m_List.front();
+				TempVector = &m_ZPathList.front();
 
 				//Cases adjacentes
 				computeNextCases4(*TempVector, NextCases);
@@ -320,14 +320,14 @@ void StateGamePathfinding::zPath()
 						if( !(TempCase->bIswall) && !(TempCase->bTested) )
 						{
 							TempCase->bTested = true;
-							TempCase->iStep = iStep;
+							TempCase->iStep = uiStep;
 							TempCase->FillColor = FILL_COLOR;
 
-							m_List.push(NextCases[j]);
+							m_ZPathList.push(NextCases[j]);
 						}
 
 						//Si on trouve le point de départ
-						if( NextCases[j].x == m_Begin.x && NextCases[j].y == m_Begin.y )
+						if( NextCases[j] == m_Begin )
 						{
 							bStartFound = true;
 							j = eNEXT_CASES_NUMBER_4;
@@ -335,19 +335,19 @@ void StateGamePathfinding::zPath()
 						}
 					}
 				}
-				m_List.pop();
+				m_ZPathList.pop();
 			}
 		}
 	}
 	
 	//Libére la liste de nodes
-	clearList();
+	clearListZpath();
 
 	//Stocke le chemin calculé
 	if( bStartFound )
-		zPathComputeFoundPath(iStep);
+		zPathComputeFoundPath(uiStep);
 
-	std::cout << "Z-Path algo achieved ( " + std::to_string(iStep) + " steps) in ";
+	std::cout << "Z-Path algo achieved ( " + std::to_string(uiStep) + " steps) in ";
 }
 
 void StateGamePathfinding::zPathComputeFoundPath(unsigned int _Step)
@@ -398,65 +398,113 @@ void StateGamePathfinding::dijkstra()
 	std::cout << "Start Dijkstra algo." << std::endl;
 
 	bool bStartFound(false);
-	unsigned int iStep = 0;
+	unsigned int uiStep(0U);
 	unsigned int uiListCurrentSize(0U);
-	sf::Vector2i NextCases[eNEXT_CASES_NUMBER_4];
+	sf::Vector2i NextCases[eNEXT_CASES_NUMBER_8];
 	stCASE* TempCase = NULL;
 	sf::Vector2i* TempVector;
 	m_CaseArray[m_Begin.x][m_Begin.y].bTested = true;
-	m_CaseArray[m_Begin.x][m_Begin.y].fWeight = 0.0f;
+	float fDistance(0.0f);
 
-	//On démarre de la fin
-	m_List.push(m_Begin);
+	//On démarre du début
+	m_DijkstraList.push_back(m_Begin);
 
-	while( !bStartFound && m_List.size() )
+	if( !(m_Begin == m_End) )
 	{
-		iStep++;
-		uiListCurrentSize = m_List.size();
-
-		for( unsigned int i(0U); i < uiListCurrentSize; i++ )
+		while( !bStartFound && (uiListCurrentSize = m_DijkstraList.size()) )
 		{
-			TempVector = &m_List.front();
+			uiStep++;
+
+			TempVector = &m_DijkstraList.front();
+			fDistance = m_CaseArray[(*TempVector).x][(*TempVector).y].fDistanceFromBegin;
 
 			//Cases adjacentes
-			computeNextCases4(*TempVector, NextCases);
+			computeNextCases8(*TempVector, NextCases);
 
 			for( int j(0); j < eNEXT_CASES_NUMBER_8; j++ )
 			{
-				//Si on est pas en dehors du tableau
-				if( isInCases(NextCases[j]) )
+				//Si on est pas en dehors du tableau et qu'on ne traverse pas un mur
+				if( isInCases(NextCases[j]) && !checkDiagonalWall(*TempVector, NextCases[j]) )
 				{
 					TempCase = &m_CaseArray[NextCases[j].x][NextCases[j].y];
 
 					//Si on a pas encore été testé, et qu'on est pas un mur
-					if( !(TempCase->bIswall) && !(TempCase->bTested) && !checkDiagonalWall(*TempVector, NextCases[j]) && TempCase->fWeight < (m_CaseArray[TempVector->x][TempVector->y].fWeight + 1.0f) )
+					if( !(TempCase->bIswall) && !(TempCase->bTested) )
 					{
 						TempCase->bTested = true;
-						TempCase->fWeight = m_CaseArray[TempVector->x][TempVector->y].fWeight + 1.0f;
+						TempCase->iStep = uiStep;
 						TempCase->FillColor = FILL_COLOR;
-						TempCase->Predecessor = new sf::Vector2i(*TempVector);
 
-						m_List.push(NextCases[j]);
+						TempCase->Parent = *TempVector;
+						TempCase->fDistanceFromBegin = fDistance + 1.0f;
+
+						m_DijkstraList.push_back(NextCases[j]);
 					}
 
 					//Si on trouve le point de départ
-					if( NextCases[j].x == m_Begin.x && NextCases[j].y == m_Begin.y )
+					if( NextCases[j] == m_End )
 					{
 						bStartFound = true;
 						j = eNEXT_CASES_NUMBER_8;
-						i = uiListCurrentSize;
 					}
 				}
 			}
-			m_List.pop();
+			
+			m_DijkstraList.pop_front();
+
+			sortDijkstra();
 		}
 	}
 
 	//Libére la liste de nodes
-	clearList();
+	clearListDijkstra();
 
-	std::cout << "Dijkstra algo achieved ( " /*+ std::to_string(uiStep) + " steps) in "*/;
+	//Stocke le chemin calculé
+	if( bStartFound )
+		dijkstraComputeFoundPath(uiStep);
+
+	std::cout << "Dijkstra algo achieved ( " + std::to_string(uiStep) + " steps) in ";
 }
+
+void StateGamePathfinding::dijkstraComputeFoundPath(unsigned int _Step)
+{
+	sf::Vector2i TempCaseIndexs = m_End;
+	bool bEndFound(false);
+
+	while( m_CaseArray[TempCaseIndexs.x][TempCaseIndexs.y].Parent != sf::Vector2i(-1, -1) )
+	{
+		m_Path.push_back(TempCaseIndexs);
+		TempCaseIndexs = m_CaseArray[TempCaseIndexs.x][TempCaseIndexs.y].Parent;
+	}
+
+	m_Path.push_back(m_Begin);
+}
+
+void StateGamePathfinding::sortDijkstra()
+{
+	if( m_DijkstraList.size() > 1 )
+	{
+		bool bChange(true);
+		sf::Vector2i Temp;
+
+		while( bChange )
+		{
+			bChange = false;
+
+			for( std::list<sf::Vector2i>::iterator it = m_DijkstraList.begin(), itTwo = ++m_DijkstraList.begin(); it != m_DijkstraList.end(), itTwo != m_DijkstraList.end(); ++it, ++itTwo )
+			{
+				if( m_CaseArray[(*it).x][(*it).y].fDistanceFromBegin > m_CaseArray[(*itTwo).x][(*itTwo).y].fDistanceFromBegin )
+				{
+					Temp = (*it);
+					(*it) = (*itTwo);
+					(*itTwo) = Temp;
+					bChange = true;
+				}
+			}
+		}
+	}
+}
+
 
 int StateGamePathfinding::astar_search_in_list(sf::Vector2i _node, std::vector<NodeAStar*>& _list)
 {

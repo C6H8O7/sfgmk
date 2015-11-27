@@ -19,9 +19,18 @@ class StateGamePathfinding : public sfgmk::engine::State
 
 			int iStep; //Z-Path
 
-			float fWeight;	//Dijkstra
-			sf::Vector2i* Predecessor; //Dijkstra
+			float fDistanceFromBegin; //Dijkstra
+			sf::Vector2i Parent;
 		};
+
+		/*struct NodeDijkstra
+		{
+			sf::Vector2i grid_node;
+
+			NodeDijkstra* parent;
+			float cost_so_far;
+			bool open;
+		};*/
 
 		enum ePATHFINDING_ALGOS
 		{
@@ -66,18 +75,11 @@ class StateGamePathfinding : public sfgmk::engine::State
 		stCASE** m_CaseArray;
 
 		//Z Path
-		std::queue<sf::Vector2i> m_List;
+		std::queue<sf::Vector2i> m_ZPathList;
 		
 		//Dijkstra
-		struct NodeDijkstra
-		{
-			sf::Vector2i grid_node;
+		std::list<sf::Vector2i> m_DijkstraList;
 
-			NodeDijkstra* parent;
-			float cost_so_far;
-			bool open;
-		};
-		
 		//AStar
 		struct NodeAStar
 		{
@@ -108,7 +110,8 @@ class StateGamePathfinding : public sfgmk::engine::State
 		void draw();
 
 		void initArray();
-		void clearList();
+		void clearListZpath();
+		void clearListDijkstra();
 
 		sf::Vector2i getMouseCase(const sf::Vector2f& _MapDecal = sf::Vector2f(0.0f, 0.0f));
 		bool isInCases(const sf::Vector2i& _Position);
@@ -123,8 +126,10 @@ class StateGamePathfinding : public sfgmk::engine::State
 		void zPathComputeFoundPath(unsigned int _Step);
 
 		void dijkstra();
+		void dijkstraComputeFoundPath(unsigned int _Step);
+		void sortDijkstra();
 
-		// A*
+		//A*
 		int astar_search_in_list(sf::Vector2i _node, std::vector<NodeAStar*>& _list);
 		void astar_remove_from_list(NodeAStar* _node, std::vector<NodeAStar*>& _list, bool _delete);
 		NodeAStar* astar_find_smallest(std::vector<NodeAStar*>& _list);

@@ -52,6 +52,7 @@
 	#include <vector>
 	#include <random>
 	#include <queue>
+	#include <list>
 
 	//Monitoring
 	#pragma comment(lib, "Powrprof.lib")
