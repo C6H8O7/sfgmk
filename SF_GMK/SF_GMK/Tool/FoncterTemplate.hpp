@@ -28,7 +28,9 @@ namespace sfgmk
 			virtual inline void Execute() {}
 			virtual inline void Execute(const int&) {}
 			virtual inline void Execute(const float&) {}
-			virtual inline bool Execute(const std::string&) { return false; }
+			virtual inline void Execute(std::vector<sf::Vector2i>*, const int&, void*, const sf::Vector2i&, const sf::Vector2i&, const sf::Vector2i&) {}
+
+			virtual inline bool Execute(const std::string&) { return false; }	
 	};
 
 	template<typename InstanceType, typename T, typename... Args>

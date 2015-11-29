@@ -95,6 +95,8 @@
 	#include "Math\Curb\CoordinateSystem\GraphCurb.hpp"
 	#include "Math\Curb\CoordinateSystem\Graph.hpp"
 
+	#include "Tool\Pathfinding\Pathfinding.hpp"
+
 	#include "Physic\Collider.hpp"
 	#include "Physic\SphereCollider.hpp"
 	#include "Physic\ObbCollider.hpp"
