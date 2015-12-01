@@ -27,7 +27,7 @@ namespace sfgmk
 		unsigned int uiStep;
 	};
 
-	class Pathfinding
+	class SFGMK_API Pathfinding
 	{
 		public:
 			Pathfinding();
@@ -58,16 +58,14 @@ namespace sfgmk
 				float fCostSoFar;
 				float fHeuristic;
 				float fEstimatedTotalCost;
-				bool bOpen;
 
-				stPATHFINDING_NODE(sf::Vector2i _GridCoord, stPATHFINDING_NODE* _Parent = NULL, float _CostSoFar = 0.0f, float _Heuristic = 0.0f, float _EstimatedTotalCost = 0.0f, bool _Open = true)
+				stPATHFINDING_NODE(sf::Vector2i _GridCoord, stPATHFINDING_NODE* _Parent = NULL, float _CostSoFar = 0.0f, float _Heuristic = 0.0f, float _EstimatedTotalCost = 0.0f)
 				{
 					GridCoords = _GridCoord;
 					ParentPtr = _Parent;
 					fCostSoFar = _CostSoFar;
 					fHeuristic = _Heuristic;
 					fEstimatedTotalCost = _EstimatedTotalCost;
-					bOpen = _Open;
 				}
 			};
 
@@ -98,6 +96,13 @@ namespace sfgmk
 			void zPath();
 			void dijkstra();
 			void aStar();
+
+			void sortDijkstra();
+
+			int astar_search_in_list(const sf::Vector2i& _node, std::vector<stPATHFINDING_NODE*>& _list);
+			void astar_remove_from_list(stPATHFINDING_NODE* _node, std::vector<stPATHFINDING_NODE*>& _list, bool _delete);
+			stPATHFINDING_NODE* astar_find_smallest(std::vector<stPATHFINDING_NODE*>& _list);
+			float astar_heuristic(const sf::Vector2i& _node);
 	};
 }
 

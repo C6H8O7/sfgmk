@@ -74,7 +74,7 @@ namespace sfgmk
 		//Stocke les infos grille
 		m_GridSize = _GridSize;
 		m_CaseArray = _Grid;
-
+		
 		//Reset variables
 		m_bStartFound = false;
 		m_uiStep = 0U;
@@ -85,9 +85,10 @@ namespace sfgmk
 
 		//Lance le pathfinding
 		m_Clock.restart();
+
 		m_Algorithms[_Algo];
 		m_ElapsedTime = m_Clock.getElapsedTime().asMicroseconds();
-		std::cout << m_sAlgosNames[_Algo] << " computed in " << m_ElapsedTime * 0.001f << " ms." << std::endl;
+		std::cout << m_sAlgosNames[_Algo] << " computed in " << m_ElapsedTime << " microseconds (" << m_ElapsedTime * 0.001f << " ms), with a total of " << m_uiStep << " steps." << std::endl;
 	}
 
 
@@ -96,7 +97,7 @@ namespace sfgmk
 		unsigned int uiListCurrentSize(0U);
 		stPATHFINDING_CASE* TempCase = NULL;
 		sf::Vector2i* TempVector = NULL;
-
+	
 		//On démarre de la fin
 		m_CaseArray[m_End.x][m_End.y].bTested = true;
 		m_ZPathList.push(m_End);
@@ -189,18 +190,7 @@ namespace sfgmk
 
 	void Pathfinding::dijkstra()
 	{
-	}
-
-	void Pathfinding::aStar()
-	{
-	}
-
-
-
-
-	/*void StateGamePathfinding::dijkstra()
-	{
-		std::cout << "Start Dijkstra algo." << std::endl;
+		/*std::cout << "Start Dijkstra algo." << std::endl;
 
 		bool bStartFound(false);
 		unsigned int uiStep(0U);
@@ -268,12 +258,9 @@ namespace sfgmk
 		if( bStartFound )
 			dijkstraComputeFoundPath(uiStep);
 
-		std::cout << "Dijkstra algo achieved ( " + std::to_string(uiStep) + " steps) in ";
-	}
+		std::cout << "Dijkstra algo achieved ( " + std::to_string(uiStep) + " steps) in ";*/
 
-	void StateGamePathfinding::dijkstraComputeFoundPath(unsigned int _Step)
-	{
-		sf::Vector2i TempCaseIndexs = m_End;
+		/*sf::Vector2i TempCaseIndexs = m_End;
 		bool bEndFound(false);
 
 		while( m_CaseArray[TempCaseIndexs.x][TempCaseIndexs.y].Parent != sf::Vector2i(-1, -1) )
@@ -282,12 +269,83 @@ namespace sfgmk
 			TempCaseIndexs = m_CaseArray[TempCaseIndexs.x][TempCaseIndexs.y].Parent;
 		}
 
-		m_Path.push_back(m_Begin);
+		m_Path.push_back(m_Begin);*/
 	}
 
-	void StateGamePathfinding::sortDijkstra()
+	void Pathfinding::aStar()
 	{
-		if( m_DijkstraList.size() > 1 )
+		float cost = 1.0f;
+
+		bool found = false;
+		std::vector<stPATHFINDING_NODE*> open_list;
+		std::vector<stPATHFINDING_NODE*> closed_list;
+
+		// Algorithm
+		open_list.push_back(new stPATHFINDING_NODE(m_Begin, 0, 0, astar_heuristic(m_Begin), astar_heuristic(m_Begin)));
+
+		while( open_list.size() > 0 )
+		{
+			m_uiStep++;
+
+			stPATHFINDING_NODE* smallest = astar_find_smallest(open_list);
+
+			if( smallest->GridCoords == m_End )
+			{
+				found = true;
+				break;
+			}
+
+			sf::Vector2i expanded_nodes[8];
+			computeNextCases8(smallest->GridCoords, expanded_nodes);
+
+			for( int i = 0; i < 8; i++ )
+			{
+				if( isInCases(expanded_nodes[i]) )
+				{
+					stPATHFINDING_CASE* node = &m_CaseArray[expanded_nodes[i].x][expanded_nodes[i].y];
+
+					if( !node->bIswall && astar_search_in_list(expanded_nodes[i], closed_list) < 0 && astar_search_in_list(expanded_nodes[i], open_list) < 0 )
+					{
+						//Coût diagonales
+						i > 4 ? cost = 1.4f :cost = 1.0f;
+
+						stPATHFINDING_NODE* newNode = new stPATHFINDING_NODE(expanded_nodes[i], smallest);
+						newNode->fCostSoFar = newNode->ParentPtr->fCostSoFar + cost;
+						newNode->fHeuristic = astar_heuristic(newNode->GridCoords);
+						newNode->fEstimatedTotalCost = newNode->fCostSoFar + newNode->fHeuristic;
+
+						node->bTested = true;
+						node->uiStep = m_uiStep;
+
+						open_list.push_back(newNode);
+					}
+				}
+			}
+
+			astar_remove_from_list(smallest, open_list, false);
+
+			closed_list.push_back(smallest);
+		}
+
+		// Final path
+		if( found )
+		{
+			stPATHFINDING_NODE* curr = astar_find_smallest(open_list);
+
+			while( curr->ParentPtr )
+			{
+				m_Path->push_back(curr->GridCoords);
+				curr = curr->ParentPtr;
+			}
+
+			m_Path->push_back(curr->GridCoords);
+		}
+	}
+
+
+	void Pathfinding::sortDijkstra()
+	{
+		/*if( m_DijkstraList.size() > 1 )
 		{
 			bool bChange(true);
 			sf::Vector2i Temp;
@@ -307,11 +365,11 @@ namespace sfgmk
 					}
 				}
 			}
-		}
+		}*/
 	}
 
 
-	int StateGamePathfinding::astar_search_in_list(sf::Vector2i _node, std::vector<NodeAStar*>& _list)
+	int Pathfinding::astar_search_in_list(const sf::Vector2i& _node, std::vector<stPATHFINDING_NODE*>& _list)
 	{
 		for( unsigned int i(0); i < _list.size(); i++ )
 			if( _node == _list[i]->GridCoords )
@@ -320,7 +378,7 @@ namespace sfgmk
 		return -1;
 	}
 
-	void StateGamePathfinding::astar_remove_from_list(NodeAStar* _node, std::vector<NodeAStar*>& _list, bool _delete)
+	void Pathfinding::astar_remove_from_list(stPATHFINDING_NODE* _node, std::vector<stPATHFINDING_NODE*>& _list, bool _delete)
 	{
 		for( unsigned int i(0); i < _list.size(); i++ )
 		{
@@ -335,12 +393,12 @@ namespace sfgmk
 		}
 	}
 
-	StateGamePathfinding::NodeAStar* StateGamePathfinding::astar_find_smallest(std::vector<NodeAStar*>& _list)
+	Pathfinding::stPATHFINDING_NODE* Pathfinding::astar_find_smallest(std::vector<stPATHFINDING_NODE*>& _list)
 	{
 		float value = -1.0f;
-		NodeAStar* node = 0;
+		stPATHFINDING_NODE* node = 0;
 
-		for( NodeAStar*& _node : _list )
+		for( stPATHFINDING_NODE*& _node : _list )
 		{
 			if( _node->fEstimatedTotalCost < value || value < 0.0f )
 			{
@@ -352,86 +410,8 @@ namespace sfgmk
 		return node;
 	}
 
-	float StateGamePathfinding::astar_heuristic(sf::Vector2i& _node)
+	float Pathfinding::astar_heuristic(const sf::Vector2i& _node)
 	{
-		return math::Calc_DistanceSquared(_node.x, _node.y, m_End.x, m_End.y);
+		return (float)math::Calc_DistanceSquared(_node.x, _node.y, m_End.x, m_End.y);
 	}
-
-	void StateGamePathfinding::astar()
-	{
-		std::cout << "Start AStar algo." << std::endl;
-
-		float cost = 1.0f;
-
-		bool found = false;
-		std::vector<NodeAStar*> open_list;
-		std::vector<NodeAStar*> closed_list;
-
-		// Algorithm
-
-		open_list.push_back(new NodeAStar(m_Begin, 0, 0, astar_heuristic(m_Begin), astar_heuristic(m_Begin)));
-
-		while( open_list.size() > 0 )
-		{
-			NodeAStar* smallest = astar_find_smallest(open_list);
-
-			if( smallest->GridCoords == m_End )
-			{
-				found = true;
-				break;
-			}
-
-			sf::Vector2i expanded_nodes[8];
-			computeNextCases8(smallest->GridCoords, expanded_nodes);
-
-			for( int i = 0; i < 8; i++ )
-			{
-				if( isInCases(expanded_nodes[i]) )
-				{
-					stCASE* node = &m_CaseArray[expanded_nodes[i].x][expanded_nodes[i].y];
-
-					if( !node->bIswall && astar_search_in_list(expanded_nodes[i], closed_list) < 0 && astar_search_in_list(expanded_nodes[i], open_list) < 0 )
-					{
-						cost = 1.0f;
-
-						if( i >= 4 )
-							cost = 1.4f;
-
-						NodeAStar* newNode = new NodeAStar(expanded_nodes[i], smallest);
-						newNode->fCostSoFar = newNode->ParentPtr->fCostSoFar + cost;
-						newNode->fHeuristic = astar_heuristic(newNode->GridCoords);
-						newNode->fEstimatedTotalCost = newNode->fCostSoFar + newNode->fHeuristic;
-
-						node->bTested = true;
-						node->iStep = (int)newNode->fEstimatedTotalCost;
-
-						open_list.push_back(newNode);
-					}
-				}
-			}
-
-			astar_remove_from_list(smallest, open_list, false);
-
-			closed_list.push_back(smallest);
-		}
-
-		std::cout << (found ? "FOUND!" : "Not Found :( !") << std::endl;
-
-		// Final path
-
-		if( found )
-		{
-			NodeAStar* curr = astar_find_smallest(open_list);
-
-			while( curr->ParentPtr )
-			{
-				m_Path.push_back(curr->GridCoords);
-				curr = curr->ParentPtr;
-			}
-
-			m_Path.push_back(curr->GridCoords);
-		}
-
-		std::cout << "AStar algo achieved ( ";
-	}*/
 }

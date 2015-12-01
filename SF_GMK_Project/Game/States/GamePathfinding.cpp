@@ -9,13 +9,14 @@ using namespace sfgmk;
 #define HUD_SIZE sf::Vector2f(ARRAY_CASE_SIZE * 4.0f, ARRAY_CASE_SIZE)
 #define CASE_OUTLINE_COLOR sf::Color::Blue
 #define WALL_COLOR sf::Color(150, 150, 150, 255)
-#define PATH_COLOR sf::Color(127, 255, 0, 100)
+#define PATH_COLOR sf::Color(200, 255, 0, 150)
+#define EXPLORATION_COLOR sf::Color(100, 255, 0, 100)
 
-StateGamePathfinding::StateGamePathfinding() : m_ArraySize(0, 0), m_Begin(-1, -1), m_End(-1, -1), m_CaseArray(NULL), m_RenderCases(NULL), m_RenderCasesState(NULL), m_uiAlgoChosen(0U)
+StateGamePathfinding::StateGamePathfinding() : m_ArraySize(0, 0), m_Begin(-1, -1), m_End(-1, -1), m_CaseArray(NULL), m_RenderCases(NULL), m_RenderCasesState(NULL), m_RenderExploration(NULL), m_uiAlgoChosen(0U)
 {
 	m_Font = DATA_MANAGER->getFont("sfgmk_ConsoleFont1");
 	m_PathfindingText.setFont(m_Font);
-	m_PathfindingText.setCharacterSize((unsigned int)(ARRAY_CASE_SIZE * 0.25f));
+	m_PathfindingText.setCharacterSize((unsigned int)(ARRAY_CASE_SIZE * 0.5f));
 	m_PathfindingText.setColor(sf::Color::White);
 
 	m_HudText.setFont(m_Font);
@@ -30,11 +31,14 @@ StateGamePathfinding::~StateGamePathfinding()
 	deleteArray();
 	SAFE_DELETE(m_RenderCases);
 	SAFE_DELETE(m_RenderCasesState);
+	SAFE_DELETE(m_RenderExploration);
 }
 
 
 void StateGamePathfinding::init()
 {
+	CONSOLE.command("/freecam");
+
 	//Algos
 	m_sAlgosNames[eZpath] = "Z-Path";
 	m_sAlgosNames[eDijkstra] = "Dijkstra";
@@ -56,6 +60,11 @@ void StateGamePathfinding::init()
 			m_MapFileName.push_back(ReadFile->d_name);
 		closedir(LevelRepertory);
 	}
+
+	//Renders
+	m_RenderCases = new sf::RenderTexture();
+	m_RenderCasesState = new sf::RenderTexture();
+	m_RenderExploration = new sf::RenderTexture();
 }
 
 void StateGamePathfinding::update()
@@ -73,17 +82,17 @@ void StateGamePathfinding::update()
 			//Set start
 			if( INPUT_MANAGER->MOUSE.getButtonState(sf::Mouse::Left) == KEY_PRESSED )
 			{
-				drawCase(sf::Vector2f((float)m_Begin.x, (float)m_Begin.y), sf::Color::Black);
+				drawCase(m_RenderCasesState, sf::Vector2f((float)m_Begin.x, (float)m_Begin.y), sf::Color::Black);
 				m_Begin = FocusedCase;
-				drawCase(sf::Vector2f((float)FocusedCase.x, (float)FocusedCase.y), sf::Color::Green);
+				drawCase(m_RenderCasesState, sf::Vector2f((float)FocusedCase.x, (float)FocusedCase.y), sf::Color::Green);
 			}
 
 			//Set end
 			else if( INPUT_MANAGER->MOUSE.getButtonState(sf::Mouse::Right) == KEY_PRESSED )
 			{
-				drawCase(sf::Vector2f((float)m_End.x, (float)m_End.y), sf::Color::Black);
+				drawCase(m_RenderCasesState, sf::Vector2f((float)m_End.x, (float)m_End.y), sf::Color::Black);
 				m_End = FocusedCase;
-				drawCase(sf::Vector2f((float)FocusedCase.x, (float)FocusedCase.y), sf::Color::Red);
+				drawCase(m_RenderCasesState, sf::Vector2f((float)FocusedCase.x, (float)FocusedCase.y), sf::Color::Red);
 			}
 		}
 
@@ -94,13 +103,13 @@ void StateGamePathfinding::update()
 			if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::LShift) == KEY_DOWN )
 			{
 				m_CaseArray[FocusedCase.x][FocusedCase.y].bIswall = false;
-				drawCase(sf::Vector2f((float)FocusedCase.x, (float)FocusedCase.y), sf::Color::Black);
+				drawCase(m_RenderCasesState, sf::Vector2f((float)FocusedCase.x, (float)FocusedCase.y), sf::Color::Black);
 			}
 			//Set wall
 			else
 			{
 				m_CaseArray[FocusedCase.x][FocusedCase.y].bIswall = true;
-				drawCase(sf::Vector2f((float)FocusedCase.x, (float)FocusedCase.y), WALL_COLOR);
+				drawCase(m_RenderCasesState, sf::Vector2f((float)FocusedCase.x, (float)FocusedCase.y), WALL_COLOR);
 			}
 		}
 	}
@@ -147,6 +156,7 @@ void StateGamePathfinding::update()
 
 		std::cout << "Pathfinding computing..." << std::endl;
 		m_Pathfinding.computePathfinding(&m_Path, (const ePATHFINDING_ALGOS)m_uiAlgoChosen, m_CaseArray, m_ArraySize, m_Begin, m_End);
+		drawExploration();
 	}
 }
 
@@ -190,10 +200,11 @@ void StateGamePathfinding::draw()
 
 	//Draw cases
 	Render->draw(m_RenderCasesSprite);
-	Render->draw(m_RenderCasesSpriteState);
+	Render->draw(m_RenderCasesStateSprite);
+	Render->draw(m_RenderExplorationSprite);
 
 	//Draw path
-	for( int i(0); i < m_Path.size(); i++ )
+	for( size_t i(0); i < m_Path.size(); i++ )
 		Drawer->drawCircle(sf::Vector2f(m_Path[i].x * ARRAY_CASE_SIZE + HUD_SIZE.x, m_Path[i].y * ARRAY_CASE_SIZE + HUD_SIZE.y), ARRAY_CASE_SIZE * 0.5f, 8, PATH_COLOR);
 }
 
@@ -269,7 +280,6 @@ void StateGamePathfinding::loadFile(const std::string& _FileName)
 		{
 			if( cBuffer == '\n' )
 			{
-
 				iX++;
 				iY = 0;
 			}
@@ -299,13 +309,18 @@ void StateGamePathfinding::loadFile(const std::string& _FileName)
 		m_RenderCasesState->create((unsigned int)(ARRAY_CASE_SIZE * m_ArraySize.x), (unsigned int)(ARRAY_CASE_SIZE * m_ArraySize.y));
 		m_RenderCasesState->clear(sf::Color::Transparent);
 
+		SAFE_DELETE(m_RenderExploration);
+		m_RenderExploration = new sf::RenderTexture();
+		m_RenderExploration->create((unsigned int)(ARRAY_CASE_SIZE * m_ArraySize.x), (unsigned int)(ARRAY_CASE_SIZE * m_ArraySize.y));
+		m_RenderExploration->clear(sf::Color::Transparent);
+
 		for( int i(0); i < m_ArraySize.x; i++ )
 		{
 			for( int j(0); j < m_ArraySize.y; j++ )
 			{
 				Drawer->drawRectangle(sf::Vector2f(i * ARRAY_CASE_SIZE, j * ARRAY_CASE_SIZE), sf::Vector2f(ARRAY_CASE_SIZE, ARRAY_CASE_SIZE), m_RenderCases, sf::Color::Transparent, -1.0, CASE_OUTLINE_COLOR);
 				if( m_CaseArray[j][i].bIswall )
-					drawCase(sf::Vector2f((float)i, (float)j), WALL_COLOR);
+					drawCase(m_RenderCasesState, sf::Vector2f((float)i, (float)j), WALL_COLOR);
 			}
 		}
 
@@ -314,8 +329,11 @@ void StateGamePathfinding::loadFile(const std::string& _FileName)
 		m_RenderCasesSprite.setPosition(HUD_SIZE);
 
 		m_RenderCasesState->display();
-		m_RenderCasesSpriteState.setTexture(m_RenderCasesState->getTexture(), true);
-		m_RenderCasesSpriteState.setPosition(HUD_SIZE);
+		m_RenderCasesStateSprite.setTexture(m_RenderCasesState->getTexture(), true);
+		m_RenderCasesStateSprite.setPosition(HUD_SIZE);
+
+		m_RenderExploration->display();
+		m_RenderExplorationSprite.setTexture(m_RenderExploration->getTexture(), true);
 	}
 }
 
@@ -331,7 +349,35 @@ bool StateGamePathfinding::isInCases(const sf::Vector2i& _Position)
 }
 
 
-void StateGamePathfinding::drawCase(const sf::Vector2f& _Position, const sf::Color& _Color)
+void StateGamePathfinding::drawCase(sf::RenderTexture* _Render, const sf::Vector2f& _Position, const sf::Color& _Color)
 {
-	SHAPE_DRAWER.drawRectangle(sf::Vector2f(_Position.x * ARRAY_CASE_SIZE + 1.0f, _Position.y * ARRAY_CASE_SIZE + 1.0f), sf::Vector2f(ARRAY_CASE_SIZE - 2.0f, ARRAY_CASE_SIZE - 2.0f), m_RenderCasesState, _Color);
+	SHAPE_DRAWER.drawRectangle(sf::Vector2f(_Position.x * ARRAY_CASE_SIZE + 1.0f, _Position.y * ARRAY_CASE_SIZE + 1.0f), sf::Vector2f(ARRAY_CASE_SIZE - 2.0f, ARRAY_CASE_SIZE - 2.0f), _Render, _Color);
+}
+
+void StateGamePathfinding::drawExploration()
+{
+	m_RenderExploration->clear(sf::Color::Transparent);
+	sf::Vector2f TextSize;
+
+	for( int i(0); i < m_ArraySize.x; i++ )
+	{
+		for( int j(0); j < m_ArraySize.y; j++ )
+		{
+			if( m_CaseArray[i][j].bTested )
+			{
+				drawCase(m_RenderExploration, sf::Vector2f((float)i, (float)j), EXPLORATION_COLOR);
+
+				m_PathfindingText.setString(std::to_string(m_CaseArray[i][j].uiStep));
+				TextSize = sf::Vector2f(m_PathfindingText.getGlobalBounds().width, m_PathfindingText.getGlobalBounds().height);
+				m_PathfindingText.setOrigin(TextSize.x * 0.5f, TextSize.y * 0.5f);
+				m_PathfindingText.setPosition(sf::Vector2f((float)i * ARRAY_CASE_SIZE + ARRAY_CASE_SIZE * 0.5f, (float)j * ARRAY_CASE_SIZE + ARRAY_CASE_SIZE * 0.5f));
+
+				m_RenderExploration->draw(m_PathfindingText);
+			}
+		}
+	}
+
+	m_RenderExploration->display();
+	m_RenderExplorationSprite.setTexture(m_RenderExploration->getTexture(), true);
+	m_RenderExplorationSprite.setPosition(HUD_SIZE);
 }

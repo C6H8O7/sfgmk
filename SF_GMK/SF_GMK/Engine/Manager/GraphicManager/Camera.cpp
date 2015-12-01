@@ -57,7 +57,7 @@ namespace sfgmk
 		void Camera::zoom(float factor)
 		{
 			m_fZoomFactor *= 1.0f / factor;
-			((sf::View*)(this))->zoom(factor);
+			sf::View::zoom(factor);
 		}
 
 
