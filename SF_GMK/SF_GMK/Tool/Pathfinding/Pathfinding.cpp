@@ -272,6 +272,32 @@ namespace sfgmk
 		m_Path.push_back(m_Begin);*/
 	}
 
+
+	void Pathfinding::sortDijkstra()
+	{
+		/*if( m_DijkstraList.size() > 1 )
+		{
+		bool bChange(true);
+		sf::Vector2i Temp;
+
+		while( bChange )
+		{
+		bChange = false;
+
+		for( std::list<sf::Vector2i>::iterator it = m_DijkstraList.begin(), itTwo = ++m_DijkstraList.begin(); it != m_DijkstraList.end(), itTwo != m_DijkstraList.end(); ++it, ++itTwo )
+		{
+		if( m_CaseArray[(*it).x][(*it).y].fDistanceFromBegin > m_CaseArray[(*itTwo).x][(*itTwo).y].fDistanceFromBegin )
+		{
+		Temp = (*it);
+		(*it) = (*itTwo);
+		(*itTwo) = Temp;
+		bChange = true;
+		}
+		}
+		}
+		}*/
+	}
+
 	void Pathfinding::aStar()
 	{
 		float cost = 1.0f;
@@ -341,33 +367,6 @@ namespace sfgmk
 			m_Path->push_back(curr->GridCoords);
 		}
 	}
-
-
-	void Pathfinding::sortDijkstra()
-	{
-		/*if( m_DijkstraList.size() > 1 )
-		{
-			bool bChange(true);
-			sf::Vector2i Temp;
-
-			while( bChange )
-			{
-				bChange = false;
-
-				for( std::list<sf::Vector2i>::iterator it = m_DijkstraList.begin(), itTwo = ++m_DijkstraList.begin(); it != m_DijkstraList.end(), itTwo != m_DijkstraList.end(); ++it, ++itTwo )
-				{
-					if( m_CaseArray[(*it).x][(*it).y].fDistanceFromBegin > m_CaseArray[(*itTwo).x][(*itTwo).y].fDistanceFromBegin )
-					{
-						Temp = (*it);
-						(*it) = (*itTwo);
-						(*itTwo) = Temp;
-						bChange = true;
-					}
-				}
-			}
-		}*/
-	}
-
 
 	int Pathfinding::astar_search_in_list(const sf::Vector2i& _node, std::vector<stPATHFINDING_NODE*>& _list)
 	{

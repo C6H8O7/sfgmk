@@ -99,10 +99,10 @@ namespace sfgmk
 
 			void sortDijkstra();
 
-			int astar_search_in_list(const sf::Vector2i& _node, std::vector<stPATHFINDING_NODE*>& _list);
-			void astar_remove_from_list(stPATHFINDING_NODE* _node, std::vector<stPATHFINDING_NODE*>& _list, bool _delete);
-			stPATHFINDING_NODE* astar_find_smallest(std::vector<stPATHFINDING_NODE*>& _list);
-			float astar_heuristic(const sf::Vector2i& _node);
+			inline int astar_search_in_list(const sf::Vector2i& _node, std::vector<stPATHFINDING_NODE*>& _list);
+			inline void astar_remove_from_list(stPATHFINDING_NODE* _node, std::vector<stPATHFINDING_NODE*>& _list, bool _delete);
+			inline stPATHFINDING_NODE* astar_find_smallest(std::vector<stPATHFINDING_NODE*>& _list);
+			inline float astar_heuristic(const sf::Vector2i& _node);
 	};
 }
 
