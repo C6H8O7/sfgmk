@@ -53,6 +53,11 @@ namespace sfgmk
 	{
 		return (_Position.x >= 0 && _Position.x < m_GridSize.x && _Position.y >= 0 && _Position.y < m_GridSize.y);
 	}
+	
+	bool Pathfinding::isWall(const sf::Vector2i& _Position)
+	{
+		return m_CaseArray[_Position.x][_Position.y].bIswall;
+	}
 
 	bool Pathfinding::checkDiagonalWall(const sf::Vector2i& _CaseOne, const sf::Vector2i& _CaseTwo)
 	{
@@ -298,6 +303,24 @@ namespace sfgmk
 		}*/
 	}
 
+	void Pathfinding::astar_compute_next_cases(sf::Vector2i _current, sf::Vector2i _cases[8], int* _validCases)
+	{
+		int c[] = { 0, -1, 1, 0, 0, 1, -1, 0, 1, -1, 1, 1, -1, 1, -1, -1 };
+
+		for (int i = 0; i < 8; i++)
+		{
+			sf::Vector2i expanded_node(_current.x + c[i * 2], _current.y + c[i * 2 + 1]);
+
+			if (isInCases(expanded_node) && !isWall(expanded_node))
+			{
+				if (i < 4 || !checkDiagonalWall(_current, expanded_node))
+				{
+					_cases[(*_validCases)++] = expanded_node;
+				}
+			}
+		}
+	}
+
 	void Pathfinding::aStar()
 	{
 		float cost = 1.0f;
@@ -306,45 +329,49 @@ namespace sfgmk
 		std::vector<stPATHFINDING_NODE*> open_list;
 		std::vector<stPATHFINDING_NODE*> closed_list;
 
+		int valid = 0;
+		sf::Vector2i expanded_nodes[8];
+
+		stPATHFINDING_NODE* smallest = 0;
+		stPATHFINDING_CASE* currCase = 0;
+		stPATHFINDING_NODE* newNode = 0;
+
 		// Algorithm
-		open_list.push_back(new stPATHFINDING_NODE(m_Begin, 0, 0, astar_heuristic(m_Begin), astar_heuristic(m_Begin)));
+		open_list.push_back(new stPATHFINDING_NODE(m_End, 0, 0, astar_heuristic(m_End), astar_heuristic(m_End)));
 
 		while( open_list.size() > 0 )
 		{
 			m_uiStep++;
 
-			stPATHFINDING_NODE* smallest = astar_find_smallest(open_list);
+			smallest = astar_find_smallest(open_list);
 
-			if( smallest->GridCoords == m_End )
+			if( smallest->GridCoords == m_Begin )
 			{
 				found = true;
 				break;
 			}
 
-			sf::Vector2i expanded_nodes[8];
-			computeNextCases8(smallest->GridCoords, expanded_nodes);
+			valid = 0;
+			astar_compute_next_cases(smallest->GridCoords, expanded_nodes, &valid);
 
-			for( int i = 0; i < 8; i++ )
+			for( int i = 0; i < valid; i++ )
 			{
-				if( isInCases(expanded_nodes[i]) )
+				currCase = &m_CaseArray[expanded_nodes[i].x][expanded_nodes[i].y];
+
+				if( astar_search_in_list(expanded_nodes[i], closed_list) < 0 && astar_search_in_list(expanded_nodes[i], open_list) < 0 )
 				{
-					stPATHFINDING_CASE* node = &m_CaseArray[expanded_nodes[i].x][expanded_nodes[i].y];
+					//Coût diagonales
+					i > 4 ? cost = 1.4f :cost = 1.0f;
 
-					if( !node->bIswall && astar_search_in_list(expanded_nodes[i], closed_list) < 0 && astar_search_in_list(expanded_nodes[i], open_list) < 0 )
-					{
-						//Coût diagonales
-						i > 4 ? cost = 1.4f :cost = 1.0f;
+					newNode = new stPATHFINDING_NODE(expanded_nodes[i], smallest);
+					newNode->fCostSoFar = newNode->ParentPtr->fCostSoFar + cost;
+					newNode->fHeuristic = astar_heuristic(newNode->GridCoords);
+					newNode->fEstimatedTotalCost = newNode->fCostSoFar + newNode->fHeuristic;
 
-						stPATHFINDING_NODE* newNode = new stPATHFINDING_NODE(expanded_nodes[i], smallest);
-						newNode->fCostSoFar = newNode->ParentPtr->fCostSoFar + cost;
-						newNode->fHeuristic = astar_heuristic(newNode->GridCoords);
-						newNode->fEstimatedTotalCost = newNode->fCostSoFar + newNode->fHeuristic;
+					currCase->bTested = true;
+					currCase->uiStep = (int)newNode->fEstimatedTotalCost;
 
-						node->bTested = true;
-						node->uiStep = m_uiStep;
-
-						open_list.push_back(newNode);
-					}
+					open_list.push_back(newNode);
 				}
 			}
 
@@ -411,6 +438,9 @@ namespace sfgmk
 
 	float Pathfinding::astar_heuristic(const sf::Vector2i& _node)
 	{
-		return (float)math::Calc_DistanceSquared(_node.x, _node.y, m_End.x, m_End.y);
+		float dx = (float)(m_Begin.x - _node.x);
+		float dy = (float)(m_Begin.y - _node.y);
+
+		return dx * dx + dy * dy;
 	}
 }

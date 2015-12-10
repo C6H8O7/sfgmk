@@ -89,6 +89,7 @@ namespace sfgmk
 			inline void computeNextCases4(const sf::Vector2i& _CurrentCase, sf::Vector2i _Array[eNEXT_CASES_NUMBER_4]);
 			inline void computeNextCases8(const sf::Vector2i& _CurrentCase, sf::Vector2i _Array[eNEXT_CASES_NUMBER_8]);
 			inline bool isInCases(const sf::Vector2i& _Position);
+			inline bool isWall(const sf::Vector2i& _Position);
 			inline bool checkDiagonalWall(const sf::Vector2i& _CaseOne, const sf::Vector2i& _CaseTwo);
 
 			void computePathfinding(std::vector<sf::Vector2i>* _Path, const ePATHFINDING_ALGOS& _Algo, stPATHFINDING_CASE** _Grid, const sf::Vector2i& _GridSize, const sf::Vector2i& _Begin, const sf::Vector2i& _End);
@@ -99,6 +100,7 @@ namespace sfgmk
 
 			void sortDijkstra();
 
+			inline void astar_compute_next_cases(sf::Vector2i _current, sf::Vector2i _cases[8], int* _validCases);
 			inline int astar_search_in_list(const sf::Vector2i& _node, std::vector<stPATHFINDING_NODE*>& _list);
 			inline void astar_remove_from_list(stPATHFINDING_NODE* _node, std::vector<stPATHFINDING_NODE*>& _list, bool _delete);
 			inline stPATHFINDING_NODE* astar_find_smallest(std::vector<stPATHFINDING_NODE*>& _list);
