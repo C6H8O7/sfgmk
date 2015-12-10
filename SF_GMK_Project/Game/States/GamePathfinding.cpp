@@ -5,8 +5,8 @@ using namespace sfgmk;
 
 
 #define FILE_DIR "../data/states/GamePathfinding/pathfindingMap"
-#define ARRAY_CASE_SIZE 16.0f
-#define HUD_SIZE sf::Vector2f(ARRAY_CASE_SIZE * 4.0f, ARRAY_CASE_SIZE)
+#define ARRAY_CASE_SIZE 8.0f
+#define HUD_SIZE sf::Vector2f(128.0f, 32.0f)
 #define CASE_OUTLINE_COLOR sf::Color::Blue
 #define WALL_COLOR sf::Color(150, 150, 150, 255)
 #define PATH_COLOR sf::Color(200, 255, 0, 150)
@@ -339,7 +339,7 @@ void StateGamePathfinding::loadFile(const std::string& _FileName)
 
 sf::Vector2i StateGamePathfinding::getMouseCase(const sf::Vector2f& _MouseWorldPos, const sf::Vector2f& _MapDecal)
 {
-	return sf::Vector2i((int)(_MouseWorldPos.x / ARRAY_CASE_SIZE - _MapDecal.x / ARRAY_CASE_SIZE), (int)(_MouseWorldPos.y / ARRAY_CASE_SIZE - _MapDecal.y / ARRAY_CASE_SIZE));
+	return sf::Vector2i((int)((_MouseWorldPos.x - _MapDecal.x) / ARRAY_CASE_SIZE), (int)((_MouseWorldPos.y - _MapDecal.y) / ARRAY_CASE_SIZE));
 }
 
 bool StateGamePathfinding::isInCases(const sf::Vector2i& _Position)
