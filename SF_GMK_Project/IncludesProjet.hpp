@@ -8,6 +8,7 @@ enum eSTATES
 	eStateMenu,
 	eStateGame,
 	eStateGamePathfinding,
+	eStateGameNavmesh,
 	eSTATES_NUMBER
 };
 

@@ -208,7 +208,7 @@ namespace sfgmk
 
 			transition->length = math::Calc_Norm(diff);
 			transition->diff_uni = math::Calc_UnitVector(diff);
-			transition->rotation = atan2f(diff.y, diff.x) * 180.0f / PI;
+			transition->rotation = atan2f(diff.y, diff.x) * 180.0f / GMK_PI;
 			transition->duration = transition->timer = 1.0f;
 
 			transition->messageDelay = transition->timerDelay = _f_Delay;

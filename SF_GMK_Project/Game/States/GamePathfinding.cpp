@@ -5,7 +5,7 @@ using namespace sfgmk;
 
 
 #define FILE_DIR "../data/states/GamePathfinding/pathfindingMap"
-#define ARRAY_CASE_SIZE 32.0f
+#define ARRAY_CASE_SIZE 16.0f
 #define HUD_SIZE sf::Vector2f(ARRAY_CASE_SIZE * 4.0f, ARRAY_CASE_SIZE)
 #define CASE_OUTLINE_COLOR sf::Color::Blue
 #define WALL_COLOR sf::Color(150, 150, 150, 255)
@@ -71,7 +71,6 @@ void StateGamePathfinding::update()
 {
 	ShapeDrawer* Drawer = &SHAPE_DRAWER;
 	sf::Vector2f MouseWorld = MOUSE_WORLD_POS;
-	sf::Vector2i MouseWindow = MOUSE_WINDOW_POS;
 	sf::Vector2i FocusedCase = getMouseCase(MOUSE_WORLD_POS, HUD_SIZE);
 
 	//Clic dans la grille
@@ -125,7 +124,7 @@ void StateGamePathfinding::update()
 
 			for( std::string& FileName : m_MapFileName )
 			{
-				if( MouseWindow.x >= Position.x &&  MouseWindow.x <= FileName.length() * fTextSize * 0.5f && MouseWindow.y >= Position.y && MouseWindow.y <= Position.y + fTextSize )
+				if( MouseWorld.x >= Position.x &&  MouseWorld.x <= FileName.length() * fTextSize * 0.5f && MouseWorld.y >= Position.y && MouseWorld.y <= Position.y + fTextSize )
 					loadFile(FileName);
 
 				iIndex++;

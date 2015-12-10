@@ -38,7 +38,7 @@ namespace sfgmk
 	void FloatingDamage::update(const float& _TimeDelta)
 	{
 		//Update position
-		if( m_fAngle < PI )
+		if( m_fAngle < GMK_PI )
 		{
 			m_fAngle += _TimeDelta * 10.0f;
 			m_Text.setPosition(sf::Vector2f(getPosition().x + m_fAngle * 15.0f, getPosition().y - sin(m_fAngle) * 20.0f)); //X et Y augmentent avec l'angle ==> trajectoire en cloche

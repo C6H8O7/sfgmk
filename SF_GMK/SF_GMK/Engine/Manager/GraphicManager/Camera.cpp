@@ -96,33 +96,37 @@ namespace sfgmk
 
 		void Camera::freeMove(float _TimeDelta)
 		{
+			sf::Vector2f Speed(m_Speed);
 			//Clavier / Souris
+			if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::LShift) == KEY_DOWN )
+				Speed *= FREE_CAMERA_RUN_SPEED_FACTOR;
+
 				//Déplacements
 					//Gauche
 					if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Left) == KEY_DOWN )
 					{
-						this->move(-m_Speed.x * _TimeDelta, 0);
+						this->move(-Speed.x * _TimeDelta, 0);
 						CONSOLE.setDisplayTimer(CONSOLE_DISPLAY_TIMING);
 					}
 
 					//Droite
 					else if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Right) == KEY_DOWN )
 					{
-						this->move(m_Speed.x * _TimeDelta, 0);
+						this->move(Speed.x * _TimeDelta, 0);
 						CONSOLE.setDisplayTimer(CONSOLE_DISPLAY_TIMING);
 					}
 
 					//Haut
 					if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Up) == KEY_DOWN )
 					{
-						this->move(0, -m_Speed.y * _TimeDelta);
+						this->move(0, -Speed.y * _TimeDelta);
 						CONSOLE.setDisplayTimer(CONSOLE_DISPLAY_TIMING);
 					}
 
 					//Bas
 					else if( INPUT_MANAGER->KEYBOARD_KEY(sf::Keyboard::Down) == KEY_DOWN )
 					{
-						this->move(0, m_Speed.y * _TimeDelta);
+						this->move(0, Speed.y * _TimeDelta);
 						CONSOLE.setDisplayTimer(CONSOLE_DISPLAY_TIMING);
 					}
 
@@ -142,6 +146,11 @@ namespace sfgmk
 						}
 
 			//Manette (si un joystick connecté)
+			if( sf::Joystick::isConnected(0) )
+			{
+				if( JOYSTICK_GET_BUTTON(0, TRIGGER_RIGHT) < JOYSTICK_TOLERANCE )
+					Speed *= FREE_CAMERA_RUN_SPEED_FACTOR;
+
 				//Déplacements
 				if( sf::Joystick::isConnected(0) )
 				{
@@ -152,10 +161,11 @@ namespace sfgmk
 						float fJoystickAngle = INPUT_MANAGER->getJoystickAngle(0, JOYSTICK_LEFT_VERTICAL, JOYSTICK_LEFT_HORIZONTAL);
 						sf::Vector2f Result = math::Matrix22(cos(fJoystickAngle), -sin(fJoystickAngle), sin(fJoystickAngle), cos(fJoystickAngle)) * sf::Vector2f(1.0f, 0.0f);
 
-						this->move(Result.x * m_Speed.x * _TimeDelta, Result.y * m_Speed.y * _TimeDelta);
+						this->move(Result.x * Speed.x * _TimeDelta, Result.y * Speed.y * _TimeDelta);
 						CONSOLE.setDisplayTimer(CONSOLE_DISPLAY_TIMING);
 					}
 				}
+			}
 		}
 
 

@@ -15,6 +15,7 @@ namespace sfgmk
 	namespace engine
 	{
 		#define FREE_CAMERA_DEFAULT_SPEED 250.0f
+		#define FREE_CAMERA_RUN_SPEED_FACTOR 2.0f
 
 		class SFGMK_API Camera : public sf::View
 		{

@@ -19,7 +19,7 @@ namespace sfgmk
 		//Constantes
 		#define G -9.81f
 		#define EPSILON 0.00001f
-		#define PI 3.14159265358979323846f
+		#define GMK_PI 3.14159265358979323846f
 		#define PI_2 1.57079632679489661923f
 		#define PI_4 0.785398163397448309616f
 		#define PI_X_2 6.28318530718f

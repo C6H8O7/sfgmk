@@ -83,7 +83,7 @@ namespace sfgmk
 
 			//Permet d'avoir un angle entre 0 et 360, et pas entre -180 et 180
 			if( fAngle < 0.0f )
-				fAngle = 2.0f * PI + fAngle;
+				fAngle = 2.0f * GMK_PI + fAngle;
 
 			return fAngle;
 		}
