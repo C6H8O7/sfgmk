@@ -358,20 +358,23 @@ namespace sfgmk
 			{
 				currCase = &m_CaseArray[expanded_nodes[i].x][expanded_nodes[i].y];
 
-				if( astar_search_in_list(expanded_nodes[i], closed_list) < 0 && astar_search_in_list(expanded_nodes[i], open_list) < 0 )
+				if (!currCase->bTested)
 				{
-					//Coût diagonales
-					i > 4 ? cost = 1.4f :cost = 1.0f;
+					if (astar_search_in_list(expanded_nodes[i], closed_list) < 0 && astar_search_in_list(expanded_nodes[i], open_list) < 0)
+					{
+						//Coût diagonales
+						i > 4 ? cost = 1.4f : cost = 1.0f;
 
-					newNode = new stPATHFINDING_NODE(expanded_nodes[i], smallest);
-					newNode->fCostSoFar = newNode->ParentPtr->fCostSoFar + cost;
-					newNode->fHeuristic = astar_heuristic(newNode->GridCoords);
-					newNode->fEstimatedTotalCost = newNode->fCostSoFar + newNode->fHeuristic;
+						newNode = new stPATHFINDING_NODE(expanded_nodes[i], smallest);
+						newNode->fCostSoFar = newNode->ParentPtr->fCostSoFar + cost;
+						newNode->fHeuristic = astar_heuristic(newNode->GridCoords);
+						newNode->fEstimatedTotalCost = newNode->fCostSoFar + newNode->fHeuristic;
 
-					currCase->bTested = true;
-					currCase->uiStep = (int)newNode->fEstimatedTotalCost;
+						currCase->bTested = true;
+						currCase->uiStep = (int)newNode->fEstimatedTotalCost;
 
-					open_list.push_back(newNode);
+						open_list.push_back(newNode);
+					}
 				}
 			}
 
