@@ -9,18 +9,7 @@ class StateGamePathfinding : public sfgmk::engine::State
 		~StateGamePathfinding();
 
 	private:
-		Pathfinding m_Pathfinding;
-
-		sf::Vector2i m_ArraySize, m_Begin, m_End;
-		stPATHFINDING_CASE** m_CaseArray;
-		std::vector<sf::Vector2i> m_Path;
-
-		sf::RenderTexture* m_RenderCases;
-		sf::Sprite m_RenderCasesSprite;
-		sf::RenderTexture* m_RenderCasesState;
-		sf::Sprite m_RenderCasesStateSprite;
-		sf::RenderTexture* m_RenderExploration;
-		sf::Sprite m_RenderExplorationSprite;
+		PathfindingMap m_Map;
 
 		sf::Font m_Font;
 		sf::Text m_PathfindingText;
@@ -30,17 +19,17 @@ class StateGamePathfinding : public sfgmk::engine::State
 		std::string m_sAlgosNames[ePATHFINDING_ALGOS_NUMBER];
 		unsigned int m_uiAlgoChosen;
 
+		sf::Vector2i m_Begin, m_End;
+		PathfindingPathCntr m_Path;
+
+		Pathfinding m_Pathfinding;
+
 	public:
 		void init();
 		void update();
 		void deinit();
 
 		void draw();
-
-		void initArray();
-		void deleteArray();
-
-		void loadFile(const std::string& _FileName);
 
 		sf::Vector2i getMouseCase(const sf::Vector2f& _MouseWorldPos, const sf::Vector2f& _MapDecal = sf::Vector2f(0.0f, 0.0f));
 		bool isInCases(const sf::Vector2i& _Position);
