@@ -20,6 +20,7 @@ namespace sfgmk
 		eDijkstra,
 		eAStar,
 		eJps,
+		eJpsKcc,
 		ePATHFINDING_ALGOS_NUMBER
 	};
 
@@ -84,6 +85,8 @@ namespace sfgmk
 
 		public:
 			void computePathfinding(PathfindingPathCntr* _Path, const ePATHFINDING_ALGOS& _Algo, PathfindingMap* _Map, const sf::Vector2i& _Begin, const sf::Vector2i& _End);
+
+			stPATHFINDING_SIMPLIFIED_NODE** getSimplifiedMap();
 
 		private:
 			void allocSimplifiedMap();
@@ -162,6 +165,33 @@ namespace sfgmk
 			inline sf::Vector2i* jps_jump(sf::Vector2i& _current, sf::Vector2i& _start, sf::Vector2i& _end, sf::Vector2i& _dir);
 			inline void jps_identify_successors(sf::Vector2i& _current, sf::Vector2i& _start, sf::Vector2i& _end, sf::Vector2i* _successors, int* _validSuccessors);
 			void jps();
+
+			//A* Jps Kcc
+			inline int Pathfinding::computeNextCases8Jps(const sf::Vector2i& _CurrentCase, sf::Vector2i _Array[eNEXT_CASES_NUMBER_8])
+			{
+				int iIndex(0);
+
+				for( int i(0); i < eNEXT_CASES_NUMBER_8; i++ )
+				{
+					_Array[iIndex] = _CurrentCase + m_PrecomputedNextCases[i];
+
+					//Si la case est dans la map
+					if( _Array[iIndex].x >= 0 && _Array[iIndex].x < m_Size.x && _Array[iIndex].y >= 0 && _Array[iIndex].y < m_Size.y )
+					{
+						if( !checkDiagonalWall(_CurrentCase, _Array[iIndex]) )
+						{
+							if( !(m_SimplifiedMap[_Array[iIndex].x][_Array[iIndex].y].bIswall) )
+								iIndex++;
+						}
+					}
+				}
+
+				return iIndex;
+			}
+			inline void switchElementFromList(stPATHFINDING_NODE* _Element);
+			inline stPATHFINDING_NODE* getSmallest();
+			inline bool checkInLists(const sf::Vector2i& _Coords);
+			void jpsKcc();
 	};
 }
 

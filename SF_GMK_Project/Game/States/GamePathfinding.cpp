@@ -43,6 +43,7 @@ void StateGamePathfinding::init()
 	m_sAlgosNames[eDijkstra] = "Dijkstra";
 	m_sAlgosNames[eAStar] = "A*";
 	m_sAlgosNames[eJps] = "Jps";
+	m_sAlgosNames[eJpsKcc] = "JpsKcc";
 
 	//Fichiers de map
 	DIR* LevelRepertory = NULL;
@@ -131,8 +132,9 @@ void StateGamePathfinding::update()
 		m_Path.clear();
 
 		std::cout << "Pathfinding computing..." << std::endl;
-		//std::thread* NewPathfindingThread = new std::thread(&Pathfinding::computePathfinding, &m_Pathfinding, &m_Path, ePATHFINDING_ALGOS(m_uiAlgoChosen), &m_Map, m_Begin, m_End); comprend pas pourquoi si je lance sur un thread on double le temps de calcul...
-		m_Pathfinding.computePathfinding(&m_Path, ePATHFINDING_ALGOS(m_uiAlgoChosen), &m_Map, m_Begin, m_End);
+		
+		std::thread* NewPathfindingThread  = new std::thread(&Pathfinding::computePathfinding, &m_Pathfinding, &m_Path, ePATHFINDING_ALGOS(m_uiAlgoChosen), &m_Map, m_Begin, m_End); //comprend pas pourquoi si je lance sur un thread on double le temps de calcul...
+		//m_Pathfinding.computePathfinding(&m_Path, ePATHFINDING_ALGOS(m_uiAlgoChosen), &m_Map, m_Begin, m_End);
 	}
 }
 
@@ -211,6 +213,24 @@ void StateGamePathfinding::draw()
 			{
 				Case.setPosition(sf::Vector2f(HUD_SIZE.x + i * ARRAY_CASE_SIZE + 1.0f, HUD_SIZE.y + j * ARRAY_CASE_SIZE + 1.0f));
 				Render->draw(Case);
+			}
+		}
+	}
+
+	//Draw exploration
+	stPATHFINDING_SIMPLIFIED_NODE** SimplifiedMap = m_Pathfinding.getSimplifiedMap();
+	if( SimplifiedMap )
+	{
+		Case.setFillColor(EXPLORATION_COLOR);
+		for( int i(0); i < m_Map.getMapWidth(); i++ )
+		{
+			for( int j(0); j < m_Map.getMapHeight(); j++ )
+			{
+				if( SimplifiedMap[i][j].bTested )
+				{
+					Case.setPosition(sf::Vector2f(HUD_SIZE.x + i * ARRAY_CASE_SIZE + 1.0f, HUD_SIZE.y + j * ARRAY_CASE_SIZE + 1.0f));
+					Render->draw(Case);
+				}
 			}
 		}
 	}
