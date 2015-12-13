@@ -373,7 +373,8 @@ namespace sfgmk
 		stPATHFINDING_NODE* newNode = 0;
 
 		// Algorithm
-		open_list.push_back(new stPATHFINDING_NODE(m_End, NULL, sf::Vector2i(0, 0), astar_heuristic(m_End), astar_heuristic(m_End)));
+		float f = astar_heuristic(m_End);
+		open_list.push_back(new stPATHFINDING_NODE(m_End, NULL, sf::Vector2i(0, 0), f, f));
 
 		while( open_list.size() > 0 )
 		{
@@ -434,8 +435,67 @@ namespace sfgmk
 		}
 	}
 
+	void Pathfinding::jps_forced_neighbours(sf::Vector2i& _current, sf::Vector2i& _dir, sf::Vector2i _forced[8], int* _forcedCount)
+	{
+		// TODO récupérer tous les voisins forcés
+	}
+
+	sf::Vector2i* Pathfinding::jps_jump(sf::Vector2i& _current, sf::Vector2i& _start, sf::Vector2i& _end, sf::Vector2i& _dir)
+	{
+		sf::Vector2i next(_current + _dir);
+
+		// On vérifie qu'on est pas tombés sur l'arrivée
+		if (next == _end) return new sf::Vector2i(_end);
+
+		// Vérification voisin forcé
+		int forced_count = 0;
+		sf::Vector2i forced[8];
+		jps_forced_neighbours(_current, _dir, forced, &forced_count);
+
+		// Si il y a un voisin forcé, on ajoute le point de saut
+		if (forced_count)
+			return new sf::Vector2i(next);
+
+		// Cas en diagonal
+		if (_dir.x && _dir.y)
+		{
+			if(jps_jump(next, _start, _end, sf::Vector2i(_dir.x, 0))
+			|| jps_jump(next, _start, _end, sf::Vector2i(0, _dir.y)))
+			{
+				return new sf::Vector2i(next);
+			}
+		}
+
+		return jps_jump(next, _start, _end, _dir);
+	}
+
+	void Pathfinding::jps_identify_successors(sf::Vector2i& _current, sf::Vector2i& _start, sf::Vector2i& _end, sf::Vector2i* _successors, int* _validSuccessors)
+	{
+		int valid_expanded_nodes = 0;
+		sf::Vector2i expanded_nodes[8];
+
+		// On récupère tous les voisins valables
+		astar_compute_next_cases(_current, expanded_nodes, &valid_expanded_nodes);
+
+		sf::Vector2i direction;
+		
+		for (int i = 0; i < valid_expanded_nodes; i++)
+		{
+			sf::Vector2i& expanded_node = expanded_nodes[i];
+
+			direction = expanded_node - _current;
+
+			// On tente de trouver un nouveau point de saut
+			sf::Vector2i* jumpPoint = jps_jump(_current, _start, _end, direction);
+
+			if (jumpPoint)
+				_successors[(*_validSuccessors)++] = *jumpPoint;
+		}
+	}
 
 	void Pathfinding::jps()
 	{
+		// TODO
+		// http://users.cecs.anu.edu.au/~dharabor/data/papers/harabor-grastien-aaai11.pdf
 	}
 }

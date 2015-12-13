@@ -80,12 +80,12 @@ namespace sfgmk
 				}
 
 				iIteration++;
-				iY++;
+				iX++;
 			}
 			else
 			{
-				iX++;
-				iY = 0;
+				iY++;
+				iX = 0;
 			}
 		}
 
