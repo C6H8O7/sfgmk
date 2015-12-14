@@ -271,6 +271,9 @@
     <ClCompile Include="SF_GMK\Tool\Pathfinding\Pathfinding.cpp">
       <Filter>sfgmk</Filter>
     </ClCompile>
+    <ClCompile Include="SF_GMK\Tool\Pathfinding\PathfindingMap.cpp">
+      <Filter>sfgmk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -443,5 +446,6 @@
     <ClInclude Include="SF_GMK\Tool\Warden.hpp" />
     <ClInclude Include="SF_GMK\Graphic\ShapeDrawer.hpp" />
     <ClInclude Include="SF_GMK\Tool\Pathfinding\Pathfinding.hpp" />
+    <ClInclude Include="SF_GMK\Tool\Pathfinding\PathfindingMap.hpp" />
   </ItemGroup>
 </Project>

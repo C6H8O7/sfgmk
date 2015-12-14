@@ -78,6 +78,7 @@
     <ClCompile Include="SF_GMK\Engine\Manager\StateMachineManager\StateMachine.cpp" />
     <ClCompile Include="SF_GMK\Tool\Parser\tinyxml2.cpp" />
     <ClCompile Include="SF_GMK\Tool\Pathfinding\Pathfinding.cpp" />
+    <ClCompile Include="SF_GMK\Tool\Pathfinding\PathfindingMap.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">Create</PrecompiledHeader>
@@ -153,6 +154,7 @@
     <ClInclude Include="SF_GMK\Engine\Manager\StateMachineManager\StateMachine.hpp" />
     <ClInclude Include="SF_GMK\Tool\Parser\tinyxml2.h" />
     <ClInclude Include="SF_GMK\Tool\Pathfinding\Pathfinding.hpp" />
+    <ClInclude Include="SF_GMK\Tool\Pathfinding\PathfindingMap.hpp" />
     <ClInclude Include="SF_GMK\Tool\Warden.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SF_GMK\Tool\ThreadTemplate.hpp" />

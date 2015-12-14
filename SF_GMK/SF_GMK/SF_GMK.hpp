@@ -99,6 +99,7 @@
 	#include "Math\Curb\CoordinateSystem\GraphCurb.hpp"
 	#include "Math\Curb\CoordinateSystem\Graph.hpp"
 
+	#include "Tool\Pathfinding\PathfindingMap.hpp"
 	#include "Tool\Pathfinding\Pathfinding.hpp"
 
 	#include "Physic\Collider.hpp"
