@@ -30,13 +30,14 @@
 	#include <SFML\Window.hpp>
 
 	//C
-	#include <Windows.h>
+	#include <ws2tcpip.h>
 	#include <assert.h>
 	#include <psapi.h>
 	#include <stdio.h>
 	#include <tchar.h>
 	#include <time.h>
 	#include <limits.h>
+	#include <Windows.h>
 
 	//C++
 	#include <algorithm>
@@ -73,6 +74,9 @@
 
 	//tinyxml2
 	#include "Tool\Parser\tinyxml2.h"
+
+	//Winsock
+	#pragma comment(lib, "Ws2_32.lib")
 
 	//SF_GMK
 	#include "Tool\DesignPattern\SingletonTemplate.hpp"
