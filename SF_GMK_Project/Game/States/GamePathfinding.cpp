@@ -43,6 +43,7 @@ void StateGamePathfinding::init()
 	m_sAlgosNames[eDijkstra] = "Dijkstra";
 	m_sAlgosNames[eAStar] = "A*";
 	m_sAlgosNames[eJps] = "Jps";
+	m_sAlgosNames[eAStarKcc] = "A*Kcc";
 	m_sAlgosNames[eJpsKcc] = "JpsKcc";
 
 	//Fichiers de map
@@ -111,7 +112,8 @@ void StateGamePathfinding::update()
 				if( MouseWorld.x >= Position.x &&  MouseWorld.x <= FileName.length() * fTextSize * 0.5f && MouseWorld.y >= Position.y && MouseWorld.y <= Position.y + fTextSize )
 				{
 					m_Path.clear();
-					m_Map.loadMapFromFile((std::string(FILE_DIR + '/' + FileName).c_str()));
+					m_Pathfinding.resetMap();
+					m_Map.loadMapFromFile((std::string(FILE_DIR + '/' + FileName).c_str()), m_Begin, m_End);
 				}
 				
 				iIndex++;
@@ -132,9 +134,8 @@ void StateGamePathfinding::update()
 		m_Path.clear();
 
 		std::cout << "Pathfinding computing..." << std::endl;
-		
-		std::thread* NewPathfindingThread  = new std::thread(&Pathfinding::computePathfinding, &m_Pathfinding, &m_Path, ePATHFINDING_ALGOS(m_uiAlgoChosen), &m_Map, m_Begin, m_End); //comprend pas pourquoi si je lance sur un thread on double le temps de calcul...
-		//m_Pathfinding.computePathfinding(&m_Path, ePATHFINDING_ALGOS(m_uiAlgoChosen), &m_Map, m_Begin, m_End);
+		//std::thread* NewPathfindingThread  = new std::thread(&Pathfinding::computePathfinding, &m_Pathfinding, &m_Path, ePATHFINDING_ALGOS(m_uiAlgoChosen), &m_Map, m_Begin, m_End);
+		m_Pathfinding.computePathfinding(&m_Path, ePATHFINDING_ALGOS(m_uiAlgoChosen), &m_Map, m_Begin, m_End);
 	}
 }
 
@@ -193,7 +194,7 @@ void StateGamePathfinding::draw()
 		LineX[0].position += DecalX;
 		LineX[1].position += DecalX;
 	}
-	for( int i(0); i <= m_Map.getMapHeight(); i++ )
+	for( int i(0); i <= m_Map.getMapWidth(); i++ )
 	{
 		Render->draw(LineY, 2, sf::Lines);
 		LineY[0].position += DecalY;

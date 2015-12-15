@@ -15,8 +15,8 @@ namespace sfgmk
 	enum ePATHFINDING_TERRAIN_TYPE
 	{
 		eOUT_OF_MAP = -1,
-		eWALL,
-		eGROUND
+		eWALL = 0,
+		eGROUND =  1
 	};
 
 	
@@ -25,6 +25,7 @@ namespace sfgmk
 		bool bTested;
 		bool bIswall;
 		unsigned int uiStep;
+		int iAdditionalCost;
 	};
 
 	class SFGMK_API PathfindingMap
@@ -50,7 +51,7 @@ namespace sfgmk
 				return _Y * m_Width + _X;
 			}
 
-			bool loadMapFromFile(const char* _FileName);
+			bool loadMapFromFile(const char* _FileName, sf::Vector2i& _Begin, sf::Vector2i& _End);
 
 			int* getMap();
 			stPATHFINDING_SIMPLIFIED_NODE** getSimplifiedMap();

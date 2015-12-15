@@ -20,6 +20,7 @@ namespace sfgmk
 		eDijkstra,
 		eAStar,
 		eJps,
+		eAStarKcc,
 		eJpsKcc,
 		ePATHFINDING_ALGOS_NUMBER
 	};
@@ -87,6 +88,7 @@ namespace sfgmk
 			void computePathfinding(PathfindingPathCntr* _Path, const ePATHFINDING_ALGOS& _Algo, PathfindingMap* _Map, const sf::Vector2i& _Begin, const sf::Vector2i& _End);
 
 			stPATHFINDING_SIMPLIFIED_NODE** getSimplifiedMap();
+			void resetMap();
 
 		private:
 			void allocSimplifiedMap();
@@ -166,8 +168,8 @@ namespace sfgmk
 			inline void jps_identify_successors(sf::Vector2i& _current, sf::Vector2i& _start, sf::Vector2i& _end, sf::Vector2i* _successors, int* _validSuccessors);
 			void jps();
 
-			//A* Jps Kcc
-			inline int Pathfinding::computeNextCases8Jps(const sf::Vector2i& _CurrentCase, sf::Vector2i _Array[eNEXT_CASES_NUMBER_8])
+			//A* Kcc
+			inline int Pathfinding::computeNextCases8Astar(const sf::Vector2i& _CurrentCase, sf::Vector2i _Array[eNEXT_CASES_NUMBER_8])
 			{
 				int iIndex(0);
 
@@ -190,7 +192,10 @@ namespace sfgmk
 			}
 			inline void switchElementFromList(stPATHFINDING_NODE* _Element);
 			inline stPATHFINDING_NODE* getSmallest();
-			inline bool checkInLists(const sf::Vector2i& _Coords);
+			inline stPATHFINDING_NODE* checkInLists(const sf::Vector2i& _Coords);
+			void aStarKcc();
+
+			//Jps Kcc
 			void jpsKcc();
 	};
 }

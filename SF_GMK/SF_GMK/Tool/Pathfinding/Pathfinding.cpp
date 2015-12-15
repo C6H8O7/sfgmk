@@ -19,6 +19,7 @@ namespace sfgmk
 		m_Algorithms.m_FunctionsArray.pushBack(new sfgmk::FoncterTemplateInstance<Pathfinding, void>(this, &Pathfinding::dijkstra));
 		m_Algorithms.m_FunctionsArray.pushBack(new sfgmk::FoncterTemplateInstance<Pathfinding, void>(this, &Pathfinding::aStar));
 		m_Algorithms.m_FunctionsArray.pushBack(new sfgmk::FoncterTemplateInstance<Pathfinding, void>(this, &Pathfinding::jps));
+		m_Algorithms.m_FunctionsArray.pushBack(new sfgmk::FoncterTemplateInstance<Pathfinding, void>(this, &Pathfinding::aStarKcc));
 		m_Algorithms.m_FunctionsArray.pushBack(new sfgmk::FoncterTemplateInstance<Pathfinding, void>(this, &Pathfinding::jpsKcc));
 
 		//Strings algos names
@@ -26,6 +27,7 @@ namespace sfgmk
 		m_sAlgosNames[eDijkstra] = "Dijkstra";
 		m_sAlgosNames[eAStar] = "A*";
 		m_sAlgosNames[eJps] = "Jps";
+		m_sAlgosNames[eAStarKcc] = "A*Kcc";
 		m_sAlgosNames[eJpsKcc] = "JpsKcc";
 	}
 
@@ -66,6 +68,12 @@ namespace sfgmk
 	stPATHFINDING_SIMPLIFIED_NODE** Pathfinding::getSimplifiedMap()
 	{
 		return m_SimplifiedMap;
+	}
+
+	void Pathfinding::resetMap()
+	{
+		desallocSimplifiedMap();
+		m_Map = NULL;
 	}
 
 
@@ -405,6 +413,8 @@ namespace sfgmk
 
 				if( !currCase->bTested )
 				{
+					m_uiCasesTested++;
+
 					if( astar_search_in_list(expanded_nodes[i], closed_list) < 0 && astar_search_in_list(expanded_nodes[i], open_list) < 0 )
 					{
 						//Coût diagonales
@@ -527,7 +537,7 @@ namespace sfgmk
 		return SmallestNode;
 	}
 
-	bool Pathfinding::checkInLists(const sf::Vector2i& _Coords)
+	Pathfinding::stPATHFINDING_NODE* Pathfinding::checkInLists(const sf::Vector2i& _Coords)
 	{
 		std::list<stPATHFINDING_NODE*>::iterator OpenListIt = m_JpsOpenList.begin();
 		std::list<stPATHFINDING_NODE*>::iterator CloseListIt = m_JpsCloseList.begin();
@@ -540,7 +550,7 @@ namespace sfgmk
 			if( i < m_JpsOpenList.size() )
 			{
 				if( (*OpenListIt)->GridCoords == _Coords )
-					return true;
+					return (*OpenListIt);
 
 				++OpenListIt;
 			}
@@ -548,7 +558,7 @@ namespace sfgmk
 			if( i < m_JpsCloseList.size() )
 			{
 				if( (*CloseListIt)->GridCoords == _Coords )
-					return true;
+					return (*CloseListIt);
 
 				++CloseListIt;
 			}
@@ -556,8 +566,81 @@ namespace sfgmk
 			i++;
 		}
 
-		return false;
+		return NULL;
 	}
+
+	void Pathfinding::aStarKcc()
+	{
+		stPATHFINDING_NODE* TempNode = NULL;
+		sf::Vector2i* TempVector = NULL;
+		stPATHFINDING_SIMPLIFIED_NODE* TempCase = NULL;
+		int iExpandedNodeNumber(0);
+
+		//On démarre du début
+		m_SimplifiedMap[m_Begin.x][m_Begin.y].bTested = true;
+		m_JpsOpenList.emplace_back(new stPATHFINDING_NODE(m_Begin, NULL, sf::Vector2i(0, 0), 0.0f, 0.0f, (float)ABS(m_End.x - m_Begin.x) + (float)ABS(m_End.y - m_Begin.y)));
+		TempNode = m_JpsOpenList.front();
+
+		while( !m_bStartFound && m_JpsOpenList.size() )
+		{
+			m_uiStep++;
+			switchElementFromList(TempNode);
+			TempVector = &m_JpsCloseList.back()->GridCoords;
+
+			//Cases adjacentes
+			iExpandedNodeNumber = computeNextCases8Astar(*TempVector, m_ExpandedNodes);
+
+			for( int j(0); j < iExpandedNodeNumber; j++ )
+			{
+				m_uiCasesTested++;
+
+				TempCase = &m_SimplifiedMap[m_ExpandedNodes[j].x][m_ExpandedNodes[j].y];
+
+				TempCase->bTested = true;
+				TempCase->uiStep = m_uiStep;
+
+				//Si on est pas déjà dans une des deux listes dans la close list
+				if( !checkInLists(m_ExpandedNodes[j]) )
+				{
+					float fCostSofar = j < eNEXT_CASES_NUMBER_4 ? 1.0f : 1.4f;
+
+					m_JpsOpenList.emplace_back(new stPATHFINDING_NODE(m_ExpandedNodes[j], m_JpsCloseList.back(), sf::Vector2i(0, 0), m_JpsCloseList.back()->fCostSoFar + fCostSofar, 0.0f, (float)ABS(m_End.x - m_ExpandedNodes[j].x) + (float)ABS(m_End.y - m_ExpandedNodes[j].y)));
+
+					//Si on trouve l'arrivée
+					if( m_ExpandedNodes[j] == m_End )
+					{
+						m_bStartFound = true;
+						j = eNEXT_CASES_NUMBER_8;
+					}
+				}
+			}
+			//Recherche l'élément avec la plus faible heurisitique
+			TempNode = getSmallest();
+		}
+
+		// Final path
+		if( m_bStartFound )
+		{
+			stPATHFINDING_NODE* End = m_JpsOpenList.back();
+
+			while( End->ParentPtr )
+			{
+				m_Path->push_back(End->GridCoords);
+				End = End->ParentPtr;
+			}
+
+			m_Path->push_back(End->GridCoords);
+		}
+
+		//Clear conteneurs
+		for( auto it = m_JpsOpenList.begin(); it != m_JpsOpenList.end(); ++it )
+			delete (*it);
+		m_JpsOpenList.clear();
+		for( auto it = m_JpsCloseList.begin(); it != m_JpsCloseList.end(); ++it )
+			delete (*it);
+		m_JpsCloseList.clear();
+	}
+
 
 	void Pathfinding::jpsKcc()
 	{
@@ -578,7 +661,7 @@ namespace sfgmk
 			TempVector = &m_JpsCloseList.back()->GridCoords;
 
 			//Cases adjacentes
-			iExpandedNodeNumber = computeNextCases8Jps(*TempVector, m_ExpandedNodes);
+			iExpandedNodeNumber = computeNextCases8Astar(*TempVector, m_ExpandedNodes);
 
 			for( int j(0); j < iExpandedNodeNumber; j++ )
 			{

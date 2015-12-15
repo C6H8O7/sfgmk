@@ -28,7 +28,7 @@ namespace sfgmk
 	}
 
 
-	bool PathfindingMap::loadMapFromFile(const char* _FileName)
+	bool PathfindingMap::loadMapFromFile(const char* _FileName, sf::Vector2i& _Begin, sf::Vector2i& _End)
 	{
 		freeMaps();
 
@@ -40,9 +40,10 @@ namespace sfgmk
 			return false;
 		}
 		
-		//Chargement
+		//Chargement:
 		std::cout << "Load file " << _FileName << std::endl;
 
+		//Taille de la map
 		fscanf_s(FileToLoad, "%d %d", &m_Width, &m_Height);
 		m_Map = (int*)malloc(sizeof(int) * (m_Width * m_Height));
 
@@ -59,26 +60,45 @@ namespace sfgmk
 			}
 		}
 
+		//Begin et end
 		char cBuffer = '\0';
+
+		while( (cBuffer = fgetc(FileToLoad)) != '\n' );
+		fscanf_s(FileToLoad, "%d", &_Begin.x);
+		cBuffer = fgetc(FileToLoad);
+		fscanf_s(FileToLoad, "%d", &_Begin.y);
+
+		while( (cBuffer = fgetc(FileToLoad)) != '\n' );
+		fscanf_s(FileToLoad, "%d", &_End.x);
+		cBuffer = fgetc(FileToLoad);
+		fscanf_s(FileToLoad, "%d", &_End.y);
+
+		while( (cBuffer = fgetc(FileToLoad)) != '\n' );
+
+		//Valeurs des cases
+		int iCharNumber = m_Width * m_Height;
 		int iIteration(0);
 		int iX(0), iY(0);
 
-		fgetc(FileToLoad); //'\n' première ligne
-		while( (cBuffer = fgetc(FileToLoad)) != EOF )
+		while( (cBuffer = fgetc(FileToLoad)) != EOF && iCharNumber > 0 )
 		{
 			if( !(cBuffer == '\n') )
 			{
+				iCharNumber--;
+
 				if( cBuffer == 48 )
-				{
-					m_Map[iIteration] = eGROUND;
-					m_SimplifiedMap[iX][iY].bIswall = false;
-				}
-				else if( cBuffer == 49 )
 				{
 					m_Map[iIteration] = eWALL;
 					m_SimplifiedMap[iX][iY].bIswall = true;
 				}
-
+				else if( cBuffer == 49 )
+				{
+					m_Map[iIteration] = eGROUND;
+					m_SimplifiedMap[iX][iY].bIswall = false;
+				}
+				
+				//Gestion heuristique spécifique à la case
+				m_SimplifiedMap[iX][iY].iAdditionalCost = m_Map[iIteration];
 				iIteration++;
 				iX++;
 			}
