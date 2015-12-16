@@ -72,7 +72,6 @@ namespace sfgmk
 			PathfindingPathCntr* m_Path;
 			bool m_bStartFound;
 			unsigned int m_uiStep;
-			unsigned int m_uiCasesTested;
 			sf::Clock m_Clock;
 			sf::Int64 m_ElapsedTime;
 
@@ -83,6 +82,9 @@ namespace sfgmk
 			//A*
 			std::list<stPATHFINDING_NODE*> m_JpsOpenList;
 			std::list<stPATHFINDING_NODE*> m_JpsCloseList;
+
+			//Jps
+			PathfindingPathCntr m_JpsSuccessors;
 
 		public:
 			void computePathfinding(PathfindingPathCntr* _Path, const ePATHFINDING_ALGOS& _Algo, PathfindingMap* _Map, const sf::Vector2i& _Begin, const sf::Vector2i& _End);
@@ -192,10 +194,13 @@ namespace sfgmk
 			}
 			inline void switchElementFromList(stPATHFINDING_NODE* _Element);
 			inline stPATHFINDING_NODE* getSmallest();
-			inline stPATHFINDING_NODE* checkInLists(const sf::Vector2i& _Coords);
+			inline void checkInLists(const sf::Vector2i& _Coords, stPATHFINDING_NODE* _ParentPtr, const float& _Heuristic);
 			void aStarKcc();
 
 			//Jps Kcc
+			int identifySuccessors(const sf::Vector2i& _CurrentCase);
+			sf::Vector2i* jump(const sf::Vector2i& _CurrentCase, const sf::Vector2i& _Direction);
+			//bool forcedNeighbours(const sf::Vector2i& _CurrentCase, const sf::Vector2i& _Direction);
 			void jpsKcc();
 	};
 }

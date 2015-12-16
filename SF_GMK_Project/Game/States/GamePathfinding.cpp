@@ -67,7 +67,7 @@ void StateGamePathfinding::init()
 void StateGamePathfinding::update()
 {
 	ShapeDrawer* Drawer = &SHAPE_DRAWER;
-	sf::Vector2f MouseWorld = MOUSE_WORLD_POS;
+	sf::Vector2i MouseWindow = MOUSE_WINDOW_POS;
 	sf::Vector2i FocusedCase = getMouseCase(MOUSE_WORLD_POS, HUD_SIZE);
 
 	//Clic dans la grille
@@ -109,7 +109,7 @@ void StateGamePathfinding::update()
 
 			for( std::string& FileName : m_MapFileName )
 			{
-				if( MouseWorld.x >= Position.x &&  MouseWorld.x <= FileName.length() * fTextSize * 0.5f && MouseWorld.y >= Position.y && MouseWorld.y <= Position.y + fTextSize )
+				if( MouseWindow.x >= Position.x &&  MouseWindow.x <= FileName.length() * fTextSize * 0.5f && MouseWindow.y >= Position.y && MouseWindow.y <= Position.y + fTextSize )
 				{
 					m_Path.clear();
 					m_Pathfinding.resetMap();
@@ -181,6 +181,7 @@ void StateGamePathfinding::draw()
 		m_HudText.setPosition(m_HudText.getPosition() + sf::Vector2f(0.0f, fTextSize));
 		Render->draw(m_HudText);
 	}
+	Render->display();
 
 	//Draw map
 	sf::Vector2f DecalX(0.0f, ARRAY_CASE_SIZE);
