@@ -164,8 +164,10 @@ namespace sfgmk
 
 			//Jps
 			inline void jps_forced_neighbours(sf::Vector2i& _current, sf::Vector2i& _dir, sf::Vector2i _forced[8], int* _forcedCount);
+			inline void jps_neighbours(sf::Vector2i& _current, sf::Vector2i& _dir, sf::Vector2i _neighbours[8], int* _neighboursCount);
+			inline void jps_all_neighbours(sf::Vector2i& _current, sf::Vector2i& _dir, sf::Vector2i _allNeighbours[8], int* _allNeighboursCount);
 			inline sf::Vector2i* jps_jump(sf::Vector2i& _current, sf::Vector2i& _start, sf::Vector2i& _end, sf::Vector2i& _dir);
-			inline void jps_identify_successors(sf::Vector2i& _current, sf::Vector2i& _start, sf::Vector2i& _end, sf::Vector2i* _successors, int* _validSuccessors);
+			inline void jps_identify_successors(sf::Vector2i& _current, sf::Vector2i& _start, sf::Vector2i& _end, sf::Vector2i _successors[8], int* _validSuccessors);
 			void jps();
 
 			//A* Kcc
