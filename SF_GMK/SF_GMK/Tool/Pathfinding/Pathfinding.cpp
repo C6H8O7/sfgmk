@@ -390,7 +390,7 @@ namespace sfgmk
 
 		// Algorithm
 		float f = astar_heuristic(m_End);
-		open_list.push_back(new stPATHFINDING_NODE(m_End, NULL, sf::Vector2i(0, 0), f, f));
+		open_list.push_back(new stPATHFINDING_NODE(m_End, NULL, sf::Vector2i(0, 0), 0.0f, f, f));
 
 		while( open_list.size() > 0 )
 		{
@@ -415,13 +415,43 @@ namespace sfgmk
 				{
 					m_uiCasesTested++;
 
-					if( astar_search_in_list(expanded_nodes[i], closed_list) < 0 && astar_search_in_list(expanded_nodes[i], open_list) < 0 )
-					{
-						//Coût diagonales
-						i > 4 ? cost = 1.4f : cost = 1.0f;
+					int closed_list_index = astar_search_in_list(expanded_nodes[i], closed_list);
+					int open_list_index = astar_search_in_list(expanded_nodes[i], open_list);
 
+					//Coût diagonales
+					i > 4 ? cost = currCase->iAdditionalCost + 0.4f : cost = currCase->iAdditionalCost;
+					float costSoFar = smallest->fCostSoFar + cost;
+
+					if (closed_list_index >= 0)
+					{
+						stPATHFINDING_NODE* node = closed_list[closed_list_index];
+
+						if (costSoFar < node->fCostSoFar)
+						{
+							node->fCostSoFar = costSoFar;
+							node->fEstimatedTotalCost = node->fCostSoFar + node->fHeuristic;
+							node->ParentPtr = smallest;
+
+							astar_remove_from_list(node, closed_list, false);
+
+							open_list.push_back(node);
+						}
+					}
+					else if (open_list_index >= 0)
+					{
+						stPATHFINDING_NODE* node = open_list[open_list_index];
+
+						if (costSoFar < node->fCostSoFar)
+						{
+							node->fCostSoFar = costSoFar;
+							node->fEstimatedTotalCost = node->fCostSoFar + node->fHeuristic;
+							node->ParentPtr = smallest;
+						}
+					}
+					else
+					{
 						newNode = new stPATHFINDING_NODE(expanded_nodes[i], smallest);
-						newNode->fCostSoFar = newNode->ParentPtr->fCostSoFar + cost;
+						newNode->fCostSoFar = costSoFar;
 						newNode->fHeuristic = astar_heuristic(newNode->GridCoords);
 						newNode->fEstimatedTotalCost = newNode->fCostSoFar + newNode->fHeuristic;
 
