@@ -224,7 +224,9 @@ void StateGamePathfinding::draw()
 		}
 	}
 
-	Render->draw(m_ExplorationSprite);
+	//Draw exploration
+	if( m_Path.size() )
+		Render->draw(m_ExplorationSprite);
 
 	//Draw begin / end
 	Case.setFillColor(BEGIN_COLOR);
@@ -305,6 +307,6 @@ void StateGamePathfinding::drawExploration()
 	}*/
 
 	m_RenderExploration->display();
-	m_ExplorationSprite.setTexture(m_RenderExploration->getTexture());
+	m_ExplorationSprite.setTexture(m_RenderExploration->getTexture(), true);
 	m_ExplorationSprite.setPosition(HUD_SIZE);
 }
