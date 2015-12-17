@@ -414,7 +414,7 @@ namespace sfgmk
 					if( astar_search_in_list(expanded_nodes[i], closed_list) < 0 && astar_search_in_list(expanded_nodes[i], open_list) < 0 )
 					{
 						//Coût diagonales
-						i > 4 ? cost = 1.4f : cost = 1.0f;
+						i > 4 ? cost = (float)currCase->iAdditionalCost + 0.4f : cost = (float)currCase->iAdditionalCost;
 
 						newNode = new stPATHFINDING_NODE(expanded_nodes[i], smallest);
 						newNode->fCostSoFar = newNode->ParentPtr->fCostSoFar + cost;
@@ -452,15 +452,117 @@ namespace sfgmk
 
 	void Pathfinding::jps_forced_neighbours(sf::Vector2i& _current, sf::Vector2i& _dir, sf::Vector2i _forced[8], int* _forcedCount)
 	{
-		// TODO récupérer tous les voisins forcés
+		sf::Vector2i testWall;
+
+		// Diagonal
+		if (_dir.x && _dir.y)
+		{
+			testWall = sf::Vector2i(_current.x - _dir.x, _current.y);
+			if (isInCases(testWall) && isWall(testWall))
+			{
+				sf::Vector2i forced(_current.x - _dir.x, _current.y + _dir.y);
+				
+				if (isInCases(forced) && !isWall(forced))
+					_forced[(*_forcedCount)++] = forced;
+			}
+			testWall = sf::Vector2i(_current.x, _current.y - _dir.y);
+			if (isInCases(testWall) && isWall(testWall))
+			{
+				sf::Vector2i forced(_current.x + _dir.x, _current.y - _dir.y);
+
+				if (isInCases(forced) && !isWall(forced))
+					_forced[(*_forcedCount)++] = forced;
+			}
+		}
+		// Horizontal
+		else if (_dir.x)
+		{
+			testWall = sf::Vector2i(_current.x, _current.y - 1);
+			if (isInCases(testWall) && isWall(testWall))
+			{
+				sf::Vector2i forced(_current.x + _dir.x, _current.y - 1);
+
+				if (isInCases(forced) && !isWall(forced))
+					_forced[(*_forcedCount)++] = forced;
+			}
+			testWall = sf::Vector2i(_current.x, _current.y + 1);
+			if (isInCases(testWall) && isWall(testWall))
+			{
+				sf::Vector2i forced(_current.x + _dir.x, _current.y + 1);
+
+				if (isInCases(forced) && !isWall(forced))
+					_forced[(*_forcedCount)++] = forced;
+			}
+		}
+		// Vertical
+		else if (_dir.y)
+		{
+			testWall = sf::Vector2i(_current.x - 1, _current.y);
+			if (isInCases(testWall) && isWall(testWall))
+			{
+				sf::Vector2i forced(_current.x - 1 ,_current.y + _dir.y);
+
+				if (isInCases(forced) && !isWall(forced))
+					_forced[(*_forcedCount)++] = forced;
+			}
+			testWall = sf::Vector2i(_current.x + 1, _current.y);
+			if (isInCases(testWall) && isWall(testWall))
+			{
+				sf::Vector2i forced(_current.x + 1 ,_current.y + _dir.y);
+
+				if (isInCases(forced) && !isWall(forced))
+					_forced[(*_forcedCount)++] = forced;
+			}
+		}
+	}
+
+	void Pathfinding::jps_neighbours(sf::Vector2i& _current, sf::Vector2i& _dir, sf::Vector2i _neighbours[8], int* _neighboursCount)
+	{
+		if (_dir.x && _dir.y)
+		{
+			sf::Vector2i n[3];
+			n[0] = sf::Vector2i(_current.x, _current.y + _dir.y);
+			n[1] = sf::Vector2i(_current.x + _dir.x, _current.y);
+			n[2] = sf::Vector2i(_current.x + _dir.x, _current.y + _dir.y);
+
+			for (int i = 0; i < 3; i++)
+				if (isInCases(n[i]) && !isWall(n[i]))
+					_neighbours[(*_neighboursCount)++] = n[i];
+		}
+		else
+		{
+			sf::Vector2i n(_current.x + _dir.x, _current.y + _dir.y);
+
+			if (isInCases(n) && !isWall(n))
+				_neighbours[(*_neighboursCount)++] = n;
+		}
+	}
+
+	void Pathfinding::jps_all_neighbours(sf::Vector2i& _current, sf::Vector2i& _dir, sf::Vector2i _allNeighbours[8], int* _allNeighboursCount)
+	{
+		int countNormal = 0, countForced = 0;
+		sf::Vector2i normal[8], forced[8];
+
+		jps_neighbours(_current, _dir, normal, &countNormal);
+		jps_forced_neighbours(_current, _dir, forced, &countForced);
+
+		for (int i = 0; i < countNormal; i++)
+			_allNeighbours[(*_allNeighboursCount)++] = normal[i];
+
+		for (int i = 0; i < countForced; i++)
+			_allNeighbours[(*_allNeighboursCount)++] = forced[i];
 	}
 
 	sf::Vector2i* Pathfinding::jps_jump(sf::Vector2i& _current, sf::Vector2i& _start, sf::Vector2i& _end, sf::Vector2i& _dir)
 	{
 		sf::Vector2i next(_current + _dir);
 
+		if (!isInCases(next) || isWall(next))
+			return 0;
+
 		// On vérifie qu'on est pas tombés sur l'arrivée
-		if (next == _end) return new sf::Vector2i(_end);
+		if (next == _end)
+			return new sf::Vector2i(_end);
 
 		// Vérification voisin forcé
 		int forced_count = 0;
@@ -484,12 +586,17 @@ namespace sfgmk
 		return jps_jump(next, _start, _end, _dir);
 	}
 
-	void Pathfinding::jps_identify_successors(sf::Vector2i& _current, sf::Vector2i& _start, sf::Vector2i& _end, sf::Vector2i* _successors, int* _validSuccessors)
+	void Pathfinding::jps_identify_successors(sf::Vector2i& _current, sf::Vector2i& _start, sf::Vector2i& _end, sf::Vector2i _successors[8], int* _validSuccessors)
 	{
 		int valid_expanded_nodes = 0;
 		sf::Vector2i expanded_nodes[8];
 
 		// On récupère tous les voisins valables
+		float dx = (float)(_end.x - _start.x);
+		float dy = (float)(_end.y - _start.y);
+
+		sf::Vector2i dir((int)(dx / ABS(dx)), (int)(dy / ABS(dy)));
+		//jps_all_neighbours(_current, dir, expanded_nodes, &valid_expanded_nodes);
 		astar_compute_next_cases(_current, expanded_nodes, &valid_expanded_nodes);
 
 		sf::Vector2i direction;
@@ -512,6 +619,116 @@ namespace sfgmk
 	{
 		// TODO
 		// http://users.cecs.anu.edu.au/~dharabor/data/papers/harabor-grastien-aaai11.pdf
+
+		float cost = 1.0f;
+
+		bool found = false;
+		std::vector<stPATHFINDING_NODE*> open_list;
+		std::vector<stPATHFINDING_NODE*> closed_list;
+
+		int valid = 0;
+		sf::Vector2i expanded_nodes[8];
+
+		stPATHFINDING_NODE* smallest = 0;
+		stPATHFINDING_SIMPLIFIED_NODE* currCase = 0;
+		stPATHFINDING_NODE* newNode = 0;
+
+		// Algorithm
+		float f = astar_heuristic(m_End);
+		open_list.push_back(new stPATHFINDING_NODE(m_End, NULL, sf::Vector2i(0, 0), 0.0f, f, f));
+
+		while (open_list.size() > 0)
+		{
+			m_uiStep++;
+
+			smallest = astar_find_smallest(open_list);
+
+			if (smallest->GridCoords == m_Begin)
+			{
+				found = true;
+				break;
+			}
+
+			valid = 0;
+			jps_identify_successors(smallest->GridCoords, m_End, m_Begin, expanded_nodes, &valid);
+			//astar_compute_next_cases(smallest->GridCoords, expanded_nodes, &valid);
+
+			for (int i = 0; i < valid; i++)
+			{
+				currCase = &m_SimplifiedMap[expanded_nodes[i].x][expanded_nodes[i].y];
+
+				if (!currCase->bTested)
+				{
+					int closed_list_index = astar_search_in_list(expanded_nodes[i], closed_list);
+					int open_list_index = astar_search_in_list(expanded_nodes[i], open_list);
+
+					//Coût diagonales
+					i > 4 ? cost = (float)currCase->iAdditionalCost + 0.4f : cost = (float)currCase->iAdditionalCost;
+					float costSoFar = smallest->fCostSoFar + cost;
+
+					if (closed_list_index < 0 && open_list_index < 0)
+					{
+						sf::Vector2i DirectionFromParent = expanded_nodes[i] - smallest->GridCoords;
+						bool bSign(false);
+						if( DirectionFromParent.x != 0 )
+						{
+							if( DirectionFromParent.x < 0 )
+								bSign = true;
+							DirectionFromParent.x = DirectionFromParent.x / DirectionFromParent.x;
+							if( bSign )
+								DirectionFromParent.x = -DirectionFromParent.x;
+						}
+						bSign = false;
+
+						if( DirectionFromParent.y != 0 )
+						{
+							if( DirectionFromParent.y < 0 )
+								bSign = true;
+							DirectionFromParent.y = DirectionFromParent.y / DirectionFromParent.y;
+							if( bSign )
+								DirectionFromParent.y = -DirectionFromParent.y;
+						}
+
+						newNode = new stPATHFINDING_NODE(expanded_nodes[i], smallest, DirectionFromParent);
+						newNode->fCostSoFar = costSoFar;
+						newNode->fHeuristic = astar_heuristic(newNode->GridCoords);
+						newNode->fEstimatedTotalCost = newNode->fCostSoFar + newNode->fHeuristic;
+
+						currCase->bTested = true;
+						currCase->uiStep = (int)newNode->fEstimatedTotalCost;
+
+						open_list.push_back(newNode);
+					}
+				}
+			}
+
+			astar_remove_from_list(smallest, open_list, false);
+
+			closed_list.push_back(smallest);
+		}
+
+		// Final path
+		if (found)
+		{
+			stPATHFINDING_NODE* prev = 0;
+			stPATHFINDING_NODE* curr = astar_find_smallest(open_list);
+
+			while (curr->ParentPtr)
+			{
+				m_Path->push_back(curr->GridCoords);
+
+				prev = curr;
+				curr = curr->ParentPtr;
+
+				while( prev->GridCoords != curr->GridCoords )
+				{
+					prev->GridCoords -= prev->DirectionFromParent;
+					m_Path->push_back(prev->GridCoords);
+				}
+			}
+
+			m_Path->push_back(curr->GridCoords);
+		}
 	}
 
 
@@ -602,7 +819,8 @@ namespace sfgmk
 
 			for( int j(0); j < iExpandedNodeNumber; j++ )
 			{
-				float fCostSofar = j < eNEXT_CASES_NUMBER_4 ? 1.0f : 1.4f;
+				//float fCostSofar = j < eNEXT_CASES_NUMBER_4 ? 1.0f : 1.4f;
+				/*Version Colin*/ float fCostSofar = j < eNEXT_CASES_NUMBER_4 ? m_SimplifiedMap[m_ExpandedNodes[j].x][m_ExpandedNodes[j].y].iAdditionalCost : m_SimplifiedMap[m_ExpandedNodes[j].x][m_ExpandedNodes[j].y].iAdditionalCost + 0.4f;
 				TempCase = &m_SimplifiedMap[m_ExpandedNodes[j].x][m_ExpandedNodes[j].y];
 
 				//Si la case n'avait pas encore été découverte
@@ -622,8 +840,8 @@ namespace sfgmk
 					}
 				}
 				//Si la case était déjà découverte, on vérifie qu'on a pas trouvé un chemin plus court
-				//else
-				//	checkInLists(m_ExpandedNodes[j], m_JpsCloseList.back(), m_JpsCloseList.back()->fEstimatedTotalCost + fCostSofar);
+				/*else
+					checkInLists(m_ExpandedNodes[j], m_JpsCloseList.back(), m_JpsCloseList.back()->fEstimatedTotalCost + fCostSofar);*/
 			}
 			//Recherche l'élément avec la plus faible heurisitique
 			TempNode = getSmallest();
@@ -654,33 +872,6 @@ namespace sfgmk
 	}
 
 
-	sf::Vector2i* Pathfinding::jump(const sf::Vector2i& _CurrentCase, const sf::Vector2i& _Direction)
-	{
-		sf::Vector2i CurrentProgressPos = _CurrentCase;
-
-		while( 1 )
-		{
-			CurrentProgressPos += _Direction;
-
-			//Si la case suivante n'est pas valide
-			if( !(isInCases(CurrentProgressPos)) )
-				return NULL;
-			if( m_SimplifiedMap[CurrentProgressPos.x][CurrentProgressPos.y].bIswall )
-				return NULL;
-
-			//Si on a trouvé l'arrivée
-			if( CurrentProgressPos == m_End )
-				return &m_End;
-
-			//Si on a un voisin forcé, on retourne cette case
-			//if( forcedNeighbours(CurrentProgressPos, _Direction) )
-			//	return &CurrentProgressPos;
-
-			//Sinon appel récursif à "Jump"
-			return jump(CurrentProgressPos, _Direction);
-		}
-	}
-
 	int Pathfinding::identifySuccessors(const sf::Vector2i& _CurrentCase)
 	{
 		sf::Vector2i Direction(0, 0);
@@ -693,7 +884,7 @@ namespace sfgmk
 		for( int i(0); i < iExpandedNodeNumber; i++ )
 		{
 			Direction = m_ExpandedNodes[i] - _CurrentCase;
-			JumpPoint = jump(m_ExpandedNodes[i], Direction);
+			JumpPoint = jump(_CurrentCase, Direction);
 
 			//If jump point found, add it to the list
 			if( JumpPoint )
@@ -701,6 +892,113 @@ namespace sfgmk
 		}
 
 		return m_JpsSuccessors.size();
+	}
+
+	sf::Vector2i* Pathfinding::jump(const sf::Vector2i& _CurrentCase, const sf::Vector2i& _Direction)
+	{
+		sf::Vector2i* ReturnedPoint(NULL);
+		m_JpsProgress = _CurrentCase + _Direction;
+
+		//Si la case suivante n'est pas valide
+		if( !(isInCases(m_JpsProgress)) )
+			return NULL;
+		if( m_SimplifiedMap[m_JpsProgress.x][m_JpsProgress.y].bIswall )
+			return NULL;
+
+		//Si on a trouvé l'arrivée
+		if( m_JpsProgress == m_End )
+			return &m_End;
+
+		//Voisins forcés
+		if( forcedNeighbours(m_JpsProgress, _Direction) )
+			return &m_JpsProgress;
+
+		//Si on se déplace en diagonale, on essaye de jump horizontalement puis verticalement AVANT de progresser en diagonale
+		if( _Direction.x != 0 && _Direction.y != 0 )
+		{
+			//Check horizontal and vertical directions for forced neighbours
+			if( (ReturnedPoint = jump(m_JpsProgress, sf::Vector2i(_Direction.x, 0))) || (ReturnedPoint = jump(m_JpsProgress, sf::Vector2i(0, _Direction.y))) )
+				return ReturnedPoint;
+		}
+
+		return jump(m_JpsProgress, _Direction);
+	}
+
+	bool Pathfinding::forcedNeighbours(const sf::Vector2i& _CurrentCase, const sf::Vector2i& _Direction)
+	{
+		sf::Vector2i CaseToTest;
+
+		//Diagonal (les 2 points testés sont ceux qui correspondraient à un mur en diagonale qui empécherait d'aller de "_CurrentCase" à "_CurrentCase + _Direction"
+		if( _Direction.x != 0 && _Direction.y != 0 )
+		{
+			CaseToTest = sf::Vector2i(_CurrentCase.x - _Direction.x, _CurrentCase.y);
+			if( isInCases(CaseToTest) && isWall(CaseToTest) )
+			{
+				sf::Vector2i ForcedNeighbour(_CurrentCase.x - _Direction.x, _CurrentCase.y + _Direction.y);
+
+				if( isInCases(ForcedNeighbour) && !isWall(ForcedNeighbour) )
+					return true;
+			}
+
+			CaseToTest = sf::Vector2i(_CurrentCase.x, _CurrentCase.y - _Direction.y);
+			if( isInCases(CaseToTest) && isWall(CaseToTest) )
+			{
+				sf::Vector2i ForcedNeighbour(_CurrentCase.x + _Direction.x, _CurrentCase.y - _Direction.y);
+
+				if( isInCases(ForcedNeighbour) && !isWall(ForcedNeighbour) )
+					return true;
+			}
+		}
+
+		//Horizontal
+		else if( _Direction.x != 0 )
+		{
+			//Case du dessus
+			CaseToTest = sf::Vector2i(_CurrentCase.x, _CurrentCase.y - 1);
+			if( isInCases(CaseToTest) && isWall(CaseToTest) )
+			{
+				sf::Vector2i ForcedNeighbour(_CurrentCase.x + _Direction.x, _CurrentCase.y - 1);
+
+				if( isInCases(ForcedNeighbour) && !isWall(ForcedNeighbour) )
+					return true;
+			}
+
+			//Case du dessous
+			CaseToTest = sf::Vector2i(_CurrentCase.x, _CurrentCase.y + 1);
+			if( isInCases(CaseToTest) && isWall(CaseToTest) )
+			{
+				sf::Vector2i ForcedNeighbour(_CurrentCase.x + _Direction.x, _CurrentCase.y + 1);
+
+				if( isInCases(ForcedNeighbour) && !isWall(ForcedNeighbour) )
+					return true;
+			}
+		}
+
+		//Vertical
+		else
+		{
+			//Case de gauche
+			CaseToTest = sf::Vector2i(_CurrentCase.x - 1, _CurrentCase.y);
+			if( isInCases(CaseToTest) && isWall(CaseToTest) )
+			{
+				sf::Vector2i ForcedNeighbour(_CurrentCase.x - 1, _CurrentCase.y + _Direction.y);
+
+				if( isInCases(ForcedNeighbour) && !isWall(ForcedNeighbour) )
+					return true;
+			}
+
+			//Case de droite
+			CaseToTest = sf::Vector2i(_CurrentCase.x + 1, _CurrentCase.y);
+			if( isInCases(CaseToTest) && isWall(CaseToTest) )
+			{
+				sf::Vector2i ForcedNeighbour(_CurrentCase.x + 1, _CurrentCase.y + _Direction.y);
+
+				if( isInCases(ForcedNeighbour) && !isWall(ForcedNeighbour) )
+					return true;
+			}
+		}
+
+		return false;
 	}
 
 	void Pathfinding::jpsKcc()
@@ -724,30 +1022,33 @@ namespace sfgmk
 			//Cases adjacentes
 			m_JpsSuccessors.clear();
 			iSuccessorsNodeNumber = identifySuccessors(*TempVector);
-
-			for( int j(0); j < iSuccessorsNodeNumber; j++ )
+		
+			for( int i(0); i< iSuccessorsNodeNumber; i++ )
 			{
-				float fCostSofar = j < eNEXT_CASES_NUMBER_4 ? 1.0f : 1.4f;
-				TempCase = &m_SimplifiedMap[m_ExpandedNodes[j].x][m_ExpandedNodes[j].y];
+				TempVector = &m_JpsSuccessors[i];
+
+				//float fCostSofar = j < eNEXT_CASES_NUMBER_4 ? 1.0f : 1.4f;
+				/*Version Colin*/ float fCostSofar = i < eNEXT_CASES_NUMBER_4 ? m_SimplifiedMap[TempVector[i].x][TempVector[i].y].iAdditionalCost : m_SimplifiedMap[TempVector[i].x][TempVector[i].y].iAdditionalCost + 0.4f;
+				TempCase = &m_SimplifiedMap[TempVector[i].x][TempVector[i].y];
 
 				//Si la case n'avait pas encore été découverte
 				if( !TempCase->bTested )
 				{
 					TempCase->bTested = true;
 					TempCase->uiStep = m_uiStep;
-					TempNode = new stPATHFINDING_NODE(m_ExpandedNodes[j], m_JpsCloseList.back(), sf::Vector2i(0, 0), 0.0f, 0.0f, (float)ABS(m_End.x - m_ExpandedNodes[j].x) + (float)ABS(m_End.y - m_ExpandedNodes[j].y));
+					TempNode = new stPATHFINDING_NODE(TempVector[i], m_JpsCloseList.back(), sf::Vector2i(0, 0), 0.0f, 0.0f, (float)ABS(m_End.x - TempVector[i].x) + (float)ABS(m_End.y - TempVector[i].y));
 					m_JpsOpenList.emplace_back(TempNode);
 
 					//Si on trouve l'arrivée
-					if( m_ExpandedNodes[j] == m_End )
+					if( TempVector[i] == m_End )
 					{
 						m_bStartFound = true;
-						j = eNEXT_CASES_NUMBER_8;
+						i = iSuccessorsNodeNumber;
 					}
 				}
 				//Si la case était déjà découverte, on vérifie qu'on a pas trouvé un chemin plus court
 				else
-					checkInLists(m_ExpandedNodes[j], m_JpsCloseList.back(), m_JpsCloseList.back()->fEstimatedTotalCost + fCostSofar);
+					checkInLists(TempVector[i], m_JpsCloseList.back(), m_JpsCloseList.back()->fEstimatedTotalCost + fCostSofar);
 			}
 			//Recherche l'élément avec la plus faible heurisitique
 			TempNode = getSmallest();

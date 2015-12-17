@@ -84,6 +84,7 @@ namespace sfgmk
 			std::list<stPATHFINDING_NODE*> m_JpsCloseList;
 
 			//Jps
+			sf::Vector2i m_JpsProgress;
 			PathfindingPathCntr m_JpsSuccessors;
 
 		public:
@@ -96,6 +97,14 @@ namespace sfgmk
 			void allocSimplifiedMap();
 			void desallocSimplifiedMap();
 
+			inline bool isInCases(const sf::Vector2i& _Position)
+			{
+				return (_Position.x >= 0 && _Position.x < m_Size.x && _Position.y >= 0 && _Position.y < m_Size.y);
+			}
+			inline bool Pathfinding::isWall(const sf::Vector2i& _Position)
+			{
+				return m_SimplifiedMap[_Position.x][_Position.y].bIswall;
+			}
 			inline bool Pathfinding::checkDiagonalWall(const sf::Vector2i& _CaseOne, const sf::Vector2i& _CaseTwo)
 			{
 				m_CasesToTest[0] = sf::Vector2i(_CaseOne.x, _CaseTwo.y);
@@ -149,14 +158,6 @@ namespace sfgmk
 			void dijkstra();
 
 			//A*
-			inline bool isInCases(const sf::Vector2i& _Position)
-			{
-				return (_Position.x >= 0 && _Position.x < m_Size.x && _Position.y >= 0 && _Position.y < m_Size.y);
-			}
-			bool Pathfinding::isWall(const sf::Vector2i& _Position)
-			{
-				return m_SimplifiedMap[_Position.x][_Position.y].bIswall;
-			}
 			inline void astar_compute_next_cases(sf::Vector2i _current, sf::Vector2i _cases[8], int* _validCases);
 			inline int astar_search_in_list(const sf::Vector2i& _node, std::vector<stPATHFINDING_NODE*>& _list);
 			inline void astar_remove_from_list(stPATHFINDING_NODE* _node, std::vector<stPATHFINDING_NODE*>& _list, bool _delete);
@@ -166,8 +167,10 @@ namespace sfgmk
 
 			//Jps
 			inline void jps_forced_neighbours(sf::Vector2i& _current, sf::Vector2i& _dir, sf::Vector2i _forced[8], int* _forcedCount);
+			inline void jps_neighbours(sf::Vector2i& _current, sf::Vector2i& _dir, sf::Vector2i _neighbours[8], int* _neighboursCount);
+			inline void jps_all_neighbours(sf::Vector2i& _current, sf::Vector2i& _dir, sf::Vector2i _allNeighbours[8], int* _allNeighboursCount);
 			inline sf::Vector2i* jps_jump(sf::Vector2i& _current, sf::Vector2i& _start, sf::Vector2i& _end, sf::Vector2i& _dir);
-			inline void jps_identify_successors(sf::Vector2i& _current, sf::Vector2i& _start, sf::Vector2i& _end, sf::Vector2i* _successors, int* _validSuccessors);
+			inline void jps_identify_successors(sf::Vector2i& _current, sf::Vector2i& _start, sf::Vector2i& _end, sf::Vector2i _successors[8], int* _validSuccessors);
 			void jps();
 
 			//A* Kcc
@@ -200,7 +203,7 @@ namespace sfgmk
 			//Jps Kcc
 			int identifySuccessors(const sf::Vector2i& _CurrentCase);
 			sf::Vector2i* jump(const sf::Vector2i& _CurrentCase, const sf::Vector2i& _Direction);
-			//bool forcedNeighbours(const sf::Vector2i& _CurrentCase, const sf::Vector2i& _Direction);
+			bool forcedNeighbours(const sf::Vector2i& _CurrentCase, const sf::Vector2i& _Direction);
 			void jpsKcc();
 	};
 }
