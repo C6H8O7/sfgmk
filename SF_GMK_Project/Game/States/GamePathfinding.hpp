@@ -24,6 +24,9 @@ class StateGamePathfinding : public sfgmk::engine::State
 
 		Pathfinding m_Pathfinding;
 
+		sf::RenderTexture* m_RenderExploration;
+		sf::Sprite m_ExplorationSprite;
+
 	public:
 		void init();
 		void update();
@@ -34,7 +37,6 @@ class StateGamePathfinding : public sfgmk::engine::State
 		sf::Vector2i getMouseCase(const sf::Vector2f& _MouseWorldPos, const sf::Vector2f& _MapDecal = sf::Vector2f(0.0f, 0.0f));
 		bool isInCases(const sf::Vector2i& _Position);
 
-		void drawCase(sf::RenderTexture* _Render, const sf::Vector2f& _Position, const sf::Color& _Color);
 		void drawExploration();
 };
 

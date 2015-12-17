@@ -14,7 +14,7 @@ using namespace sfgmk;
 #define PATH_COLOR sf::Color(200, 255, 0, 150)
 #define EXPLORATION_COLOR sf::Color(100, 255, 0, 100)
 
-StateGamePathfinding::StateGamePathfinding() : m_uiAlgoChosen(0U), m_Begin(sf::Vector2i(-1, -1)), m_End(sf::Vector2i(-1, -1))
+StateGamePathfinding::StateGamePathfinding() : m_uiAlgoChosen(0U), m_Begin(sf::Vector2i(-1, -1)), m_End(sf::Vector2i(-1, -1)), m_RenderExploration(NULL)
 {
 }
 
@@ -119,6 +119,11 @@ void StateGamePathfinding::update()
 				iIndex++;
 				Position.y += fTextSize;
 			}
+
+			SAFE_DELETE(m_RenderExploration);
+			m_RenderExploration = new sf::RenderTexture();
+			m_RenderExploration->create(ARRAY_CASE_SIZE * m_Map.getMapWidth(), ARRAY_CASE_SIZE * m_Map.getMapHeight());
+			m_RenderExploration->clear(sf::Color::Transparent);
 		}
 	}
 
@@ -136,6 +141,7 @@ void StateGamePathfinding::update()
 		std::cout << "Pathfinding computing..." << std::endl;
 		//std::thread* NewPathfindingThread  = new std::thread(&Pathfinding::computePathfinding, &m_Pathfinding, &m_Path, ePATHFINDING_ALGOS(m_uiAlgoChosen), &m_Map, m_Begin, m_End);
 		m_Pathfinding.computePathfinding(&m_Path, ePATHFINDING_ALGOS(m_uiAlgoChosen), &m_Map, m_Begin, m_End);
+		drawExploration();
 	}
 }
 
@@ -218,23 +224,7 @@ void StateGamePathfinding::draw()
 		}
 	}
 
-	//Draw exploration
-	stPATHFINDING_SIMPLIFIED_NODE** SimplifiedMap = m_Pathfinding.getSimplifiedMap();
-	if( SimplifiedMap )
-	{
-		Case.setFillColor(EXPLORATION_COLOR);
-		for( int i(0); i < m_Map.getMapWidth(); i++ )
-		{
-			for( int j(0); j < m_Map.getMapHeight(); j++ )
-			{
-				if( SimplifiedMap[i][j].bTested )
-				{
-					Case.setPosition(sf::Vector2f(HUD_SIZE.x + i * ARRAY_CASE_SIZE + 1.0f, HUD_SIZE.y + j * ARRAY_CASE_SIZE + 1.0f));
-					Render->draw(Case);
-				}
-			}
-		}
-	}
+	Render->draw(m_ExplorationSprite);
 
 	//Draw begin / end
 	Case.setFillColor(BEGIN_COLOR);
@@ -244,17 +234,6 @@ void StateGamePathfinding::draw()
 	Case.setFillColor(END_COLOR);
 	Case.setPosition(sf::Vector2f(HUD_SIZE.x + m_End.x * ARRAY_CASE_SIZE + 1.0f, HUD_SIZE.y + m_End.y * ARRAY_CASE_SIZE + 1.0f));
 	Render->draw(Case);
-
-	//Draw path
-	sf::CircleShape Circle(ARRAY_CASE_SIZE * 0.5f, 8);
-	Circle.setFillColor(PATH_COLOR);
-	Circle.setOutlineThickness(0);
-
-	for( size_t i(0); i < m_Path.size(); i++ )
-	{
-		Circle.setPosition(sf::Vector2f(m_Path[i].x * ARRAY_CASE_SIZE + HUD_SIZE.x, m_Path[i].y * ARRAY_CASE_SIZE + HUD_SIZE.y));
-		Render->draw(Circle);
-	}
 }
 
 
@@ -269,17 +248,45 @@ bool StateGamePathfinding::isInCases(const sf::Vector2i& _Position)
 }
 
 
-void StateGamePathfinding::drawCase(sf::RenderTexture* _Render, const sf::Vector2f& _Position, const sf::Color& _Color)
-{
-	SHAPE_DRAWER.drawRectangle(sf::Vector2f(_Position.x * ARRAY_CASE_SIZE + 1.0f, _Position.y * ARRAY_CASE_SIZE + 1.0f), sf::Vector2f(ARRAY_CASE_SIZE - 2.0f, ARRAY_CASE_SIZE - 2.0f), _Render, _Color);
-}
-
 void StateGamePathfinding::drawExploration()
 {
-	/*m_RenderExploration->clear(sf::Color::Transparent);
+	m_RenderExploration->clear(sf::Color::Transparent);
 	sf::Vector2f TextSize;
 
-	for( int i(0); i < m_ArraySize.x; i++ )
+	//Draw exploration
+	sf::RectangleShape Case(sf::Vector2f(ARRAY_CASE_SIZE - 2.0f, ARRAY_CASE_SIZE - 2.0f));
+	Case.setFillColor(EXPLORATION_COLOR);
+	Case.setOutlineThickness(0);
+
+	stPATHFINDING_SIMPLIFIED_NODE** SimplifiedMap = m_Pathfinding.getSimplifiedMap();
+	if( SimplifiedMap )
+	{
+		for( int i(0); i < m_Map.getMapWidth(); i++ )
+		{
+			for( int j(0); j < m_Map.getMapHeight(); j++ )
+			{
+				if( SimplifiedMap[i][j].bTested )
+				{
+					Case.setPosition(sf::Vector2f(i * ARRAY_CASE_SIZE + 1.0f, j * ARRAY_CASE_SIZE + 1.0f));
+					m_RenderExploration->draw(Case);
+				}
+			}
+		}
+	}
+
+	//Draw path
+	sf::CircleShape Circle(ARRAY_CASE_SIZE * 0.5f, 8);
+	Circle.setFillColor(PATH_COLOR);
+	Circle.setOutlineThickness(0);
+
+	for( size_t i(0); i < m_Path.size(); i++ )
+	{
+		Circle.setPosition(sf::Vector2f(m_Path[i].x * ARRAY_CASE_SIZE, m_Path[i].y * ARRAY_CASE_SIZE));
+		m_RenderExploration->draw(Circle);
+	}
+
+	//Indices
+	/*for( int i(0); i < m_ArraySize.x; i++ )
 	{
 		for( int j(0); j < m_ArraySize.y; j++ )
 		{
@@ -295,9 +302,9 @@ void StateGamePathfinding::drawExploration()
 				m_RenderExploration->draw(m_PathfindingText);
 			}
 		}
-	}
+	}*/
 
 	m_RenderExploration->display();
-	m_RenderExplorationSprite.setTexture(m_RenderExploration->getTexture(), true);
-	m_RenderExplorationSprite.setPosition(HUD_SIZE);*/
+	m_ExplorationSprite.setTexture(m_RenderExploration->getTexture());
+	m_ExplorationSprite.setPosition(HUD_SIZE);
 }
