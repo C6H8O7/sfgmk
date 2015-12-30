@@ -22,7 +22,7 @@ namespace sfgmk
 	#define OnAnyMsg if(msg)
 	#define OnMsg(a) if(msg && msg->GetTag() == a)
 
-	#define STATE_NAME_STRING_LENGTH 5
+	#define STATE_NAME_STRING_LENGTH 5U
 
 	namespace engine
 	{

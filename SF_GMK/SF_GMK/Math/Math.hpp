@@ -34,7 +34,7 @@ namespace sfgmk
 		//Macros
 		#define ABS(A) ((A)>=(0)?(A):((-1)*(A)))
 		#define RAND(MIN,MAX) ((MIN)+((rand())%((ABS(((MAX)-(MIN))))+(1)))) //Limite 32767
-		#define SQUARE(a) (a)*(a)
+		#define SQUARE(a) ((a)*(a))
 		#define CUBE(a) a*a*a
 		#define MAX(a,b) (((a) > (b)) ? (a) : (b))
 		#define MIN(a,b) (((a) < (b)) ? (a) : (b))

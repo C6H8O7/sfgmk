@@ -1,0 +1,82 @@
+Z-Path:
+	1. You start the search from the destination-point (Step 0) and not the start-point.
+	2. You mark the 4 squares over/under and left/right of the current square with "1" (step value) (if its not a wall) as in "one step from the destination", 
+	   then you add these squares to a node-list.
+	3. Go through the current node-list and repeat point 2 on each entry, mark the appropriate squares "2" (n+1) and add these to a swap node-list. Squares 
+	   already marked with a step-value are IGNORED (like a wall).
+	4. Repeat point 2 & 3 while incresing the step-value for every cycle/point until you have reached the start-point. (or continue and scan the whole maze 
+	   if desired).
+	5. Now you have the shortest way to the target, by simply moving to the adjacent square with the lowest number - until you have reached the destination! 
+	   (see picture on the left). 
+
+	//Research
+	Add end point to list
+	While begin point not found and list is not empty
+		Increase step account
+		For each element in list, find 4 neighbours
+			For each valid neighbour found, which haven't been tested yet, add it to list and set it current step account
+		If neighbour = begin point, stop research
+
+	//Final path
+	Add begin point to path
+	While end point not found
+		Find 8 neighbours of the last point added to path
+		For each valid neighbour found
+			If neighbour has been tested during research
+				If neighbour's step < last point added to path's step, consider it as an interesting one 
+		Add the interesting neighbour with the lower step value to path
+		If last point added to path = end, stop research 
+	
+
+Dijkstra:
+	//Research
+	Add begin point to open list
+	While end point not found and open list is not empty
+		Find smallest weight point
+		Find all valid neighbours
+		For all valid neighbour that is not in the close list
+			If the neighbour is reached for the fist time
+				Set it parent and heuristic, and add it to open list
+				Check if this new point is the goal
+				
+			//OPTIONAL
+			Else if current heuristic < previous heuristic
+				Change his parent and heuristic
+			//
+			
+		Remove smallest point from the open list, and add it to close list		
+			
+	//Final path
+	Pick the open list last added node as current node
+	While current node have a parent
+		Add node to path
+		Current node = Current node's parent
+	
+	
+A*:
+	//Research
+	Add begin point to path
+	While open list is not empty
+		Find smallest weight point
+		If smallest = end, stop research 
+		Find all valid neighbours
+		For all valid neighbour
+			If the neighbour is reached for the fist time
+				Set it parent and heuristic, and add it to open list
+				
+			//OPTIONAL
+			Else if the neighbour is in open list
+				Change parent and heuristic
+			Else if the neighbour is in close list
+				Change parent and heuristic
+				Remove it from close list, and add it to open list
+			//
+				
+		Add smallest to close list, remove it from open list
+		
+	//Final path
+	Pick the smallest node in the open list as current node
+	While current node have a parent
+		Add node to path
+		Current node = Current node's parent
+	

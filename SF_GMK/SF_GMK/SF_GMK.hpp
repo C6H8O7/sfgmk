@@ -171,6 +171,8 @@ namespace sfgmk
 
 	#define DATA_PATH std::string("../data/sfgmk")
 
+	#define ASCII_NUMBER_GAP -48
+
 	//Core
 	#define CORE							engine::Core::getSingleton()
 	#define TIME_DELTA						CORE->getTimeDelta()
