@@ -1,4 +1,5 @@
 Z-Path:
+
 	1. You start the search from the destination-point (Step 0) and not the start-point.
 	2. You mark the 4 squares over/under and left/right of the current square with "1" (step value) (if its not a wall) as in "one step from the destination", 
 	   then you add these squares to a node-list.
